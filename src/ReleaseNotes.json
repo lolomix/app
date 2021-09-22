@@ -1,0 +1,27 @@
+[
+  {
+    "release": "v0.9.21",
+    "notes": ["UI fixes", "new API server"],
+    "date": "1 Oct 2020"
+  },
+  {
+    "release": "v0.9.22",
+    "notes": ["UI fixes"],
+    "date": "15 Oct 2020"
+  },
+  {
+    "release": "v0.9.26",
+    "notes": ["PWA functionality", "UI fixes"],
+    "date": "11 Nov 2020"
+  },
+  {
+    "release": "v0.9.27",
+    "notes": ["implement React.lazy", "enabling QR camera"],
+    "date": "19 Nov 2020"
+  },
+  {
+    "release": "v0.9.28",
+    "notes": ["Internationalization updates"],
+    "date": "25 Nov 2020"
+  }
+]
