@@ -30,11 +30,10 @@ import Settings from "@mui/icons-material/Settings";
 import CopyButton from "./CopyButton";
 
 const links = [
-  { name: "Admin", icon: <Home />, path: "admin", description: "Admin console" },
-  { name: "Settings", icon: <Settings />, path: "settings", description: "General settings" },
-  { name: "Agenda", icon: <EventNote />, path: "agenda", description: "Setup agenda and launch ballots" },
-  { name: "Participants", icon: <People />, path: "participants", description: "Manage and accredit participants" },
-  { name: "Front view", icon: <Flip />, path: "overview", description: "View as participant" },
+  { name: "Start", icon: <Home />, path: "start", description: "Admin console" },
+  { name: "Store", icon: <Settings />, path: "store", description: "General settings" },
+  { name: "Kitchen", icon: <EventNote />, path: "kitchen", description: "Setup agenda and launch ballots" },
+  { name: "Buffet", icon: <People />, path: "buffet", description: "Manage and accredit participants" },
 ];
 
 class AdminBarLight extends Component {
@@ -48,16 +47,16 @@ class AdminBarLight extends Component {
     this.setState({ popover: false });
   };
   render() {
-    const { t, assembly, admin, chain } = this.props;
+    const { t } = this.props;
     const { popover } = this.state;
 
-    return admin ? (
+    return (
       <React.Fragment>
         <Hidden smDown>
           <ButtonGroup color="secondary" size="large">
             {links.map((item, index) => (
               <Tooltip key={index} title={item.name}>
-                <Button component={Link} to={"/" + chain + "/assembly/" + assembly + "/" + item.path}>
+                <Button component={Link} to={"/assembly/" + item.path}>
                   {item.icon}
                 </Button>
               </Tooltip>
@@ -75,23 +74,23 @@ class AdminBarLight extends Component {
           <DialogTitle id="admininfos">Admin Infos</DialogTitle>
           <DialogContent>
             <List dense>
-              {assembly && assembly.length === 42 && (
+
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <Blockies seed={assembly} size={10} scale={4} className="blockies" />
+                      <Blockies seed="asdf" size={10} scale={4} className="blockies" />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     secondary={
                       <Typography variant="body2" noWrap>
-                        {assembly}
+                        "asdf"
                       </Typography>
                     }
                     primary={t("base.currentAssembly")}
                   />
                   <ListItemSecondaryAction>
-                    <CopyButton text={assembly} />
+                    <CopyButton text="asdf" />
                   </ListItemSecondaryAction>
                 </ListItem>
               )}
@@ -100,7 +99,7 @@ class AdminBarLight extends Component {
                   key={index}
                   button
                   component={Link}
-                  to={"/" + chain + "/assembly/" + assembly + "/" + item.path}
+                  to={"/assembly/" + item.path}
                   onClick={this.handleConnectionMenuClose}
                 >
                   <ListItemIcon color="primary">{item.icon}</ListItemIcon>
@@ -116,8 +115,6 @@ class AdminBarLight extends Component {
           </DialogActions>
         </Dialog>
       </React.Fragment>
-    ) : (
-      <></>
     );
   }
 }

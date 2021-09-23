@@ -1,15 +1,14 @@
 import { createTheme } from "@mui/material/styles";
-import { blueGrey, purple, pink } from "@mui/material/colors";
+import { blueGrey } from "@mui/material/colors";
 
-// new color scheme based on Ethereum diamond
-//const red = "rgb(255, 156, 146)";
-//const purple = "rgba(205, 113, 194, 1)";
-//const purpleLight = "rgba(205, 113, 194, 0.7)";
-//const blue = "rgb(90, 157, 237)";
-//const teal = "rgba(83, 211, 224, 1)";
-//const tealLight = "rgba(83, 211, 224, 0.7)";
-//const green = "rgb(136, 216, 72)";
-//const yellow = "rgb(255, 233, 77)";
+const red = "rgb(255, 156, 146)";
+const purple = "rgba(205, 113, 194, 1)";
+const purpleLight = "rgba(205, 113, 194, 0.7)";
+const blue = "rgb(90, 157, 237)";
+const teal = "rgba(83, 211, 224, 1)";
+const tealLight = "rgba(83, 211, 224, 0.7)";
+const green = "rgb(136, 216, 72)";
+const yellow = "rgb(255, 233, 77)";
 
 export const theme = createTheme ({
   palette: {
@@ -28,15 +27,15 @@ export const theme = createTheme ({
       hint: "rgba(0, 0, 0, 0.38)",
     },
     primary: {
-      light: purple[400],
-      main: purple[600],
-      dark: purple[900],
+      light: purpleLight,
+      main: purple,
+      dark: purple,
       contrastText: "#fff",
     },
     secondary: {
-      light: "#53D3E0", // blueGrey[100],
-      main: "#53D3E0", // blueGrey[300],
-      dark: "#53D3E0", // blueGrey[600],
+      light: tealLight,
+      main: teal, 
+      dark: teal,
       contrastText: "#000",
     },
   },
@@ -45,30 +44,6 @@ export const theme = createTheme ({
     fontFamily: ["system-ui", "sans-serif"].join(","),
   },
   overrides: {
-    MuiAppBar: {
-      colorDefault: {
-        backgroundImage: "linear-gradient(0deg, " + blueGrey[50] + ", #ffffff)",
-        "@media print": {
-          display: "none",
-        },
-        boxShadow: "none",
-      },
-      colorPrimary: {
-        color: blueGrey[50],
-        backgroundImage: "linear-gradient(90deg, " + purple[600] + ", " + pink[600] + ")",
-        "@media print": {
-          display: "none",
-        },
-      },
-      colorSecondary: {
-        backgroundColor: "transparent",
-        boxShadow: "none",
-        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-        "@media print": {
-          display: "none",
-        },
-      },
-    },
     MuiBadge: {
       badge: {
         background: blueGrey[50],
@@ -98,18 +73,9 @@ export const theme = createTheme ({
       },
     },
     MuiButton: {
-      contained: {
-        "&$disabled": {
-          backgroundImage: "none",
-        },
-      },
-      containedPrimary: {
-        backgroundImage: "linear-gradient(90deg, " + purple[600] + ", " + pink[600] + ")",
-      },
-      outlinedSecondary: {
-        color: "#ffffff",
-        borderColor: "#ffffff",
-      },
+      root: {
+        borderRadius: "50%",
+      }
     },
     MuiStepper: {
       root: {

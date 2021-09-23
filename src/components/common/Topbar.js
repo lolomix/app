@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
 import ConnectionInfo from "./ConnectionInfo";
-import SupportInfo from "./SupportInfo";
 import LanguageSelector from "./LanguageSelector";
 import LogoButton from "./LogoButton";
 import AdminBarLight from "./AdminBarLight";
@@ -30,13 +29,11 @@ class Topbar extends Component {
                 {t("base.title")}
               </Button>
             </Grid>
-            {assembly && (
+            
               <Grid item>
                 <AdminBarLight assembly={assembly} chain={chain} admin={admin} />
               </Grid>
-            )}
             <Grid item>
-              <SupportInfo />
               <ConnectionInfo
                 setExpertMode={this.props.setExpertMode}
                 setVideoOn={this.props.setVideoOn}
