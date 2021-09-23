@@ -12,12 +12,12 @@ import { theme } from "./utils/theme";
 import Topbar from "./components/common/Topbar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
-//import OfflineInfo from "./components/common/OfflineInfo";
 // pages (lazy loading)
 const Main = lazy(() => import("./components/Main"));
 const Account = lazy(() => import("./components/Account"));
-const Explainer = lazy(() => import("./components/Explainer"));
-const ReleaseNotes = lazy(() => import("./components/ReleaseNotes"));
+const Store = lazy(() => import("./components/Store"));
+const Kitchen = lazy(() => import("./components/Kitchen"));
+const Buffet = lazy(() => import("./components/Buffet"));
 
 class App extends Component {
   state = {
@@ -66,10 +66,10 @@ class App extends Component {
                 <Suspense fallback={<LoadingSpinner />}>
                   <Switch>
                     <Route exact path="/" component={Main} />
-                    <Route exact path="/history" component={Main} />
-                    <Route exact path="/join" component={Main} />
-                    <Route exact path="/howitworks" component={Explainer} />
-                    <Route exact path="/releasenotes" component={ReleaseNotes} />
+                    <Route exact path="/start" component={Main} />
+                    <Route exact path="/buffet" component={Buffet} />
+                    <Route exact path="/store" component={Store} />
+                    <Route exact path="/kitchen" component={Kitchen} />
                     <Route exact path="/account" render={() => <Account expertmode={expertmode} />} />
                   </Switch>
                 </Suspense>

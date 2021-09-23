@@ -15,15 +15,12 @@ import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import Switch from "@mui/material/Switch";
-import Hidden from "@mui/material/Hidden";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
 //icons
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddCircle from "@mui/icons-material/AddCircle";
-//custom
-import CopyButton from "./CopyButton";
 
 class ConnectionInfo extends Component {
   state = {
@@ -34,13 +31,6 @@ class ConnectionInfo extends Component {
   };
 
   componentDidMount = () => {
-    let expertmode = window.localStorage.getItem("expertmode") ? window.localStorage.getItem("expertmode") : false;
-    expertmode = expertmode === "true";
-    let videoOn = window.localStorage.getItem("videoOn") ? window.localStorage.getItem("videoOn") : false;
-    videoOn = videoOn === "true";
-    this.props.setExpertMode(expertmode);
-    this.props.setVideoOn(videoOn);
-
     window.addEventListener("beforeinstallprompt", (e) => {
       this.setState({ deferredPrompt: e, isAppInstallable: true });
       console.log("deffered prompt saved");
@@ -55,15 +45,9 @@ class ConnectionInfo extends Component {
   handleConnectionMenuClose = () => {
     this.setState({ connectionMenu: null });
   };
-  setExpertMode = (event) => {
-    this.props.setExpertMode(event.target.checked);
-  };
-  setVideoOn = (event) => {
-    this.props.setVideoOn(event.target.checked);
-  };
 
   render() {
-    const { t, expertmode, videoOn } = this.props;
+    const { t } = this.props;
     const { connectionMenu } = this.state;
 
     return (
@@ -75,47 +59,41 @@ class ConnectionInfo extends Component {
         </Tooltip>
         <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
           <Popover id="settings-menu" open={Boolean(connectionMenu)} anchorEl={connectionMenu} onClose={this.handleConnectionMenuClose}>
-            <Paper className="defaultpadding">
-              <List dense>
-                <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
-                  <Tooltip disableFocusListener title="asdfasdf">
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Blockies seed="asdfasdf" size={10} scale={4} className="blockies" />
-                      </Avatar>
-                    </ListItemAvatar>
-                  </Tooltip>
-                  <ListItemText secondary="asdfasdf" primary={t("base.openYourAccount")} />
-                  <ListItemSecondaryAction>
-                    <CopyButton text="asdfasdf" />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <Hidden smDown>
-                  <ListItem>
-                    <Tooltip disableFocusListener title={t("base.tooltipVideo")}>
-                      <Switch checked={videoOn ? videoOn : false} onChange={this.setVideoOn} name="Video" color="primary" />
+            <Paper>
+              <Box m={2}>
+                <List dense>
+                  <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
+                    <Tooltip disableFocusListener title="asdfasdf">
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Blockies seed="asdfasdf" size={10} scale={4} className="blockies" />
+                        </Avatar>
+                      </ListItemAvatar>
                     </Tooltip>
-                    <ListItemText primary={t("base.toggleVideo")} secondary={t("base.toggleVideoSecondary")} />
+                    <ListItemText secondary="0x45454545455345" primary={t("base.openYourAccount")} />
+                    <ListItemSecondaryAction></ListItemSecondaryAction>
                   </ListItem>
-                </Hidden>
-                <ListItem>
-                  <Tooltip disableFocusListener title={t("base.tooltipExpertmode")}>
-                    <Switch checked={expertmode ? expertmode : false} onChange={this.setExpertMode} name="expertmode" color="primary" />
-                  </Tooltip>
-                  <ListItemText primary={t("base.expertmode")} secondary={t("base.expertmodeSecondary")} />
-                </ListItem>
-                {this.state.isAppInstallable && !this.state.isAppInstalled && (
-                  <ListItem button onClick={() => this.state.deferredPrompt.prompt()}>
-                    <ListItemIcon color="primary">
-                      <AddCircle />
-                    </ListItemIcon>
-                    <ListItemText primary="Install app" secondary="Click to install" />
+                  <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
+                    <ListItemText secondary="20 AROMA" primary="Wallet balance" />
+                    <ListItemSecondaryAction></ListItemSecondaryAction>
                   </ListItem>
-                )}
-              </List>
-              <Button color="primary" variant="outlined" onClick={this.handleConnectionMenuClose}>
-                {t("base.close")}
-              </Button>
+                  <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
+                    <ListItemText secondary="0 NFTs" primary="Open my collection" />
+                    <ListItemSecondaryAction></ListItemSecondaryAction>
+                  </ListItem>
+                  {this.state.isAppInstallable && !this.state.isAppInstalled && (
+                    <ListItem button onClick={() => this.state.deferredPrompt.prompt()}>
+                      <ListItemIcon color="primary">
+                        <AddCircle />
+                      </ListItemIcon>
+                      <ListItemText primary="Install app" secondary="Click to install" />
+                    </ListItem>
+                  )}
+                </List>
+                <Button color="primary" variant="outlined" onClick={this.handleConnectionMenuClose}>
+                  {t("base.close")}
+                </Button>
+              </Box>
             </Paper>
           </Popover>
         </Backdrop>

@@ -1,14 +1,14 @@
 import { createTheme } from "@mui/material/styles";
 import { blueGrey } from "@mui/material/colors";
 
-const red = "rgb(255, 156, 146)";
+//const red = "rgb(255, 156, 146)";
 const purple = "rgba(205, 113, 194, 1)";
 const purpleLight = "rgba(205, 113, 194, 0.7)";
-const blue = "rgb(90, 157, 237)";
+//const blue = "rgb(90, 157, 237)";
 const teal = "rgba(83, 211, 224, 1)";
 const tealLight = "rgba(83, 211, 224, 0.7)";
-const green = "rgb(136, 216, 72)";
-const yellow = "rgb(255, 233, 77)";
+//const green = "rgb(136, 216, 72)";
+//const yellow = "rgb(255, 233, 77)";
 
 export const theme = createTheme ({
   palette: {
