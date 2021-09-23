@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
-//import AlertTitle from '@material-ui/lab/Alert';
-import Typography from "@material-ui/core/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 
 export default class CustomSnackbar extends Component {
   render() {

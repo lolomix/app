@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 //material-ui
-import Box from "@material-ui/core/Box";
-import Typography from '@material-ui/core/Typography';
+import Box from "@mui/material/Box";
+import Typography from '@mui/material/Typography';
 
 class AccessForbidden extends Component {
   

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Hidden from "@material-ui/core/Hidden";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Hidden from "@mui/material/Hidden";
 
 class AccountConnect extends Component {
   state = {

@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 
-import Tooltip from "@material-ui/core/Tooltip";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Badge from "@material-ui/core/Badge";
-import LanguageIcon from "@material-ui/icons/Language";
-import IconButton from "@material-ui/core/IconButton";
-import Backdrop from "@material-ui/core/Backdrop";
+import Tooltip from "@mui/material/Tooltip";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Badge from "@mui/material/Badge";
+import LanguageIcon from "@mui/icons-material/Language";
+import IconButton from "@mui/material/IconButton";
+import Backdrop from "@mui/material/Backdrop";
 import { withTranslation } from "react-i18next";
 import i18n from "./../../i18n";
 

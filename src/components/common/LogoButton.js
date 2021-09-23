@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import IconButton from "@material-ui/core/IconButton";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import SvgIcon from "@mui/material/SvgIcon";
+import Tooltip from "@mui/material/Tooltip";
 
 class LogoButton extends Component {
   state = {

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 //material-ui
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 //icons
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import CheckIcon from "@material-ui/icons/Check";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import CheckIcon from "@mui/icons-material/Check";
 
 class CopyButton extends Component {
   state = {

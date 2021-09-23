@@ -3,10 +3,10 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
 // material-ui
-import { green, blue, red } from "@material-ui/core/colors";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
+import { green, blue, red } from "@mui/material/colors";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
 import { theme } from "./utils/theme";
 // shell
 import Topbar from "./components/common/Topbar";
@@ -18,13 +18,6 @@ const Main = lazy(() => import("./components/Main"));
 const Account = lazy(() => import("./components/Account"));
 const Explainer = lazy(() => import("./components/Explainer"));
 const ReleaseNotes = lazy(() => import("./components/ReleaseNotes"));
-
-const styles = {
-  info: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
-  error: { backgroundImage: "linear-gradient(90deg," + red[700] + "," + red[400] + ")" },
-  warning: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
-  success: { backgroundImage: "linear-gradient(90deg," + green[700] + "," + green[500] + ")" },
-};
 
 class App extends Component {
   state = {
@@ -47,10 +40,9 @@ class App extends Component {
 
   render() {
     const { expertmode, videoOn, admin } = this.state;
-    const { classes } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider  theme={theme}>
         <SnackbarProvider
           anchorOrigin={{
             vertical: "bottom",
@@ -59,10 +51,10 @@ class App extends Component {
           maxSnack={3}
           autoHideDuration={6000}
           classes={{
-            variantSuccess: classes.success,
-            variantError: classes.error,
-            variantWarning: classes.warning,
-            variantInfo: classes.info,
+            variantSuccess: { backgroundImage: "linear-gradient(90deg," + green[700] + "," + green[500] + ")" },
+            variantError: { backgroundImage: "linear-gradient(90deg," + red[700] + "," + red[400] + ")" },
+            variantWarning: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
+            variantInfo: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
           }}
         >
           <CssBaseline />
@@ -85,9 +77,9 @@ class App extends Component {
             </>
           </Router>
         </SnackbarProvider>
-      </MuiThemeProvider>
+      </ThemeProvider >
     );
   }
 }
 
-export default withTranslation()(withStyles(styles)(App));
+export default withTranslation()(App);

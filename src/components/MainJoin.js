@@ -2,19 +2,19 @@ import React, { Component, Suspense } from "react";
 import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Tooltip from "@mui/material/Tooltip";
 //icons
-import CameraAlt from "@material-ui/icons/CameraAlt";
+import CameraAlt from "@mui/icons-material/CameraAlt";
 //custom
 import LoadingSpinner from "./common/LoadingSpinner";
 //lazy

@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import QRCode from "qrcode.react";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 //icons
-import GetApp from "@material-ui/icons/GetApp";
-import Image from "@material-ui/icons/Image";
+import GetApp from "@mui/icons-material/GetApp";
+import Image from "@mui/icons-material/Image";
 
 class AccountExport extends Component {
   state = {

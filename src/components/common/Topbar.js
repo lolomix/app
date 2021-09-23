@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { withRouter, Link } from "react-router-dom";
 //material-ui
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import Toolbar from "@mui/material/Toolbar";
+import AppBar from "@mui/material/AppBar";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
 import ConnectionInfo from "./ConnectionInfo";

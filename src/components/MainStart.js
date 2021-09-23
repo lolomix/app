@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 //icons
-import Share from "@material-ui/icons/Share";
-import OpenInNew from "@material-ui/icons/OpenInNew";
-import Info from "@material-ui/icons/Info";
-import QuestionAnswer from "@material-ui/icons/QuestionAnswer";
-import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
+import Share from "@mui/icons-material/Share";
+import OpenInNew from "@mui/icons-material/OpenInNew";
+import Info from "@mui/icons-material/Info";
+import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 //custom
 import pkg from "../../package.json";
 

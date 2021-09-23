@@ -1,8 +1,8 @@
 import React from "react";
 //material-ui
-import CircularProgress from "@material-ui/core/CircularProgress";
-import IconButton from "@material-ui/core/IconButton";
-import Close from "@material-ui/icons/Close";
+import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import Close from "@mui/icons-material/Close";
 
 export default function ToastLoading(props) {
   const [progress, setProgress] = React.useState(100);

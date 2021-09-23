@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import * as serviceWorker from "../serviceWorker";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { withSnackbar } from "notistack";
 
 class ServiceWorkerWrapper extends React.Component {

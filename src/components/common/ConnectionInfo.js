@@ -4,24 +4,24 @@ import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Blockies from "react-blockies";
 //material-ui
-import Tooltip from "@material-ui/core/Tooltip";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Popover from "@material-ui/core/Popover";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Switch from "@material-ui/core/Switch";
-import Hidden from "@material-ui/core/Hidden";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Backdrop from "@material-ui/core/Backdrop";
+import Tooltip from "@mui/material/Tooltip";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Popover from "@mui/material/Popover";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Switch from "@mui/material/Switch";
+import Hidden from "@mui/material/Hidden";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Backdrop from "@mui/material/Backdrop";
 //icons
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import AddCircle from "@material-ui/icons/AddCircle";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import AddCircle from "@mui/icons-material/AddCircle";
 //custom
 import CopyButton from "./CopyButton";
 

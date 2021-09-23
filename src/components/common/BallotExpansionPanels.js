@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 //material-ui
-import Grid from "@material-ui/core/Grid";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionActions from "@material-ui/core/AccordionActions";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Tooltip from "@material-ui/core/Tooltip";
+import Grid from "@mui/material/Grid";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionActions from "@mui/material/AccordionActions";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import LinearProgress from "@mui/material/LinearProgress";
+import Tooltip from "@mui/material/Tooltip";
 //icons & images
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import HowToVoteIcon from "@material-ui/icons/HowToVote";
-import Check from "@material-ui/icons/Check";
-import Schedule from "@material-ui/icons/Schedule";
-import LaunchIcon from "@material-ui/icons/Launch";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import Check from "@mui/icons-material/Check";
+import Schedule from "@mui/icons-material/Schedule";
+import LaunchIcon from "@mui/icons-material/Launch";
 // custom
 import CopyButtonWithText from "./CopyButtonWithText";
 

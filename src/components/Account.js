@@ -4,19 +4,19 @@ import { withRouter } from "react-router";
 import Blockies from "react-blockies";
 import PropTypes from "prop-types";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
-import Tooltip from "@material-ui/core/Tooltip";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import AppBar from "@material-ui/core/AppBar";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Tooltip from "@mui/material/Tooltip";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import AppBar from "@mui/material/AppBar";
 //icons
-import GetApp from "@material-ui/icons/GetApp";
-import VpnKey from "@material-ui/icons/VpnKey";
-import Edit from "@material-ui/icons/Edit";
-import Power from "@material-ui/icons/Power";
+import GetApp from "@mui/icons-material/GetApp";
+import VpnKey from "@mui/icons-material/VpnKey";
+import Edit from "@mui/icons-material/Edit";
+import Power from "@mui/icons-material/Power";
 //custom
 import LoadingSpinner from "./common/LoadingSpinner";
 //lazy

@@ -2,17 +2,17 @@ import React, { Component, Suspense } from "react";
 import { withTranslation } from "react-i18next";
 import { withSnackbar } from "notistack";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 //icons
-import CameraAlt from "@material-ui/icons/CameraAlt";
-import Publish from "@material-ui/icons/Publish";
+import CameraAlt from "@mui/icons-material/CameraAlt";
+import Publish from "@mui/icons-material/Publish";
 //custom
 import LoadingSpinner from "./common/LoadingSpinner";
 import ToastLoading from "./common/ToastLoading";

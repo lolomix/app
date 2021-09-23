@@ -2,17 +2,17 @@ import React, { Component, Suspense } from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 //material-ui
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Paper from "@material-ui/core/Paper";
-import AppBar from "@material-ui/core/AppBar";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Paper from "@mui/material/Paper";
+import AppBar from "@mui/material/AppBar";
 //icons
-import Home from "@material-ui/icons/Home";
-import MeetingRoom from "@material-ui/icons/MeetingRoom";
-import History from "@material-ui/icons/History";
+import Home from "@mui/icons-material/Home";
+import MeetingRoom from "@mui/icons-material/MeetingRoom";
+import History from "@mui/icons-material/History";
 //tabs
 import MainJoin from "./MainJoin";
 import MainHistory from "./MainHistory";

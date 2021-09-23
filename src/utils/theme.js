@@ -1,5 +1,5 @@
-import { createTheme } from "@material-ui/core/styles";
-import { blueGrey, purple, pink } from "@material-ui/core/colors";
+import { createTheme } from "@mui/material/styles";
+import { blueGrey, purple, pink } from "@mui/material/colors";
 
 // new color scheme based on Ethereum diamond
 //const red = "rgb(255, 156, 146)";
