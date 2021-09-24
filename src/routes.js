@@ -42,7 +42,7 @@ class App extends Component {
     const { expertmode, videoOn, admin } = this.state;
 
     return (
-      <ThemeProvider  theme={theme}>
+      <ThemeProvider theme={theme}>
         <SnackbarProvider
           anchorOrigin={{
             vertical: "bottom",
@@ -55,10 +55,9 @@ class App extends Component {
             variantError: { backgroundImage: "linear-gradient(90deg," + red[700] + "," + red[400] + ")" },
             variantWarning: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
             variantInfo: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
-          }}
-        >
+          }}>
           <CssBaseline />
-          <Router basename="/">
+          <Router basename="/app">
             <>
               <Topbar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
               <Grid container spacing={0} direction="row" justifyContent="center" alignItems="flex-start">
@@ -77,7 +76,7 @@ class App extends Component {
             </>
           </Router>
         </SnackbarProvider>
-      </ThemeProvider >
+      </ThemeProvider>
     );
   }
 }

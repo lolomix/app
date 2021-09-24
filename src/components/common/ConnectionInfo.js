@@ -18,9 +18,15 @@ import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Typography from "@mui/material/Typography";
 //icons
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddCircle from "@mui/icons-material/AddCircle";
+//
+import Web3 from "../../web3/Web3";
 
 class ConnectionInfo extends Component {
   state = {
@@ -28,6 +34,7 @@ class ConnectionInfo extends Component {
     deferredPrompt: null,
     isAppInstalled: false,
     isAppInstallable: false,
+    dialogWeb3: false,
   };
 
   componentDidMount = () => {
@@ -45,13 +52,24 @@ class ConnectionInfo extends Component {
   handleConnectionMenuClose = () => {
     this.setState({ connectionMenu: null });
   };
+  handleDialogWeb3Open = () => {
+    this.setState({ dialogWeb3: true });
+  };
+  handleDialogWeb3Close = () => {
+    this.setState({ dialogWeb3: false });
+  };
 
   render() {
     const { t } = this.props;
-    const { connectionMenu } = this.state;
+    const { connectionMenu, dialogWeb3 } = this.state;
 
     return (
       <Fragment>
+        <Tooltip title="Connect to your Ethereum account">
+          <Button size="small" variant="outlined" color="secondary" onClick={this.handleDialogWeb3Open}>
+            Connect
+          </Button>
+        </Tooltip>
         <Tooltip disableFocusListener title={t("base.connectionInfo")} aria-label={t("base.connectionInfo")}>
           <IconButton color="inherit" onClick={this.handleConnectionIconClick}>
             <AccountCircle />
@@ -97,6 +115,19 @@ class ConnectionInfo extends Component {
             </Paper>
           </Popover>
         </Backdrop>
+        <Dialog onClose={this.handleDialogWeb3Close} open={dialogWeb3} keepMounted maxWidth="lg">
+          <DialogContent>
+            <Typography variant="h2" gutterBottom>
+              Connect Wallet
+            </Typography>
+            <Web3 />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleDialogWeb3Close} variant="contained" color="primary">
+              {t("base.close")}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Fragment>
     );
   }

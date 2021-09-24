@@ -34,7 +34,6 @@ const links = [
   { name: "Buffet", icon: <People />, path: "/buffet", description: "Order and enjoy your meal" },
 ];
 
-
 class Topbar extends Component {
   state = {
     popover: false,
@@ -59,50 +58,44 @@ class Topbar extends Component {
                 {t("base.title")}
               </Button>
             </Grid>
-              <Grid item>
+            <Grid item>
               <Hidden smDown>
-          <ButtonGroup color="secondary" variant="contained" size="large">
-            {links.map((item, index) => (
-              <Tooltip key={index} title={item.description}>
-                <Button component={Link} to={item.path}>
-                  {item.name}
-                </Button>
-              </Tooltip>
-            ))}
-          </ButtonGroup>
-        </Hidden>
-        <Hidden mdUp>
-          <Tooltip title={t("admin.navControlButton")}>
-            <IconButton color="inherit" onClick={this.handleConnectionIconClick}>
-              <Settings />
-            </IconButton>
-          </Tooltip>
-        </Hidden>
-        <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="admininfos" open={popover}>
-          <DialogTitle id="admininfos">Admin Infos</DialogTitle>
-          <DialogContent>
-            <List dense>
-              {links.map((item, index) => (
-                <ListItem
-                  key={index}
-                  button
-                  component={Link}
-                  to={"/assembly/" + item.path}
-                  onClick={this.handleConnectionMenuClose}
-                >
-                  <ListItemIcon color="primary">{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} secondary={item.description} />
-                </ListItem>
-              ))}
-            </List>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" variant="outlined" onClick={this.handleConnectionMenuClose}>
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-              </Grid>
+                <ButtonGroup color="secondary" variant="contained" size="large">
+                  {links.map((item, index) => (
+                    <Tooltip key={index} title={item.description}>
+                      <Button component={Link} to={item.path}>
+                        {item.name}
+                      </Button>
+                    </Tooltip>
+                  ))}
+                </ButtonGroup>
+              </Hidden>
+              <Hidden mdUp>
+                <Tooltip title={t("admin.navControlButton")}>
+                  <IconButton color="inherit" onClick={this.handleConnectionIconClick}>
+                    <Settings />
+                  </IconButton>
+                </Tooltip>
+              </Hidden>
+              <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="admininfos" open={popover}>
+                <DialogTitle id="admininfos">Admin Infos</DialogTitle>
+                <DialogContent>
+                  <List dense>
+                    {links.map((item, index) => (
+                      <ListItem key={index} button component={Link} to={"/assembly/" + item.path} onClick={this.handleConnectionMenuClose}>
+                        <ListItemIcon color="primary">{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.name} secondary={item.description} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </DialogContent>
+                <DialogActions>
+                  <Button color="primary" variant="outlined" onClick={this.handleConnectionMenuClose}>
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
             <Grid item>
               <ConnectionInfo />
               <LanguageSelector />

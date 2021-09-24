@@ -15,7 +15,6 @@ import CardContent from "@mui/material/CardContent";
 //icons
 import Share from "@mui/icons-material/Share";
 import OpenInNew from "@mui/icons-material/OpenInNew";
-import Info from "@mui/icons-material/Info";
 import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
 
 class Main extends Component {
