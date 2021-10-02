@@ -14,7 +14,7 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
 const Main = lazy(() => import("./components/Main"));
-const Account = lazy(() => import("./components/Account"));
+const Account = lazy(() => import("./web3/Web3"));
 const Store = lazy(() => import("./components/Store"));
 const Kitchen = lazy(() => import("./components/Kitchen"));
 const Buffet = lazy(() => import("./components/Buffet"));
@@ -57,7 +57,7 @@ class App extends Component {
             variantInfo: { backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")" },
           }}>
           <CssBaseline />
-          <Router basename="/app">
+          <Router basename="/">
             <>
               <Topbar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
               <Grid container spacing={0} direction="row" justifyContent="center" alignItems="flex-start">
@@ -69,7 +69,7 @@ class App extends Component {
                     <Route exact path="/buffet" component={Buffet} />
                     <Route exact path="/store" component={Store} />
                     <Route exact path="/kitchen" component={Kitchen} />
-                    <Route exact path="/account" render={() => <Account expertmode={expertmode} />} />
+                    <Route exact path="/account" component={Account}/> />
                   </Switch>
                 </Suspense>
               </Grid>
