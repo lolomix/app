@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import * as serviceWorker from "../serviceWorker";
+import * as serviceWorkerRegistration from "../serviceWorkerRegistration";
 import Button from "@mui/material/Button";
 import { withSnackbar } from "notistack";
 
@@ -10,7 +10,7 @@ class ServiceWorkerWrapper extends React.Component {
   };
 
   componentDidMount() {
-    serviceWorker.register({ onUpdate: this.onSWUpdate });
+    serviceWorkerRegistration.register({ onUpdate: this.onSWUpdate });
   }
 
   onSWUpdate = (registration) => {

@@ -24,7 +24,7 @@ import EventNote from "@mui/icons-material/EventNote";
 import Settings from "@mui/icons-material/Settings";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
-import ConnectionInfo from "./ConnectionInfo";
+import Web3connect from "./Web3connect";
 import LanguageSelector from "./LanguageSelector";
 import LogoButton from "./LogoButton";
 
@@ -97,7 +97,7 @@ class Topbar extends Component {
               </Dialog>
             </Grid>
             <Grid item>
-              <ConnectionInfo />
+              <Web3connect />
               <LanguageSelector />
             </Grid>
           </Grid>
