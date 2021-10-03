@@ -1,7 +1,6 @@
-import React, { useState, Fragment, useCallback, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Blockies from "react-blockies";
 //web3
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -10,13 +9,11 @@ import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
 //mui
-//material-ui
 import Tooltip from "@mui/material/Tooltip";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
@@ -32,11 +29,13 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 //import AddCircle from "@mui/icons-material/AddCircle";
 //custom
-import { INFURA_ID } from "../../web3/constants";
+import { INFURA_ID, TARGET_CHAIN } from "../../web3/constants";
+import aromaAbi from "../../web3/abi/aroma.json";
+import mainAbi from "../../web3/abi/main.json";
 const { ethers } = require("ethers");
 
 const web3Modal = new Web3Modal({
-  network: "mainnet", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
+  network: TARGET_CHAIN, // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
   cacheProvider: true, // optional
   theme: "light", // optional. Change to "dark" for a dark theme.
   providerOptions: {
@@ -76,30 +75,13 @@ const web3Modal = new Web3Modal({
 });
 
 function Web3connect(props) {
-  /*
-  state = {
-    connectionMenu: null,
-    deferredPrompt: null,
-    isAppInstalled: false,
-    isAppInstallable: false,
-    dialogWeb3: false,
-  };
-  
-  componentDidMount = () => {
-    window.addEventListener("beforeinstallprompt", (e) => {
-      this.setState({ deferredPrompt: e, isAppInstallable: true });
-      console.log("deffered prompt saved");
-    });
-    window.addEventListener("appinstalled", (evt) => {
-      this.setState({ isAppInstalled: true });
-    });
-  };
-  */
-
-  const [injectedProvider, setInjectedProvider] = useState();
-  const [address, setAddress] = useState();
+  const [provider, setProvider] = useState(null);
+  const [address, setAddress] = useState(null);
   const [connectionMenu, setconnectionMenu] = useState(false);
   const [dialogWeb3, setdialogWeb3] = useState(false);
+  const [balanceAroma, setBalanceAroma] = useState(0);
+  const [balanceMatic, setBalanceMatic] = useState(0);
+
   const handleConnectionIconClick = (event) => {
     setconnectionMenu(event.currentTarget);
   };
@@ -113,96 +95,102 @@ function Web3connect(props) {
 
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
-    if (injectedProvider && injectedProvider.provider && typeof injectedProvider.provider.disconnect == "function") {
-      await injectedProvider.provider.disconnect();
+    if (provider && provider.provider && typeof provider.provider.disconnect == "function") {
+      await provider.provider.disconnect();
     }
     setTimeout(() => {
       window.location.reload();
     }, 1);
   };
-  const loadWeb3Modal = useCallback(async () => {
-    const provider = await web3Modal.connect();
-    setInjectedProvider(new ethers.providers.Web3Provider(provider));
+  const loadWeb3Modal = async () => {
+    const web3modalProvider = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(web3modalProvider);
 
-    provider.on("chainChanged", chainId => {
+    setProvider(provider);
+    const addressList = await provider.listAccounts();
+    setAddress(addressList[0]);
+
+    const balance = await provider.getBalance(addressList[0]);
+    console.log(balance);
+    setBalanceMatic(ethers.utils.formatEther(balance));
+
+    const aromaContract = new ethers.Contract("0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3", aromaAbi, provider);
+    const balanceAroma = await aromaContract.balanceOf(addressList[0]);
+    setBalanceAroma(ethers.utils.formatEther(balanceAroma));
+
+    provider.on("chainChanged", (chainId) => {
       console.log(`chain changed to ${chainId}! updating providers`);
-      setInjectedProvider(new ethers.providers.Web3Provider(provider));
+      setProvider(new ethers.providers.Web3Provider(provider));
     });
-
     provider.on("accountsChanged", () => {
       console.log(`account changed!`);
-      setInjectedProvider(new ethers.providers.Web3Provider(provider));
+      setProvider(new ethers.providers.Web3Provider(provider));
     });
-
-    // Subscribe to session disconnection
     provider.on("disconnect", (code, reason) => {
       console.log(code, reason);
       logoutOfWeb3Modal();
     });
-  }, [setInjectedProvider, logoutOfWeb3Modal]);
+  };
 
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      loadWeb3Modal();
-    }
-  }, [loadWeb3Modal]);
+  const buyAroma = async () => {
+    const mainContract = new ethers.Contract("0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f", mainAbi, provider);
+    //await mainContract.deployed("buyAROMA)  (23).send({ value: "1000", from: address, gas: 10000000 });
+  };
 
   return (
     <Fragment>
-      {true && (
-      <Tooltip title="Connect to your Ethereum account">
-        <Button size="small" variant="outlined" color="secondary" onClick={loadWeb3Modal}>
-          Connect
-        </Button>
-      </Tooltip>
+      {!address ? (
+        <Tooltip title="Connect to your Ethereum account">
+          <Button size="small" variant="outlined" color="secondary" onClick={loadWeb3Modal}>
+            Connect
+          </Button>
+        </Tooltip>
+      ) : (
+        <>
+          <Tooltip disableFocusListener title={t("base.connectionInfo")} aria-label={t("base.connectionInfo")}>
+            <IconButton color="inherit" onClick={handleConnectionIconClick}>
+              <AccountCircle />
+            </IconButton>
+          </Tooltip>
+          <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
+            <Popover id="settings-menu" open={Boolean(connectionMenu)} anchorEl={connectionMenu} onClose={handleConnectionMenuClose}>
+              <Paper>
+                <Box m={2}>
+                  <List dense>
+                    {address && (
+                      <ListItem>
+                        <Tooltip disableFocusListener title="your web3 address">
+                          <ListItemAvatar>
+                            <Avatar>
+                              <Blockies seed={address.toLowerCase()} size={10} scale={4} className="blockies" />
+                            </Avatar>
+                          </ListItemAvatar>
+                        </Tooltip>
+                        <ListItemText secondary={address.toLowerCase()} primary={t("base.yourWeb3Account")} />
+                      </ListItem>
+                    )}
+                    <ListItem>
+                      <ListItemText secondary={balanceAroma} primary="Your AROMA balance" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText secondary={balanceMatic} primary="Your MATIC balance" />
+                    </ListItem>
+                  </List>
+                  <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
+                    {t("base.close")}
+                  </Button>
+                  <Button color="primary" variant="outlined" onClick={logoutOfWeb3Modal}>
+                    Logout
+                  </Button>
+                  <Button color="primary" variant="outlined" onClick={buyAroma}>
+                    buy some aroma
+                  </Button>
+                </Box>
+              </Paper>
+            </Popover>
+          </Backdrop>
+        </>
       )}
-      <Tooltip disableFocusListener title={t("base.connectionInfo")} aria-label={t("base.connectionInfo")}>
-        <IconButton color="inherit" onClick={handleConnectionIconClick}>
-          <AccountCircle />
-        </IconButton>
-      </Tooltip>
-      <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
-        <Popover id="settings-menu" open={Boolean(connectionMenu)} anchorEl={connectionMenu} onClose={handleConnectionMenuClose}>
-          <Paper>
-            <Box m={2}>
-              <List dense>
-                <ListItem button component={Link} to="/account" onClick={handleConnectionMenuClose}>
-                  <Tooltip disableFocusListener title="asdfasdf">
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Blockies seed="asdfasdf" size={10} scale={4} className="blockies" />
-                      </Avatar>
-                    </ListItemAvatar>
-                  </Tooltip>
-                  <ListItemText secondary="0x45454545455345" primary={t("base.openYourAccount")} />
-                  <ListItemSecondaryAction></ListItemSecondaryAction>
-                </ListItem>
-                <ListItem button component={Link} to="/account" onClick={handleConnectionMenuClose}>
-                  <ListItemText secondary="20 AROMA" primary="Wallet balance" />
-                  <ListItemSecondaryAction></ListItemSecondaryAction>
-                </ListItem>
-                <ListItem button component={Link} to="/account" onClick={handleConnectionMenuClose}>
-                  <ListItemText secondary="0 NFTs" primary="Open my collection" />
-                  <ListItemSecondaryAction></ListItemSecondaryAction>
-                </ListItem>
-                {/* 
-                {this.state.isAppInstallable && !this.state.isAppInstalled && (
-                  <ListItem button onClick={() => this.state.deferredPrompt.prompt()}>
-                    <ListItemIcon color="primary">
-                      <AddCircle />
-                    </ListItemIcon>
-                    <ListItemText primary="Install app" secondary="Click to install" />
-                  </ListItem>
-                )}
-                */}
-              </List>
-              <Button color="primary" variant="outlined" onClick={handleConnectionMenuClose}>
-                {t("base.close")}
-              </Button>
-            </Box>
-          </Paper>
-        </Popover>
-      </Backdrop>
       <Dialog onClose={handleWeb3Modal} open={dialogWeb3} keepMounted maxWidth="lg">
         <DialogContent>
           <Typography variant="h2" gutterBottom>
