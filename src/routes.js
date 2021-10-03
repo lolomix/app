@@ -18,11 +18,11 @@ import Topbar from "./components/common/Topbar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
-const Main = lazy(() => import("./components/Main"));
+const Main = lazy(() => import("./views/Main/Main"));
 const Account = lazy(() => import("./web3/Web3"));
-const Store = lazy(() => import("./components/Store"));
-const Kitchen = lazy(() => import("./components/Kitchen"));
-const Buffet = lazy(() => import("./components/Buffet"));
+const Store = lazy(() => import("./views/Store/Store"));
+const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
+const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 
 class App extends Component {
   state = {
