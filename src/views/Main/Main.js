@@ -12,14 +12,22 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+
 //icons
 import Share from "@mui/icons-material/Share";
 import OpenInNew from "@mui/icons-material/OpenInNew";
 import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
+import AddCircle from "@mui/icons-material/AddCircle";
 //custom
 import pkg from "../../../package.json";
 
 class Main extends Component {
+  state = {
+    deferredPrompt: null,
+    isAppInstalled: false,
+    isAppInstallable: false,
+  };
+
   webShare = () => {
     navigator
       .share({
@@ -29,6 +37,16 @@ class Main extends Component {
       })
       .then(() => console.log("Successful share"))
       .catch((error) => console.log("Error sharing", error));
+  };
+
+  componentDidMount = () => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      this.setState({ deferredPrompt: e, isAppInstallable: true });
+      console.log("deffered prompt saved");
+    });
+    window.addEventListener("appinstalled", (evt) => {
+      this.setState({ isAppInstalled: true });
+    });
   };
 
   render() {
@@ -117,6 +135,23 @@ class Main extends Component {
                 </List>
               </CardContent>
             </Card>
+            {this.state.isAppInstallable && !this.state.isAppInstalled && (
+              <Box mt={2}>
+                <Card>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5">
+                      Install App
+                    </Typography>
+                    <Typography gutterBottom variant="body2">
+                      Add CryptoChefs to your homescreen or desktop
+                    </Typography>
+                    <Button variant="contained" onClick={() => this.state.deferredPrompt.prompt()} startIcon={<AddCircle />}>
+                      Install app
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Box>
+            )}
           </Grid>
         </Grid>
         <Box my={6}>
