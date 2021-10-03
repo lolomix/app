@@ -27,7 +27,7 @@
     "i18next": "^17.3.1",
     "i18next-browser-languagedetector": "^3.1.1",
     "isomorphic-fetch": "^3.0.0",
-    "notistack": "^1.0.10",
+    "notistack": "^2.0.2",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.2",
     "react-apollo": "^3.1.5",
