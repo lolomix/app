@@ -11,6 +11,7 @@ const tealLight = "rgba(83, 211, 224, 0.7)";
 //const yellow = "rgb(255, 233, 77)";
 
 export const theme = createTheme ({
+  mode: 'light',
   palette: {
     common: {
       black: "rgba(40, 31, 31, 1)",
@@ -18,7 +19,7 @@ export const theme = createTheme ({
     },
     background: {
       paper: "#fff",
-      default: "#ddd",
+      default: "#f1f1f1",
     },
     text: {
       primary: "rgba(0, 0, 0, 0.87)",
@@ -40,148 +41,167 @@ export const theme = createTheme ({
     },
   },
   typography: {
-    useNextVariants: true,
-    fontFamily: ["system-ui", "sans-serif"].join(","),
+    // using Roboto by default
+    h1: {
+      fontSize: "3.052rem",
+      fontWeight: 400
+    },
+    h2: {
+      fontSize: "2.441rem",
+      fontWeight: 400
+    },
+    h3: {
+      fontSize: "1.953rem",
+      fontWeight: 400
+    },
+    h4: {
+      fontSize: "1.563rem",
+      fontWeight: 400
+    },
+    h5: {
+      fontSize: "1.25rem",
+      fontWeight: 400
+    },
+    h6: {
+      fontSize: "1rem",
+      fontWeight: 400
+    }
   },
-  overrides: {
-    MuiBadge: {
-      badge: {
-        background: blueGrey[50],
-        color: blueGrey[800],
-        border: "1px solid" + blueGrey[500],
-      },
-      colorSecondary: {
-        border: 0,
-      },
-      colorError: {
-        border: 0,
-        color: "#fff",
-      },
-    },
-    MuiTooltip: {
-      tooltip: {
-        color: "#fff",
-      },
-    },
-    MuiIconButton: {
-      root: {
-        color: blueGrey[500],
-      },
-      colorSecondary: {
-        color: blueGrey[50],
-        zIndex: 10,
-      },
-    },
-    MuiButton: {
-      root: {
-        borderRadius: "50%",
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          // todo: other variants (square) is not excluded from these overrides
+          borderRadius: "10px"
+        }
       }
     },
-    MuiStepper: {
-      root: {
-        backgroundColor: "transparent",
-        "@media print": {
-          display: "none",
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "10px"
         },
       },
     },
-    MuiLinearProgress: {
-      root: {
-        height: 15,
-        borderRadius: 2,
-      },
-      dashedColorPrimary: {
-        animation: "none",
-        backgroundImage: "none",
-        backgroundColor: blueGrey[200],
-      },
-      barColorPrimary: {
-        backgroundColor: blueGrey[700],
-      },
-      colorPrimary: {
-        backgroundColor: blueGrey[100],
-      },
-    },
-    MuiCircularProgress: {
-      colorSecondary: {
-        color: blueGrey[50],
-      },
-    },
-    MuiTypography: {
-      colorTextSecondary: {
-        color: blueGrey[400],
-      },
-      h1: {
-        fontFamily: ["system-ui", "serif"].join(","),
-        fontSize: "2.2rem",
-        fontWeight: 300,
-      },
-      h2: {
-        fontFamily: ["system-ui", "serif"].join(","),
-        fontSize: "1.4rem",
-        fontWeight: 300,
-      },
-      h3: {
-        fontSize: "1.3rem",
-      },
-      h5: {
-        fontSize: "1.1rem",
-      },
-      body1: {
-        fontFamily: ["system-ui", "serif"].join(","),
-      },
-    },
-    MuiTabs: {
-      indicator: {
-        backgroundColor: blueGrey[800],
-      },
-    },
-    MuiTab: {
-      root: {
-        "@media (min-width: 960px)": {
-          minWidth: 120,
+    // todo: validate all styles below - Do we need these changes globally?
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          background: blueGrey[50],
+          color: blueGrey[800],
+          border: "1px solid" + blueGrey[500],
         },
-      },
-      textColorSecondary: {
-        color: blueGrey[400],
-        "&$selected": {
-          color: blueGrey[900],
+        colorSecondary: {
+          border: 0,
         },
-      },
-    },
-    MuiCardContent: {
-      root: {
-        paddingTop: 0,
-      },
-    },
-    MuiBottomNavigation: {
-      root: {
-        zIndex: 1190,
-        backgroundColor: blueGrey[50],
-        background: "linear-gradient(315deg," + blueGrey[600] + "," + blueGrey[800] + ")",
-      },
-    },
-    MuiBottomNavigationAction: {
-      root: {
-        color: blueGrey[100],
-        "&$selected": {
+        colorError: {
+          border: 0,
           color: "#fff",
         },
-      },
+      }
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          color: "#fff",
+        },
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: blueGrey[500],
+        },
+        colorSecondary: {
+          color: blueGrey[50],
+          zIndex: 10,
+        },
+      }
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          height: 15,
+          borderRadius: 2,
+        },
+        dashedColorPrimary: {
+          animation: "none",
+          backgroundImage: "none",
+          backgroundColor: blueGrey[200],
+        },
+        barColorPrimary: {
+          backgroundColor: blueGrey[700],
+        },
+        colorPrimary: {
+          backgroundColor: blueGrey[100],
+        },
+      }
+    },
+    MuiCircularProgress: {
+      styleOverrides: {
+        colorSecondary: {
+          color: blueGrey[50],
+        },
+      }
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: blueGrey[800],
+        },
+      }
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "@media (min-width: 960px)": {
+            minWidth: 120,
+          },
+        },
+        textColorSecondary: {
+          color: blueGrey[400],
+          "&$selected": {
+            color: blueGrey[900],
+          },
+        },
+      }
+    },
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          zIndex: 1190,
+          backgroundColor: blueGrey[50],
+          background: "linear-gradient(315deg," + blueGrey[600] + "," + blueGrey[800] + ")",
+        },
+      }
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          color: blueGrey[100],
+          "&$selected": {
+            color: "#fff",
+          },
+        },
+      }
     },
     MuiAvatar: {
-      colorDefault: {
-        color: blueGrey[800],
-        backgroundColor: blueGrey[100],
-      },
-      square: {
-        backgroundColor: "transparent",
-      },
+      styleOverrides: {
+        colorDefault: {
+          color: blueGrey[800],
+          backgroundColor: blueGrey[100],
+        },
+        square: {
+          backgroundColor: "transparent",
+        },
+      }
     },
     MuiCardMedia: {
-      root: {
-        height: 220,
-      },
+      styleOverrides: {
+        root: {
+          height: 220,
+        },
+      }
     },
-  },
+  }
 });

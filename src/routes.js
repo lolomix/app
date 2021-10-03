@@ -2,6 +2,11 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
+// fonts
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 // material-ui
 import { green, blue, red } from "@mui/material/colors";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,15 +14,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import { theme } from "./utils/theme";
 // shell
-import Topbar from "./components/common/Topbar";
+import TopBar from "./components/layout/TopBar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
-const Main = lazy(() => import("./components/Main"));
+const Main = lazy(() => import("./views/Main/Main"));
 const Account = lazy(() => import("./web3/Web3"));
-const Store = lazy(() => import("./components/Store"));
-const Kitchen = lazy(() => import("./components/Kitchen"));
-const Buffet = lazy(() => import("./components/Buffet"));
+const Store = lazy(() => import("./views/Store/Store"));
+const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
+const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 
 class App extends Component {
   state = {
@@ -59,7 +64,7 @@ class App extends Component {
           <CssBaseline />
           <Router basename="/">
             <>
-              <Topbar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
+              <TopBar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
               <Grid container spacing={0} direction="row" justifyContent="center" alignItems="flex-start">
                 <ServiceWorkerWrapper />
                 <Suspense fallback={<LoadingSpinner />}>

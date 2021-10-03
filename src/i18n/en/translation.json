@@ -251,5 +251,14 @@
   },
   "assemblyLogin": {
     "AccessCodeDescription": "Enter here your personalized access code that you have received in advance."
+  },
+  "store": {
+    "title": "Store",
+    "exchangeTitle": "Exchange"
+  },
+  "components": {
+    "CurrencyInputField": {
+      "helperText": "Enter the amount of {{ currency }} you want to {{ type }}."
+    }
   }
 }

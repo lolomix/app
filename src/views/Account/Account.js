@@ -18,12 +18,12 @@ import VpnKey from "@mui/icons-material/VpnKey";
 import Edit from "@mui/icons-material/Edit";
 import Power from "@mui/icons-material/Power";
 //custom
-import LoadingSpinner from "./common/LoadingSpinner";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 //lazy
-const AccountExport = React.lazy(() => import("./AccountExport"));
-const AccountImport = React.lazy(() => import("./AccountImport"));
-const AccountSecurity = React.lazy(() => import("./AccountSecurity"));
-const AccountConnect = React.lazy(() => import("./AccountConnect"));
+const AccountExport = React.lazy(() => import("../../components/AccountExport"));
+const AccountImport = React.lazy(() => import("../../components/AccountImport"));
+const AccountSecurity = React.lazy(() => import("../../components/AccountSecurity"));
+const AccountConnect = React.lazy(() => import("../../components/AccountConnect"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
