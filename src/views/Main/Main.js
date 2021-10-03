@@ -16,6 +16,8 @@ import CardContent from "@mui/material/CardContent";
 import Share from "@mui/icons-material/Share";
 import OpenInNew from "@mui/icons-material/OpenInNew";
 import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
+//custom
+import pkg from "../../../package.json";
 
 class Main extends Component {
   webShare = () => {
@@ -119,7 +121,7 @@ class Main extends Component {
         </Grid>
         <Box my={6}>
           <Typography variant="body2" gutterBottom color="textSecondary">
-            © Copyright {new Date().getFullYear()} CryptoChefs
+            © Copyright {new Date().getFullYear()} CryptoChefs | v{pkg.version}
           </Typography>
         </Box>
       </Grid>
