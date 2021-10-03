@@ -2,6 +2,11 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
+// fonts
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 // material-ui
 import { green, blue, red } from "@mui/material/colors";
 import { ThemeProvider } from "@mui/material/styles";
