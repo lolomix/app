@@ -5,13 +5,10 @@ import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
 import {
   useBalance,
-//  useContractLoader,
-//  useContractReader,
   useGasPrice,
   useOnBlock,
   useUserProviderAndSigner,
 } from "eth-hooks";
-//import { useEventListener } from "eth-hooks/events/useEventListener";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
@@ -21,28 +18,17 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 //custom
-import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
+import { INFURA_ID, NETWORK, TARGET_CHAIN, NETWORKS } from "./constants";
 import { Transactor } from "./helpers";
-//import { useContractConfig } from "./hooks";
 const { ethers } = require("ethers");
 
-/// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const DEBUG = process.env.REACT_APP_DEBUG;
+const TARGET_NETWORK = NETWORKS[TARGET_CHAIN];
 
-// 😬 Sorry for all the console logging
-const DEBUG = true;
-const NETWORKCHECK = true;
-
-// 🛰 providers
-if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 // const mainnetProvider = getDefaultProvider("mainnet", { infura: INFURA_ID, etherscan: ETHERSCAN_KEY, quorum: 1 });
 // const mainnetProvider = new InfuraProvider("mainnet",INFURA_ID);
 //
-// attempt to connect to our own scaffold eth rpc and if that fails fall back to infura...
-// Using StaticJsonRpcProvider as the chainId won't change see https://github.com/ethers-io/ethers.js/issues/901
-const scaffoldEthProvider = navigator.onLine
-  ? new ethers.providers.StaticJsonRpcProvider("https://rpc.scaffoldeth.io:48544")
-  : null;
+
 const poktMainnetProvider = navigator.onLine
   ? new ethers.providers.StaticJsonRpcProvider(
       "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -53,7 +39,7 @@ const mainnetInfura = navigator.onLine
   : null;
 // ( ⚠️ Getting "failed to meet quorum" errors? Check your INFURA_ID
 // 🏠 Your local provider is usually pointed at your local blockchain
-const localProviderUrl = targetNetwork.rpcUrl;
+const localProviderUrl = TARGET_NETWORK.rpcUrl;
 // as you deploy to other networks you can set REACT_APP_PROVIDER=https://dai.poa.network in packages/react-app/.env
 const localProviderUrlFromEnv = process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : localProviderUrl;
 if (DEBUG) console.log("🏠 Connecting to provider:", localProviderUrlFromEnv);
@@ -106,19 +92,6 @@ const web3Modal = new Web3Modal({
         key: "pk_live_5A7C91B2FC585A17", // required
       },
     },
-    // torus: {
-    //   package: Torus,
-    //   options: {
-    //     networkParams: {
-    //       host: "https://localhost:8545", // optional
-    //       chainId: 1337, // optional
-    //       networkId: 1337 // optional
-    //     },
-    //     config: {
-    //       buildEnv: "development" // optional
-    //     },
-    //   },
-    // },
     "custom-walletlink": {
       display: {
         logo: "https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0",
@@ -141,8 +114,6 @@ function Web3(props) {
   const mainnetProvider =
     poktMainnetProvider && poktMainnetProvider._isProvider
       ? poktMainnetProvider
-      : scaffoldEthProvider && scaffoldEthProvider._network
-      ? scaffoldEthProvider
       : mainnetInfura;
 
   const [injectedProvider, setInjectedProvider] = useState();
@@ -159,10 +130,10 @@ function Web3(props) {
   };
 
   /* 💵 This hook will get the price of ETH from 🦄 Uniswap: */
-  const price = useExchangeEthPrice(targetNetwork, mainnetProvider);
+  const price = useExchangeEthPrice(TARGET_NETWORK, mainnetProvider);
 
   /* 🔥 This hook will get the price of Gas from ⛽️ EtherGasStation */
-  const gasPrice = useGasPrice(targetNetwork, "fast");
+  const gasPrice = useGasPrice(TARGET_NETWORK, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
   const userProviderAndSigner = useUserProviderAndSigner(injectedProvider, localProvider);
   const userSigner = userProviderAndSigner.signer;
@@ -257,7 +228,7 @@ function Web3(props) {
   ]);
 
   let networkDisplay = "";
-  if (NETWORKCHECK && localChainId && selectedChainId && localChainId !== selectedChainId) {
+  if (localChainId && selectedChainId && localChainId !== selectedChainId) {
     const networkSelected = NETWORK(selectedChainId);
     const networkLocal = NETWORK(localChainId);
     if (selectedChainId === 1337 && localChainId === 31337) {
@@ -290,11 +261,11 @@ function Web3(props) {
                     const ethereum = window.ethereum;
                     const data = [
                       {
-                        chainId: "0x" + targetNetwork.chainId.toString(16),
-                        chainName: targetNetwork.name,
-                        nativeCurrency: targetNetwork.nativeCurrency,
-                        rpcUrls: [targetNetwork.rpcUrl],
-                        blockExplorerUrls: [targetNetwork.blockExplorer],
+                        chainId: "0x" + TARGET_NETWORK.chainId.toString(16),
+                        chainName: TARGET_NETWORK.name,
+                        nativeCurrency: TARGET_NETWORK.nativeCurrency,
+                        rpcUrls: [TARGET_NETWORK.rpcUrl],
+                        blockExplorerUrls: [TARGET_NETWORK.blockExplorer],
                       },
                     ];
                     console.log("data", data);
@@ -335,8 +306,8 @@ function Web3(props) {
     }
   } else {
     networkDisplay = (
-      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }}>
-        {targetNetwork.name}
+      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: TARGET_NETWORK.color }}>
+        {TARGET_NETWORK.name}
       </div>
     );
   }
@@ -398,34 +369,50 @@ function Web3(props) {
   }
 
   return (
-    <div>
-      {networkDisplay}
-  
-      {faucetHint}
-
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Grid container spacing={2}>
-          <Grid item>
-          <div>asPrice={gasPrice}</div>
+          <Grid item sm={12}>
+          {networkDisplay}
           </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-              }}
-              size="large"
-              shape="round"
-            >
-              <span style={{ marginRight: 8 }} role="img" aria-label="support">
-                💬
-              </span>
-              Support
-            </Button>
+          <Grid item sm={12}>
+           {faucetHint}
+          </Grid>
+          <Grid item sm={12}>
+          <div>gasPrice={gasPrice}</div>
+          </Grid>
+          <Grid item sm={12}>
+          {web3Modal && (
+          web3Modal.cachedProvider ? (
+        <Button
+          key="logoutbutton"
+          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }}
+          shape="round"
+          size="large"
+          onClick={logoutOfWeb3Modal}
+        >
+          logout
+        </Button>
+    ) : (
+        <Button
+          key="loginbutton"
+          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }}
+          shape="round"
+          size="large"
+          /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */
+          onClick={loadWeb3Modal}
+        >
+          connect
+        </Button>
+    )
+    )}
+          </Grid>
+          <Grid item sm={12}>
+      {address ? (
+        address
+      ) : (
+        "Connecting..."
+      )}
           </Grid>
         </Grid>
-      </div>
-    </div>
   );
 }
 
