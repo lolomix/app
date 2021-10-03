@@ -9,7 +9,6 @@ import {
   useOnBlock,
   useUserProviderAndSigner,
 } from "eth-hooks";
-import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
@@ -45,7 +44,6 @@ const localProviderUrlFromEnv = process.env.REACT_APP_PROVIDER ? process.env.REA
 if (DEBUG) console.log("🏠 Connecting to provider:", localProviderUrlFromEnv);
 const localProvider = new ethers.providers.StaticJsonRpcProvider(localProviderUrlFromEnv);
 
-
 // Coinbase walletLink init
 const walletLink = new WalletLink({
   appName: "coinbase",
@@ -54,10 +52,6 @@ const walletLink = new WalletLink({
 // WalletLink provider
 const walletLinkProvider = walletLink.makeWeb3Provider(`https://mainnet.infura.io/v3/${INFURA_ID}`, 1);
 
-// Portis ID: 6255fb2b-58c8-433b-a2c9-62098c05ddc9
-/*
-  Web3 modal helps us "connect" external wallets:
-*/
 const web3Modal = new Web3Modal({
   network: "mainnet", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
   cacheProvider: true, // optional
@@ -129,9 +123,6 @@ function Web3(props) {
     }, 1);
   };
 
-  /* 💵 This hook will get the price of ETH from 🦄 Uniswap: */
-  const price = useExchangeEthPrice(TARGET_NETWORK, mainnetProvider);
-
   /* 🔥 This hook will get the price of Gas from ⛽️ EtherGasStation */
   const gasPrice = useGasPrice(TARGET_NETWORK, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
@@ -164,9 +155,6 @@ function Web3(props) {
   // 🏗 scaffold-eth is full of handy hooks like this one to get your balance:
   const yourLocalBalance = useBalance(localProvider, address);
 
-  // Just plug in different 🛰 providers to get your balance on different chains:
-  const yourMainnetBalance = useBalance(mainnetProvider, address);
-
 //  const contractConfig = useContractConfig();
   // Load in your local 📝 contract and read a value from it:
 //  const readContracts = useContractLoader(localProvider, contractConfig);
@@ -176,11 +164,6 @@ function Web3(props) {
   //
   // If you want to bring in the mainnet DAI contract it would look like:
  // const mainnetContracts = useContractLoader(mainnetProvider, contractConfig);
-
-  // If you want to call a function on a new block
-  useOnBlock(mainnetProvider, () => {
-    console.log(`⛓ A new mainnet block is here: ${mainnetProvider._lastBlockNumber}`);
-  });
 
   // Then read your DAI balance like:
 //  const myMainnetDAIBalance = useContractReader(mainnetContracts, "DAI", "balanceOf", [
@@ -204,26 +187,20 @@ function Web3(props) {
   useEffect(() => {
     if (
       DEBUG &&
-      mainnetProvider &&
       address &&
       selectedChainId &&
-      yourLocalBalance &&
-      yourMainnetBalance 
+      yourLocalBalance 
     ) {
       console.log("_____________________________________ web3 _____________________________________");
-      console.log("🌎 mainnetProvider", mainnetProvider);
       console.log("🏠 localChainId", localChainId);
       console.log("👩‍💼 selected address:", address);
       console.log("🕵🏻‍♂️ selectedChainId:", selectedChainId);
       console.log("💵 yourLocalBalance", yourLocalBalance ? ethers.utils.formatEther(yourLocalBalance) : "...");
-      console.log("💵 yourMainnetBalance", yourMainnetBalance ? ethers.utils.formatEther(yourMainnetBalance) : "...");
     }
   }, [
-    mainnetProvider,
     address,
     selectedChainId,
     yourLocalBalance,
-    yourMainnetBalance,
     localChainId
   ]);
 
@@ -406,11 +383,18 @@ function Web3(props) {
     )}
           </Grid>
           <Grid item sm={12}>
-      {address ? (
-        address
-      ) : (
-        "Connecting..."
-      )}
+            {address ? (
+              address
+            ) : (
+              "Connecting..."
+            )}
+          </Grid>
+          <Grid item sm={12}>
+            Balance of ETH/MATIC: ... <br />
+            Balance of AROMA: ...
+          </Grid>
+          <Grid item sm={12}>
+            <Button>Buy some AROMA</Button> 
           </Grid>
         </Grid>
   );

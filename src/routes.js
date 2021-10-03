@@ -19,7 +19,7 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
-const Account = lazy(() => import("./web3/Web3"));
+/*const Account = lazy(() => import("./web3/Web3")); */
 const Store = lazy(() => import("./views/Store/Store"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
@@ -74,7 +74,7 @@ class App extends Component {
                     <Route exact path="/buffet" component={Buffet} />
                     <Route exact path="/store" component={Store} />
                     <Route exact path="/kitchen" component={Kitchen} />
-                    <Route exact path="/account" component={Account}/> />
+                    {/* <Route exact path="/account" component={Account}/> /> */}
                   </Switch>
                 </Suspense>
               </Grid>
