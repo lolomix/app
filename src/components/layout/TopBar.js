@@ -24,9 +24,9 @@ import EventNote from "@mui/icons-material/EventNote";
 import Settings from "@mui/icons-material/Settings";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
-import Web3connect from "./Web3connect";
-import LanguageSelector from "./LanguageSelector";
-import LogoButton from "./LogoButton";
+import Web3connect from "../common/Web3connect";
+import LanguageSelector from "../common/LanguageSelector";
+import LogoButton from "../common/LogoButton";
 
 const links = [
   { name: "Store", icon: <Settings />, path: "/store", description: "Buy some Aroma" },
@@ -34,7 +34,7 @@ const links = [
   { name: "Buffet", icon: <People />, path: "/buffet", description: "Order and enjoy your meal" },
 ];
 
-class Topbar extends Component {
+class TopBar extends Component {
   state = {
     popover: false,
   };
@@ -49,7 +49,7 @@ class Topbar extends Component {
     const { popover } = this.state;
 
     return (
-      <AppBar color="primary" position="static">
+      <AppBar color="default" position="static">
         <Toolbar>
           <Grid container direction="row" justifyContent="space-between" alignItems="center">
             <Grid item>
@@ -107,4 +107,4 @@ class Topbar extends Component {
   }
 }
 
-export default withRouter(withTranslation()(Topbar));
+export default withRouter(withTranslation()(TopBar));

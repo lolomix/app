@@ -14,7 +14,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import { theme } from "./utils/theme";
 // shell
-import Topbar from "./components/common/Topbar";
+import TopBar from "./components/layout/TopBar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
@@ -64,7 +64,7 @@ class App extends Component {
           <CssBaseline />
           <Router basename="/">
             <>
-              <Topbar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
+              <TopBar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
               <Grid container spacing={0} direction="row" justifyContent="center" alignItems="flex-start">
                 <ServiceWorkerWrapper />
                 <Suspense fallback={<LoadingSpinner />}>
