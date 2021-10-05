@@ -24,7 +24,7 @@ import EventNote from "@mui/icons-material/EventNote";
 import Settings from "@mui/icons-material/Settings";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
-import Web3connect from "./Web3connect";
+import Web3connect from "./Web3connect2";
 import LanguageSelector from "./LanguageSelector";
 import LogoButton from "../common/LogoButton";
 

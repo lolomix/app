@@ -3,12 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import WalletLink from "walletlink";
 import Web3Modal from "web3modal";
-import {
-  useBalance,
-  useGasPrice,
-  useOnBlock,
-  useUserProviderAndSigner,
-} from "eth-hooks";
+import { useBalance, useGasPrice, useUserProviderAndSigner } from "eth-hooks";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
@@ -27,7 +22,7 @@ const TARGET_NETWORK = NETWORKS[TARGET_CHAIN];
 // const mainnetProvider = getDefaultProvider("mainnet", { infura: INFURA_ID, etherscan: ETHERSCAN_KEY, quorum: 1 });
 // const mainnetProvider = new InfuraProvider("mainnet",INFURA_ID);
 //
-
+/*
 const poktMainnetProvider = navigator.onLine
   ? new ethers.providers.StaticJsonRpcProvider(
       "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -36,6 +31,7 @@ const poktMainnetProvider = navigator.onLine
 const mainnetInfura = navigator.onLine
   ? new ethers.providers.StaticJsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID)
   : null;
+  */
 // ( ⚠️ Getting "failed to meet quorum" errors? Check your INFURA_ID
 // 🏠 Your local provider is usually pointed at your local blockchain
 const localProviderUrl = TARGET_NETWORK.rpcUrl;
@@ -105,11 +101,12 @@ const web3Modal = new Web3Modal({
 });
 
 function Web3(props) {
+  /*
   const mainnetProvider =
     poktMainnetProvider && poktMainnetProvider._isProvider
       ? poktMainnetProvider
       : mainnetInfura;
-
+*/
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
 
@@ -141,13 +138,12 @@ function Web3(props) {
 
   // You can warn the user if you would like them to be on a specific network
   const localChainId = localProvider && localProvider._network && localProvider._network.chainId;
-  const selectedChainId =
-    userSigner && userSigner.provider && userSigner.provider._network && userSigner.provider._network.chainId;
+  const selectedChainId = userSigner && userSigner.provider && userSigner.provider._network && userSigner.provider._network.chainId;
 
   // For more hooks, check out 🔗eth-hooks at: https://www.npmjs.com/package/eth-hooks
 
   // The transactor wraps transactions and provides notificiations
-//  const tx = Transactor(userSigner, gasPrice);
+  //  const tx = Transactor(userSigner, gasPrice);
 
   // Faucet Tx can be used to send funds from the faucet
   const faucetTx = Transactor(localProvider, gasPrice);
@@ -155,20 +151,20 @@ function Web3(props) {
   // 🏗 scaffold-eth is full of handy hooks like this one to get your balance:
   const yourLocalBalance = useBalance(localProvider, address);
 
-//  const contractConfig = useContractConfig();
+  //  const contractConfig = useContractConfig();
   // Load in your local 📝 contract and read a value from it:
-//  const readContracts = useContractLoader(localProvider, contractConfig);
+  //  const readContracts = useContractLoader(localProvider, contractConfig);
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
-//  const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
+  //  const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
   // EXTERNAL CONTRACT EXAMPLE:
   //
   // If you want to bring in the mainnet DAI contract it would look like:
- // const mainnetContracts = useContractLoader(mainnetProvider, contractConfig);
+  // const mainnetContracts = useContractLoader(mainnetProvider, contractConfig);
 
   // Then read your DAI balance like:
-//  const myMainnetDAIBalance = useContractReader(mainnetContracts, "DAI", "balanceOf", [
- //   "0x34aA3F359A9D614239015126635CE7732c18fDF3",
- // ]);
+  //  const myMainnetDAIBalance = useContractReader(mainnetContracts, "DAI", "balanceOf", [
+  //   "0x34aA3F359A9D614239015126635CE7732c18fDF3",
+  // ]);
 
   // keep track of a variable from the contract in the local React state:
   //const purpose = useContractReader(readContracts, "YourContract", "purpose");
@@ -185,24 +181,14 @@ function Web3(props) {
   // 🧫 DEBUG 👨🏻‍🔬
   //
   useEffect(() => {
-    if (
-      DEBUG &&
-      address &&
-      selectedChainId &&
-      yourLocalBalance 
-    ) {
+    if (DEBUG && address && selectedChainId && yourLocalBalance) {
       console.log("_____________________________________ web3 _____________________________________");
       console.log("🏠 localChainId", localChainId);
       console.log("👩‍💼 selected address:", address);
       console.log("🕵🏻‍♂️ selectedChainId:", selectedChainId);
       console.log("💵 yourLocalBalance", yourLocalBalance ? ethers.utils.formatEther(yourLocalBalance) : "...");
     }
-  }, [
-    address,
-    selectedChainId,
-    yourLocalBalance,
-    localChainId
-  ]);
+  }, [address, selectedChainId, yourLocalBalance, localChainId]);
 
   let networkDisplay = "";
   if (localChainId && selectedChainId && localChainId !== selectedChainId) {
@@ -215,8 +201,7 @@ function Web3(props) {
             message="⚠️ Wrong Network ID"
             description={
               <div>
-                You have <b>chain id 1337</b> for localhost and you need to change it to <b>31337</b> to work with
-                HardHat.
+                You have <b>chain id 1337</b> for localhost and you need to change it to <b>31337</b> to work with HardHat.
                 <div>(MetaMask -&gt; Settings -&gt; Networks -&gt; Chain ID -&gt; 31337)</div>
               </div>
             }
@@ -269,8 +254,7 @@ function Web3(props) {
                     if (switchTx) {
                       console.log(switchTx);
                     }
-                  }}
-                >
+                  }}>
                   <b>{networkLocal && networkLocal.name}</b>
                 </Button>
               </div>
@@ -283,9 +267,7 @@ function Web3(props) {
     }
   } else {
     networkDisplay = (
-      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: TARGET_NETWORK.color }}>
-        {TARGET_NETWORK.name}
-      </div>
+      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: TARGET_NETWORK.color }}>{TARGET_NETWORK.name}</div>
     );
   }
 
@@ -293,7 +275,7 @@ function Web3(props) {
     const provider = await web3Modal.connect();
     setInjectedProvider(new ethers.providers.Web3Provider(provider));
 
-    provider.on("chainChanged", chainId => {
+    provider.on("chainChanged", (chainId) => {
       console.log(`chain changed to ${chainId}! updating providers`);
       setInjectedProvider(new ethers.providers.Web3Provider(provider));
     });
@@ -316,7 +298,6 @@ function Web3(props) {
     }
   }, [loadWeb3Modal]);
 
-
   let faucetHint = "";
   const [faucetClicked, setFaucetClicked] = useState(false);
   if (
@@ -337,8 +318,7 @@ function Web3(props) {
               value: ethers.utils.parseEther("0.01"),
             });
             setFaucetClicked(true);
-          }}
-        >
+          }}>
           💰 Grab funds from the faucet ⛽️
         </Button>
       </div>
@@ -346,57 +326,45 @@ function Web3(props) {
   }
 
   return (
-        <Grid container spacing={2}>
-          <Grid item sm={12}>
-          {networkDisplay}
-          </Grid>
-          <Grid item sm={12}>
-           {faucetHint}
-          </Grid>
-          <Grid item sm={12}>
-          <div>gasPrice={gasPrice}</div>
-          </Grid>
-          <Grid item sm={12}>
-          {web3Modal && (
-          web3Modal.cachedProvider ? (
-        <Button
-          key="logoutbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }}
-          shape="round"
-          size="large"
-          onClick={logoutOfWeb3Modal}
-        >
-          logout
-        </Button>
-    ) : (
-        <Button
-          key="loginbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }}
-          shape="round"
-          size="large"
-          /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */
-          onClick={loadWeb3Modal}
-        >
-          connect
-        </Button>
-    )
-    )}
-          </Grid>
-          <Grid item sm={12}>
-            {address ? (
-              address
-            ) : (
-              "Connecting..."
-            )}
-          </Grid>
-          <Grid item sm={12}>
-            Balance of ETH/MATIC: ... <br />
-            Balance of AROMA: ...
-          </Grid>
-          <Grid item sm={12}>
-            <Button>Buy some AROMA</Button> 
-          </Grid>
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid item sm={12}>
+        {networkDisplay}
+      </Grid>
+      <Grid item sm={12}>
+        {faucetHint}
+      </Grid>
+      <Grid item sm={12}>
+        <div>gasPrice={gasPrice}</div>
+      </Grid>
+      <Grid item sm={12}>
+        {web3Modal &&
+          (web3Modal.cachedProvider ? (
+            <Button key="logoutbutton" style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }} shape="round" size="large" onClick={logoutOfWeb3Modal}>
+              logout
+            </Button>
+          ) : (
+            <Button
+              key="loginbutton"
+              style={{ verticalAlign: "top", marginLeft: 8, marginTop: 4 }}
+              shape="round"
+              size="large"
+              /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */
+              onClick={loadWeb3Modal}>
+              connect
+            </Button>
+          ))}
+      </Grid>
+      <Grid item sm={12}>
+        {address ? address : "Connecting..."}
+      </Grid>
+      <Grid item sm={12}>
+        Balance of ETH/MATIC: ... <br />
+        Balance of AROMA: ...
+      </Grid>
+      <Grid item sm={12}>
+        <Button>Buy some AROMA</Button>
+      </Grid>
+    </Grid>
   );
 }
 
