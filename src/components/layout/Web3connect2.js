@@ -21,7 +21,8 @@ import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 //icons
 import AccountCircle from "@mui/icons-material/AccountCircle";
-//import AddCircle from "@mui/icons-material/AddCircle";
+//custom
+import {connectorsByName} from "../../web3/new/connectorsList";
 
 function Web3connect(props) {
   const [address, setAddress] = useState(null);
@@ -105,6 +106,69 @@ function Web3connect(props) {
           <Typography variant="h2" gutterBottom>
             Connect Wallet
           </Typography>
+        {Object.keys(connectorsByName).map(name => {
+            <Button
+              style={{
+                height: '3rem',
+                borderRadius: '1rem',
+                borderColor: currentConnector === activatingConnector ? 'orange' : currentConnector === connector ? 'green' : 'unset',
+                cursor: disabled ? 'unset' : 'pointer',
+                position: 'relative'
+              }}
+              disabled={!triedEager || !!activatingConnector || currentConnector === connector || !!error}
+              key={name}
+              onClick={() => {
+                setActivatingConnector(connectorsByName[name])
+                activate(connectorsByName[name])
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'black',
+                  margin: '0 0 0 1rem'
+                }}
+              >
+                {currentConnector === activatingConnector && <span>loading</span>}
+                {currentConnector === connector && (
+                  <span role="img" aria-label="check">
+                    ✅
+                  </span>
+                )}
+              </div>
+              {name}
+            </Button>
+          
+        })}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {(active || error) && (
+          <button
+            style={{
+              height: '3rem',
+              marginTop: '2rem',
+              borderRadius: '1rem',
+              borderColor: 'red',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              deactivate()
+            }}
+          >
+            Deactivate
+          </button>
+        )}
+
+        {!!error && <h4 style={{ marginTop: '1rem', marginBottom: '0' }}>{getErrorMessage(error)}</h4>}
+      </div>
+
+      <hr style={{ margin: '2rem' }} />
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleWeb3Modal} variant="contained" color="primary">

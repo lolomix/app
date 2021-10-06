@@ -2,6 +2,8 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
+import {Web3ReactProvider} from "@web3-react/core";
+import Web3 from "web3";
 // fonts
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -19,10 +21,16 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
-/*const Account = lazy(() => import("./web3/Web3")); */
+const Web3Test = lazy(() => import("./web3/new/Web3Test")); 
 const Store = lazy(() => import("./views/Store/Store"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
+
+function getLibrary(provider) {
+  //const library = 
+  //library.pollingInterval = 12000
+  return new Web3(provider);
+}
 
 class App extends Component {
   state = {
@@ -47,6 +55,7 @@ class App extends Component {
     const { expertmode, videoOn, admin } = this.state;
 
     return (
+      <Web3ReactProvider getLibrary={getLibrary}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
           anchorOrigin={{
@@ -74,7 +83,7 @@ class App extends Component {
                     <Route exact path="/buffet" component={Buffet} />
                     <Route exact path="/store" component={Store} />
                     <Route exact path="/kitchen" component={Kitchen} />
-                    {/* <Route exact path="/account" component={Account}/> /> */}
+                    <Route exact path="/web3test" component={Web3Test}/> 
                   </Switch>
                 </Suspense>
               </Grid>
@@ -82,6 +91,7 @@ class App extends Component {
           </Router>
         </SnackbarProvider>
       </ThemeProvider>
+      </Web3ReactProvider>
     );
   }
 }
