@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 const BuyAroma = function () {
   const { account, library } = useWeb3React();
   const getSomeAroma = async () => {
-    const mainProxyAddress = "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3";
+    const mainProxyAddress = "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f";
     const contract = new library.eth.Contract(mainProxyAbi, mainProxyAddress);
     console.log(contract);
     try {
