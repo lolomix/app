@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 //material-ui
-import Typography from "@mui/material/Typography";
+//import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import OpeningSoon from "../../components/common/OpeningSoon";
 
 class Buffet extends Component {
   state = {
@@ -11,14 +12,14 @@ class Buffet extends Component {
     chain: "demo",
   };
 
-  render() {
-    const { t } = this.props;
+  componentDidMount() {
+    document.body.className = "buffet";
+  }
 
+  render() {
     return (
       <Box p={2}>
-        <Typography variant="h2" gutterBottom>
-          {t("buffet.title")}
-        </Typography>
+        <OpeningSoon />
       </Box>
     );
   }

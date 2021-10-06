@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 //material-ui
-import Typography from "@mui/material/Typography";
+//import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
+//import Card from "@mui/material/Card";
+//import CardActionArea from "@mui/material/CardActionArea";
+//import CardContent from "@mui/material/CardContent";
+import OpeningSoon from "../../components/common/OpeningSoon";
 
 class Kitchen extends Component {
+  componentDidMount() {
+    document.body.className = "kitchen";
+  }
   render() {
-    const { t } = this.props;
-
     return (
       <Grid item xs={12} md={9} xl={6}>
-        <Typography variant="h1" gutterBottom>
-          {t("kitchen.title")}
-        </Typography>
+        <OpeningSoon />
+        {/* 
         <Grid container spacing={2}>
           <Grid item sm={12} md={6}>
             <Card>
@@ -45,6 +46,7 @@ class Kitchen extends Component {
             </Card>
           </Grid>
         </Grid>
+        */}
       </Grid>
     );
   }

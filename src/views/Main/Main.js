@@ -47,6 +47,8 @@ class Main extends Component {
     window.addEventListener("appinstalled", (evt) => {
       this.setState({ isAppInstalled: true });
     });
+
+    document.body.className = "";
   };
 
   render() {
