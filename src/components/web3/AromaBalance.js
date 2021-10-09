@@ -1,6 +1,8 @@
 import React from "react";
 import { useWeb3React } from "@web3-react/core";
 //import { utils } from "web3";
+import Skeleton from "@mui/material/Skeleton";
+import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../../web3/constants";
 
 const AromaBalance = function () {
   const { account, library } = useWeb3React();
@@ -9,7 +11,7 @@ const AromaBalance = function () {
     if (!!account && !!library) {
       async function loadBalance() {
         try {
-          const aromaAddress = "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3";
+          const contractAroma = NETWORKS[TARGET_CHAIN].contractAroma;
           const minAbi = [
             {
               constant: true,
@@ -19,9 +21,9 @@ const AromaBalance = function () {
               type: "function",
             },
           ];
-          const contract = new library.eth.Contract(minAbi, aromaAddress);
+          const contract = new library.eth.Contract(minAbi, contractAroma);
           const balance = await contract.methods.balanceOf(account).call();
-          setBalance(balance);
+          setBalance(balance / AROMA_DECIMALS);
         } catch (e) {
           console.log(e);
         }
@@ -30,7 +32,7 @@ const AromaBalance = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return <span>{balance === null ? "Error" : balance ? `AROMA ${balance}` : ""}</span>;
+  return balance === null ? <Skeleton variant="text" /> : balance ? <span>AROMA {balance}</span> : <Skeleton variant="text" />;
 };
 
 export default AromaBalance;

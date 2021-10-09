@@ -1,6 +1,7 @@
 import React from "react";
 import { useWeb3React } from "@web3-react/core";
 import { utils } from "web3";
+import Skeleton from "@mui/material/Skeleton";
 
 const Balance = function () {
   const { account, library, chainId } = useWeb3React();
@@ -29,7 +30,7 @@ const Balance = function () {
     }
   }, [account, library, chainId]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return <span>{balance === null ? "Error" : balance ? `Ξ${utils.fromWei(balance, "ether")}` : ""}</span>;
+  return balance === null ? <Skeleton variant="text" /> : balance ? <span>{utils.fromWei(balance, "ether")}</span> : <Skeleton variant="text" />;
 };
 
 export default Balance;

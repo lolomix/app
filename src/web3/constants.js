@@ -7,29 +7,11 @@ export const ETHERSCAN_KEY = process.env.REACT_APP_ETHERSCAN_KEY;
 // BLOCKNATIVE ID FOR Notify.js:
 export const BLOCKNATIVE_DAPPID = process.env.REACT_APP_BLOCKNATIVE_DAPPID;
 
+export const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+export const ETHER_IN_WEI = 1000000000000000000;
+export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
+
 export const NETWORKS = {
-  localhost: {
-    name: "localhost",
-    color: "#666666",
-    chainId: 31337,
-    blockExplorer: "",
-    rpcUrl: "http://" + window.location.hostname + ":8545",
-  },
-  mainnet: {
-    name: "mainnet",
-    color: "#ff8b9e",
-    chainId: 1,
-    rpcUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
-    blockExplorer: "https://etherscan.io/",
-  },
-  kovan: {
-    name: "kovan",
-    color: "#7003DD",
-    chainId: 42,
-    rpcUrl: `https://kovan.infura.io/v3/${INFURA_ID}`,
-    blockExplorer: "https://kovan.etherscan.io/",
-    faucet: "https://gitter.im/kovan-testnet/faucet", // https://faucet.kovan.network/
-  },
   rinkeby: {
     name: "rinkeby",
     color: "#e0d068",
@@ -37,7 +19,32 @@ export const NETWORKS = {
     rpcUrl: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorer: "https://rinkeby.etherscan.io/",
+    contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
+    contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
+    nativeToken: "TEST ETHER",
   },
+  matic: {
+    name: "matic",
+    color: "#2bbdf7",
+    chainId: 137,
+    price: 1,
+    gasPrice: 1000000000,
+    rpcUrl: "https://rpc-mainnet.maticvigil.com",
+    faucet: "https://faucet.matic.network/",
+    blockExplorer: "https://explorer-mainnet.maticvigil.com/",
+    nativeToken: "MATIC",
+  },
+  mumbai: {
+    name: "mumbai",
+    color: "#92D9FA",
+    chainId: 80001,
+    price: 1,
+    gasPrice: 1000000000,
+    rpcUrl: "https://rpc-mumbai.maticvigil.com",
+    faucet: "https://faucet.matic.network/",
+    blockExplorer: "https://mumbai-explorer.matic.today/",
+  },
+  /*
   ropsten: {
     name: "ropsten",
     color: "#F60D09",
@@ -64,25 +71,27 @@ export const NETWORKS = {
     faucet: "https://xdai-faucet.top/",
     blockExplorer: "https://blockscout.com/poa/xdai/",
   },
-  matic: {
-    name: "matic",
-    color: "#2bbdf7",
-    chainId: 137,
-    price: 1,
-    gasPrice: 1000000000,
-    rpcUrl: "https://rpc-mainnet.maticvigil.com",
-    faucet: "https://faucet.matic.network/",
-    blockExplorer: "https://explorer-mainnet.maticvigil.com/",
+    localhost: {
+    name: "localhost",
+    color: "#666666",
+    chainId: 31337,
+    blockExplorer: "",
+    rpcUrl: "http://" + window.location.hostname + ":8545",
   },
-  mumbai: {
-    name: "mumbai",
-    color: "#92D9FA",
-    chainId: 80001,
-    price: 1,
-    gasPrice: 1000000000,
-    rpcUrl: "https://rpc-mumbai.maticvigil.com",
-    faucet: "https://faucet.matic.network/",
-    blockExplorer: "https://mumbai-explorer.matic.today/",
+  mainnet: {
+    name: "mainnet",
+    color: "#ff8b9e",
+    chainId: 1,
+    rpcUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
+    blockExplorer: "https://etherscan.io/",
+  },
+  kovan: {
+    name: "kovan",
+    color: "#7003DD",
+    chainId: 42,
+    rpcUrl: `https://kovan.infura.io/v3/${INFURA_ID}`,
+    blockExplorer: "https://kovan.etherscan.io/",
+    faucet: "https://gitter.im/kovan-testnet/faucet", // https://faucet.kovan.network/
   },
   localArbitrum: {
     name: "localArbitrum",
@@ -183,9 +192,10 @@ export const NETWORKS = {
     rpcUrl: `https://api.harmony.one`,
     gasPrice: 1000000000,
   },
+  */
 };
 
-export const NETWORK = chainId => {
+export const NETWORK = (chainId) => {
   for (const n in NETWORKS) {
     if (NETWORKS[n].chainId === chainId) {
       return NETWORKS[n];
