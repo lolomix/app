@@ -60,3 +60,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## I18n / translations
+
+To handle translations, install i18next-scanner globally: `nnpm install -g i18next-scanner`.
+
+Next, run `i18next-scanner` to update all translation json files
+
