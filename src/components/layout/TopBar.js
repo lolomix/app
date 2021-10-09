@@ -25,7 +25,7 @@ import Settings from "@mui/icons-material/Settings";
 //custom
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
 import Web3connect from "./Web3connect";
-import LanguageSelector from "./LanguageSelector";
+//import LanguageSelector from "./LanguageSelector";
 import LogoButton from "../common/LogoButton";
 
 const links = [
@@ -98,7 +98,7 @@ class TopBar extends Component {
             </Grid>
             <Grid item>
               <Web3connect />
-              <LanguageSelector />
+              {/* <LanguageSelector /> */}
             </Grid>
           </Grid>
         </Toolbar>
