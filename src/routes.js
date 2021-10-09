@@ -21,7 +21,7 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
-const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
+//const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
 const Store = lazy(() => import("./views/Store/Store"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
@@ -83,7 +83,7 @@ class App extends Component {
                       <Route exact path="/buffet" component={Buffet} />
                       <Route exact path="/store" component={Store} />
                       <Route exact path="/kitchen" component={Kitchen} />
-                      <Route exact path="/web3test" component={Web3Test} />
+                      {/* <Route exact path="/web3test" component={Web3Test} /> */}
                     </Switch>
                   </Suspense>
                 </Grid>
