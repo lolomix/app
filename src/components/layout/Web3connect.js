@@ -3,6 +3,7 @@ import { withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import Blockies from "react-blockies";
 import { useWeb3React } from "@web3-react/core";
+import { useSnackbar } from "notistack";
 //mui
 import Tooltip from "@mui/material/Tooltip";
 import List from "@mui/material/List";
@@ -20,15 +21,17 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 //icons
 import AccountCircle from "@mui/icons-material/AccountCircle";
 //custom
-import { connectorsByName } from "../../web3/connectorsList";
+import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
 import { useEagerConnect } from "../../web3/hooks";
 import Balance from "../web3/Balance";
 import AromaBalance from "../web3/AromaBalance";
-import BuyAroma from "../web3/BuyAroma";
+//import ToastLoading from "../../components/notification/ToastLoading";
+//import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 
 function Web3connect(props) {
   const Web3Context = useWeb3React();
@@ -37,6 +40,7 @@ function Web3connect(props) {
   const [activatingConnector, setActivatingConnector] = React.useState();
   const [connectionMenu, setconnectionMenu] = useState(false);
   const [dialogWeb3, setdialogWeb3] = useState(false);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleConnectionIconClick = (event) => {
     setconnectionMenu(event.currentTarget);
@@ -45,13 +49,11 @@ function Web3connect(props) {
     setconnectionMenu(null);
   };
   const handleWeb3Modal = () => {
+    setconnectionMenu(null);
     setdialogWeb3(!dialogWeb3);
   };
   const { t } = props;
 
-  const logoutOfWeb3Modal = () => {
-    setdialogWeb3(!dialogWeb3);
-  };
   const loadWeb3Modal = () => {
     setdialogWeb3(!dialogWeb3);
   };
@@ -62,19 +64,27 @@ function Web3connect(props) {
     }
   }, [activatingConnector, connector]);
 
+  useEffect(() => {
+    if (!!error) {
+      enqueueSnackbar("I love hooks");
+    }
+  }, [error, enqueueSnackbar]);
+
   return (
     <Fragment>
       {!account ? (
         <Tooltip title="Connect to your Ethereum account">
-          <Button size="small" variant="outlined" color="secondary" onClick={loadWeb3Modal}>
+          <Button variant="contained" color="secondary" onClick={loadWeb3Modal}>
             Connect
           </Button>
         </Tooltip>
       ) : (
         <>
-          <Tooltip disableFocusListener title={t("base.connectionInfo")} aria-label={t("base.connectionInfo")}>
+          <Tooltip disableFocusListener title={t("base.youraccount")} aria-label={t("base.youraccount")}>
             <IconButton color="inherit" onClick={handleConnectionIconClick}>
-              <AccountCircle />
+              <Avatar>
+                <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
+              </Avatar>
             </IconButton>
           </Tooltip>
           <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
@@ -84,7 +94,7 @@ function Web3connect(props) {
                   <List dense>
                     {account && (
                       <ListItem>
-                        <Tooltip disableFocusListener title="your web3 address">
+                        <Tooltip disableFocusListener title={t("base.youraccount")}>
                           <ListItemAvatar>
                             <Avatar>
                               <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
@@ -104,10 +114,9 @@ function Web3connect(props) {
                   <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
                     {t("base.close")}
                   </Button>
-                  <Button color="primary" variant="outlined" onClick={logoutOfWeb3Modal}>
-                    Logout
+                  <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
+                    {t("base.settings")}
                   </Button>
-                  <BuyAroma />
                 </Box>
               </Paper>
             </Popover>
@@ -119,44 +128,57 @@ function Web3connect(props) {
           <Typography variant="h2" gutterBottom>
             Connect Wallet
           </Typography>
-          {Object.keys(connectorsByName).map((name) => (
-            <Button
-              style={{
-                borderColor: connectorsByName[name] === activatingConnector ? "orange" : connectorsByName[name] === connector ? "green" : "unset",
-              }}
-              disabled={!triedEager || !!activatingConnector || connectorsByName[name] === connector || !!error}
-              key={name}
-              onClick={() => {
-                setActivatingConnector(connectorsByName[name]);
-                activate(connectorsByName[name]);
-              }}>
-              <div>
-                {connectorsByName[name] === activatingConnector && <span>loading</span>}
-                {connectorsByName[name] === connector && (
-                  <span role="img" aria-label="check">
-                    ✅
-                  </span>
-                )}
-              </div>
-              {name}
-            </Button>
+
+          {Object.keys(connectorsList).map((name) => (
+            <Box mb={2} key={name}>
+              <Grid container spacing={2}>
+                <Grid item sm={6} md={4}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      borderColor:
+                        connectorsList[name].connector === activatingConnector ? "orange" : connectorsList[name].connector === connector ? "green" : "unset",
+                    }}
+                    disabled={!triedEager || !!activatingConnector || connectorsList[name].connector === connector || !!error}
+                    onClick={() => {
+                      setActivatingConnector(connectorsList[name].connector);
+                      activate(connectorsList[name].connector);
+                    }}>
+                    <div>
+                      {connectorsList[name].connector === activatingConnector && <span>loading</span>}
+                      {connectorsList[name].connector === connector && (
+                        <span role="img" aria-label="check">
+                          ✅
+                        </span>
+                      )}
+                    </div>
+                    {name}
+                  </Button>
+                </Grid>
+                <Grid item sm={6} md={8}>
+                  <Typography variant="body2">{connectorsList[name].description}</Typography>
+                </Grid>
+              </Grid>
+            </Box>
           ))}
-          <div>
-            {(active || error) && (
-              <Button
-                onClick={() => {
-                  deactivate();
-                }}>
-                Deactivate
-              </Button>
-            )}
+          <Grid container item spacing={2}>
             {!!error && <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>{getErrorMessage(error)}</h4>}
-          </div>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleWeb3Modal} variant="contained" color="primary">
             {t("base.close")}
           </Button>
+          {(active || error) && (
+            <Button
+              onClick={() => {
+                deactivate();
+              }}
+              variant="outlined"
+              color="primary">
+              {t("base.deactivate")}
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </Fragment>

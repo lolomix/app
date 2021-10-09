@@ -1,34 +1,53 @@
 import {
   injected,
-  network,
   walletconnect,
   walletlink,
   ledger,
-  trezor,
-  lattice,
-  frame,
-  authereum,
-  fortmatic,
-  magic,
-  portis,
-  torus
-} from './connectors2';
+  /* , network, trezor, lattice, frame, authereum, fortmatic, magic, portis, torus */
+} from "./connectors";
 
+const connectorsList = {
+  injected: {
+    name: "Browser",
+    description: "Use this for Browser Plugins such as Metamask or Brave Wallet.",
+    icon: "",
+    connector: injected,
+  },
+  walletconnect: {
+    name: "WalletConnect",
+    description: "Use this if your wallet uses WalletConnect",
+    icon: "",
+    connector: walletconnect,
+  },
+  walletlink: {
+    name: "WalletLink",
+    description: "Use this if your wallet uses WalletLink",
+    icon: "",
+    connector: walletlink,
+  },
+  ledger: {
+    name: "Ledger",
+    description: "Use this if you use a Ledger Wallet.",
+    icon: "",
+    connector: ledger,
+  },
+};
+/*
 const ConnectorNames = {
-  "Injected": 'Injected',
-  "Network": 'Network',
-  "WalletConnect": 'WalletConnect',
-  "WalletLink": 'WalletLink',
-  "Ledger": 'Ledger',
-  "Trezor": 'Trezor',
-  "Lattice": 'Lattice',
-  "Frame": 'Frame',
-  "Authereum": 'Authereum',
-  "Fortmatic": 'Fortmatic',
-  "Magic": 'Magic',
-  "Portis": 'Portis',
-  "Torus": 'Torus'
-}
+  Injected: "Injected",
+  Network: "Network",
+  WalletConnect: "WalletConnect",
+  WalletLink: "WalletLink",
+  Ledger: "Ledger",
+  Trezor: "Trezor",
+  Lattice: "Lattice",
+  Frame: "Frame",
+  Authereum: "Authereum",
+  Fortmatic: "Fortmatic",
+  Magic: "Magic",
+  Portis: "Portis",
+  Torus: "Torus",
+};
 
 export const connectorsByName = {
   [ConnectorNames.Injected]: injected,
@@ -43,7 +62,8 @@ export const connectorsByName = {
   [ConnectorNames.Fortmatic]: fortmatic,
   [ConnectorNames.Magic]: magic,
   [ConnectorNames.Portis]: portis,
-  [ConnectorNames.Torus]: torus
-}
+  [ConnectorNames.Torus]: torus,
+};
+*/
 
-export default ConnectorNames;
+export default connectorsList;
