@@ -28,3 +28,11 @@ body.store {
 body.buffet {
   background-image: url(./assets/background/buffet.jpg);
 }
+
+.avatar-success {
+  background-color: green !important ;
+}
+
+.avatar-warning {
+  background-color: red !important;
+}

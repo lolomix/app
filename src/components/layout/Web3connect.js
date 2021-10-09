@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import Blockies from "react-blockies";
 import { useWeb3React } from "@web3-react/core";
-import { useSnackbar } from "notistack";
+//import { useSnackbar } from "notistack";
 //mui
 import Tooltip from "@mui/material/Tooltip";
 import List from "@mui/material/List";
@@ -22,25 +22,27 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-//icons
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import Check from "@mui/icons-material/Check";
+import Warning from "@mui/icons-material/Warning";
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
 import { useEagerConnect } from "../../web3/hooks";
 import Balance from "../web3/Balance";
 import AromaBalance from "../web3/AromaBalance";
+import BuyAroma from "../web3/BuyAroma";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 
 function Web3connect(props) {
   const Web3Context = useWeb3React();
   const triedEager = useEagerConnect();
-  const { connector, account, activate, deactivate, active, error } = Web3Context;
+  const { connector, account, activate, deactivate, active, error, chainId } = Web3Context;
   const [activatingConnector, setActivatingConnector] = React.useState();
   const [connectionMenu, setconnectionMenu] = useState(false);
   const [dialogWeb3, setdialogWeb3] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleConnectionIconClick = (event) => {
     setconnectionMenu(event.currentTarget);
@@ -63,12 +65,13 @@ function Web3connect(props) {
       setActivatingConnector(undefined);
     }
   }, [activatingConnector, connector]);
-
+  /*0
   useEffect(() => {
     if (!!error) {
       enqueueSnackbar("I love hooks");
     }
   }, [error, enqueueSnackbar]);
+*/
 
   return (
     <Fragment>
@@ -80,6 +83,7 @@ function Web3connect(props) {
         </Tooltip>
       ) : (
         <>
+          <BuyAroma />
           <Tooltip disableFocusListener title={t("base.youraccount")} aria-label={t("base.youraccount")}>
             <IconButton color="inherit" onClick={handleConnectionIconClick}>
               <Avatar>
@@ -104,6 +108,25 @@ function Web3connect(props) {
                         <ListItemText secondary={account.toLowerCase()} primary={t("base.yourWeb3Account")} />
                       </ListItem>
                     )}
+                    {chainId === NETWORKS[TARGET_CHAIN].chainId ? (
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar className="avatar-success">
+                            <Check />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
+                      </ListItem>
+                    ) : (
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar className="avatar-warning">
+                            <Warning />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText secondary={"Please select " + TARGET_CHAIN.toUpperCase() + " in your wallet"} primary="WRONG NETWORK" />
+                      </ListItem>
+                    )}
                     <ListItem>
                       <ListItemText secondary={<AromaBalance />} primary="Your AROMA balance" />
                     </ListItem>
@@ -114,6 +137,7 @@ function Web3connect(props) {
                   <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
                     {t("base.close")}
                   </Button>
+                  &nbsp;
                   <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
                     {t("base.settings")}
                   </Button>

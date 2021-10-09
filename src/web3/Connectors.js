@@ -11,6 +11,7 @@ import { FortmaticConnector } from "@web3-react/fortmatic-connector";
 import { MagicConnector } from "@web3-react/magic-connector";
 import { PortisConnector } from "@web3-react/portis-connector";
 import { TorusConnector } from "@web3-react/torus-connector";
+import { NETWORKS, TARGET_CHAIN } from "./constants";
 
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
@@ -18,7 +19,7 @@ const RPC_URLS = {
   4: "https://eth-rinkeby.alchemyapi.io/v2/GPWAqKF4V0_IpIruGYM3RGGOgtNyUx6l",
 };
 
-export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
+export const injected = new InjectedConnector({ supportedChainIds: [NETWORKS[TARGET_CHAIN].chainId] });
 
 export const network = new NetworkConnector({
   urls: { 1: RPC_URLS[1], 4: RPC_URLS[4] },

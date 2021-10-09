@@ -1,9 +1,6 @@
 import {
   injected,
-  walletconnect,
-  walletlink,
-  ledger,
-  /* , network, trezor, lattice, frame, authereum, fortmatic, magic, portis, torus */
+  /* walletconnect, walletlink, ledger, network, trezor, lattice, frame, authereum, fortmatic, magic, portis, torus */
 } from "./connectors";
 
 const connectorsList = {
@@ -13,6 +10,7 @@ const connectorsList = {
     icon: "",
     connector: injected,
   },
+  /*
   walletconnect: {
     name: "WalletConnect",
     description: "Use this if your wallet uses WalletConnect",
@@ -31,6 +29,7 @@ const connectorsList = {
     icon: "",
     connector: ledger,
   },
+  */
 };
 /*
 const ConnectorNames = {
