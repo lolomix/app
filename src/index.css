@@ -9,21 +9,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-body {
-  min-height: 100vh;
-  background-image: url(./assets/background/main.jpg);
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  -webkit-transition: background-image 0.3s ease-in-out;
-  transition: background-image 0.3s ease-in-out;
-}
-
 body.kitchen {
   background-image: url(./assets/background/kitchen.jpg);
-}
-body.store {
-  background-image: url(./assets/background/market.jpg);
 }
 body.buffet {
   background-image: url(./assets/background/buffet.jpg);
