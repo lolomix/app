@@ -253,12 +253,46 @@
     "AccessCodeDescription": "Enter here your personalized access code that you have received in advance."
   },
   "store": {
-    "title": "Store",
-    "exchangeTitle": "Exchange"
+    "title": "Store"
+  },
+  "faqs": {
+    "WhatIsAroma": {
+      "question": "What is AROMA (ERC20)?",
+      "answer": "AROMA is CryptoChefs' in-kitchen currency that is required for all kinds of transactions such as: Buying an NFT, Creating a Recipe, Staking, Marketplace transactions, and so on."
+    },
+    "WhatIsACryptochefNFT": {
+      "question": "What is a CryptoChef NFT?",
+      "answer": "CryptoChef is the NFT that is issued on the Polygon Blockchain. CryptoChefs are unique tokens that represent the Chef and serve as a basis to participate in our CryptoKitchen game."
+    },
+    "WhatIsARecipe": {
+      "question": "What is a Recipe?",
+      "answer": "Recipes represent a Crypto Index Fund that a Chef believes will grow in value. It consists of a minimum of 3 and a maximum of 20 Cryptocurrencies (5% steps). Creating a recipe requires to own a CryptoChef and to lock-up AROMA tokens."
+    },
+    "WhatIsTheBuffet": {
+      "question": "What is the Buffet?",
+      "answer": "As the name suggests, the buffet is where all the active recipes and their details are displayed. It also contains historical performance data of the recipe and the accumulated rewards."
+    },
+    "WhyDoIHaveToLockUpAroma": {
+      "question": "Why do I have to lock-up AROMA?",
+      "answer": "We want to promote Chefs that put the time and effort into creating amazing recipes in which they really believe in. To prove your commitment, every Chef has to lock-up at least 200 AROMA tokens. The amount of locked-up tokens also influences your share of the reward pool - the more tokens you lock-up, the higher your share gets!"
+    }
   },
   "components": {
     "CurrencyInputField": {
       "helperText": "Enter the amount of {{ currency }} you want to {{ type }}."
+    },
+    "CurrencyExchange": {
+      "title": "Exchange",
+      "exchangeButton": "Exchange"
+    },
+    "NFTBuy": {
+      "title": "Buy a CryptoCHEF",
+      "remaining": "Remaining",
+      "sold": "Sold",
+      "season": "Season",
+      "pricePerCryptoCHEF": "Price Per CryptoCHEF",
+      "price": "Price",
+      "buyButton": "Buy CryptoCHEF"
     }
   }
 }
