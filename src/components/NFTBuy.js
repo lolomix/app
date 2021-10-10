@@ -1,78 +1,122 @@
-import React from "react";
-
+import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
-import Card from '@mui/material/Card'
-import { Divider } from '@mui/material'
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
+// material-ui
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
+// custom
+import ChefSilhouette from './icons/ChefSilhouette'
 
-class NFTBuy extends React.Component {
-  state = {
-    currentNFT: 'cryptochefsS01',
-    NFTs: {
-      cryptochefsS01: {
-        sold: 0,
-        remaining: 0,
-        price: 34231,
-        season: 1
-      }
-    }
+function NFTBuy ({ t, variant }) {
+  const [sold, setSold] = useState(1)
+  const [remaining, setRemaining] = useState(5554)
+  const [price, setPrice] = useState(1000)
+  const [season, setSeason] = useState(1)
+
+  /**
+   * Definition of the `Buy CryptoCHEF` Button loading state
+   */
+  const [buyLoading, setBuyLoading] = React.useState(false)
+
+  /**
+   * Handles the actual exchange by triggering the blockchain transaction
+   * todo: connect to web3
+   */
+  const handleBuy = () => {
+    setBuyLoading(true)
+
+    // todo: replace with the transaction
+    // please use `setBuyLoading` to make it work
+    console.log('Has AROMA approved to be spent?')
+    console.log('Approve it')
+    console.log('Quick Validation there is sufficient AROMA')
+    console.log('Create Transaction Object')
+    setTimeout(function () {
+      console.log('Send a Transaction to the Network')
+      console.log('Handle Errors... if needed')
+      console.log('Transaction Successful...')
+      setBuyLoading(false)
+    }, 3000)
   }
 
-  buy = () => {
-    console.log('Buy Nft')
-  }
 
-  render() {
-    const { t, fullHeight } = this.props;
-    const NFT = this.state.NFTs[this.state.currentNFT]
+ console.log(remaining)
+  return (
+    <Card variant={variant}>
+      <CardContent>
+        <Typography variant="h4" component="h3" align="center" gutterBottom>
+          {t('components.NFTBuy.title')}
+        </Typography>
+        <Grid container justifyContent="center" alignItems="stretch" my={3}>
+          <Grid item sm={12} md={6}>
+            <Typography gutterBottom
+                        variant="body1"
+                        textAlign="center">
+              {t('components.NFTBuy.remaining')}
+            </Typography>
+            <Typography gutterBottom
+                        variant="h1"
+                        textAlign="center">
+              {remaining}
+            </Typography>
+            <Typography gutterBottom
+                        variant="h4"
+                        color="purple"
+                        textAlign="center">
+              {sold} {t('components.NFTBuy.sold')}
+            </Typography>
 
-    let sx = {};
+            <Divider/>
 
-    if (fullHeight) {
-      sx = { height: "100%" }
-    }
-
-    return (
-      <Card sx={sx}>
-        <CardContent>
-          <Typography gutterBottom variant="h5" textAlign="center">
-            CryptoChefs
-          </Typography>
-          <Typography gutterBottom variant="h6" textAlign="center">
-            Remaining
-          </Typography>
-          <Typography gutterBottom variant="h1" textAlign="center">
-            {NFT.remaining}
-          </Typography>
-          <Typography gutterBottom variant="h4" color="purple" textAlign="center">
-            {NFT.sold} Sold
-          </Typography>
-
-          <Divider />
-
-          <Grid container alignContent="center" alignItems="center" mt={2} mb={6}>
-            <Grid item xs p={1}>
-              Season {NFT.season}
-            </Grid>
-            <Divider orientation="vertical" flexItem />
-            <Grid item xs p={1}>
-              <Typography variant="body1">
-                Price per CryptoChef
-              </Typography>
-              <Typography variant="h5" color="purple">
-                {NFT.price} AROMA
-              </Typography>
+            <Grid container alignContent="center" alignItems="center" mt={2}
+                  mb={6}>
+              <Grid item xs p={1}>
+                {t('components.NFTBuy.season')} {season}
+              </Grid>
+              <Divider orientation="vertical" flexItem/>
+              <Grid item xs p={1}>
+                <Typography variant="body1">
+                  {t('components.NFTBuy.pricePerCryptoCHEF')}
+                </Typography>
+                <Typography variant="h5" color="purple">
+                  {price} AROMA
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-          <Button variant="contained" fullWidth onClick={this.buy}>Buy CryptoChef</Button>
-        </CardContent>
-      </Card>
-    );
-  }
+          <Grid item sm={12} md={6}>
+            <Card sx={{
+              backgroundColor: "#F7D2A3",
+              margin: "0 32px"
+            }}>
+              <CardContent>
+                <Box textAlign="center">
+                  <ChefSilhouette sx={{ fontSize: 170 }} />
+                </Box>
+                <LoadingButton color="secondary"
+                               size="xlarge"
+                               variant="contained"
+                               fullWidth
+                               onClick={handleBuy}
+                               loading={buyLoading}
+                               loadingPosition="end"
+                >
+                  {t('components.NFTBuy.buyButton')}
+                </LoadingButton>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  )
 }
 
-export default withTranslation()(NFTBuy);
+export default withTranslation()(NFTBuy)
 

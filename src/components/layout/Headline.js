@@ -1,19 +1,18 @@
 import React from "react";
-
 import { withTranslation } from 'react-i18next'
+// material-ui
 import Typography from '@mui/material/Typography'
 
-class Headline extends React.Component {
-  render() {
-    const { t } = this.props;
-
-    return (
-      <Typography variant="h1" align="center" gutterBottom mt={3} mb={6}>
-        {t(this.props.title)}
-      </Typography>
-    );
-  }
+function Headline({ t, variant, color, title}) {
+  return (
+    <Typography variant={variant} color={color} align="center" gutterBottom mt={3} mb={6}>
+      {t(title)}
+    </Typography>
+  );
 }
 
-export default withTranslation()(Headline);
+Headline.defaultProps = {
+  variant: "h1"
+};
 
+export default withTranslation()(Headline);
