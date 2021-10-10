@@ -1,13 +1,13 @@
 import i18n from "i18next";
 // import Backend from 'i18next-xhr-backend';
-import LanguageDetector from "i18next-browser-languagedetector";
+//import LanguageDetector from "i18next-browser-languagedetector";
 import { format, formatDistance } from "date-fns";
 // other date functions: { formatDistance, formatRelative, subDays } from 'date-fns';
 import { de, enUS, fr, it } from "date-fns/locale";
-import transDe from "./i18n/de/translation";
 import transEn from "./i18n/en/translation";
-import transFr from "./i18n/fr/translation";
-import transIt from "./i18n/it/translation";
+//import transDe from "./i18n/de/translation";
+//import transFr from "./i18n/fr/translation";
+//import transIt from "./i18n/it/translation";
 import { initReactI18next } from "react-i18next";
 
 const dateLang = {
@@ -23,7 +23,7 @@ i18n
   //.use(Backend)
   // detect user language
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
-  .use(LanguageDetector)
+  //.use(LanguageDetector)
   // pass the i18n instance to the react-i18next components.
   // Alternative use the I18nextProvider: https://react.i18next.com/components/i18nextprovider
   .use(initReactI18next)
@@ -77,8 +77,7 @@ i18n
               locale: dateLang[lng],
             });
           default:
-            if (value instanceof Date)
-              return format(value, formatting, { locale: dateLang[lng] });
+            if (value instanceof Date) return format(value, formatting, { locale: dateLang[lng] });
             else return value;
         }
       },
@@ -89,9 +88,11 @@ i18n
     },
     resources: {
       en: { translation: transEn },
+      /*
       de: { translation: transDe },
       fr: { translation: transFr },
       it: { translation: transIt },
+      */
     },
   });
 
