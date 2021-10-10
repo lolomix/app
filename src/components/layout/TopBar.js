@@ -49,11 +49,12 @@ class TopBar extends Component {
     const { popover } = this.state;
 
     return (
-      <AppBar color="default" position="static">
+      <AppBar elevation={0} position="static">
         <Toolbar>
           <Grid container direction="row" justifyContent="space-between" alignItems="center">
             <Grid item>
               <LogoButton />
+
               <Button color="inherit" size="large" component={Link} to="/">
                 {t("base.title")}
               </Button>
