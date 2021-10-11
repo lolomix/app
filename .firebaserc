@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "cryptochefsio"
+  },
+  "targets": {
+    "cryptochefsio": {
+      "hosting": {
+        "test": [
+          "cryptochefstest"
+        ]
+      }
+    }
+  }
+}
