@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
+import { getWeb3ReactContext } from "@web3-react/core";
 // material-ui
 import { Box, Container, Grid } from "@mui/material";
 // custom
-import TokenExchange from "../../components/CurrencyExchange";
-import StoreSteps from "../../components/StoreSteps";
+import CurrencyExchange from "../../components/CurrencyExchange";
+//import StoreSteps from "../../components/StoreSteps";
 import NFTBuy from "../../components/NFTBuy";
 import Headline from "../../components/layout/Headline";
 import DripDivider from "../../components/layout/DripDivider";
 import FAQ from "../../components/common/FAQ";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
 class Store extends Component {
+  /*
   componentDidMount() {
     document.body.className = "store";
   }
-
+  */
+  static contextType = getWeb3ReactContext();
   state = {
     step: "buy-aroma",
     message: "",
@@ -47,6 +51,7 @@ class Store extends Component {
     // list of questions and order.
     const { t } = this.props;
     const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
+    const web3ready = this.context.chainId === NETWORKS[TARGET_CHAIN].chainId;
 
     return (
       <>
@@ -56,13 +61,13 @@ class Store extends Component {
             <Headline color="white" title={t("store.title")} />
             <Grid container justifyContent="center" alignItems="stretch" spacing={2}>
               <Grid item sm={12} md={12}>
-                <StoreSteps />
+                {/* <StoreSteps /> */}
               </Grid>
               <Grid item xs={12} sm={12} md={4}>
-                <TokenExchange variant="fullHeight" />
+                <CurrencyExchange variant="fullHeight" web3ready={web3ready} />
               </Grid>
               <Grid item sm={12} md={8}>
-                <NFTBuy variant="fullHeight" />
+                <NFTBuy variant="fullHeight" web3ready={web3ready} />
               </Grid>
             </Grid>
           </Container>

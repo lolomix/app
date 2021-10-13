@@ -16,6 +16,7 @@ const AromaPrice = function () {
           const contract = new library.eth.Contract(abi, contractMaster);
           const price = await contract.methods.getAROMAPrice().call();
           setPrice(price);
+          console.log(price);
         } catch (e) {
           console.log(e);
         }
@@ -24,7 +25,7 @@ const AromaPrice = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return price ? <span>{price}</span> : <Skeleton variant="text" />;
+  return price ? <span>{price} AROMA</span> : <Skeleton variant="text" />;
 };
 
 export default AromaPrice;

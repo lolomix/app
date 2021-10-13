@@ -30,7 +30,6 @@ import { getErrorMessage } from "../../web3/errors";
 import { useEagerConnect } from "../../web3/hooks";
 import Balance from "../web3/Balance";
 import AromaBalance from "../web3/AromaBalance";
-import BuyAroma from "../web3/BuyAroma";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
@@ -65,7 +64,7 @@ function Web3connect(props) {
       setActivatingConnector(undefined);
     }
   }, [activatingConnector, connector]);
-  /*0
+  /*
   useEffect(() => {
     if (!!error) {
       enqueueSnackbar("I love hooks");
@@ -83,7 +82,6 @@ function Web3connect(props) {
         </Tooltip>
       ) : (
         <>
-          <BuyAroma />
           <Tooltip disableFocusListener title={t("base.youraccount")} aria-label={t("base.youraccount")}>
             <IconButton color="inherit" onClick={handleConnectionIconClick}>
               <Avatar>
