@@ -22,6 +22,7 @@ export const NETWORKS = {
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
     nativeToken: "TEST ETHER",
+    adminAccount: "0x3824D6d729493BAEeC8d5dA7d1cB7926E895B24d",
   },
   matic: {
     name: "matic",

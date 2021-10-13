@@ -25,6 +25,7 @@ const Main = lazy(() => import("./views/Main/Main"));
 const Store = lazy(() => import("./views/Store/Store"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
+const Internal = lazy(() => import("./views/Internal/Internal"));
 
 function getLibrary(provider) {
   //const library =
@@ -91,7 +92,7 @@ class App extends Component {
                       <Route exact path="/buffet" component={Buffet} />
                       <Route exact path="/store" component={Store} />
                       <Route exact path="/kitchen" component={Kitchen} />
-                      {/* <Route exact path="/web3test" component={Web3Test} /> */}
+                      <Route exact path="/internal" component={Internal} />
                     </Switch>
                   </Suspense>
                 </Paper>
