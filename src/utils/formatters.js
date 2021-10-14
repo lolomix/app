@@ -1,0 +1,1 @@
+export const formatCurrency = num => new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 15 }).format(num)

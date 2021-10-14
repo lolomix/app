@@ -36,6 +36,9 @@ import {
 } from "../../web3/connectors";
 import BuyAroma from "../../components/web3/BuyAroma";
 
+// utils
+import {formatCurrency} from '../../utils/formatters'
+
 const ConnectorNames = {
   Injected: "Injected",
   Network: "Network",
@@ -144,7 +147,7 @@ function Balance() {
       <span role="img" aria-label="gold">
         💰
       </span>
-      <span>{balance === null ? "Error" : balance ? `Ξ${utils.fromWei(balance, "ether")}` : ""}</span>
+      <span>{balance === null ? "Error" : formatCurrency(balance) ? `Ξ${formatCurrency(utils.fromWei(balance, "ether"))}` : ""}</span>
     </>
   );
 }

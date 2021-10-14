@@ -5,6 +5,9 @@ import Skeleton from "@mui/material/Skeleton";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 
+// utils
+import {formatCurrency} from '../../utils/formatters'
+
 const AromaPrice = function () {
   const { account, library } = useWeb3React();
   const [price, setPrice] = React.useState();
@@ -25,7 +28,7 @@ const AromaPrice = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return price ? <span>{price} AROMA</span> : <Skeleton variant="text" />;
+  return price ? <span>{formatCurrency(price)} AROMA</span> : <Skeleton variant="text" />;
 };
 
 export default AromaPrice;
