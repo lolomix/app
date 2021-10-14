@@ -2,7 +2,7 @@ import * as React from 'react';
 // material-ui
 import { SvgIcon } from '@mui/material'
 
-function CurrencyMaticIcon(props) {
+function CurrencyMATICIcon(props) {
   return (
     <SvgIcon viewBox="0 0 960.25 960.25" {...props}>
       <g id="Layer_2" data-name="Layer 2">
@@ -37,4 +37,4 @@ function CurrencyMaticIcon(props) {
   );
 }
 
-export default CurrencyMaticIcon
+export default CurrencyMATICIcon
