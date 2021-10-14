@@ -95,12 +95,22 @@
       "exchangeButton": "Buy now"
     },
     "NFTBuy": {
-      "title": "Buy a CryptoCHEF",
+      "title": "Buy a CHEF",
       "remaining": "Remaining",
       "sold": "Sold",
       "season": "Season",
-      "pricePerCryptoCHEF": "Price Per CryptoCHEF",
-      "buyButton": "Buy CryptoCHEF"
+      "pricePerCryptoCHEF": "Price Per CHEF",
+      "buyButton": "Buy a CHEF"
+    },
+    "StoreSteps": {
+      "steps": {
+        "buyAroma": "Nice, seems like you are early! Get your hands on some AROMA to start your journey becoming one of our first Chefs!",
+        "buyCHEF": "Wow! I can smell tantalizing AROMAs in the air. These can bring magical CHEFS to life! Approve and purchase a CHEF before it's too late!",
+        "waitForReveal": "Congratulations, you are already a CHEF owner! Wait for the reveal, we're cooking something dangerously delicious! You have the ability to purchase more CHEFs in the meantime."
+      },
+      "buyAromaTokens": "Buy AROMA tokens",
+      "buyACHEF": "Buy a CHEF",
+      "waitForReveal": "Wait for Reveal"
     }
   }
 }
