@@ -1,17 +1,25 @@
+// material-ui
 import { createTheme } from "@mui/material/styles";
+import buttonClasses from '@mui/material/Button/buttonClasses'
+import { alpha } from '@mui/material'
 
 // images
 import rootBgPattern from '../assets/background/outer-bg-pattern-opacity30.png';
 
 // colors
-const cafeNoir = "rgba(76, 43, 0, 1)";
+const cafeNoir = "rgba(55, 16, 13, 1)";
 const unbleachedSilk = "rgba(255, 219, 205, 1)";
 const persianOrange = "rgba(223, 141, 74, 1)";
-// const brownSugar = "rgba(184, 125, 102, 1)";
-const sunGlow = "rgba(246, 222, 109, 1)";
-const columbiaBlue = "rgb(210, 238, 255)";
+const brownSugar = "rgba(184, 125, 102, 1)";
+const sunGlow = "rgba(255, 203, 76, 1)";
+const darkSkyBlue = "rgb(138, 193, 210)";
+// const beauBlue = "rgb(144, 159, 179)";
 
-export const theme = createTheme ({
+// generators
+const shadow = (px, rgb) => `0.3px ${px}px 0.2px 0px ${alpha(rgb, 0.9)}`
+
+
+export let theme = createTheme ({
   palette: {
     mode: 'light',
     primary: {
@@ -34,10 +42,44 @@ export const theme = createTheme ({
     cafeNoir: {
       main: cafeNoir
     },
-    columbiaBlue: {
-      main: columbiaBlue
+    darkSkyBlue: {
+      main: darkSkyBlue
     }
   },
+  generators: {
+    shadow: shadow
+  },
+  // There are 24 elevations (shadow types) in MUI, however, from elevation 4,
+  // we have to make all heights the same because of the type of shadow we use.
+  //
+  // @todo: work with a UI/UX designer to fix and introduce more depth
+  shadows: [
+    "none",
+    shadow(1.5, brownSugar),
+    shadow(3, brownSugar),
+    shadow(4.5, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar),
+    shadow(6, brownSugar)
+  ],
   shape: {
     borderRadius: 11,
   },
@@ -67,7 +109,10 @@ export const theme = createTheme ({
       fontSize: "1rem",
       fontWeight: 400
     }
-  },
+  }
+});
+
+theme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -89,14 +134,14 @@ export const theme = createTheme ({
       },
       styleOverrides: {
         root: {
-          backgroundColor: columbiaBlue
+          backgroundColor: darkSkyBlue
         }
       }
     },
     MuiCard: {
       variants: [
         {
-          props: { variant: 'fullHeight' },
+          props: { fullHeight: true },
           style: {
             height: "100%"
           }
@@ -104,6 +149,13 @@ export const theme = createTheme ({
       ]
     },
     MuiButton: {
+      styleOverrides: {
+        contained: {
+          [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
+            'boxShadow': theme.shadows[2]
+          }
+        }
+      },
       variants: [
         {
           props: { size: 'xlarge' },
@@ -117,7 +169,7 @@ export const theme = createTheme ({
     MuiLinearProgress: {
       styleOverrides: {
         root: {
-          height: 40,
+          height: 30,
           borderRadius: 11,
           border: "5px solid lightgray"
         },
