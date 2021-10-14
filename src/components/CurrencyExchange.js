@@ -15,7 +15,7 @@ import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../utils/formatters";
 
-function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
+function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
   const { account, library } = useWeb3React();
   const [price, setPrice] = React.useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -49,11 +49,15 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
   const [currencyFrom, setCurrencyFrom] = useState("MATIC");
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
+  React.useEffect(() => {
+    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeToken)
+  }, [])
+
   /**
    * Handles the switch of currencies if `enableCurrencySwitch` is enabled
    */
   const switchCurrencies = () => {
-    // if currency switch is not enabled return
+    // if currency switch is not enabled return early
     if (!enableCurrencySwitch) return;
 
     setCurrencyTo(currencyFrom);
@@ -67,7 +71,6 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
 
   /**
    * Handles the actual exchange by triggering the blockchain transaction
-   * todo: connect to web3
    */
   const handleExchange = async () => {
     setExchangeLoading(true);
@@ -100,17 +103,6 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
         action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
       });
     }
-
-    /*
-    console.log("Quick Validation of Inputs");
-    console.log("Create Transaction Object");
-    setTimeout(function () {
-      console.log("Send a Transaction to the Network");
-      console.log("Handle Errors... if needed");
-      console.log("Transaction Successful...");
-      setExchangeLoading(false);
-    }, 3000);
-    */
   };
 
   /**
@@ -131,13 +123,13 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
   };
 
   return (
-    <Card variant={variant}>
+    <Card fullHeight={fullHeight} elevation={3}>
       {web3ready ? (
         <CardContent>
-          <Typography variant="h4" component="h3" align="center" gutterBottom>
+          <Typography variant="h4" component="h2" align="center" mb={4}>
             {t("components.CurrencyExchange.title")}
           </Typography>
-          <Stack my={4} spacing={2.5} alignItems="center">
+          <Stack spacing={2.5} alignItems="center">
             <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="sell" value={currencyFromAmount} disabled required />
             <Divider flexItem>
               <Chip
@@ -166,7 +158,7 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
               fullWidth
               onClick={handleExchange}
               loading={exchangeLoading}
-              loadingPosition="end">
+            >
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip

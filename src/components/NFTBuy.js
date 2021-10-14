@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
 // material-ui
-import { Box, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,14 +13,14 @@ import ChefSilhouette from "./icons/ChefSilhouette";
 import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 
-function NFTBuy({ t, variant, web3ready }) {
+function NFTBuy({ t, fullHeight, web3ready }) {
   const { account, library } = useWeb3React();
-  //const [sold, setSold] = useState(1);
+  const [sold, setSold] = useState(1);
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);
-  //  const [season, setSeason] = useState(1);
-  const season = 1; // set season manually for the time being
+  //const season = 1; // set season manually for the time being
   const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
+
   /**
    * Definition of the `Buy CryptoCHEF` Button loading state
    */
@@ -31,11 +31,10 @@ function NFTBuy({ t, variant, web3ready }) {
   const handleBuyDialog = () => {
     setBuyDialog(!buyDialog);
   };
+
   /**
    * Handles the actual exchange by triggering the blockchain transaction
-   * todo: connect to web3
    */
-
   const handleApprove = async () => {
     setBuyLoading(true);
     try {
@@ -58,20 +57,6 @@ function NFTBuy({ t, variant, web3ready }) {
       console.log(error);
       setBuyLoading(false);
     }
-    // todo: replace with the transaction
-    // please use `setBuyLoading` to make it work
-    /*
-    console.log("Has AROMA approved to be spent?");
-    console.log("Approve it");
-    console.log("Quick Validation there is sufficient AROMA");
-    console.log("Create Transaction Object");
-    setTimeout(function () {
-      console.log("Send a Transaction to the Network");
-      console.log("Handle Errors... if needed");
-      console.log("Transaction Successful...");
-      setBuyLoading(false);
-    }, 3000);
-    */
   };
 
   React.useEffect(() => {
@@ -102,62 +87,81 @@ function NFTBuy({ t, variant, web3ready }) {
 
   return (
     <Fragment>
-      <Card variant={variant}>
+      <Card fullHeight={fullHeight} elevation={3}>
         {web3ready ? (
           <CardContent>
-            <Typography variant="h4" component="h3" align="center" gutterBottom>
-              {t("components.NFTBuy.title")}
+            <Typography variant="h4" component="h2" align="center" mb={4}>
+              {t('components.NFTBuy.title')}
             </Typography>
-            <Grid container justifyContent="center" alignItems="stretch" my={3}>
-              <Grid item sm={12} md={6}>
-                <Typography gutterBottom variant="body1" textAlign="center">
-                  {t("components.NFTBuy.remaining")}
+            <Grid container spacing={6} justifyContent="center" alignItems="stretch">
+              <Grid item xs={12} md={6}>
+                <Typography gutterBottom variant="h5" component="div" textAlign="center" mt={3} sx={{ 'textTransform': 'uppercase' }}>
+                  {t('components.NFTBuy.remaining')}
                 </Typography>
-                <Typography gutterBottom variant="h1" textAlign="center">
+                <Typography gutterBottom variant="h1" component="div" textAlign="center" color="secondary" sx={{ 'textTransform': 'uppercase', 'fontWeight': 'bold' }}>
                   {remaining}
                 </Typography>
-                {/*
-                <Typography gutterBottom variant="h4" color="purple" textAlign="center">
-                  {sold} {t("components.NFTBuy.sold")}
+                <Typography gutterBottom variant="h6" component="div" textAlign="center" mb={3} sx={{ 'textTransform': 'uppercase' }}>
+                  {sold} {t('components.NFTBuy.sold')}
                 </Typography>
-                */}
-                <Divider />
 
-                <Grid container alignContent="center" alignItems="center" mt={2} mb={6}>
+                <Divider variant="middle" />
+
+                <Grid container alignContent="center" alignItems="center" mt={3} mb={6}>
                   <Grid item xs p={1}>
-                    {t("components.NFTBuy.season")} {season}
+                    <Typography textAlign="center" sx={{ 'textTransform': 'uppercase' }}>
+                      {t('components.NFTBuy.season')}
+                    </Typography>
+                    <Typography textAlign="center" color="secondary" sx={{ 'textTransform': 'uppercase', 'fontWeight': 'bold' }}>
+                      ONE
+                    </Typography>
                   </Grid>
-                  <Divider orientation="vertical" flexItem />
+
+                  <Divider flexItem orientation="vertical" />
+
                   <Grid item xs p={1}>
-                    <Typography variant="body1">{t("components.NFTBuy.pricePerCryptoCHEF")}</Typography>
-                    <Typography variant="h5" color="purple">
+                    <Typography variant="body2" textAlign="center" sx={{ 'textTransform': 'uppercase' }}>
+                      {t('components.NFTBuy.pricePerCryptoCHEF')}
+                    </Typography>
+                    <Typography variant="h5" color="secondary" textAlign="center" sx={{ 'fontWeight': 'bold', 'textTransform': 'uppercase' }}>
                       {price / AROMA_DECIMALS} AROMA
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item sm={12} md={6}>
-                <Card
-                  sx={{
-                    backgroundColor: "#F7D2A3",
-                    margin: "0 32px",
-                  }}>
-                  <CardContent>
-                    <Box textAlign="center">
-                      <ChefSilhouette sx={{ fontSize: 170 }} />
-                    </Box>
-                    <LoadingButton
-                      color="secondary"
-                      size="xlarge"
-                      variant="contained"
-                      fullWidth
-                      onClick={handleBuyDialog}
-                      loading={buyLoading}
-                      loadingPosition="end">
-                      {t("components.NFTBuy.buyButton")}
-                    </LoadingButton>
-                  </CardContent>
-                </Card>
+              <Grid item sm={12} md={6} spacing={4} container justifyContent="center">
+                <Grid item xs={10}>
+                  <Card fullHeight={true}
+                        variant="outlined"
+                        sx={{
+                          maxWidth: "280px",
+                          backgroundColor: "#F7D2A3",
+                          display: "block",
+                          margin: "auto"
+                        }}
+                  >
+                    <CardContent sx={{height: "100%"}}>
+                      <Grid container justifyContent="center" alignItems="center" sx={{height: "100%"}}>
+                        <Grid item>
+                          <ChefSilhouette sx={{ fontSize: 170 }} />
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={10}>
+                  <LoadingButton
+                    mt={2}
+                    color="secondary"
+                    size="xlarge"
+                    variant="contained"
+                    fullWidth
+                    onClick={handleBuyDialog}
+                    loading={buyLoading}
+                  >
+                    {t("components.NFTBuy.buyButton")}
+                  </LoadingButton>
+                </Grid>
               </Grid>
             </Grid>
           </CardContent>
