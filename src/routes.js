@@ -19,6 +19,7 @@ import TopBar from "./components/layout/TopBar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 import { Container, Paper } from "@mui/material";
+import AnnouncementBar from './components/layout/AnnouncementBar'
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
 //const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
@@ -81,8 +82,9 @@ class App extends Component {
             }}>
             <CssBaseline />
             <Router basename="/">
-              <Container maxWidth="lg" disableGutters={true}>
-                <Paper square elevation={5}>
+              <Container maxWidth="xl" disableGutters={true}>
+                <Paper square elevation={4}>
+                  <AnnouncementBar />
                   <TopBar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
                   <ServiceWorkerWrapper />
                   <Suspense fallback={<LoadingSpinner />}>
