@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useWeb3React } from "@web3-react/core";
+import { useSnackbar } from "notistack";
 // material-ui
 import LoadingButton from "@mui/lab/LoadingButton";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
 import { Card, CardContent, Typography, Stack, Divider, Chip } from "@mui/material";
 // custom
 import CurrencyInputField from "./form/CurrencyInputField";
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
+import { NETWORKS, TARGET_CHAIN, ETHER_IN_WEI } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import ToastLoading from "./notification/ToastLoading";
+import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
+import { formatCurrency } from "../utils/formatters";
 
 function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
   const { account, library } = useWeb3React();
   const [price, setPrice] = React.useState();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   React.useEffect(() => {
     if (!!account && !!library) {
       async function loadPrice() {
@@ -66,19 +71,34 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
    */
   const handleExchange = async () => {
     setExchangeLoading(true);
-
-    // todo: replace with the transaction
-    // please use `setExchangeLoading` to make it work
+    let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
+      variant: "warning",
+      persist: true,
+      action: <ToastLoadingIndeterminate />,
+    });
     const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
     const contract = new library.eth.Contract(abi, contractMaster);
+    console.log("currencyToAmount");
+    console.log(currencyToAmount);
+    console.log("currencyFromAmount");
     console.log(currencyFromAmount);
     try {
-      const result = await contract.methods.buyAROMA(currencyFromAmount).send({ value: "1000", from: account, gas: 10000000 });
+      const result = await contract.methods.buyAROMA(currencyToAmount).send({ value: currencyToAmount * price, from: account, gas: 10000000 });
       console.log(result);
       setExchangeLoading(false);
+      closeSnackbar(loadingSnackbar);
+      enqueueSnackbar("Success", {
+        variant: "success",
+        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      });
     } catch (error) {
       console.log(error);
       setExchangeLoading(false);
+      closeSnackbar(loadingSnackbar);
+      enqueueSnackbar("Error", {
+        variant: "error",
+        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      });
     }
 
     /*
@@ -99,17 +119,15 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
    */
   const handleCurrencyToUserInput = (event) => {
     setCurrencyToAmount(event.target.value);
-
-    console.log("User Input Noticed");
-    console.log(`User want to buy AROMA`);
-
+    //console.log("User Input Noticed");
+    //console.log(`User want to buy AROMA`);
     // user would like to buy X amount of AROMA (CurrencyTo)
-    console.log(`Calculating Exchange Rate`);
-    console.log(`Calculating required amount of MATIC (CurrencyFrom)`);
-    console.log(`Fill the MATIC (CurrencyFrom) input with the calculated amount.`);
+    //console.log(`Calculating Exchange Rate`);
+    //console.log(`Calculating required amount of MATIC (CurrencyFrom)`);
+    //console.log(`Fill the MATIC (CurrencyFrom) input with the calculated amount.`);
     setCurrencyFromAmount(event.target.value / price);
-    console.log(`Quick validation that user has sufficient MATIC to buy AROMA`);
-    console.log(`Trigger input WARNING ONLY if available MATIC is insufficient`);
+    //console.log(`Quick validation that user has sufficient MATIC to buy AROMA`);
+    //console.log(`Trigger input WARNING ONLY if available MATIC is insufficient`);
   };
 
   return (
@@ -152,7 +170,7 @@ function CurrencyExchange({ t, variant, web3ready, enableCurrencySwitch }) {
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
-              label={"For 1" + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + price + " AROMA tokens."}
+              label={"For 1" + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(ETHER_IN_WEI / price) + " AROMA tokens."}
               sx={{ margin: "8px 0" }}
               size="small"
               icon={(enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />}
