@@ -171,8 +171,8 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
         </CardContent>
       ) : (
         <CardContent>
-          <Typography variant="body2" align="center" gutterBottom>
-            Connect your wallet and select the right chain.
+          <Typography variant="body2" align="center" my={20}>
+            { t("base.connectWalletAndNetwork") }
           </Typography>
         </CardContent>
       )}

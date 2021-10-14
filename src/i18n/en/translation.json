@@ -12,7 +12,8 @@
     "youraccount": "Your account",
     "yourWeb3Account": "Your Web3 Account",
     "settings": "Settings",
-    "deactivate": "Deactivate"
+    "deactivate": "Deactivate",
+    "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network."
   },
   "main": {
     "title": "CryptoChefs",
