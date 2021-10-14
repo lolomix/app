@@ -41,11 +41,14 @@ class Store extends Component {
   // }
 
   render() {
-    // Pass this array to the FAQ component to amend the
-    // list of questions and order.
     const { t } = this.props;
-    const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
     const web3ready = this.context.chainId === NETWORKS[TARGET_CHAIN].chainId;
+    
+    /**
+     * List of FAQ items to display.
+     * @type {string[]}
+     */
+    const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
 
     return (
       <>
@@ -55,7 +58,7 @@ class Store extends Component {
             <Headline color="white" title={t("store.title")} />
             <Grid container spacing={3} justifyContent="center" alignItems="stretch">
               <Grid item xs={12}>
-                 <StoreSteps step={this.state.step}/>
+                 <StoreSteps step={this.state.step} web3ready={web3ready} />
               </Grid>
               <Grid item xs={12} lg={4}>
                 <CurrencyExchange fullHeight={true} web3ready={web3ready} />
