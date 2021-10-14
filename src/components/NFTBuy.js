@@ -2,7 +2,11 @@ import React, { Fragment, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
 // material-ui
-import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
