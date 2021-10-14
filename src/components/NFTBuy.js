@@ -78,7 +78,7 @@ function NFTBuy({ t, variant, web3ready }) {
     if (!!library && !contract) {
       setContract(new library.eth.Contract(abi, contractMaster));
     }
-    if (!!library) {
+    if (!!library && contract) {
       async function loadSupply() {
         try {
           const cryptoChefSeasonSupply = await contract.methods.getCryptoChefSeasonSupply().call();
