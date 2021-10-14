@@ -11,7 +11,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -91,56 +90,54 @@ function Web3connect(props) {
           </Tooltip>
           <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
             <Popover id="settings-menu" open={Boolean(connectionMenu)} anchorEl={connectionMenu} onClose={handleConnectionMenuClose}>
-              <Paper>
-                <Box m={2}>
-                  <List dense>
-                    {account && (
-                      <ListItem>
-                        <Tooltip disableFocusListener title={t("base.youraccount")}>
-                          <ListItemAvatar>
-                            <Avatar>
-                              <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
-                            </Avatar>
-                          </ListItemAvatar>
-                        </Tooltip>
-                        <ListItemText secondary={account.toLowerCase()} primary={t("base.yourWeb3Account")} />
-                      </ListItem>
-                    )}
-                    {chainId === NETWORKS[TARGET_CHAIN].chainId ? (
-                      <ListItem>
+              <Box m={2}>
+                <List dense>
+                  {account && (
+                    <ListItem>
+                      <Tooltip disableFocusListener title={t("base.youraccount")}>
                         <ListItemAvatar>
-                          <Avatar className="avatar-success">
-                            <Check />
+                          <Avatar>
+                            <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
-                      </ListItem>
-                    ) : (
-                      <ListItem>
-                        <ListItemAvatar>
-                          <Avatar className="avatar-warning">
-                            <Warning />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText secondary={"Please select " + TARGET_CHAIN.toUpperCase() + " in your wallet"} primary="WRONG NETWORK" />
-                      </ListItem>
-                    )}
-                    <ListItem>
-                      <ListItemText secondary={<AromaBalance />} primary="Your AROMA balance" />
+                      </Tooltip>
+                      <ListItemText secondary={account.toLowerCase()} primary={t("base.yourWeb3Account")} />
                     </ListItem>
+                  )}
+                  {chainId === NETWORKS[TARGET_CHAIN].chainId ? (
                     <ListItem>
-                      <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
+                      <ListItemAvatar>
+                        <Avatar className="avatar-success">
+                          <Check />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
                     </ListItem>
-                  </List>
-                  <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
-                    {t("base.close")}
-                  </Button>
-                  &nbsp;
-                  <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
-                    {t("base.settings")}
-                  </Button>
-                </Box>
-              </Paper>
+                  ) : (
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar className="avatar-warning">
+                          <Warning />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText secondary={"Please select " + TARGET_CHAIN.toUpperCase() + " in your wallet"} primary="WRONG NETWORK" />
+                    </ListItem>
+                  )}
+                  <ListItem>
+                    <ListItemText secondary={<AromaBalance />} primary="Your AROMA balance" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
+                  </ListItem>
+                </List>
+                <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
+                  {t("base.close")}
+                </Button>
+                &nbsp;
+                <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
+                  {t("base.settings")}
+                </Button>
+              </Box>
             </Popover>
           </Backdrop>
         </>
