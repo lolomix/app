@@ -15,19 +15,19 @@ import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 
 function NFTBuy({ t, variant, web3ready }) {
   const { account, library } = useWeb3React();
-  const [sold, setSold] = useState(1);
+  //const [sold, setSold] = useState(1);
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);
   //  const [season, setSeason] = useState(1);
   const season = 1; // set season manually for the time being
   const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
-  const contract = new library.eth.Contract(abi, contractMaster);
-
   /**
    * Definition of the `Buy CryptoCHEF` Button loading state
    */
   const [buyLoading, setBuyLoading] = React.useState(false);
   const [buyDialog, setBuyDialog] = React.useState(false);
+  const [contract, setContract] = React.useState(false);
+
   const handleBuyDialog = () => {
     setBuyDialog(!buyDialog);
   };
@@ -75,6 +75,9 @@ function NFTBuy({ t, variant, web3ready }) {
   };
 
   React.useEffect(() => {
+    if (!!library && !contract) {
+      setContract(new library.eth.Contract(abi, contractMaster));
+    }
     if (!!library) {
       async function loadSupply() {
         try {
@@ -95,7 +98,7 @@ function NFTBuy({ t, variant, web3ready }) {
       loadSupply();
       loadPrice();
     }
-  }, [library, contract]); // ensures refresh if referential identity of library doesn't change across chainIds
+  }, [library, contract, contractMaster]); // ensures refresh if referential identity of library doesn't change across chainIds
 
   return (
     <Fragment>
@@ -113,10 +116,11 @@ function NFTBuy({ t, variant, web3ready }) {
                 <Typography gutterBottom variant="h1" textAlign="center">
                   {remaining}
                 </Typography>
+                {/*
                 <Typography gutterBottom variant="h4" color="purple" textAlign="center">
                   {sold} {t("components.NFTBuy.sold")}
                 </Typography>
-
+                */}
                 <Divider />
 
                 <Grid container alignContent="center" alignItems="center" mt={2} mb={6}>
