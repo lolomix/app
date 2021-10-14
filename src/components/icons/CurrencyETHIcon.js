@@ -20,7 +20,7 @@ function CurrencyETHIcon(props) {
               className="C6B2sGGpIk" data-name="Path"/>
         <path id="Path-4" d="M377.18 640.02V502.21l-171.42-99.47 171.42 237.28z"
               className="mVKY1kgP3Y" data-name="Path"/>
-        <path id="Path-5" fill="#fff" fill-opacity=".2"
+        <path id="Path-5" fill="#fff" fillOpacity=".2"
               d="m377.18 470.34 171.39-99.52-171.39-76.54v176.06z"
               data-name="Path"/>
       </g>
