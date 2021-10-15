@@ -10,14 +10,23 @@ import {
   Typography,
 } from '@mui/material'
 
-
+/**
+ * @param t
+ * @param faqKeys
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function FAQ ({ t, faqKeys }) {
 
-  // holds the list of "question and answer" objects
+  /**
+   * Holds the list of "question and answer" objects
+   *
+   * @type {*[]}
+   */
   let faqs = []
 
-  // iterate over `faqKeys` and push to `faqs`
-  // this is skipped automatically if `faqKeys` is an empty array
+  // iterates over `faqKeys` and pushes to `faqs` array
+  // `forEach` skips empty arrays automatically
   faqKeys.forEach(el => {
     let faq = t(`faqs.${el}`, {
       returnObjects: true,
@@ -69,10 +78,16 @@ function FAQ ({ t, faqKeys }) {
   )
 }
 
+/**
+ * @type {{faqKeys: *[]}}
+ */
 FAQ.defaultProps = {
   faqKeys: []
 }
 
+/**
+ * @type {{faqKeys: Requireable<any[]>}}
+ */
 FAQ.propTypes = {
   faqKeys: PropTypes.array
 }
