@@ -123,7 +123,7 @@ class ConnectionInfo extends Component {
             <Web3 />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleDialogWeb3Close} variant="contained" color="primary">
+            <Button onClick={this.handleDialogWeb3Close} disableElevation variant="contained" color="primary">
               {t("base.close")}
             </Button>
           </DialogActions>
