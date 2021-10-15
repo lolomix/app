@@ -1,12 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
+import { useSnackbar } from "notistack";
 // material-ui
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -16,21 +13,27 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import ChefSilhouette from "./icons/ChefSilhouette";
 import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import abiAroma from "../web3/abi/AROMATokenMatic.json";
+import ToastLoading from "./notification/ToastLoading";
+import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 
 function NFTBuy({ t, fullHeight, web3ready }) {
   const { account, library } = useWeb3React();
-  const [sold, setSold] = useState(1);
+  //const [sold, setSold] = useState(1);
+  const sold = 1;
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);
   //const season = 1; // set season manually for the time being
-  const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
 
   /**
    * Definition of the `Buy CryptoCHEF` Button loading state
    */
   const [buyLoading, setBuyLoading] = React.useState(false);
   const [buyDialog, setBuyDialog] = React.useState(false);
-  const [contract, setContract] = React.useState(false);
+  const [contractErc721, setContractErc721] = React.useState(false);
+  const contractMasterAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const contractAromaAddress = NETWORKS[TARGET_CHAIN].contractAroma;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleBuyDialog = () => {
     setBuyDialog(!buyDialog);
@@ -41,36 +44,42 @@ function NFTBuy({ t, fullHeight, web3ready }) {
    */
   const handleApprove = async () => {
     setBuyLoading(true);
+    let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
+      variant: "warning",
+      persist: true,
+      action: <ToastLoadingIndeterminate />,
+    });
     try {
-      const result = await contract.methods.approve(account, "1000000000000000000").send({ from: account, gas: 10000000 });
+      const contractAroma = new library.eth.Contract(abiAroma, contractAromaAddress);
+      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account, gas: 10000000 });
+      console.log(resultApprove);
+      const result = await contractErc721.methods.buyCryptoChef().send({ from: account, gas: 10000000 });
       console.log(result);
+      closeSnackbar(loadingSnackbar);
+      enqueueSnackbar("Success", {
+        variant: "success",
+        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      });
       setBuyLoading(false);
     } catch (error) {
       console.log(error);
-      setBuyLoading(false);
-    }
-  };
-
-  const handleBuy = async () => {
-    setBuyDialog(true);
-    try {
-      const result = await contract.methods.buyCryptoChef().send({ from: account, gas: 10000000 });
-      console.log(result);
-      setBuyLoading(false);
-    } catch (error) {
-      console.log(error);
+      closeSnackbar(loadingSnackbar);
+      enqueueSnackbar("Error", {
+        variant: "error",
+        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      });
       setBuyLoading(false);
     }
   };
 
   React.useEffect(() => {
-    if (!!library && !contract) {
-      setContract(new library.eth.Contract(abi, contractMaster));
+    if (!!library && !contractErc721) {
+      setContractErc721(new library.eth.Contract(abi, contractMasterAddress));
     }
-    if (!!library && contract) {
+    if (!!library && contractErc721) {
       async function loadSupply() {
         try {
-          const cryptoChefSeasonSupply = await contract.methods.getCryptoChefSeasonSupply().call();
+          const cryptoChefSeasonSupply = await contractErc721.methods.getCryptoChefSeasonSupply().call();
           setRemaining(cryptoChefSeasonSupply);
         } catch (e) {
           console.log(e);
@@ -78,7 +87,7 @@ function NFTBuy({ t, fullHeight, web3ready }) {
       }
       async function loadPrice() {
         try {
-          const cryptoChefPrice = await contract.methods.getCryptoChefPrice().call();
+          const cryptoChefPrice = await contractErc721.methods.getCryptoChefPrice().call();
           setPrice(cryptoChefPrice);
         } catch (e) {
           console.log(e);
@@ -87,7 +96,7 @@ function NFTBuy({ t, fullHeight, web3ready }) {
       loadSupply();
       loadPrice();
     }
-  }, [library, contract, contractMaster]); // ensures refresh if referential identity of library doesn't change across chainIds
+  }, [library, contractErc721, contractMasterAddress]); // ensures refresh if referential identity of library doesn't change across chainIds
 
   return (
     <Fragment>
@@ -95,28 +104,34 @@ function NFTBuy({ t, fullHeight, web3ready }) {
         {web3ready ? (
           <CardContent>
             <Typography variant="h4" component="h2" align="center" mb={4}>
-              {t('components.NFTBuy.title')}
+              {t("components.NFTBuy.title")}
             </Typography>
             <Grid container spacing={6} justifyContent="center" alignItems="stretch">
               <Grid item xs={12} md={6}>
-                <Typography gutterBottom variant="h5" component="div" textAlign="center" mt={3} sx={{ 'textTransform': 'uppercase' }}>
-                  {t('components.NFTBuy.remaining')}
+                <Typography gutterBottom variant="h5" component="div" textAlign="center" mt={3} sx={{ textTransform: "uppercase" }}>
+                  {t("components.NFTBuy.remaining")}
                 </Typography>
-                <Typography gutterBottom variant="h1" component="div" textAlign="center" color="secondary" sx={{ 'textTransform': 'uppercase', 'fontWeight': 'bold' }}>
+                <Typography
+                  gutterBottom
+                  variant="h1"
+                  component="div"
+                  textAlign="center"
+                  color="secondary"
+                  sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
                   {remaining}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="div" textAlign="center" mb={3} sx={{ 'textTransform': 'uppercase' }}>
-                  {sold} {t('components.NFTBuy.sold')}
+                <Typography gutterBottom variant="h6" component="div" textAlign="center" mb={3} sx={{ textTransform: "uppercase" }}>
+                  {sold} {t("components.NFTBuy.sold")}
                 </Typography>
 
                 <Divider variant="middle" />
 
                 <Grid container alignContent="center" alignItems="center" mt={3} mb={6}>
                   <Grid item xs p={1}>
-                    <Typography textAlign="center" sx={{ 'textTransform': 'uppercase' }}>
-                      {t('components.NFTBuy.season')}
+                    <Typography textAlign="center" sx={{ textTransform: "uppercase" }}>
+                      {t("components.NFTBuy.season")}
                     </Typography>
-                    <Typography textAlign="center" color="secondary" sx={{ 'textTransform': 'uppercase', 'fontWeight': 'bold' }}>
+                    <Typography textAlign="center" color="secondary" sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
                       ONE
                     </Typography>
                   </Grid>
@@ -124,10 +139,10 @@ function NFTBuy({ t, fullHeight, web3ready }) {
                   <Divider flexItem orientation="vertical" />
 
                   <Grid item xs p={1}>
-                    <Typography variant="body2" textAlign="center" sx={{ 'textTransform': 'uppercase' }}>
-                      {t('components.NFTBuy.pricePerCryptoCHEF')}
+                    <Typography variant="body2" textAlign="center" sx={{ textTransform: "uppercase" }}>
+                      {t("components.NFTBuy.pricePerCryptoCHEF")}
                     </Typography>
-                    <Typography variant="h5" color="secondary" textAlign="center" sx={{ 'fontWeight': 'bold', 'textTransform': 'uppercase' }}>
+                    <Typography variant="h5" color="secondary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
                       {price / AROMA_DECIMALS} AROMA
                     </Typography>
                   </Grid>
@@ -135,17 +150,17 @@ function NFTBuy({ t, fullHeight, web3ready }) {
               </Grid>
               <Grid item sm={12} md={6} spacing={4} container justifyContent="center">
                 <Grid item xs={10}>
-                  <Card fullHeight={true}
-                        variant="outlined"
-                        sx={{
-                          maxWidth: "280px",
-                          backgroundColor: "#F7D2A3",
-                          display: "block",
-                          margin: "auto"
-                        }}
-                  >
-                    <CardContent sx={{height: "100%"}}>
-                      <Grid container justifyContent="center" alignItems="center" sx={{height: "100%"}}>
+                  <Card
+                    fullHeight={true}
+                    variant="outlined"
+                    sx={{
+                      maxWidth: "280px",
+                      backgroundColor: "#F7D2A3",
+                      display: "block",
+                      margin: "auto",
+                    }}>
+                    <CardContent sx={{ height: "100%" }}>
+                      <Grid container justifyContent="center" alignItems="center" sx={{ height: "100%" }}>
                         <Grid item>
                           <ChefSilhouette sx={{ fontSize: 170 }} />
                         </Grid>
@@ -154,15 +169,7 @@ function NFTBuy({ t, fullHeight, web3ready }) {
                   </Card>
                 </Grid>
                 <Grid item xs={10}>
-                  <LoadingButton
-                    mt={2}
-                    color="secondary"
-                    size="xlarge"
-                    variant="contained"
-                    fullWidth
-                    onClick={handleBuyDialog}
-                    loading={buyLoading}
-                  >
+                  <LoadingButton mt={2} color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
                     {t("components.NFTBuy.buyButton")}
                   </LoadingButton>
                 </Grid>
@@ -172,7 +179,7 @@ function NFTBuy({ t, fullHeight, web3ready }) {
         ) : (
           <CardContent>
             <Typography variant="body2" align="center" my={20}>
-              { t("base.connectWalletAndNetwork") }
+              {t("base.connectWalletAndNetwork")}
             </Typography>
           </CardContent>
         )}
@@ -183,20 +190,11 @@ function NFTBuy({ t, fullHeight, web3ready }) {
             Buy CHEF
           </Typography>
           <Typography variant="body2" gutterBottom>
-            To buy a CHEF NFT, you need to do 2 Web3 Transactions. First, you need to approve that you have enough AROMA in your wallet. Second, you spend AROMA
-            tokens to buy the CHEF NFT.
+            Please note that in order to buy a CHEF NFT, you need to do 2 Web3 transactions. First, you need to approve that you have enough AROMA in your
+            wallet. Second, you spend AROMA tokens to buy the CHEF NFT. Please stay on this site until both web3 transactions went through.
           </Typography>
-          <Typography variant="body2" gutterBottom>
-            Step 1
-          </Typography>
-          <Button onClick={handleApprove} variant="contained" color="primary">
-            1. Approve
-          </Button>
-          <Typography variant="body2" gutterBottom>
-            Step 2
-          </Typography>
-          <Button onClick={handleBuy} variant="contained" color="primary">
-            2. Buy CHEF NFT
+          <Button onClick={handleApprove} variant="contained" color="primary" disabled={buyLoading}>
+            Approve & Buy CHEF NFT
           </Button>
         </DialogContent>
         <DialogActions>
