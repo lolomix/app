@@ -116,6 +116,9 @@ export let theme = createTheme ({
       fontSize: "1rem",
       fontWeight: 400
     }
+  },
+  zIndex: {
+
   }
 });
 
@@ -158,9 +161,9 @@ theme = createTheme(theme, {
     MuiButton: {
       styleOverrides: {
         contained: {
-          [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
+          [`&.${buttonClasses.focusVisible}, &:active, &:hover, $:not(.${buttonClasses.disableElevation})`]: {
             'boxShadow': theme.shadows[2]
-          }
+          },
         }
       },
       variants: [

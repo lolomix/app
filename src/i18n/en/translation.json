@@ -11,8 +11,10 @@
     "confirm": "Confirm",
     "youraccount": "Your account",
     "yourWeb3Account": "Your Web3 Account",
+    "yourAddress": "Your Address",
     "settings": "Settings",
     "deactivate": "Deactivate",
+    "copyToClipboard": "Copy to Clipboard",
     "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network."
   },
   "main": {

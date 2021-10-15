@@ -16,13 +16,15 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
+import Stack from '@mui/material/Stack'
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import Check from "@mui/icons-material/Check";
-import Warning from "@mui/icons-material/Warning";
+import CheckIcon from '@mui/icons-material/Check';
+import WarningIcon from '@mui/icons-material/Warning';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
@@ -30,6 +32,7 @@ import { useEagerConnect } from "../../web3/hooks";
 import Balance from "../web3/Balance";
 import AromaBalance from "../web3/AromaBalance";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 
@@ -42,6 +45,32 @@ function Web3connect(props) {
   const [dialogWeb3, setdialogWeb3] = useState(false);
   // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
+  /**
+   * Prettifies an ethereum address for presentation.
+   * @type {function(*): string}
+   *
+   * @todo refactor this to a global helper
+   */
+  const prettifyAccountAddress = address => `${address.slice(0, 6)}...${address.slice(-4)}`
+
+  /**
+   * Handles the copy to clipboard using Clipboard API OR regular method
+   *
+   * @todo refactor this to a global helper
+   */
+  const handleAccountCopyToClipboardIconClick = () => {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && navigator.permissions) {
+      navigator.clipboard.writeText(account.toLowerCase())
+    } else if (document.queryCommandSupported('copy')) {
+      const ele = document.createElement('textarea')
+      ele.value = account.toLowerCase()
+      document.body.appendChild(ele)
+      ele.select()
+      document.execCommand('copy')
+      document.body.removeChild(ele)
+    }
+  };
   const handleConnectionIconClick = (event) => {
     setconnectionMenu(event.currentTarget);
   };
@@ -90,10 +119,17 @@ function Web3connect(props) {
           </Tooltip>
           <Backdrop open={Boolean(connectionMenu)} className="backdropZindex">
             <Popover id="settings-menu" open={Boolean(connectionMenu)} anchorEl={connectionMenu} onClose={handleConnectionMenuClose}>
-              <Box m={2}>
+              <Box p={2}>
                 <List dense>
                   {account && (
-                    <ListItem>
+                    <ListItem
+                      secondaryAction={
+                        <Tooltip title={t("base.copyToClipboard")}>
+                          <IconButton onClick={handleAccountCopyToClipboardIconClick} edge="end" aria-label="copy">
+                            <ContentCopyIcon />
+                          </IconButton>
+                        </Tooltip>
+                      }>
                       <Tooltip disableFocusListener title={t("base.youraccount")}>
                         <ListItemAvatar>
                           <Avatar>
@@ -101,23 +137,23 @@ function Web3connect(props) {
                           </Avatar>
                         </ListItemAvatar>
                       </Tooltip>
-                      <ListItemText secondary={account.toLowerCase()} primary={t("base.yourWeb3Account")} />
+                      <ListItemText secondary={prettifyAccountAddress(account.toLowerCase())} primary={t("base.yourAddress")} />
                     </ListItem>
                   )}
                   {chainId === NETWORKS[TARGET_CHAIN].chainId ? (
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar className="avatar-success">
-                          <Check />
+                          <CheckIcon color="tertiary"/>
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
+                      <ListItemText secondary={TARGET_CHAIN.toUpperCase()} primary="Connection Established" />
                     </ListItem>
                   ) : (
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar className="avatar-warning">
-                          <Warning />
+                          <WarningIcon />
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText secondary={"Please select " + TARGET_CHAIN.toUpperCase() + " in your wallet"} primary="WRONG NETWORK" />
@@ -130,13 +166,14 @@ function Web3connect(props) {
                     <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
                   </ListItem>
                 </List>
-                <Button color="primary" variant="contained" onClick={handleConnectionMenuClose}>
-                  {t("base.close")}
-                </Button>
-                &nbsp;
-                <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
-                  {t("base.settings")}
-                </Button>
+                <Stack spacing={1} direction="row" justifyContent="center">
+                  <Button disableElevation color="primary" variant="contained" onClick={handleConnectionMenuClose}>
+                    {t("base.close")}
+                  </Button>
+                  <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
+                    {t("base.settings")}
+                  </Button>
+                </Stack>
               </Box>
             </Popover>
           </Backdrop>
