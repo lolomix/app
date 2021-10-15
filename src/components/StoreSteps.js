@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Box, CardContent, Card, LinearProgress, Grid, Typography } from '@mui/material'
 import { ContactSupport } from '@mui/icons-material';
 import CurrencyAROMAIcon from './icons/CurrencyAROMAIcon'
+import ChefApronIcon from './icons/ChefApronIcon'
 
 
 function StoreSteps({ t, step, web3ready }) {
@@ -33,7 +34,7 @@ function StoreSteps({ t, step, web3ready }) {
           <Grid container>
             <Grid item sm={4} container alignContent="center" justifyContent="center">
               <Grid item>
-                <CurrencyAROMAIcon/>
+                <CurrencyAROMAIcon />
               </Grid>
               <Grid item>
                 <Typography px={1}>
@@ -43,8 +44,7 @@ function StoreSteps({ t, step, web3ready }) {
             </Grid>
             <Grid item sm={4} container alignContent="center" justifyContent="center">
               <Grid item>
-                {/* todo: chef head icon*/}
-                <CurrencyAROMAIcon/>
+                <ChefApronIcon />
               </Grid>
               <Grid item>
                 <Typography px={1}>
