@@ -10,12 +10,12 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import LoadingButton from "@mui/lab/LoadingButton";
 // custom
-import ChefSilhouette from "./icons/ChefSilhouette";
 import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../web3/abi/AROMATokenMatic.json";
 import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
+import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
 
 function NFTBuy({ t, fullHeight, web3ready }) {
   const { account, library } = useWeb3React();
@@ -149,27 +149,27 @@ function NFTBuy({ t, fullHeight, web3ready }) {
                 </Grid>
               </Grid>
               <Grid item sm={12} md={6} spacing={4} container justifyContent="center">
-                <Grid item xs={10}>
+                <Grid item xs={8}>
                   <Card
                     fullHeight={true}
-                    variant="outlined"
+                    elevation={2}
                     sx={{
                       maxWidth: "280px",
-                      backgroundColor: "#F7D2A3",
-                      display: "block",
-                      margin: "auto",
+                      paddingTop: "16px",
+                      paddingBottom: "16px",
+                      backgroundColor: "white"
                     }}>
-                    <CardContent sx={{ height: "100%" }}>
-                      <Grid container justifyContent="center" alignItems="center" sx={{ height: "100%" }}>
+                    <CardContent>
+                      <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
-                          <ChefSilhouette sx={{ fontSize: 170 }} />
+                          <ChefSilhouetteIcon sx={{ fontSize: 205 }} />
                         </Grid>
                       </Grid>
                     </CardContent>
                   </Card>
                 </Grid>
                 <Grid item xs={10}>
-                  <LoadingButton mt={2} color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
+                  <LoadingButton color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
                     {t("components.NFTBuy.buyButton")}
                   </LoadingButton>
                 </Grid>
