@@ -30,7 +30,7 @@ import LogoButton from "../common/LogoButton";
 import { Typography } from '@mui/material'
 
 const links = [
-  { name: "Store", icon: <Settings />, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
+  { name: "Store", icon: <Settings />, disabled: false, path: "/", description: "Buy Aroma and CHEF" },
   { name: "Kitchen", icon: <EventNote />, disabled: true, path: "/kitchen", description: "Create your own recipe" },
   { name: "Buffet", icon: <People />, disabled: true, path: "/buffet", description: "Order and enjoy your meal" },
 ];
