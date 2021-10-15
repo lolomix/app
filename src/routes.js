@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, HashRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
 import { Web3ReactProvider } from "@web3-react/core";
