@@ -75,7 +75,7 @@ function Web3connect(props) {
     <Fragment>
       {!account ? (
         <Tooltip title="Connect to your Ethereum account">
-          <Button variant="contained" color="secondary" onClick={loadWeb3Modal}>
+          <Button elongatedWidth color="secondary" variant="contained" onClick={loadWeb3Modal}>
             Connect
           </Button>
         </Tooltip>
