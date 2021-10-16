@@ -17,7 +17,7 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Stack from '@mui/material/Stack'
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from '@mui/materialDialogTitle';
+import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
@@ -25,7 +25,6 @@ import Grid from "@mui/material/Grid";
 import CheckIcon from '@mui/icons-material/Check';
 import WarningIcon from '@mui/icons-material/Warning';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
@@ -34,6 +33,9 @@ import Balance from "../web3/Balance";
 import AromaBalance from "../web3/AromaBalance";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import LoadingButton from '@mui/lab/LoadingButton'
+import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
+import WalletLedgerIcon from '../icons/WalletLedgerIcon'
+import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
 
 
 //import ToastLoading from "../../components/notification/ToastLoading";
@@ -135,8 +137,30 @@ function Web3connect(props) {
     return (
       !triedEager ||
       !!activatingConnector ||
-      !!error
+      !!error ||
+      connectorsList[connectorKey].soon
     );
+  }
+
+  /**
+   * @param props
+   * @returns {JSX.Element}
+   * @constructor
+   */
+  const ConnectorIcon = (props) => {
+    const icons = {
+      "WalletMetaMaskIcon": WalletMetaMaskIcon,
+      "WalletWalletConnectIcon": WalletWalletConnectIcon,
+      "WalletLedgerIcon": WalletLedgerIcon
+    };
+    const TheIcon = icons[connectorsList[props.connectorKey]?.icon]
+
+    // early return, if not valid function component
+    if (typeof TheIcon !== 'function') return null;
+
+    return (
+      <TheIcon {...props}/>
+    )
   }
 
   return (
@@ -240,7 +264,12 @@ function Web3connect(props) {
           <Grid container spacing={3} >
             {Object.keys(connectorsList).map((key) => (
               <Grid item container alignContent="center" columnSpacing={3} rowSpacing={1} key={key}>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={2} sm={1}>
+                  <Avatar sx={{ bgcolor: "white", border: "1px solid rgba(55, 16, 13, 0.5)" }}>
+                    <ConnectorIcon connectorKey={key}/>
+                  </Avatar>
+                </Grid>
+                <Grid item xs={10} sm={5}>
                   <Tooltip title={
                     t(isCurrentConnector(key) ? 'base.connectedWith' : 'base.connectWith', {
                       connector: connectorsList[key].name
@@ -252,16 +281,21 @@ function Web3connect(props) {
                       variant={isCurrentConnector(key) ? "contained" : "outlined"}
                       size="large"
                       color={isCurrentConnector(key) ? "success" : "primary"}
-                      startIcon={isCurrentConnector(key) ? <CheckIcon/> : <AccountBalanceWalletIcon />}
+                      startIcon={isCurrentConnector(key) ? <CheckIcon/> : null}
                       loading={handleConnectorButtonLoadingProp(key)}
                       disabled={handleConnectorButtonDisabledProp(key)}
                       onClick={() => handleConnectorButtonClick(key)}
                     >
                       {connectorsList[key].name}
+                      {connectorsList[key].soon &&
+                        <Typography pl={.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
+                          soon
+                        </Typography>
+                      }
                     </LoadingButton>
                   </Tooltip>
                 </Grid>
-                <Grid item xs={12} sm={7} container alignContent="center" id="wallet-connectors-dialog-description">
+                <Grid item xs={12} sm={6} container alignContent="center" id="wallet-connectors-dialog-description">
                   <Typography variant="body2">{connectorsList[key].description}</Typography>
                 </Grid>
               </Grid>

@@ -1,35 +1,41 @@
 import {
   injected,
-  /* walletconnect, walletlink, ledger, network, trezor, lattice, frame, authereum, fortmatic, magic, portis, torus */
+  // walletconnect,
+  // walletlink,
+  // ledger,
+  // network,
+  // trezor,
+  // lattice,
+  // frame,
+  // authereum,
+  // fortmatic,1
+  // magic,
+  // portis,
+  // torus
 } from "./connectors";
 
 const connectorsList = {
   injected: {
-    name: "Browser",
-    description: "Use this for Browser Plugins such as Metamask or Brave Wallet.",
-    icon: "",
-    connector: injected,
+    soon: false,
+    name: "MetaMask",
+    description: "Use this for Browser Extensions such as Metamask, Brave Wallet and etc...",
+    icon: "WalletMetaMaskIcon",
+    connector: injected
   },
-  /*
-  walletconnect: {
+  walletConnect: {
+    soon: true,
     name: "WalletConnect",
     description: "Use this if your wallet uses WalletConnect",
-    icon: "",
-    connector: walletconnect,
-  },
-  walletlink: {
-    name: "WalletLink",
-    description: "Use this if your wallet uses WalletLink",
-    icon: "",
-    connector: walletlink,
+    icon: "WalletWalletConnectIcon",
+    connector: {}
   },
   ledger: {
+    soon: true,
     name: "Ledger",
     description: "Use this if you use a Ledger Wallet.",
-    icon: "",
-    connector: ledger,
-  },
-  */
+    icon: "WalletLedgerIcon",
+    connector: {}
+  }
 };
 /*
 const ConnectorNames = {
