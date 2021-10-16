@@ -15,7 +15,8 @@
     "settings": "Settings",
     "deactivate": "Deactivate",
     "copyToClipboard": "Copy to Clipboard",
-    "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network."
+    "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network.",
+    "navigation": "Navigation"
   },
   "main": {
     "title": "CryptoChefs",
@@ -28,9 +29,6 @@
     "smartcontractsPrimary": "CryptoChefs smart contracts",
     "smartcontractsSecondary": "Link to Github Repo",
     "voveoSecondary": "More about CryptoChefs"
-  },
-  "admin": {
-    "navControlButton": "navControlButton"
   },
   "wallet": {
     "title": "Your Account",

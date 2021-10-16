@@ -83,14 +83,16 @@ class TopBar extends Component {
                   </Stack>
                 </Hidden>
                 <Hidden mdUp>
-                  <Tooltip title={t("admin.navControlButton")}>
-                    <IconButton color="inherit" onClick={this.handleConnectionIconClick}>
+                  <Tooltip title={t("base.navigation")}>
+                    <IconButton color="tertiary" onClick={this.handleConnectionIconClick}>
                       <Settings />
                     </IconButton>
                   </Tooltip>
                 </Hidden>
-                <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="admininfos" open={popover}>
-                  <DialogTitle id="admininfos">Admin Infos</DialogTitle>
+                <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="navigation" open={popover}>
+                  <DialogTitle id="navigation">
+                    {t("base.navigation")}
+                  </DialogTitle>
                   <DialogContent>
                     <List dense>
                       {links.map((item, index) => (
