@@ -3,6 +3,7 @@
     "titleTooltip": "CryptoChefs Home",
     "title": "CryptoChefs",
     "cancel": "Cancel",
+    "connect": "Connect",
     "connectionInfo": "Settings",
     "close": "Close",
     "changelang": "Change Language",
@@ -16,7 +17,10 @@
     "deactivate": "Deactivate",
     "copyToClipboard": "Copy to Clipboard",
     "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network.",
-    "navigation": "Navigation"
+    "navigation": "Navigation",
+    "connectToYourWallet": "Connect to your wallet",
+    "connectWith": "Connect with {{ connector }}",
+    "connectedWith": "Connected with {{ connector }}"
   },
   "main": {
     "title": "CryptoChefs",
