@@ -30,8 +30,6 @@ import LanguageSelector from "./LanguageSelector";
 import Logo from "../common/Logo";
 import LogoText from '../common/LogoText'
 
-
-
 const links = [
   { name: "Store", icon: <Settings />, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
   { name: "Kitchen", icon: <EventNote />, disabled: true, path: "/kitchen", description: "Create your own recipe" },
@@ -49,8 +47,7 @@ class TopBar extends Component {
     this.setState({ popover: false });
   };
   render() {
-    const { t } = this.props;
-    const { popover } = this.state;
+    const { t, popover } = this.props;
 
     return (
       <AppBar elevation={0} position="static">
@@ -96,16 +93,22 @@ class TopBar extends Component {
                   <DialogContent>
                     <List dense>
                       {links.map((item, index) => (
-                        <ListItem key={index} button component={Link} to={"/assembly/" + item.path} onClick={this.handleConnectionMenuClose}>
-                          <ListItemIcon color="primary">{item.icon}</ListItemIcon>
+                        <ListItem key={index}
+                                  button
+                                  component={Link}
+                                  disabled={item.disabled}
+                                  to={item.path}
+                                  onClick={this.handleConnectionMenuClose}
+                        >
+                          <ListItemIcon color="primary">{item.disabled ? 'soon' : item.icon}</ListItemIcon>
                           <ListItemText primary={item.name} secondary={item.description} />
                         </ListItem>
                       ))}
                     </List>
                   </DialogContent>
                   <DialogActions>
-                    <Button color="primary" variant="outlined" onClick={this.handleConnectionMenuClose}>
-                      Close
+                    <Button disableElevation color="primary" variant="contained" onClick={this.handleConnectionMenuClose}>
+                      {t("base.close")}
                     </Button>
                   </DialogActions>
                 </Dialog>
