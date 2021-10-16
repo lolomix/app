@@ -15,6 +15,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
+import Typography from '@mui/material/Typography'
 import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Stack from '@mui/material/Stack'
@@ -26,8 +27,10 @@ import Settings from "@mui/icons-material/Settings";
 //import OfflineInfo from "./OfflineInfo";  // deactivated for the time being
 import Web3connect from "./Web3connect";
 import LanguageSelector from "./LanguageSelector";
-import LogoButton from "../common/LogoButton";
-import { Typography } from '@mui/material'
+import Logo from "../common/Logo";
+import LogoText from '../common/LogoText'
+
+
 
 const links = [
   { name: "Store", icon: <Settings />, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
@@ -51,17 +54,19 @@ class TopBar extends Component {
 
     return (
       <AppBar elevation={0} position="static">
-        <Toolbar>
+        <Toolbar variant="large">
           <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item>
-              <LogoButton />
-              <Button color="inherit" size="large" component={Link} to="/">
-                {t("base.title")}
-              </Button>
+            <Grid item xs={6} md={4} container justifyContent="left" alignItems="center">
+              <Grid item xs="auto">
+                <Logo />
+              </Grid>
+              <Grid item xs>
+                <LogoText />
+              </Grid>
             </Grid>
-            <Grid item xs container justifyContent="right" alignItems="center">
+            <Grid item xs={6} md={8} container justifyContent="right" alignItems="center">
               <Grid item>
-                <Hidden smDown>
+                <Hidden mdDown>
                   <Stack spacing={1} direction="row" mr={4}>
                     {links.map((item, index) => (
                       <Tooltip key={index} title={item.description}>

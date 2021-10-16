@@ -135,7 +135,17 @@ theme = createTheme(theme, {
     MuiAppBar: {
       defaultProps: {
         color: "sunGlow",
-      },
+      }
+    },
+    MuiToolbar: {
+      variants: [
+        {
+          props: { variant: "large" },
+          style: {
+            minHeight: "88px"
+          }
+        }
+      ]
     },
     MuiAccordion: {
       defaultProps: {
