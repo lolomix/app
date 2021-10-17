@@ -3,7 +3,14 @@ import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 // material-ui
-import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  DialogTitle,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/material'
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -184,22 +191,28 @@ function NFTBuy({ t, fullHeight, web3ready }) {
           </CardContent>
         )}
       </Card>
-      <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="md">
+      <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="sm">
+        <DialogTitle>
+          Buy CHEF
+        </DialogTitle>
         <DialogContent>
-          <Typography variant="h2" gutterBottom>
-            Buy CHEF
+          <Typography variant="body1" gutterBottom>
+            You can only buy CHEF NFT with AROMA.
           </Typography>
-          <Typography variant="body2" gutterBottom>
-            Please note that in order to buy a CHEF NFT, you need to do 2 Web3 transactions. First, you need to approve that you have enough AROMA in your
-            wallet. Second, you spend AROMA tokens to buy the CHEF NFT. Please stay on this site until both web3 transactions went through.
+          <Typography p={1} variant="body2" gutterBottom>
+            1. Approve AROMA token in your wallet.<br />
+            2. Spend AROMA token to buy the CHEF NFT.
           </Typography>
-          <Button onClick={handleApprove} variant="contained" color="primary" disabled={buyLoading}>
-            Approve & Buy CHEF NFT
-          </Button>
+          <Typography variant="caption" gutterBottom>
+            (Please be patient and stay on this site until both transactions are successful.)
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBuyDialog} variant="outlined" color="primary">
+          <Button disableElevation onClick={handleBuyDialog} variant="contained" color="primary">
             {t("base.close")}
+          </Button>
+          <Button disableElevation onClick={handleApprove} variant="contained" color="secondary" disabled={buyLoading}>
+            Approve & Buy CHEF NFT
           </Button>
         </DialogActions>
       </Dialog>
