@@ -8,7 +8,7 @@ import rootBgPattern from '../assets/background/outer-bg-pattern-opacity30.png';
 
 // colors
 const cafeNoir = "rgba(55, 16, 13, 1)";
-const unbleachedSilk = "rgba(255, 219, 205, 1)";
+const bisque = "rgba(255, 229, 195, 1)";
 const persianOrange = "rgba(223, 141, 74, 1)";
 const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
@@ -26,7 +26,7 @@ export let theme = createTheme ({
     mode: 'light',
     primary: {
       main: cafeNoir,
-      light: unbleachedSilk
+      light: bisque
     },
     secondary: {
       main: persianOrange,
@@ -40,7 +40,7 @@ export let theme = createTheme ({
     background: {
       // default, is not used as root background (see components below)
       default: cafeNoir,
-      paper: unbleachedSilk
+      paper: bisque
     },
     sunGlow: {
       main: sunGlow,
