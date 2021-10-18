@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, HashRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
 import { Web3ReactProvider } from "@web3-react/core";
@@ -19,7 +19,7 @@ import TopBar from "./components/layout/TopBar";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 import { Container, Paper } from "@mui/material";
-import AnnouncementBar from './components/layout/AnnouncementBar'
+import AnnouncementBar from "./components/layout/AnnouncementBar";
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
 //const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
