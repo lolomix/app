@@ -28,7 +28,7 @@ const AromaPrice = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return price ? <span>{formatCurrency(price)} AROMA</span> : <Skeleton variant="text" />;
+  return price ? <span>{formatCurrency(price)}</span> : <Skeleton variant="text" />;
 };
 
 export default AromaPrice;
