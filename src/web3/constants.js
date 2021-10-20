@@ -1,12 +1,7 @@
-// Target chain
 export const TARGET_CHAIN = process.env.REACT_APP_CHAIN;
-// MY INFURA_ID, SWAP IN YOURS FROM https://infura.io/dashboard/ethereum
 export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-// MY ETHERSCAN_ID, SWAP IN YOURS FROM https://etherscan.io/myapikey
 export const ETHERSCAN_KEY = process.env.REACT_APP_ETHERSCAN_KEY;
-// BLOCKNATIVE ID FOR Notify.js:
 export const BLOCKNATIVE_DAPPID = process.env.REACT_APP_BLOCKNATIVE_DAPPID;
-
 export const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 export const ETHER_IN_WEI = 1000000000000000000;
 export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
@@ -14,27 +9,27 @@ export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
 export const NETWORKS = {
   rinkeby: {
     name: "rinkeby",
-    color: "#e0d068",
     chainId: 4,
     rpcUrl: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorer: "https://rinkeby.etherscan.io/",
+    nativeToken: "TEST ETHER",
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
-    nativeToken: "TEST ETHER",
     adminAccount: "0xE3923e81e44ff46F5E283024AF227A210271b96E",
   },
   matic: {
     name: "matic",
-    color: "#2bbdf7",
     chainId: 137,
-    price: 1,
-    gasPrice: 1000000000,
     rpcUrl: "https://rpc-mainnet.maticvigil.com",
     faucet: "https://faucet.matic.network/",
     blockExplorer: "https://explorer-mainnet.maticvigil.com/",
     nativeToken: "MATIC",
+    contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
+    contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",
+    adminAccount: "0x1b0D20b13622D19d7CAbC4A6862deCa249C4075f",
   },
+  /*
   mumbai: {
     name: "mumbai",
     color: "#92D9FA",
@@ -45,7 +40,6 @@ export const NETWORKS = {
     faucet: "https://faucet.matic.network/",
     blockExplorer: "https://mumbai-explorer.matic.today/",
   },
-  /*
   ropsten: {
     name: "ropsten",
     color: "#F60D09",
