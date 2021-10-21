@@ -14,9 +14,10 @@ import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../utils/formatters";
+import { getErrorMessage} from "../web3/errors";
 
 function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
-  const { account, library } = useWeb3React();
+  const { account, library, error } = useWeb3React();
   const [price, setPrice] = React.useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   React.useEffect(() => {
@@ -175,8 +176,8 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
         </CardContent>
       ) : (
         <CardContent>
-          <Typography variant="body2" align="center" my={20}>
-            { t("base.connectWalletAndNetwork") }
+          <Typography variant="body2" align="center" my={4}>
+          {getErrorMessage(error)}
           </Typography>
         </CardContent>
       )}

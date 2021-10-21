@@ -5,7 +5,7 @@ import { getWeb3ReactContext } from "@web3-react/core";
 import { Box, Container, Grid } from "@mui/material";
 // custom
 import CurrencyExchange from "../../components/CurrencyExchange";
-import StoreSteps from "../../components/StoreSteps";
+//import StoreSteps from "../../components/StoreSteps";
 import NFTBuy from "../../components/NFTBuy";
 import Headline from "../../components/layout/Headline";
 import DripDivider from "../../components/layout/DripDivider";
@@ -43,7 +43,8 @@ class Store extends Component {
   render() {
     const { t } = this.props;
     const web3ready = this.context.chainId === NETWORKS[TARGET_CHAIN].chainId;
-    
+    const error = this.context.error;
+
     /**
      * List of FAQ items to display.
      * @type {string[]}
@@ -58,13 +59,13 @@ class Store extends Component {
             <Headline color="white" title={t("store.title")} />
             <Grid container spacing={3} justifyContent="center" alignItems="stretch">
               <Grid item xs={12}>
-                 <StoreSteps step={this.state.step} web3ready={web3ready} />
+                {/*   <StoreSteps step={this.state.step} web3ready={web3ready} /> */}
               </Grid>
               <Grid item xs={12} lg={4}>
                 <CurrencyExchange fullHeight={true} web3ready={web3ready} />
               </Grid>
               <Grid item xs={12} lg={8}>
-                <NFTBuy fullHeight={true} web3ready={web3ready} />
+                <NFTBuy fullHeight={true} web3ready={web3ready} error={error} />
               </Grid>
             </Grid>
           </Container>

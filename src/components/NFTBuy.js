@@ -23,9 +23,10 @@ import abiAroma from "../web3/abi/AROMATokenMatic.json";
 import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
+import { getErrorMessage} from "../web3/errors";
 
 function NFTBuy({ t, fullHeight, web3ready }) {
-  const { account, library } = useWeb3React();
+  const { account, library, error } = useWeb3React();
   //const [sold, setSold] = useState(1);
   const sold = 1;
   const [remaining, setRemaining] = useState(0);
@@ -185,9 +186,9 @@ function NFTBuy({ t, fullHeight, web3ready }) {
           </CardContent>
         ) : (
           <CardContent>
-            <Typography variant="body2" align="center" my={20}>
-              {t("base.connectWalletAndNetwork")}
-            </Typography>
+            <Typography variant="body2" align="center" my={4}>
+          {getErrorMessage(error)}
+          </Typography>
           </CardContent>
         )}
       </Card>

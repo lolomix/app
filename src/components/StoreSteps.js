@@ -1,14 +1,17 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
+import { useWeb3React } from "@web3-react/core";
 // material-ui
 import { Box, CardContent, Card, LinearProgress, Grid, Typography } from '@mui/material'
 import { ContactSupport } from '@mui/icons-material';
 import CurrencyAROMAIcon from './icons/CurrencyAROMAIcon'
 import ChefApronIcon from './icons/ChefApronIcon'
+import { getErrorMessage} from "../web3/errors";
 
+function StoreSteps({ t, step }) {
 
-function StoreSteps({ t, step, web3ready }) {
+  const { error } = useWeb3React();
 
   const stepMap = {
     "buy-aroma": {
@@ -29,7 +32,7 @@ function StoreSteps({ t, step, web3ready }) {
 
   return (
     <Card elevation={3}>
-      {web3ready ? (
+      {!error ? (
         <CardContent>
           <Grid container>
             <Grid item sm={4} container alignContent="center" justifyContent="center">
@@ -77,7 +80,7 @@ function StoreSteps({ t, step, web3ready }) {
       ) : (
         <CardContent>
           <Typography variant="body2" align="center" my={4}>
-            { t("base.connectWalletAndNetwork") }
+          {getErrorMessage(error)}
           </Typography>
         </CardContent>
       )}
