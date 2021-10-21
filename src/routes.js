@@ -84,7 +84,7 @@ class App extends Component {
             <Router basename="/">
               <Container maxWidth="xl" disableGutters={true}>
                 <Paper square elevation={4}>
-                  <AnnouncementBar />
+                  {process.env.REACT_APP_CHAIN !== "matic" &&  <AnnouncementBar /> }
                   <TopBar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
                   <ServiceWorkerWrapper />
                   <Suspense fallback={<LoadingSpinner />}>
