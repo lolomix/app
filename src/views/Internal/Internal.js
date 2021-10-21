@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import { Box, Container, OutlinedInput, Button, InputAdornment, Grid, Typography } from "@mui/material";
 // custom
 import Headline from "../../components/layout/Headline";
-import AromaPrice from "../../components/web3/AromaPrice";
+//import AromaPrice from "../../components/web3/AromaPrice";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../../web3/abi/AROMATokenMatic.json";
@@ -22,8 +22,15 @@ function Internal({ t }) {
   const contractAromaAddress = NETWORKS[TARGET_CHAIN].contractAroma;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [data, setData] = useState({});
+  const [aromaPrice, setAromaPrice] = useState(0);
+  const [chefPrice, setChefPrice] = useState(0);
 
-  const handleAromaPrice = async () => {
+  const handleAromaPrice = (event) => { setAromaPrice(event.target.value);  };
+  const handleChefPrice = (event) => { setChefPrice(event.target.value);  };
+
+  const deployAromaPrice = async () => {
+    console.log(aromaPrice)
+    console.log(account)
     setIsLoading(true);
     let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
       variant: "warning",
@@ -31,9 +38,7 @@ function Internal({ t }) {
       action: <ToastLoadingIndeterminate />,
     });
     try {
-      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account, gas: 10000000 });
-      console.log(resultApprove);
-      const result = await contractErc721.methods.buyCryptoChef().send({ from: account, gas: 10000000 });
+      const result = await contractErc721.methods.setAROMAPrice(aromaPrice).send({ from: account, gas: 10000000 });
       console.log(result);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Success", {
@@ -52,7 +57,7 @@ function Internal({ t }) {
     }
   };
 
-  const handleChefNftPrice = async () => {
+  const deployChefPrice = async () => {
     setIsLoading(true);
     let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
       variant: "warning",
@@ -60,10 +65,7 @@ function Internal({ t }) {
       action: <ToastLoadingIndeterminate />,
     });
     try {
-      const contractAroma = new library.eth.Contract(abiAroma, contractAromaAddress);
-      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account, gas: 10000000 });
-      console.log(resultApprove);
-      const result = await contractErc721.methods.buyCryptoChef().send({ from: account, gas: 10000000 });
+      const result = await contractErc721.methods.setCryptoChefPrice(chefPrice).send({ from: account, gas: 10000000 });
       console.log(result);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Success", {
@@ -81,36 +83,6 @@ function Internal({ t }) {
       setIsLoading(false);
     }
   };
-
-  const loadInfo = async (datapoint) => {
-      let result;
-      try {
-        switch(datapoint){
-          case "getCryptoChefSeasonSupply": 
-            result = await contractErc721.methods.getCryptoChefSeasonSupply().call();
-            break;
-          case "getCryptoChefPrice": 
-            result = await contractErc721.methods.getCryptoChefPrice().call();
-            break;
-          case "getAROMAPrice": 
-            result = await contractErc721.methods.getAROMAPrice().call();
-            break;
-          case "totalSupply": 
-            result = await contractErc721.methods.totalSupply().call();
-            break;
-          case "symbol": 
-            result = await contractErc721.methods.symbol().call();
-            break;
-          default:
-            console.log("no query");
-          }
-        const dataTemp = data;
-        dataTemp[datapoint] = result;
-        setData(dataTemp);
-      } catch (e) {
-        console.log(e);
-      }
-  }
 
   React.useEffect(() => {
     if (!!library && !contractErc721) {
@@ -118,6 +90,29 @@ function Internal({ t }) {
     }
     if (!!library && !contractAroma) {
       setContractAroma(new library.eth.Contract(abiAroma, contractAromaAddress));
+    }
+    if(library && contractErc721 && contractAroma) {
+      async function loadData() {
+      let dataTemp = {};
+      let result;
+      try {
+          result = await contractErc721.methods.getCryptoChefSeasonSupply().call();
+          dataTemp.getCryptoChefSeasonSupply = result;
+          result = await contractErc721.methods.getCryptoChefPrice().call();
+          dataTemp.getCryptoChefPrice = result;
+          result = await contractErc721.methods.getAROMAPrice().call();
+          dataTemp.getAROMAPrice = result;
+          result = await contractErc721.methods.totalSupply().call();
+          dataTemp.totalSupply = result;
+          result = await contractErc721.methods.symbol().call();
+          dataTemp.symbol = result;
+        setData(dataTemp);
+        console.log(dataTemp)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    loadData();
     }
   }, [library, contractErc721, contractMasterAddress, contractAroma, contractAromaAddress]); 
 
@@ -132,15 +127,16 @@ function Internal({ t }) {
         <Grid container spacing={2}>
           <Grid item sm={12} md={6}>
             <Typography variant="h3">AROMA price</Typography>
-            <Typography variant="body2">Current price is <AromaPrice /></Typography>
             <Typography variant="body2">Set Price of AROMA in native currency.</Typography>
             <OutlinedInput
               variant="outlined"
               disabled={false}
               type="number"
+              onChange={(e) => handleAromaPrice(e)}
+              value={aromaPrice}
               endAdornment={
                 <InputAdornment position="end">
-                  <Button variant="contained" edge="end" disabled={isLoading} onClick={handleAromaPrice}>
+                  <Button variant="contained" edge="end" disabled={isLoading} onClick={deployAromaPrice}>
                     Set price
                   </Button>
                 </InputAdornment>
@@ -152,9 +148,11 @@ function Internal({ t }) {
               variant="outlined"
               disabled={false}
               type="number"
+              onChange={(e) => handleChefPrice(e)}
+              value={chefPrice}
               endAdornment={
                 <InputAdornment position="end">
-                  <Button variant="contained" edge="end" disabled={isLoading} onClick={handleChefNftPrice}>
+                  <Button variant="contained" edge="end" disabled={isLoading} onClick={deployChefPrice}>
                     Set price
                   </Button>
                 </InputAdornment>
@@ -162,28 +160,28 @@ function Internal({ t }) {
             />
           </Grid>
           <Grid item sm={12} md={6}>
-            <Typography variant="h3">Addresses</Typography>
+            <Typography variant="h3">Addresses (parameters)</Typography>
             <Typography variant="body2">Contract Aroma: {NETWORKS[TARGET_CHAIN].contractAroma}</Typography>
             <Typography variant="body2">Contract Proxy Master: {NETWORKS[TARGET_CHAIN].contractMaster}</Typography>
             <Typography variant="body2" gutterBottom>Admin account: {NETWORKS[TARGET_CHAIN].adminAccount}</Typography>
 
             <Typography variant="h3">Stats CHEFS</Typography>
             <Typography variant="body2">Admin account: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getAROMAPrice")}}>{data.getAROMAPrice ? data.getAROMAPrice : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >...</Typography>
             <Typography variant="body2">totalSupply: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("totalSupply")}}>{data.totalSupply ? data.totalSupply : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >{data.totalSupply ? data.totalSupply : "DATA UNAVAILABLE"}</Typography>
             <Typography variant="body2">getCryptoChefSeasonSupply: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getCryptoChefSeasonSupply")}}>{data.getCryptoChefSeasonSupply ? data.getCryptoChefSeasonSupply : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >{data.getCryptoChefSeasonSupply ? data.getCryptoChefSeasonSupply : "DATA UNAVAILABLE"}</Typography>
             <Typography variant="body2">getAROMAPrice: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getAROMAPrice")}}>{data.getAROMAPrice ? data.getAROMAPrice : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >{data.getAROMAPrice ? data.getAROMAPrice : "DATA UNAVAILABLE"}</Typography>
             <Typography variant="body2">getCryptoChefPrice: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getCryptoChefPrice")}}>{data.getCryptoChefPrice ? data.getCryptoChefPrice : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >{data.getCryptoChefPrice ? data.getCryptoChefPrice : "DATA UNAVAILABLE"}</Typography>
            
             <Typography variant="h3">Stats AROMA</Typography>
             <Typography variant="body2">Total Supply: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getAROMAPrice")}}>{data.getAROMAPrice ? data.getAROMAPrice : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >...</Typography>
             <Typography variant="body2">Decimals: </Typography>
-            <Typography variant="body2" gutterBottom onClick={() => {loadInfo("getAROMAPrice")}}>{data.getAROMAPrice ? data.getAROMAPrice : "CLICK TO LOAD DATA"}</Typography>
+            <Typography variant="body2" gutterBottom >...</Typography>
           </Grid>
         </Grid>
       ) : (
