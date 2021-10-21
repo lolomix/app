@@ -73,6 +73,12 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
    * Handles the actual exchange by triggering the blockchain transaction
    */
   const handleExchange = async () => {
+    if (isNaN(currencyToAmount) || currencyToAmount % 1 !== 0 || currencyToAmount < 5 || currencyToAmount > 10000) {
+      enqueueSnackbar("Error: Invalid input", {
+        variant: "error",
+        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      });
+    } else {
     setExchangeLoading(true);
     let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
       variant: "warning",
@@ -81,10 +87,6 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
     });
     const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
     const contract = new library.eth.Contract(abi, contractMaster);
-    console.log("currencyToAmount");
-    console.log(currencyToAmount);
-    console.log("currencyFromAmount");
-    console.log(currencyFromAmount);
     try {
       const result = await contract.methods.buyAROMA(currencyToAmount).send({ value: currencyToAmount * price, from: account, gas: 10000000 });
       console.log(result);
@@ -103,6 +105,7 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
         action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
       });
     }
+  }
   };
 
   /**
@@ -151,6 +154,7 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
               value={currencyToAmount}
               required
             />
+            <Typography variant="body2" gutterBottom>Please enter amount between 5 and 10 000</Typography>
             <LoadingButton
               color="secondary"
               size="xlarge"
