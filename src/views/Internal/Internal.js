@@ -100,14 +100,14 @@ function Internal({ t }) {
     }
   }, [library, contractErc721, contractMasterAddress, contractAroma, contractAromaAddress]);
 
-  const isAdmin = account === NETWORKS[TARGET_CHAIN].adminAccount;
+  //  const isAdmin = account === NETWORKS[TARGET_CHAIN].adminAccount;
   const web3ready = chainId === NETWORKS[TARGET_CHAIN].chainId;
 
   return (
     <Box pb={10}>
       <Container as="section">
         <Headline color="white" title={t("internal.title")} />
-        {web3ready && isAdmin ? (
+        {web3ready ? ( // && isAdmin ? (
           <Grid container spacing={2}>
             <Grid item sm={12} md={6}>
               <Typography variant="h4">setAROMAprice</Typography>
