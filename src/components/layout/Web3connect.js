@@ -11,32 +11,31 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
-import Popover from "@mui/material/Popover";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-import Stack from '@mui/material/Stack'
+import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from '@mui/material/DialogTitle'
+import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import CheckIcon from '@mui/icons-material/Check';
-import WarningIcon from '@mui/icons-material/Warning';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CheckIcon from "@mui/icons-material/Check";
+import WarningIcon from "@mui/icons-material/Warning";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
 import { useEagerConnect } from "../../web3/hooks";
 import Balance from "../web3/Balance";
+import NftList from "../web3/NftList";
 import AromaBalance from "../web3/AromaBalance";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import LoadingButton from '@mui/lab/LoadingButton'
-import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
-import WalletLedgerIcon from '../icons/WalletLedgerIcon'
-import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
-
+import LoadingButton from "@mui/lab/LoadingButton";
+import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
+import WalletLedgerIcon from "../icons/WalletLedgerIcon";
+import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
 
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
@@ -47,7 +46,6 @@ function Web3connect(props) {
   const Web3Context = useWeb3React();
   const triedEager = useEagerConnect();
   const { connector, account, activate, deactivate, active, error, chainId } = Web3Context;
-
 
   const [activatingConnector, setActivatingConnector] = useState();
   const [connectionMenu, setConnectionMenu] = useState(false);
@@ -60,7 +58,7 @@ function Web3connect(props) {
    *
    * @todo refactor this to a global helper
    */
-  const prettifyAccountAddress = address => `${address.slice(0, 6)}...${address.slice(-4)}`
+  const prettifyAccountAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   /**
    * Handles the copy to clipboard using Clipboard API OR regular method
@@ -70,77 +68,66 @@ function Web3connect(props) {
   const handleAccountCopyToClipboardIconClick = () => {
     // navigator clipboard api needs a secure context (https)
     if (navigator.clipboard && navigator.permissions) {
-      navigator.clipboard.writeText(account.toLowerCase())
-    } else if (document.queryCommandSupported('copy')) {
-      const ele = document.createElement('textarea')
-      ele.value = account.toLowerCase()
-      document.body.appendChild(ele)
-      ele.select()
-      document.execCommand('copy')
-      document.body.removeChild(ele)
+      navigator.clipboard.writeText(account.toLowerCase());
+    } else if (document.queryCommandSupported("copy")) {
+      const ele = document.createElement("textarea");
+      ele.value = account.toLowerCase();
+      document.body.appendChild(ele);
+      ele.select();
+      document.execCommand("copy");
+      document.body.removeChild(ele);
     }
   };
 
-  const handleConnectionIconClick = (event) => {
-    setConnectionMenu(event.currentTarget);
-  };
-
-  const handleConnectionMenuClose = () => {
-    setConnectionMenu(null);
+  const handleConnectionMenu = () => {
+    setConnectionMenu(!connectionMenu);
   };
 
   const handleWeb3Modal = () => {
-    setConnectionMenu(null);
-    setDialogWeb3(dialogWeb3 => !dialogWeb3);
+    setConnectionMenu(false);
+    setDialogWeb3((dialogWeb3) => !dialogWeb3);
   };
 
   const loadWeb3Modal = () => {
-    setDialogWeb3(dialogWeb3 => !dialogWeb3);
+    setDialogWeb3((dialogWeb3) => !dialogWeb3);
   };
 
   /**
    * Identifies the current connector by key
    *
-   * @param connectorKey
+   * @param connectorkey
    * @returns {boolean}
    */
-  const isCurrentConnector = (connectorKey) =>
-    connectorsList[connectorKey]?.connector === connector
+  const isCurrentConnector = (connectorkey) => connectorsList[connectorkey]?.connector === connector;
 
   /**
    * Activates a new connector by its key
    *
-   * @param connectorKey
+   * @param connectorkey
    */
-  const handleConnectorButtonClick = (connectorKey) => {
-    const newConnector = connectorsList[connectorKey].connector
+  const handleConnectorButtonClick = (connectorkey) => {
+    const newConnector = connectorsList[connectorkey].connector;
 
     setActivatingConnector(newConnector);
     activate(newConnector).then(() => {
-      handleWeb3Modal()
+      handleWeb3Modal();
       setActivatingConnector(undefined);
     });
-  }
+  };
 
   /**
-   * @param connectorKey
+   * @param connectorkey
    * @returns {boolean}
    */
-  const handleConnectorButtonLoadingProp = (connectorKey) =>
-    connectorsList[connectorKey].connector === activatingConnector
+  const handleConnectorButtonLoadingProp = (connectorkey) => connectorsList[connectorkey].connector === activatingConnector;
 
   /**
-   * @param connectorKey
+   * @param connectorkey
    * @returns {boolean}
    */
-  const handleConnectorButtonDisabledProp = (connectorKey) => {
-    return (
-      !triedEager ||
-      !!activatingConnector ||
-      !!error ||
-      connectorsList[connectorKey].soon
-    );
-  }
+  const handleConnectorButtonDisabledProp = (connectorkey) => {
+    return !triedEager || !!activatingConnector || !!error || connectorsList[connectorkey].soon;
+  };
 
   /**
    * @param props
@@ -149,46 +136,36 @@ function Web3connect(props) {
    */
   const ConnectorIcon = (props) => {
     const icons = {
-      "WalletMetaMaskIcon": WalletMetaMaskIcon,
-      "WalletWalletConnectIcon": WalletWalletConnectIcon,
-      "WalletLedgerIcon": WalletLedgerIcon
+      WalletMetaMaskIcon: WalletMetaMaskIcon,
+      WalletWalletConnectIcon: WalletWalletConnectIcon,
+      WalletLedgerIcon: WalletLedgerIcon,
     };
-    const TheIcon = icons[connectorsList[props.connectorKey]?.icon]
+    const TheIcon = icons[connectorsList[props.connectorkey]?.icon];
 
     // early return, if not valid function component
-    if (typeof TheIcon !== 'function') return null;
+    if (typeof TheIcon !== "function") return null;
 
-    return (
-      <TheIcon {...props}/>
-    )
-  }
+    return <TheIcon {...props} />;
+  };
 
   return (
     <Fragment>
       {!account ? (
         <Tooltip title={t("base.connectToYourWallet")}>
-          <Button elongatedWidth color="secondary" variant="contained" onClick={loadWeb3Modal}>
+          <Button elongatedwidth="true" color="secondary" variant="contained" onClick={loadWeb3Modal}>
             {t("base.connect")}
           </Button>
         </Tooltip>
       ) : (
         <>
           <Tooltip disableFocusListener title={t("base.youraccount")} aria-label={t("base.youraccount")}>
-            <IconButton color="inherit" onClick={handleConnectionIconClick}>
+            <IconButton color="inherit" onClick={handleConnectionMenu}>
               <Avatar>
                 <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Popover id="settings-menu"
-                   open={Boolean(connectionMenu)}
-                   anchorEl={connectionMenu}
-                   onClose={handleConnectionMenuClose}
-                   anchorOrigin={{
-                     vertical: 'bottom',
-                     horizontal: 'right',
-                   }}
-          >
+          <Dialog id="settings-menu" open={Boolean(connectionMenu)} onClose={handleConnectionMenu} maxWidth="lg">
             <Box p={2}>
               <List dense>
                 {account && (
@@ -214,10 +191,10 @@ function Web3connect(props) {
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar className="avatar-success">
-                        <CheckIcon color="tertiary"/>
+                        <CheckIcon color="tertiary" />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText secondary={TARGET_CHAIN.toUpperCase() + ' network'} primary="Connection Established" />
+                    <ListItemText secondary={TARGET_CHAIN.toUpperCase() + " network"} primary="Connection Established" />
                   </ListItem>
                 ) : (
                   <ListItem>
@@ -235,17 +212,20 @@ function Web3connect(props) {
                 <ListItem>
                   <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
                 </ListItem>
+                <ListItem>
+                  <ListItemText secondary={<NftList />} primary="Your CHEF NFTs" />
+                </ListItem>
               </List>
               <Stack spacing={1} direction="row" justifyContent="center">
-                <Button disableElevation color="primary" variant="contained" onClick={handleConnectionMenuClose}>
+                <Button disableElevation color="primary" variant="contained" onClick={handleConnectionMenu}>
                   {t("base.close")}
                 </Button>
                 <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
-                  {t("base.settings")}
+                  Web3 Settings
                 </Button>
               </Stack>
             </Box>
-          </Popover>
+          </Dialog>
         </>
       )}
       <Dialog
@@ -255,44 +235,41 @@ function Web3connect(props) {
         scroll="paper"
         maxWidth="sm"
         aria-labelledby="wallet-connectors-dialog-title"
-        aria-describedby="wallet-connectors-dialog-description"
-      >
-        <DialogTitle id="wallet-connectors-dialog-title">
-          {t("base.connectToYourWallet")}
-        </DialogTitle>
+        aria-describedby="wallet-connectors-dialog-description">
+        <DialogTitle id="wallet-connectors-dialog-title">{t("base.connectToYourWallet")}</DialogTitle>
         <DialogContent>
-          <Grid container spacing={3} >
+          <Grid container spacing={3}>
             {Object.keys(connectorsList).map((key) => (
               <Grid item container alignContent="center" columnSpacing={3} rowSpacing={1} key={key}>
                 <Grid item xs={2} sm={1}>
                   <Avatar sx={{ bgcolor: "white", border: "1px solid rgba(55, 16, 13, 0.5)" }}>
-                    <ConnectorIcon connectorKey={key}/>
+                    <ConnectorIcon connectorkey={key} />
                   </Avatar>
                 </Grid>
                 <Grid item xs={10} sm={5}>
-                  <Tooltip title={
-                    t(isCurrentConnector(key) ? 'base.connectedWith' : 'base.connectWith', {
-                      connector: connectorsList[key].name
-                      })
-                  }>
-                    <LoadingButton
-                      fullWidth
-                      disableElevation
-                      variant={isCurrentConnector(key) ? "contained" : "outlined"}
-                      size="large"
-                      color={isCurrentConnector(key) ? "success" : "primary"}
-                      startIcon={isCurrentConnector(key) ? <CheckIcon/> : null}
-                      loading={handleConnectorButtonLoadingProp(key)}
-                      disabled={handleConnectorButtonDisabledProp(key)}
-                      onClick={() => handleConnectorButtonClick(key)}
-                    >
-                      {connectorsList[key].name}
-                      {connectorsList[key].soon &&
-                        <Typography pl={.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
-                          soon
-                        </Typography>
-                      }
-                    </LoadingButton>
+                  <Tooltip
+                    title={t(isCurrentConnector(key) ? "base.connectedWith" : "base.connectWith", {
+                      connector: connectorsList[key].name,
+                    })}>
+                    <span>
+                      <LoadingButton
+                        fullWidth
+                        disableElevation
+                        variant={isCurrentConnector(key) ? "contained" : "outlined"}
+                        size="large"
+                        color={isCurrentConnector(key) ? "success" : "primary"}
+                        startIcon={isCurrentConnector(key) ? <CheckIcon /> : null}
+                        loading={handleConnectorButtonLoadingProp(key)}
+                        disabled={handleConnectorButtonDisabledProp(key)}
+                        onClick={() => handleConnectorButtonClick(key)}>
+                        {connectorsList[key].name}
+                        {connectorsList[key].soon && (
+                          <Typography pl={0.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
+                            soon
+                          </Typography>
+                        )}
+                      </LoadingButton>
+                    </span>
                   </Tooltip>
                 </Grid>
                 <Grid item xs={12} sm={6} container alignContent="center" id="wallet-connectors-dialog-description">
@@ -300,13 +277,13 @@ function Web3connect(props) {
                 </Grid>
               </Grid>
             ))}
-            {!!error &&
+            {!!error && (
               <Grid item xs={12}>
                 <Typography variant="h6" color="error">
                   {getErrorMessage(error)}
                 </Typography>
               </Grid>
-            }
+            )}
           </Grid>
         </DialogContent>
         <DialogActions>

@@ -1,10 +1,10 @@
 // material-ui
 import { createTheme } from "@mui/material/styles";
-import buttonClasses from '@mui/material/Button/buttonClasses'
-import { alpha } from '@mui/material'
+import buttonClasses from "@mui/material/Button/buttonClasses";
+import { alpha } from "@mui/material";
 
 // images
-import rootBgPattern from '../assets/background/outer-bg-pattern-opacity30.png';
+import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
 
 // colors
 const cafeNoir = "rgba(55, 16, 13, 1)";
@@ -14,47 +14,46 @@ const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
 const darkSkyBlue = "rgb(138, 193, 210)";
 // const beauBlue = "rgb(144, 159, 179)";
-const culturedWhite = "rgba(250, 250, 250, 1)"
-const cadetBlue = "rgba(176, 181, 189, 1)"
+const culturedWhite = "rgba(250, 250, 250, 1)";
+const cadetBlue = "rgba(176, 181, 189, 1)";
 
 // generators
-const shadow = (px, rgb) => `0.3px ${px}px 0.2px 0px ${alpha(rgb, 0.9)}`
+const shadow = (px, rgb) => `0.3px ${px}px 0.2px 0px ${alpha(rgb, 0.9)}`;
 
-
-export let theme = createTheme ({
+export let theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
       main: cafeNoir,
-      light: bisque
+      light: bisque,
     },
     secondary: {
       main: persianOrange,
-      contrastText: '#fff'
+      contrastText: "#fff",
     },
     tertiary: {
       main: culturedWhite,
       shadow: cadetBlue,
-      contrastText: cafeNoir
+      contrastText: cafeNoir,
     },
     background: {
       // default, is not used as root background (see components below)
       default: cafeNoir,
-      paper: bisque
+      paper: bisque,
     },
     sunGlow: {
       main: sunGlow,
-      contrastText: 'white'
+      contrastText: "white",
     },
     cafeNoir: {
-      main: cafeNoir
+      main: cafeNoir,
     },
     darkSkyBlue: {
-      main: darkSkyBlue
-    }
+      main: darkSkyBlue,
+    },
   },
   generators: {
-    shadow: shadow
+    shadow: shadow,
   },
   // There are 24 elevations (shadow types) in MUI, however, from elevation 4,
   // we have to make all heights the same because of the type of shadow we use.
@@ -85,7 +84,7 @@ export let theme = createTheme ({
     shadow(6, brownSugar),
     shadow(6, brownSugar),
     shadow(6, brownSugar),
-    shadow(6, brownSugar)
+    shadow(6, brownSugar),
   ],
   shape: {
     borderRadius: 11,
@@ -94,32 +93,30 @@ export let theme = createTheme ({
     fontFamily: "'Lexend', 'Helvetica', 'Arial', sans-serif",
     h1: {
       fontSize: "3.052rem",
-      fontWeight: 400
+      fontWeight: 400,
     },
     h2: {
       fontSize: "2.441rem",
-      fontWeight: 400
+      fontWeight: 400,
     },
     h3: {
       fontSize: "1.953rem",
-      fontWeight: 400
+      fontWeight: 400,
     },
     h4: {
       fontSize: "1.563rem",
-      fontWeight: 400
+      fontWeight: 400,
     },
     h5: {
       fontSize: "1.25rem",
-      fontWeight: 400
+      fontWeight: 400,
     },
     h6: {
       fontSize: "1rem",
-      fontWeight: 400
-    }
+      fontWeight: 400,
+    },
   },
-  zIndex: {
-
-  }
+  zIndex: {},
 });
 
 theme = createTheme(theme, {
@@ -135,17 +132,17 @@ theme = createTheme(theme, {
     MuiAppBar: {
       defaultProps: {
         color: "sunGlow",
-      }
+      },
     },
     MuiToolbar: {
       variants: [
         {
           props: { variant: "large" },
           style: {
-            minHeight: "88px"
-          }
-        }
-      ]
+            minHeight: "88px",
+          },
+        },
+      ],
     },
     MuiAccordion: {
       defaultProps: {
@@ -154,61 +151,60 @@ theme = createTheme(theme, {
       },
       styleOverrides: {
         root: {
-          backgroundColor: darkSkyBlue
-        }
-      }
+          backgroundColor: darkSkyBlue,
+        },
+      },
     },
     MuiCard: {
       variants: [
         {
-          props: { fullHeight: true },
+          props: { fullheight: "true" },
           style: {
-            height: "100%"
-          }
-        }
-      ]
+            height: "100%",
+          },
+        },
+      ],
     },
     MuiButton: {
       styleOverrides: {
         contained: {
           [`&.${buttonClasses.focusVisible}, &:active, &:hover, $:not(.${buttonClasses.disableElevation})`]: {
-            'boxShadow': theme.shadows[2]
+            boxShadow: theme.shadows[2],
           },
-        }
+        },
       },
       variants: [
         {
-          props: { size: 'xlarge' },
+          props: { size: "xlarge" },
           style: {
             padding: "14px 22px",
-            fontSize: "1rem"
-          }
+            fontSize: "1rem",
+          },
         },
         {
-          props: { elongatedWidth: true },
+          props: { elongatedwidth: "true" },
           style: {
             paddingLeft: "32px",
-            paddingRight: "32px"
-          }
+            paddingRight: "32px",
+          },
         },
         {
-          props: { color: 'tertiary', variant: "contained" },
+          props: { color: "tertiary", variant: "contained" },
           style: {
-            'boxShadow': theme.generators.shadow(2, theme.palette.tertiary.shadow),
+            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
             [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              'boxShadow': theme.generators.shadow(2, theme.palette.tertiary.shadow)
-            }
-          }
-        }
-
-      ]
+              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+            },
+          },
+        },
+      ],
     },
     MuiLinearProgress: {
       styleOverrides: {
         root: {
           height: 30,
           borderRadius: 11,
-          border: "5px solid lightgray"
+          border: "5px solid lightgray",
         },
         barColorPrimary: {
           backgroundColor: sunGlow,
@@ -216,10 +212,9 @@ theme = createTheme(theme, {
         colorPrimary: {
           backgroundColor: "lightgray",
         },
-      }
+      },
     },
-
-  }
+  },
   // components: {
   //   // todo: validate all styles below - Do we need these changes globally?
   //   MuiBadge: {

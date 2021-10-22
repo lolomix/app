@@ -15,10 +15,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
-import Typography from '@mui/material/Typography'
+import Typography from "@mui/material/Typography";
 import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
-import Stack from '@mui/material/Stack'
+import Stack from "@mui/material/Stack";
 // icons
 import People from "@mui/icons-material/People";
 import EventNote from "@mui/icons-material/EventNote";
@@ -28,7 +28,7 @@ import Settings from "@mui/icons-material/Settings";
 import Web3connect from "./Web3connect";
 import LanguageSelector from "./LanguageSelector";
 import Logo from "../common/Logo";
-import LogoText from '../common/LogoText'
+import LogoText from "../common/LogoText";
 
 const links = [
   { name: "Store", icon: <Settings />, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
@@ -47,7 +47,8 @@ class TopBar extends Component {
     this.setState({ popover: false });
   };
   render() {
-    const { t, popover } = this.props;
+    const { t } = this.props;
+    const { popover } = this.state;
 
     return (
       <AppBar elevation={0} position="static">
@@ -67,14 +68,22 @@ class TopBar extends Component {
                   <Stack spacing={1} direction="row" mr={4}>
                     {links.map((item, index) => (
                       <Tooltip key={index} title={item.description}>
-                        <Button elongatedWidth={!item.disabled} color="tertiary" variant="contained" disabled={item.disabled} component={Link} to={item.path}>
-                          {item.name}
-                          {item.disabled &&
-                            <Typography pl={.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
-                              soon
-                            </Typography>
-                          }
-                        </Button>
+                        <span>
+                          <Button
+                            elongatedwidth={item.disabled ? "false" : "true"}
+                            color="tertiary"
+                            variant="contained"
+                            disabled={item.disabled}
+                            component={Link}
+                            to={item.path}>
+                            {item.name}
+                            {item.disabled && (
+                              <Typography pl={0.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
+                                soon
+                              </Typography>
+                            )}
+                          </Button>
+                        </span>
                       </Tooltip>
                     ))}
                   </Stack>
@@ -85,33 +94,25 @@ class TopBar extends Component {
                       <Settings />
                     </IconButton>
                   </Tooltip>
+                  <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="navigation" open={popover}>
+                    <DialogTitle id="navigation">{t("base.navigation")}</DialogTitle>
+                    <DialogContent>
+                      <List dense>
+                        {links.map((item, index) => (
+                          <ListItem key={index} button component={Link} disabled={item.disabled} to={item.path} onClick={this.handleConnectionMenuClose}>
+                            <ListItemIcon color="primary">{item.disabled ? "soon" : item.icon}</ListItemIcon>
+                            <ListItemText primary={item.name} secondary={item.description} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button disableElevation color="primary" variant="contained" onClick={this.handleConnectionMenuClose}>
+                        {t("base.close")}
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                 </Hidden>
-                <Dialog onClose={this.handleConnectionMenuClose} aria-labelledby="navigation" open={popover}>
-                  <DialogTitle id="navigation">
-                    {t("base.navigation")}
-                  </DialogTitle>
-                  <DialogContent>
-                    <List dense>
-                      {links.map((item, index) => (
-                        <ListItem key={index}
-                                  button
-                                  component={Link}
-                                  disabled={item.disabled}
-                                  to={item.path}
-                                  onClick={this.handleConnectionMenuClose}
-                        >
-                          <ListItemIcon color="primary">{item.disabled ? 'soon' : item.icon}</ListItemIcon>
-                          <ListItemText primary={item.name} secondary={item.description} />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button disableElevation color="primary" variant="contained" onClick={this.handleConnectionMenuClose}>
-                      {t("base.close")}
-                    </Button>
-                  </DialogActions>
-                </Dialog>
               </Grid>
               <Grid item>
                 <Web3connect />

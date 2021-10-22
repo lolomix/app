@@ -62,10 +62,10 @@ class Store extends Component {
                 {/*   <StoreSteps step={this.state.step} web3ready={web3ready} /> */}
               </Grid>
               <Grid item xs={12} lg={4}>
-                <CurrencyExchange fullHeight={true} web3ready={web3ready} />
+                <CurrencyExchange fullheight="true" web3ready={web3ready} />
               </Grid>
               <Grid item xs={12} lg={8}>
-                <NFTBuy fullHeight={true} web3ready={web3ready} error={error} />
+                <NFTBuy fullheight="true" web3ready={web3ready} error={error} />
               </Grid>
             </Grid>
           </Container>

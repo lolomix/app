@@ -3,14 +3,7 @@ import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 // material-ui
-import {
-  Card,
-  CardContent,
-  DialogTitle,
-  Divider,
-  Grid,
-  Typography,
-} from '@mui/material'
+import { Card, CardContent, DialogTitle, Divider, Grid, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,9 +16,9 @@ import abiAroma from "../web3/abi/AROMATokenMatic.json";
 import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
-import { getErrorMessage} from "../web3/errors";
+import { getErrorMessage } from "../web3/errors";
 
-function NFTBuy({ t, fullHeight, web3ready }) {
+function NFTBuy({ t, fullheight, web3ready }) {
   const { account, library, error } = useWeb3React();
   //const [sold, setSold] = useState(1);
   const sold = 1;
@@ -59,9 +52,9 @@ function NFTBuy({ t, fullHeight, web3ready }) {
     });
     try {
       const contractAroma = new library.eth.Contract(abiAroma, contractAromaAddress);
-      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account, gas: 10000000 });
+      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account });
       console.log(resultApprove);
-      const result = await contractErc721.methods.buyCryptoChef().send({ from: account, gas: 10000000 });
+      const result = await contractErc721.methods.buyCryptoChef().send({ from: account });
       console.log(result);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Success", {
@@ -108,7 +101,7 @@ function NFTBuy({ t, fullHeight, web3ready }) {
 
   return (
     <Fragment>
-      <Card fullHeight={fullHeight} elevation={3}>
+      <Card fullheight="true" elevation={3}>
         {web3ready ? (
           <CardContent>
             <Typography variant="h4" component="h2" align="center" mb={4}>
@@ -159,13 +152,13 @@ function NFTBuy({ t, fullHeight, web3ready }) {
               <Grid item sm={12} md={6} spacing={4} container justifyContent="center">
                 <Grid item xs={8}>
                   <Card
-                    fullHeight={true}
+                    fullheight="true"
                     elevation={2}
                     sx={{
                       maxWidth: "280px",
                       paddingTop: "16px",
                       paddingBottom: "16px",
-                      backgroundColor: "white"
+                      backgroundColor: "white",
                     }}>
                     <CardContent>
                       <Grid container justifyContent="center" alignItems="center">
@@ -187,21 +180,20 @@ function NFTBuy({ t, fullHeight, web3ready }) {
         ) : (
           <CardContent>
             <Typography variant="body2" align="center" my={4}>
-          {getErrorMessage(error)}
-          </Typography>
+              {getErrorMessage(error)}
+            </Typography>
           </CardContent>
         )}
       </Card>
       <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="sm">
-        <DialogTitle>
-          Buy CHEF
-        </DialogTitle>
+        <DialogTitle>Buy CHEF</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
             You can only buy CHEF NFT with AROMA.
           </Typography>
           <Typography p={1} variant="body2" gutterBottom>
-            1. Approve AROMA token in your wallet.<br />
+            1. Approve AROMA token in your wallet.
+            <br />
             2. Spend AROMA token to buy the CHEF NFT.
           </Typography>
           <Typography variant="caption" gutterBottom>

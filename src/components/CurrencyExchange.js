@@ -9,14 +9,14 @@ import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
 import { Card, CardContent, Typography, Stack, Divider, Chip } from "@mui/material";
 // custom
 import CurrencyInputField from "./form/CurrencyInputField";
-import { NETWORKS, TARGET_CHAIN, ETHER_IN_WEI } from "../web3/constants";
+import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../utils/formatters";
-import { getErrorMessage} from "../web3/errors";
+import { getErrorMessage } from "../web3/errors";
 
-function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
+function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
   const { account, library, error } = useWeb3React();
   const [price, setPrice] = React.useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -51,8 +51,8 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
   React.useEffect(() => {
-    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeToken)
-  }, [])
+    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeToken);
+  }, []);
 
   /**
    * Handles the switch of currencies if `enableCurrencySwitch` is enabled
@@ -60,7 +60,6 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
   const switchCurrencies = () => {
     // if currency switch is not enabled return early
     if (!enableCurrencySwitch) return;
-
     setCurrencyTo(currencyFrom);
     setCurrencyFrom(currencyTo);
   };
@@ -80,33 +79,33 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
         action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
       });
     } else {
-    setExchangeLoading(true);
-    let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
-      variant: "warning",
-      persist: true,
-      action: <ToastLoadingIndeterminate />,
-    });
-    const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
-    const contract = new library.eth.Contract(abi, contractMaster);
-    try {
-      const result = await contract.methods.buyAROMA(currencyToAmount).send({ value: currencyToAmount * price, from: account, gas: 10000000 });
-      console.log(result);
-      setExchangeLoading(false);
-      closeSnackbar(loadingSnackbar);
-      enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      setExchangeLoading(true);
+      let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
+        variant: "warning",
+        persist: true,
+        action: <ToastLoadingIndeterminate />,
       });
-    } catch (error) {
-      console.log(error);
-      setExchangeLoading(false);
-      closeSnackbar(loadingSnackbar);
-      enqueueSnackbar("Error", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
-      });
+      const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
+      const contract = new library.eth.Contract(abi, contractMaster);
+      try {
+        const result = await contract.methods.buyAROMA(currencyToAmount).send({ value: currencyToAmount * price, from: account });
+        console.log(result);
+        setExchangeLoading(false);
+        closeSnackbar(loadingSnackbar);
+        enqueueSnackbar("Success", {
+          variant: "success",
+          action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        });
+      } catch (error) {
+        console.log(error);
+        setExchangeLoading(false);
+        closeSnackbar(loadingSnackbar);
+        enqueueSnackbar("Error", {
+          variant: "error",
+          action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        });
+      }
     }
-  }
   };
 
   /**
@@ -115,26 +114,18 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
    */
   const handleCurrencyToUserInput = (event) => {
     setCurrencyToAmount(event.target.value);
-    //console.log("User Input Noticed");
-    //console.log(`User want to buy AROMA`);
-    // user would like to buy X amount of AROMA (CurrencyTo)
-    //console.log(`Calculating Exchange Rate`);
-    //console.log(`Calculating required amount of MATIC (CurrencyFrom)`);
-    //console.log(`Fill the MATIC (CurrencyFrom) input with the calculated amount.`);
-    setCurrencyFromAmount(event.target.value / price);
-    //console.log(`Quick validation that user has sufficient MATIC to buy AROMA`);
-    //console.log(`Trigger input WARNING ONLY if available MATIC is insufficient`);
+    setCurrencyFromAmount((event.target.value * price) / AROMA_DECIMALS);
   };
 
   return (
-    <Card fullHeight={fullHeight} elevation={3}>
+    <Card elevation={3}>
       {web3ready ? (
         <CardContent>
           <Typography variant="h4" component="h2" align="center" mb={4}>
             {t("components.CurrencyExchange.title")}
           </Typography>
           <Stack spacing={2.5} alignItems="center">
-            <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="sell" value={currencyFromAmount} disabled required />
+            <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="text" value={currencyFromAmount} disabled required />
             <Divider flexItem>
               <Chip
                 size="small"
@@ -150,24 +141,19 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
               id="token-exchange-to"
               currency={currencyTo}
               label="You Get"
-              type="buy"
+              type="text"
               onUserInput={(e) => handleCurrencyToUserInput(e)}
               value={currencyToAmount}
               required
             />
-            <Typography variant="body2" gutterBottom>Please enter amount between 5 and 10 000</Typography>
-            <LoadingButton
-              color="secondary"
-              size="xlarge"
-              variant="contained"
-              fullWidth
-              onClick={handleExchange}
-              loading={exchangeLoading}
-            >
+            <Typography variant="body2" gutterBottom>
+              Please enter amount between 5 and 10 000
+            </Typography>
+            <LoadingButton color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleExchange} loading={exchangeLoading}>
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
-              label={"For 1" + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(ETHER_IN_WEI / price) + " AROMA tokens."}
+              label={"For 1" + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(AROMA_DECIMALS / price) + " AROMA tokens."}
               sx={{ margin: "8px 0" }}
               size="small"
               icon={(enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />}
@@ -177,7 +163,7 @@ function CurrencyExchange({ t, fullHeight, web3ready, enableCurrencySwitch }) {
       ) : (
         <CardContent>
           <Typography variant="body2" align="center" my={4}>
-          {getErrorMessage(error)}
+            {getErrorMessage(error)}
           </Typography>
         </CardContent>
       )}
