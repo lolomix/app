@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 // material-ui
 import LoadingButton from "@mui/lab/LoadingButton";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
-import { Card, CardContent, Typography, Stack, Divider, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Stack, Divider, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 // custom
 import CurrencyInputField from "./form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
@@ -19,7 +19,13 @@ import { getErrorMessage } from "../web3/errors";
 function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
   const { account, library, error } = useWeb3React();
   const [price, setPrice] = React.useState();
+  const [successDialog, setSuccessDialog] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const handleSuccessDialog = () => {
+    setSuccessDialog(!successDialog);
+  };
+
   React.useEffect(() => {
     if (!!account && !!library) {
       async function loadPrice() {
@@ -96,6 +102,7 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
           variant: "success",
           action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
         });
+        handleSuccessDialog();
       } catch (error) {
         console.log(error);
         setExchangeLoading(false);
@@ -125,7 +132,7 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
             {t("components.CurrencyExchange.title")}
           </Typography>
           <Stack spacing={2.5} alignItems="center">
-            <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="text" value={currencyFromAmount} disabled required />
+            <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="sell" value={currencyFromAmount} disabled required />
             <Divider flexItem>
               <Chip
                 size="small"
@@ -141,7 +148,7 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
               id="token-exchange-to"
               currency={currencyTo}
               label="You Get"
-              type="text"
+              type="buy"
               onUserInput={(e) => handleCurrencyToUserInput(e)}
               value={currencyToAmount}
               required
@@ -162,11 +169,30 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
         </CardContent>
       ) : (
         <CardContent>
-          <Typography variant="body2" align="center" my={4}>
+          <Typography variant="body2" my={4}>
             {getErrorMessage(error)}
           </Typography>
+          <Button variant="contained" component="a" href="https://cryptochefs.medium.com/" target="_blank" rel="noopener">
+            Learn more
+          </Button>
         </CardContent>
       )}
+      <Dialog onClose={handleSuccessDialog} open={successDialog} maxWidth="md">
+        <DialogTitle>Congratulations</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1" gutterBottom>
+            You acquired some AROMA tokens. Check your balance in your account (top right)
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Now go on and get your CryptoChef NFT!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button disableElevation onClick={handleSuccessDialog} variant="contained" color="primary">
+            {t("base.close")}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 }

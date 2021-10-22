@@ -165,7 +165,7 @@ function Web3connect(props) {
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Dialog id="settings-menu" open={Boolean(connectionMenu)} onClose={handleConnectionMenu} maxWidth="lg">
+          <Dialog id="settings-menu" open={Boolean(connectionMenu)} onClose={handleConnectionMenu} maxWidth="md">
             <Box p={2}>
               <List dense>
                 {account && (
@@ -215,6 +215,9 @@ function Web3connect(props) {
                 <ListItem>
                   <ListItemText secondary={<NftList />} primary="Your CHEF NFTs" />
                 </ListItem>
+                <ListItem>
+                  <ListItemText primary="Your CHEF NFTs will be revealed soon!" />
+                </ListItem>
               </List>
               <Stack spacing={1} direction="row" justifyContent="center">
                 <Button disableElevation color="primary" variant="contained" onClick={handleConnectionMenu}>
@@ -233,7 +236,7 @@ function Web3connect(props) {
         onClose={handleWeb3Modal}
         open={dialogWeb3}
         scroll="paper"
-        maxWidth="sm"
+        maxWidth="md"
         aria-labelledby="wallet-connectors-dialog-title"
         aria-describedby="wallet-connectors-dialog-description">
         <DialogTitle id="wallet-connectors-dialog-title">{t("base.connectToYourWallet")}</DialogTitle>

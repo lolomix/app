@@ -14,9 +14,8 @@ const NftList = function () {
         try {
           const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
           const contract = new library.eth.Contract(abi, contractMaster);
-          const balance = await contract.methods.balanceOf(account).call();
+          const balance = await contract.methods.tokensOfOwner(account).call({ from: account });
           setBalance(balance);
-          console.log(balance);
         } catch (e) {
           console.log(e);
         }
@@ -25,7 +24,17 @@ const NftList = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return balance === null ? <Skeleton variant="text" /> : balance ? <span>NFTs</span> : <Skeleton variant="text" />;
+  return balance === null || !Array.isArray(balance) ? (
+    <Skeleton variant="text" />
+  ) : (
+    <span>
+      You have {balance.length} CHEF NFTs. (No.{" "}
+      {balance.map((item) => (
+        <span key={item}>{item} </span>
+      ))}{" "}
+      )
+    </span>
+  );
 };
 
 export default NftList;

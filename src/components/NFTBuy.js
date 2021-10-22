@@ -20,8 +20,7 @@ import { getErrorMessage } from "../web3/errors";
 
 function NFTBuy({ t, fullheight, web3ready }) {
   const { account, library, error } = useWeb3React();
-  //const [sold, setSold] = useState(1);
-  const sold = 1;
+  const [sold, setSold] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);
   //const season = 1; // set season manually for the time being
@@ -31,6 +30,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
    */
   const [buyLoading, setBuyLoading] = React.useState(false);
   const [buyDialog, setBuyDialog] = React.useState(false);
+  const [successDialog, setSuccessDialog] = React.useState(false);
   const [contractErc721, setContractErc721] = React.useState(false);
   const contractMasterAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const contractAromaAddress = NETWORKS[TARGET_CHAIN].contractAroma;
@@ -38,6 +38,9 @@ function NFTBuy({ t, fullheight, web3ready }) {
 
   const handleBuyDialog = () => {
     setBuyDialog(!buyDialog);
+  };
+  const handleSuccessDialog = () => {
+    setSuccessDialog(!successDialog);
   };
 
   /**
@@ -52,7 +55,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
     });
     try {
       const contractAroma = new library.eth.Contract(abiAroma, contractAromaAddress);
-      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, "1000000000000000000").send({ from: account });
+      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, price).send({ from: account });
       console.log(resultApprove);
       const result = await contractErc721.methods.buyCryptoChef().send({ from: account });
       console.log(result);
@@ -62,6 +65,8 @@ function NFTBuy({ t, fullheight, web3ready }) {
         action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
       });
       setBuyLoading(false);
+      handleBuyDialog();
+      handleSuccessDialog();
     } catch (error) {
       console.log(error);
       closeSnackbar(loadingSnackbar);
@@ -81,7 +86,9 @@ function NFTBuy({ t, fullheight, web3ready }) {
       async function loadSupply() {
         try {
           const cryptoChefSeasonSupply = await contractErc721.methods.getCryptoChefSeasonSupply().call();
-          setRemaining(cryptoChefSeasonSupply);
+          const totalSupply = await contractErc721.methods.totalSupply().call();
+          setRemaining(cryptoChefSeasonSupply - totalSupply);
+          setSold(totalSupply);
         } catch (e) {
           console.log(e);
         }
@@ -179,13 +186,16 @@ function NFTBuy({ t, fullheight, web3ready }) {
           </CardContent>
         ) : (
           <CardContent>
-            <Typography variant="body2" align="center" my={4}>
+            <Typography variant="body2" my={4}>
               {getErrorMessage(error)}
             </Typography>
+            <Button variant="contained" component="a" href="https://cryptochefs.medium.com/" target="_blank" rel="noopener">
+              Learn more
+            </Button>
           </CardContent>
         )}
       </Card>
-      <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="sm">
+      <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="md">
         <DialogTitle>Buy CHEF</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
@@ -206,6 +216,25 @@ function NFTBuy({ t, fullheight, web3ready }) {
           </Button>
           <Button disableElevation onClick={handleApprove} variant="contained" color="secondary" disabled={buyLoading}>
             Approve & Buy CHEF NFT
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog onClose={handleSuccessDialog} open={successDialog} keepMounted maxWidth="md">
+        <DialogTitle>Congratulations</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1" gutterBottom>
+            You bought a CryptoChef NFT. Click on your account (top right) to see the ID of your Chef.
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Please check our Discord server to learn when the NFTs will be revealed.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button disableElevation variant="contained" color="secondary" component="a" href="https://discord.gg/JufpFYBdKG" target="_blank" rel="noopener">
+            Go to Discord
+          </Button>
+          <Button disableElevation onClick={handleSuccessDialog} variant="contained" color="primary">
+            {t("base.close")}
           </Button>
         </DialogActions>
       </Dialog>

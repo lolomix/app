@@ -114,7 +114,6 @@ function Internal({ t }) {
               <Typography variant="body2">Set Price of AROMA in native currency.</Typography>
               <OutlinedInput
                 variant="outlined"
-                type="number"
                 onChange={(e) => handleAromaPrice(e)}
                 value={aromaPrice}
                 fullWidth
@@ -136,7 +135,6 @@ function Internal({ t }) {
               <Typography variant="body2">Set Price of CHEF NFT in AROMA.</Typography>
               <OutlinedInput
                 variant="outlined"
-                type="number"
                 onChange={(e) => handleChefPrice(e)}
                 value={chefPrice}
                 fullWidth
