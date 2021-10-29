@@ -23,7 +23,7 @@ export const NETWORKS = {
     chainId: 137,
     rpcUrl: "https://rpc-mainnet.maticvigil.com",
     faucet: "https://faucet.matic.network/",
-    blockExplorer: "https://explorer-mainnet.maticvigil.com/",
+    blockExplorer: "https://polygonscan.com/",
     nativeToken: "MATIC",
     contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
     contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",

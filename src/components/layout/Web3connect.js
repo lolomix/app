@@ -23,7 +23,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CheckIcon from "@mui/icons-material/Check";
 import WarningIcon from "@mui/icons-material/Warning";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
@@ -36,6 +35,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
 import WalletLedgerIcon from "../icons/WalletLedgerIcon";
 import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
+import IconButtonVerifyExplorer from "../web3/IconButtonVerifyExplorer";
+import IconButtonCopy from "../IconButtonCopy";
 
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
@@ -59,25 +60,6 @@ function Web3connect(props) {
    * @todo refactor this to a global helper
    */
   const prettifyAccountAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
-
-  /**
-   * Handles the copy to clipboard using Clipboard API OR regular method
-   *
-   * @todo refactor this to a global helper
-   */
-  const handleAccountCopyToClipboardIconClick = () => {
-    // navigator clipboard api needs a secure context (https)
-    if (navigator.clipboard && navigator.permissions) {
-      navigator.clipboard.writeText(account.toLowerCase());
-    } else if (document.queryCommandSupported("copy")) {
-      const ele = document.createElement("textarea");
-      ele.value = account.toLowerCase();
-      document.body.appendChild(ele);
-      ele.select();
-      document.execCommand("copy");
-      document.body.removeChild(ele);
-    }
-  };
 
   const handleConnectionMenu = () => {
     setConnectionMenu(!connectionMenu);
@@ -171,11 +153,10 @@ function Web3connect(props) {
                 {account && (
                   <ListItem
                     secondaryAction={
-                      <Tooltip title={t("base.copyToClipboard")}>
-                        <IconButton onClick={handleAccountCopyToClipboardIconClick} edge="end" aria-label="copy">
-                          <ContentCopyIcon />
-                        </IconButton>
-                      </Tooltip>
+                      <>
+                      <IconButtonVerifyExplorer address={account} />
+                      <IconButtonCopy copyText={account} />
+                      </>
                     }>
                     <Tooltip disableFocusListener title={t("base.youraccount")}>
                       <ListItemAvatar>
