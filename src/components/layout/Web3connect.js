@@ -87,14 +87,41 @@ function Web3connect(props) {
    *
    * @param connectorkey
    */
-  const handleConnectorButtonClick = (connectorkey) => {
+  const handleConnectorButtonClick = async (connectorkey) => {
     const newConnector = connectorsList[connectorkey].connector;
-
     setActivatingConnector(newConnector);
     activate(newConnector).then(() => {
       handleWeb3Modal();
       setActivatingConnector(undefined);
     });
+    if(connectorkey === "injected") { // only works for metamask
+      if(chainId !==  NETWORKS[TARGET_CHAIN].chainId ) {
+        try { // check if the chain to connect to is installed
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: NETWORKS[TARGET_CHAIN].chainIdHex }], // chainId must be in hexadecimal numbers
+          });
+        } catch (error) {
+          if (error.code === 4902) {  // This error code indicates that the chain has not been added to MetaMask
+            try {
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: NETWORKS[TARGET_CHAIN].chainIdHex,
+                    rpcUrl: NETWORKS[TARGET_CHAIN].rpcUrl,
+                    chainName: NETWORKS[TARGET_CHAIN].name,
+                  },
+                ],
+              });
+            } catch (addError) {
+              console.error(addError);
+            }
+          }
+          console.error(error);
+          }
+        } 
+      }
   };
 
   /**

@@ -9,8 +9,9 @@ export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
 export const NETWORKS = {
   rinkeby: {
-    name: "rinkeby",
+    name: "Rinkeby",
     chainId: 4,
+    chainIdHex: "0x4",
     rpcUrl: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorer: "https://rinkeby.etherscan.io/",
@@ -20,8 +21,9 @@ export const NETWORKS = {
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
   },
   matic: {
-    name: "matic",
+    name: "Polygon",
     chainId: 137,
+    chainIdHex: "0x89",
     rpcUrl: "https://rpc-mainnet.maticvigil.com",
     faucet: "https://faucet.matic.network/",
     blockExplorer: "https://polygonscan.com/",
