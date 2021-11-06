@@ -9,7 +9,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
 // components
 import AppLaunch from './AppLaunch'
-const App = lazy(() => import("./routes"));
+const App = lazy(() => import("./App"));
 
 ReactDOM.render(
   <BrowserRouter>
