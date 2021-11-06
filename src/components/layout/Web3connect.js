@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from "react";
 import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router-dom";
 import Blockies from "react-blockies";
 import { useWeb3React } from "@web3-react/core";
 //import { useSnackbar } from "notistack";
@@ -290,4 +289,4 @@ function Web3connect(props) {
   );
 }
 
-export default withRouter(withTranslation()(Web3connect));
+export default withTranslation()(Web3connect);

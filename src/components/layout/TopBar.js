@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //material-ui
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "@mui/material/AppBar";
@@ -126,4 +126,4 @@ class TopBar extends Component {
   }
 }
 
-export default withRouter(withTranslation()(TopBar));
+export default withTranslation()(TopBar);

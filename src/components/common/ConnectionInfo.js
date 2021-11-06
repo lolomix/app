@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Blockies from "react-blockies";
 //material-ui
@@ -42,7 +41,7 @@ class ConnectionInfo extends Component {
       this.setState({ deferredPrompt: e, isAppInstallable: true });
       console.log("deffered prompt saved");
     });
-    window.addEventListener("appinstalled", (evt) => {
+    window.addEventListener("appinstalled", () => {
       this.setState({ isAppInstalled: true });
     });
   };
@@ -89,15 +88,15 @@ class ConnectionInfo extends Component {
                       </ListItemAvatar>
                     </Tooltip>
                     <ListItemText secondary="0x45454545455345" primary={t("base.openYourAccount")} />
-                    <ListItemSecondaryAction></ListItemSecondaryAction>
+                    <ListItemSecondaryAction />
                   </ListItem>
                   <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
                     <ListItemText secondary="20 AROMA" primary="Wallet balance" />
-                    <ListItemSecondaryAction></ListItemSecondaryAction>
+                    <ListItemSecondaryAction />
                   </ListItem>
                   <ListItem button component={Link} to="/account" onClick={this.handleConnectionMenuClose}>
                     <ListItemText secondary="0 NFTs" primary="Open my collection" />
-                    <ListItemSecondaryAction></ListItemSecondaryAction>
+                    <ListItemSecondaryAction />
                   </ListItem>
                   {this.state.isAppInstallable && !this.state.isAppInstalled && (
                     <ListItem button onClick={() => this.state.deferredPrompt.prompt()}>
@@ -133,4 +132,4 @@ class ConnectionInfo extends Component {
   }
 }
 
-export default withRouter(withTranslation()(ConnectionInfo));
+export default withTranslation()(ConnectionInfo);

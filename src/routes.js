@@ -1,5 +1,5 @@
-import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import React, { Suspense, lazy } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { withTranslation } from "react-i18next";
 import { SnackbarProvider } from "notistack";
 import { Web3ReactProvider } from "@web3-react/core";
@@ -22,89 +22,73 @@ import { Container, Paper } from "@mui/material";
 import AnnouncementBar from "./components/layout/AnnouncementBar";
 // pages (lazy loading)
 const Main = lazy(() => import("./views/Main/Main"));
-//const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
+// const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
 const Store = lazy(() => import("./views/Store/Store"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 const Internal = lazy(() => import("./views/Internal/Internal"));
 
+/**
+ * Instantiating a web3 convenience library object from a low-level provider.
+ * e.g. ethers or web3.js
+ *
+ * @param provider
+ * @returns {Web3}
+ */
 function getLibrary(provider) {
-  //const library =
-  //library.pollingInterval = 12000
   return new Web3(provider);
 }
 
-class App extends Component {
-  state = {
-    expertmode: false,
-    videoOn: false,
-    admin: false,
-  };
+function App() {
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          maxSnack={3}
+          autoHideDuration={6000}
+          classes={{
+            variantSuccess: {
+              backgroundImage: "linear-gradient(90deg," + green[700] + "," + green[500] + ")",
+            },
+            variantError: {
+              backgroundImage: "linear-gradient(90deg," + red[700] + "," + red[400] + ")",
+            },
+            variantWarning: {
+              backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")",
+            },
+            variantInfo: {
+              backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")",
+            },
+          }}>
+          <CssBaseline />
+            <Container maxWidth="xl" disableGutters={true}>
+              <Paper square elevation={4}>
+                {process.env.REACT_APP_CHAIN !== "matic" &&  <AnnouncementBar /> }
+                <TopBar/>
+                <ServiceWorkerWrapper />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    <Route path="/" element={<Store/>}/>
+                    <Route path="/start" element={<Main/>}/>
+                    <Route path="/buffet" element={<Buffet/>}/>
+                    <Route path="/store" element={<Store/>}/>
+                    <Route path="/kitchen" element={<Kitchen/>}/>
+                    <Route path="/internal" element={<Internal/>}/>
+                  </Routes>
+                </Suspense>
+              </Paper>
+            </Container>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </Web3ReactProvider>
+  );
 
-  setExpertMode = (boolValue) => {
-    this.setState({ expertmode: boolValue });
-    window.localStorage.setItem("expertmode", boolValue);
-  };
-  setVideoOn = (boolValue) => {
-    this.setState({ videoOn: boolValue });
-    window.localStorage.setItem("videoOn", boolValue);
-  };
-  setAdmin = (boolValue) => {
-    this.setState({ admin: boolValue });
-  };
-
-  render() {
-    const { expertmode, videoOn, admin } = this.state;
-
-    return (
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <ThemeProvider theme={theme}>
-          <SnackbarProvider
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            maxSnack={3}
-            autoHideDuration={6000}
-            classes={{
-              variantSuccess: {
-                backgroundImage: "linear-gradient(90deg," + green[700] + "," + green[500] + ")",
-              },
-              variantError: {
-                backgroundImage: "linear-gradient(90deg," + red[700] + "," + red[400] + ")",
-              },
-              variantWarning: {
-                backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")",
-              },
-              variantInfo: {
-                backgroundImage: "linear-gradient(90deg," + blue[700] + "," + blue[500] + ")",
-              },
-            }}>
-            <CssBaseline />
-            <Router basename="/">
-              <Container maxWidth="xl" disableGutters={true}>
-                <Paper square elevation={4}>
-                  {process.env.REACT_APP_CHAIN !== "matic" &&  <AnnouncementBar /> }
-                  <TopBar setExpertMode={this.setExpertMode} setVideoOn={this.setVideoOn} expertmode={expertmode} videoOn={videoOn} admin={admin} />
-                  <ServiceWorkerWrapper />
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Switch>
-                      <Route exact path="/" component={Store} />
-                      <Route exact path="/start" component={Main} />
-                      <Route exact path="/buffet" component={Buffet} />
-                      <Route exact path="/store" component={Store} />
-                      <Route exact path="/kitchen" component={Kitchen} />
-                      <Route exact path="/internal" component={Internal} />
-                    </Switch>
-                  </Suspense>
-                </Paper>
-              </Container>
-            </Router>
-          </SnackbarProvider>
-        </ThemeProvider>
-      </Web3ReactProvider>
-    );
-  }
 }
+
+
 
 export default withTranslation()(App);

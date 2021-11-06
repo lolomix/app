@@ -1,7 +1,5 @@
-import React, { Component, Suspense } from "react";
+import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router";
-import Blockies from "react-blockies";
 //mui
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -34,4 +32,4 @@ class Account extends Component {
   }
 }
 
-export default withRouter(withTranslation()(Account));
+export default withTranslation()(Account);
