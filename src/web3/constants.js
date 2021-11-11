@@ -5,6 +5,7 @@ export const BLOCKNATIVE_DAPPID = process.env.REACT_APP_BLOCKNATIVE_DAPPID;
 export const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 export const ETHER_IN_WEI = 1000000000000000000;
 export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
+export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
 export const NETWORKS = {
   rinkeby: {
