@@ -20,6 +20,7 @@ import LoadingSpinner from './components/common/LoadingSpinner'
 import ServiceWorkerWrapper from './components/ServiceWorkerWrapper'
 import { Container, Paper } from '@mui/material'
 import AnnouncementBar from './components/layout/AnnouncementBar'
+import Collection from './views/Collection/Collection'
 // pages (lazy loading)
 const Main = lazy(() => import('./views/Main/Main'))
 // const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
@@ -82,6 +83,7 @@ function App () {
                   <Route path="/store" element={<Store/>}/>
                   <Route path="/kitchen" element={<Kitchen/>}/>
                   <Route path="/internal" element={<Internal/>}/>
+                  <Route path="/collection" element={<Collection/>}/>
                 </Routes>
               </Suspense>
             </Paper>
