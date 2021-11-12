@@ -13,10 +13,11 @@ import {
 /**
  * @param t
  * @param faqKeys
+ * @param color
  * @returns {JSX.Element}
  * @constructor
  */
-function FAQ ({ t, faqKeys }) {
+function FAQ ({ t, faqKeys, color}) {
 
   /**
    * Holds the list of "question and answer" objects
@@ -53,10 +54,10 @@ function FAQ ({ t, faqKeys }) {
     <div>
       {
         faqs.map(({ answer, question }, index) => (
-          <Accordion key={`panel${index}`}>
+          <Accordion key={`panel${index}`} sx={{color: color}}>
             <AccordionSummary
               id={`panel${index}bh-header`}
-              expandIcon={<AddIcon/>}
+              expandIcon={<AddIcon sx={{color: color}}/>}
               aria-controls={`panel${index}bh-content`}
             >
               <Typography sx={{ textTransform: 'uppercase' }}
@@ -82,14 +83,16 @@ function FAQ ({ t, faqKeys }) {
  * @type {{faqKeys: *[]}}
  */
 FAQ.defaultProps = {
-  faqKeys: []
+  faqKeys: [],
+  color: undefined
 }
 
 /**
- * @type {{faqKeys: Requireable<any[]>}}
+ * @type {{color: Requireable<string>, faqKeys: Requireable<any[]>}}
  */
 FAQ.propTypes = {
-  faqKeys: PropTypes.array
+  faqKeys: PropTypes.array,
+  color: PropTypes.string
 }
 
 export default withTranslation()(FAQ)
