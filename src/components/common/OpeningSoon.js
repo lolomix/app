@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import "./openingsoon.css";
+import React from "react";
+import { withTranslation } from 'react-i18next'
+import { Box, Typography } from '@mui/material'
 
-class OpeningSoon extends Component {
-  render() {
-    return (
-      <div className="openingsoon">
-        <link href="https://fonts.googleapis.com/css?family=Sacramento:400" rel="stylesheet" type="text/css" />
-        <h1 className="neontext">opening soon</h1>
-      </div>
-    );
-  }
+function OpeningSoon({ t }) {
+  return (
+    <Box>
+      <Typography variant="h1" textAlign="center">
+        {t('base.openingSoon')}
+      </Typography>
+    </Box>
+  );
 }
 
-export default OpeningSoon;
+export default withTranslation()(OpeningSoon);

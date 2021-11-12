@@ -20,7 +20,8 @@
     "navigation": "Navigation",
     "connectToYourWallet": "Connect to your wallet",
     "connectWith": "Connect with {{ connector }}",
-    "connectedWith": "Connected with {{ connector }}"
+    "connectedWith": "Connected with {{ connector }}",
+    "openingSoon": "Opening Soon"
   },
   "main": {
     "title": "CryptoChefs",
