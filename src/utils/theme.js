@@ -7,13 +7,11 @@ import { alpha } from "@mui/material";
 import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
 
 // colors
-const cafeNoir = "rgba(55, 16, 13, 1)";
-const bisque = "rgba(255, 229, 195, 1)";
-const persianOrange = "rgba(223, 141, 74, 1)";
+const cafeNoir = "rgba(39, 12, 10, 1)";
+const ming = "rgba(29, 96, 104, 1)"
 const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
 const darkSkyBlue = "rgb(138, 193, 210)";
-// const beauBlue = "rgb(144, 159, 179)";
 const culturedWhite = "rgba(250, 250, 250, 1)";
 const cadetBlue = "rgba(176, 181, 189, 1)";
 
@@ -24,22 +22,15 @@ export let theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: cafeNoir,
-      light: bisque,
+      main: ming
     },
     secondary: {
-      main: persianOrange,
-      contrastText: "#fff",
+      main: cafeNoir
     },
     tertiary: {
       main: culturedWhite,
       shadow: cadetBlue,
       contrastText: cafeNoir,
-    },
-    background: {
-      // default, is not used as root background (see components below)
-      default: cafeNoir,
-      paper: bisque,
     },
     sunGlow: {
       main: sunGlow,
@@ -84,7 +75,7 @@ export let theme = createTheme({
     shadow(6, brownSugar),
     shadow(6, brownSugar),
     shadow(6, brownSugar),
-    shadow(6, brownSugar),
+    shadow(6, brownSugar)
   ],
   shape: {
     borderRadius: 11,
@@ -151,7 +142,7 @@ theme = createTheme(theme, {
       },
       styleOverrides: {
         root: {
-          backgroundColor: darkSkyBlue,
+          backgroundColor: "transparent",
         },
       },
     },

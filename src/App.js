@@ -18,7 +18,7 @@ import { theme } from './utils/theme'
 import TopBar from './components/layout/TopBar'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ServiceWorkerWrapper from './components/ServiceWorkerWrapper'
-import { Container, Paper } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 // pages (lazy loading)
@@ -70,8 +70,8 @@ function App () {
             },
           }}>
           <CssBaseline/>
-          <Container maxWidth="xl" disableGutters={true}>
-            <Paper square elevation={4}>
+          <Container maxWidth="xl" disableGutters={true} >
+            <Box sx={{ backgroundColor: 'background.default', boxShadow: 4 }}>
               {process.env.REACT_APP_CHAIN !== 'matic' && <AnnouncementBar/>}
               <TopBar/>
               <ServiceWorkerWrapper/>
@@ -86,7 +86,7 @@ function App () {
                   <Route path="/collection" element={<Collection/>}/>
                 </Routes>
               </Suspense>
-            </Paper>
+            </Box>
           </Container>
         </SnackbarProvider>
       </ThemeProvider>

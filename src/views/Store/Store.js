@@ -53,10 +53,9 @@ class Store extends Component {
 
     return (
       <>
-        <Box id="store" pb={10} sx={{ backgroundColor: "background.default" }}>
-          <DripDivider variant={1} color="sunGlow.main" />
+        <Box id="store" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }} >
           <Container as="section">
-            <Headline color="white" title={t("store.title")} />
+            <Headline title={t("store.title")} />
             <Grid container spacing={3} justifyContent="center" alignItems="stretch">
               <Grid item xs={12}>
                 {/*   <StoreSteps step={this.state.step} web3ready={web3ready} /> */}
@@ -71,13 +70,13 @@ class Store extends Component {
           </Container>
         </Box>
 
-        <Box id="faq" pb={10} sx={{ backgroundColor: "darkSkyBlue.main" }}>
-          <DripDivider variant={2} color="cafeNoir.main" />
+        <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
+          <DripDivider variant={2} color="sunGlow.main" />
           <Container as="section">
-            <Headline variant="h2" title="FAQ" />
+            <Headline variant="h2" color="secondary.contrastText" title="FAQ" />
             <Grid container justifyContent="center" alignItems="center" spacing={2}>
               <Grid item xs={12} sm={10} md={8}>
-                <FAQ faqKeys={faqKeys} />
+                <FAQ color="secondary.contrastText" faqKeys={faqKeys} />
               </Grid>
             </Grid>
           </Container>

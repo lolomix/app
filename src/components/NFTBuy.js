@@ -18,7 +18,7 @@ import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate"
 import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
 import { getErrorMessage } from "../web3/errors";
 
-function NFTBuy({ t, fullheight, web3ready }) {
+function NFTBuy({ t, web3ready }) {
   const { account, library, error } = useWeb3React();
   const [sold, setSold] = useState(0);
   const [remaining, setRemaining] = useState(0);
@@ -124,7 +124,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
                   variant="h1"
                   component="div"
                   textAlign="center"
-                  color="secondary"
+                  color="primary"
                   sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
                   {remaining}
                 </Typography>
@@ -139,7 +139,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
                     <Typography textAlign="center" sx={{ textTransform: "uppercase" }}>
                       {t("components.NFTBuy.season")}
                     </Typography>
-                    <Typography textAlign="center" color="secondary" sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
+                    <Typography textAlign="center" color="primary" sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
                       ONE
                     </Typography>
                   </Grid>
@@ -150,7 +150,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
                     <Typography variant="body2" textAlign="center" sx={{ textTransform: "uppercase" }}>
                       {t("components.NFTBuy.pricePerCryptoCHEF")}
                     </Typography>
-                    <Typography variant="h5" color="secondary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
+                    <Typography variant="h5" color="primary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
                       {price / AROMA_DECIMALS} AROMA
                     </Typography>
                   </Grid>
@@ -177,7 +177,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
                   </Card>
                 </Grid>
                 <Grid item xs={10}>
-                  <LoadingButton color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
+                  <LoadingButton size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
                     {t("components.NFTBuy.buyButton")}
                   </LoadingButton>
                 </Grid>
@@ -214,7 +214,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
           <Button disableElevation onClick={handleBuyDialog} variant="contained" color="primary">
             {t("base.close")}
           </Button>
-          <Button disableElevation onClick={handleApprove} variant="contained" color="secondary" disabled={buyLoading}>
+          <Button disableElevation onClick={handleApprove} variant="contained" disabled={buyLoading}>
             Approve & Buy CHEF NFT
           </Button>
         </DialogActions>
@@ -230,7 +230,7 @@ function NFTBuy({ t, fullheight, web3ready }) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button disableElevation variant="contained" color="secondary" component="a" href="https://discord.gg/JufpFYBdKG" target="_blank" rel="noopener">
+          <Button disableElevation variant="contained" component="a" href="https://discord.gg/JufpFYBdKG" target="_blank" rel="noopener">
             Go to Discord
           </Button>
           <Button disableElevation onClick={handleSuccessDialog} variant="contained" color="primary">

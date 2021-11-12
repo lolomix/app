@@ -57,7 +57,7 @@ function StoreSteps({ t, step }) {
             </Grid>
             <Grid item sm={4} container alignContent="center" justifyContent="center">
               <Grid item>
-                <ContactSupport color="secondary"/>
+                <ContactSupport/>
               </Grid>
               <Grid item>
                 <Typography px={1}>

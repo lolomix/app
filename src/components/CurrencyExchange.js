@@ -156,7 +156,7 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
             <Typography variant="body2" gutterBottom>
               Please enter amount between 5 and 10 000
             </Typography>
-            <LoadingButton color="secondary" size="xlarge" variant="contained" fullWidth onClick={handleExchange} loading={exchangeLoading}>
+            <LoadingButton size="xlarge" variant="contained" fullWidth onClick={handleExchange} loading={exchangeLoading}>
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
