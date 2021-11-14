@@ -12,6 +12,13 @@ import DripDivider from "../../components/layout/DripDivider";
 import FAQ from "../../components/common/FAQ";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
+/**
+ * List of FAQ items to display.
+ * @type {string[]}
+ */
+const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
+
+
 class Store extends Component {
   static contextType = getWeb3ReactContext();
   state = {
@@ -44,12 +51,6 @@ class Store extends Component {
     const { t } = this.props;
     const web3ready = this.context.chainId === NETWORKS[TARGET_CHAIN].chainId;
     const error = this.context.error;
-
-    /**
-     * List of FAQ items to display.
-     * @type {string[]}
-     */
-    const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
 
     return (
       <>
