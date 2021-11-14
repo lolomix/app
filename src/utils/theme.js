@@ -13,7 +13,7 @@ const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
 const darkSkyBlue = "rgb(138, 193, 210)";
 const culturedWhite = "rgba(250, 250, 250, 1)";
-const cadetBlue = "rgba(176, 181, 189, 1)";
+const cadetBlue = "rgba(181, 186, 195, 1)";
 
 // generators
 const shadow = (px, rgb) => `0.3px ${px}px 0.2px 0px ${alpha(rgb, 0.9)}`;
@@ -106,6 +106,9 @@ export let theme = createTheme({
       fontSize: "1rem",
       fontWeight: 400,
     },
+    button: {
+      textTransform: "none"
+    }
   },
   zIndex: {},
 });
@@ -122,7 +125,7 @@ theme = createTheme(theme, {
     },
     MuiAppBar: {
       defaultProps: {
-        color: "sunGlow",
+        color: "cafeNoir",
       },
     },
     MuiToolbar: {
@@ -158,10 +161,24 @@ theme = createTheme(theme, {
     },
     MuiButton: {
       styleOverrides: {
-        contained: {
-          [`&.${buttonClasses.focusVisible}, &:active, &:hover, $:not(.${buttonClasses.disableElevation})`]: {
+        root: {
+          [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
             boxShadow: theme.shadows[2],
+          }
+        },
+        contained: {
+          [`&.MuiButton-containedTertiary:not(.Mui-disabled):not(.MuiButton-active)`]: {
+            backgroundColor: alpha(theme.palette.tertiary.main, 0.1),
+            color: theme.palette.tertiary.main,
+            boxShadow: "none"
           },
+          [`&.MuiButton-containedTertiary.MuiButton-active:not(.Mui-disabled)`]: {
+            boxShadow: shadow(2, theme.palette.tertiary.shadow),
+          },
+          [`&.MuiButton-contained.Mui-disabled`]: {
+            backgroundColor: alpha(theme.palette.tertiary.main, 0.04),
+            color: alpha(theme.palette.tertiary.main, 0.5)
+          }
         },
       },
       variants: [
@@ -180,14 +197,20 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { color: "tertiary", variant: "contained" },
+          props: { color: "secondary", variant: "contained", disabled: true },
           style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
-            },
-          },
+            backgroundColor: "white"
+          }
         },
+        // {
+        //   props: { color: "tertiary", variant: "contained" },
+        //   style: {
+        //     boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+        //     [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
+        //       boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+        //     },
+        //   },
+        // },
       ],
     },
     MuiLinearProgress: {

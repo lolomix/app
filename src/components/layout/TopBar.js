@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from 'react-router-dom'
 //material-ui
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "@mui/material/AppBar";
@@ -20,8 +20,6 @@ import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 // icons
-import People from "@mui/icons-material/People";
-import EventNote from "@mui/icons-material/EventNote";
 import Settings from "@mui/icons-material/Settings";
 //custom
 import Web3connect from "./Web3connect";
@@ -30,10 +28,18 @@ import Logo from "../common/Logo";
 import LogoText from "../common/LogoText";
 
 const links = [
-  { name: "Store", icon: <Settings />, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
-  { name: "Kitchen", icon: <EventNote />, disabled: true, path: "/kitchen", description: "Create your own recipe" },
-  { name: "Buffet", icon: <People />, disabled: true, path: "/buffet", description: "Order and enjoy your meal" },
+  { name: "Store", disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
+  { name: "Kitchen", disabled: true, path: "/kitchen", description: "Create your own recipe" },
+  { name: "Buffet", disabled: true, path: "/buffet", description: "Order and enjoy your meal" },
+  { name: "Collection", disabled: false, path: "/collection", description: "See the collection of CHEFs" },
 ];
+
+const NavLinkRef = React.forwardRef((props, ref) => (
+    <NavLink {...props} ref={ref} className={({ isActive }) => (
+      props.className + (isActive ? " MuiButton-active" : "")
+    )} />
+  )
+)
 
 function TopBar ({t}) {
   const [ popover, setPopover ] = useState(false)
@@ -69,12 +75,12 @@ function TopBar ({t}) {
                             color="tertiary"
                             variant="contained"
                             disabled={item.disabled}
-                            component={Link}
+                            component={NavLinkRef}
                             to={item.path}>
                             {item.name}
                             {item.disabled && (
-                              <Typography pl={0.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
-                                soon
+                              <Typography pl={0.5} variant="caption" sx={{opacity:0.7}}>
+                                SOON
                               </Typography>
                             )}
                           </Button>
