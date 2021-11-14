@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withTranslation } from "react-i18next";
 import { Link, NavLink } from 'react-router-dom'
-//material-ui
+// material-ui
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
@@ -21,17 +21,18 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 // icons
 import Settings from "@mui/icons-material/Settings";
-//custom
+// custom
 import Web3connect from "./Web3connect";
 import LanguageSelector from "./LanguageSelector";
 import Logo from "../common/Logo";
 import LogoText from "../common/LogoText";
+import { useWeb3React } from '@web3-react/core'
 
 const links = [
-  { name: "Store", disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
-  { name: "Kitchen", disabled: true, path: "/kitchen", description: "Create your own recipe" },
-  { name: "Buffet", disabled: true, path: "/buffet", description: "Order and enjoy your meal" },
-  { name: "Collection", disabled: false, path: "/collection", description: "See the collection of CHEFs" },
+  { name: "Store", visible: true, disabled: false, path: "/store", description: "Buy Aroma and CHEF" },
+  { name: "Kitchen", visible: true, disabled: true, path: "/kitchen", description: "Create your own recipe" },
+  { name: "Buffet", visible: true, disabled: true, path: "/buffet", description: "Order and enjoy your meal" },
+  { name: "Collection", visible: active => active, disabled: false, path: "/collection", description: "See the collection of CHEFs" }
 ];
 
 const NavLinkRef = React.forwardRef((props, ref) => (
@@ -43,6 +44,7 @@ const NavLinkRef = React.forwardRef((props, ref) => (
 
 function TopBar ({t}) {
   const [ popover, setPopover ] = useState(false)
+  const { active } = useWeb3React()
 
   const handleConnectionIconClick = () => {
     setPopover(true)
@@ -67,7 +69,12 @@ function TopBar ({t}) {
             <Grid item>
               <Hidden mdDown>
                 <Stack spacing={1} direction="row" mr={4}>
-                  {links.map((item, index) => (
+                  {links.filter(item => {
+                    if (typeof item.visible === 'function') {
+                      return item.visible(active)
+                    }
+                    return item.visible
+                  }).map((item, index) => (
                     <Tooltip key={index} title={item.description}>
                         <span>
                           <Button
