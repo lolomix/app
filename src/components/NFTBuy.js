@@ -18,8 +18,8 @@ import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate"
 import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
 import { getErrorMessage } from "../web3/errors";
 
-function NFTBuy({ t, web3ready }) {
-  const { account, library, error } = useWeb3React();
+function NFTBuy({ t }) {
+  const { account, library, error, active } = useWeb3React();
   const [sold, setSold] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);
@@ -109,7 +109,7 @@ function NFTBuy({ t, web3ready }) {
   return (
     <Fragment>
       <Card fullheight="true" elevation={3}>
-        {web3ready ? (
+        {active ? (
           <CardContent>
             <Typography variant="h4" component="h2" align="center" mb={4}>
               {t("components.NFTBuy.title")}

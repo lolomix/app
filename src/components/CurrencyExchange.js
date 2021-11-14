@@ -16,8 +16,8 @@ import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate"
 import { formatCurrency } from "../utils/formatters";
 import { getErrorMessage } from "../web3/errors";
 
-function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
-  const { account, library, error } = useWeb3React();
+function CurrencyExchange({ t, enableCurrencySwitch }) {
+  const { account, library, error, active } = useWeb3React();
   const [price, setPrice] = React.useState();
   const [successDialog, setSuccessDialog] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -126,7 +126,7 @@ function CurrencyExchange({ t, web3ready, enableCurrencySwitch }) {
 
   return (
     <Card elevation={3}>
-      {web3ready ? (
+      {active ? (
         <CardContent>
           <Typography variant="h4" component="h2" align="center" mb={4}>
             {t("components.CurrencyExchange.title")}
