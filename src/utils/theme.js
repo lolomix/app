@@ -1,6 +1,6 @@
 // material-ui
-import { createTheme } from "@mui/material/styles";
 import buttonClasses from "@mui/material/Button/buttonClasses";
+import { createTheme } from "@mui/material/styles";
 import { alpha } from "@mui/material";
 
 // images
@@ -16,7 +16,7 @@ const culturedWhite = "rgba(250, 250, 250, 1)";
 const cadetBlue = "rgba(181, 186, 195, 1)";
 
 // generators
-const shadow = (px, rgb) => `0.3px ${px}px 0.2px 0px ${alpha(rgb, 0.9)}`;
+const shadow = (px, rgb) => `0.3px ${px}px 0.4px 0px ${alpha(rgb, 0.9)}`;
 
 export let theme = createTheme({
   palette: {
@@ -161,19 +161,11 @@ theme = createTheme(theme, {
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-            boxShadow: theme.shadows[2],
-          }
-        },
         contained: {
           [`&.MuiButton-containedTertiary:not(.Mui-disabled):not(.MuiButton-active)`]: {
             backgroundColor: alpha(theme.palette.tertiary.main, 0.1),
             color: theme.palette.tertiary.main,
             boxShadow: "none"
-          },
-          [`&.MuiButton-containedTertiary.MuiButton-active:not(.Mui-disabled)`]: {
-            boxShadow: shadow(2, theme.palette.tertiary.shadow),
           },
           [`&.MuiButton-contained.Mui-disabled`]: {
             backgroundColor: alpha(theme.palette.tertiary.main, 0.04),
@@ -202,15 +194,15 @@ theme = createTheme(theme, {
             backgroundColor: "white"
           }
         },
-        // {
-        //   props: { color: "tertiary", variant: "contained" },
-        //   style: {
-        //     boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
-        //     [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-        //       boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
-        //     },
-        //   },
-        // },
+        {
+          props: { color: "tertiary", variant: "contained" },
+          style: {
+            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
+              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+            },
+          },
+        },
       ],
     },
     MuiLinearProgress: {
@@ -228,109 +220,5 @@ theme = createTheme(theme, {
         },
       },
     },
-  },
-  // components: {
-  //   // todo: validate all styles below - Do we need these changes globally?
-  //   MuiBadge: {
-  //     styleOverrides: {
-  //       badge: {
-  //         background: blueGrey[50],
-  //         color: blueGrey[800],
-  //         border: "1px solid" + blueGrey[500],
-  //       },
-  //       colorSecondary: {
-  //         border: 0,
-  //       },
-  //       colorError: {
-  //         border: 0,
-  //         color: "#fff",
-  //       },
-  //     }
-  //   },
-  //   MuiTooltip: {
-  //     styleOverrides: {
-  //       tooltip: {
-  //         color: "#fff",
-  //       },
-  //     }
-  //   },
-  //   MuiIconButton: {
-  //     styleOverrides: {
-  //       root: {
-  //         color: blueGrey[500],
-  //       },
-  //       colorSecondary: {
-  //         color: blueGrey[50],
-  //         zIndex: 10,
-  //       },
-  //     }
-  //   },
-
-  //   MuiCircularProgress: {
-  //     styleOverrides: {
-  //       colorSecondary: {
-  //         color: blueGrey[50],
-  //       },
-  //     }
-  //   },
-  //   MuiTabs: {
-  //     styleOverrides: {
-  //       indicator: {
-  //         backgroundColor: blueGrey[800],
-  //       },
-  //     }
-  //   },
-  //   MuiTab: {
-  //     styleOverrides: {
-  //       root: {
-  //         "@media (min-width: 960px)": {
-  //           minWidth: 120,
-  //         },
-  //       },
-  //       textColorSecondary: {
-  //         color: blueGrey[400],
-  //         "&$selected": {
-  //           color: blueGrey[900],
-  //         },
-  //       },
-  //     }
-  //   },
-  //   MuiBottomNavigation: {
-  //     styleOverrides: {
-  //       root: {
-  //         zIndex: 1190,
-  //         backgroundColor: blueGrey[50],
-  //         background: "linear-gradient(315deg," + blueGrey[600] + "," + blueGrey[800] + ")",
-  //       },
-  //     }
-  //   },
-  //   MuiBottomNavigationAction: {
-  //     styleOverrides: {
-  //       root: {
-  //         color: blueGrey[100],
-  //         "&$selected": {
-  //           color: "#fff",
-  //         },
-  //       },
-  //     }
-  //   },
-  //   MuiAvatar: {
-  //     styleOverrides: {
-  //       colorDefault: {
-  //         color: blueGrey[800],
-  //         backgroundColor: blueGrey[100],
-  //       },
-  //       square: {
-  //         backgroundColor: "transparent",
-  //       },
-  //     }
-  //   },
-  //   MuiCardMedia: {
-  //     styleOverrides: {
-  //       root: {
-  //         height: 220,
-  //       },
-  //     }
-  //   },
-  // }
+  }
 });
