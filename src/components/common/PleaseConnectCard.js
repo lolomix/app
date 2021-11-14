@@ -3,7 +3,7 @@ import React from 'react'
 import { Card, CardContent, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 // custom
-import bg from '../../assets/components/common/please-connect/bg.png'
+import bg from '../../assets/components/common/please-connect/bg@2x.png'
 
 /**
  * @param props
@@ -20,7 +20,7 @@ function PleaseConnectCard (props) {
                  alt="Crypto Wallet Providers"
                  style={{ maxWidth: '182px' }}
             />
-            <Typography mt={4} textAlign="center">
+            <Typography mt={3} textAlign="center">
               Please connect your wallet
             </Typography>
           </Grid>
