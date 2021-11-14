@@ -2024,10 +2024,10 @@
     "@ethersproject/properties" "^5.4.0"
     "@ethersproject/strings" "^5.4.0"
 
-"@fontsource/lexend@^4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/lexend/-/lexend-4.5.1.tgz#905f5ed1f3f40e7150b79d6c11e7b4839977999e"
-  integrity sha512-opFE25zKj2vo978f+QWgID9K4qMsPE6S59RRuwOcyuVL0pBbTErYUVWxfHn8kgDGyy99w+vwxoKI2hGqCHeN2g==
+"@fontsource/balsamiq-sans@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/balsamiq-sans/-/balsamiq-sans-4.5.0.tgz#4c3fd89ca9d8b207912f3559e3fac23a5201740e"
+  integrity sha512-2N73S/bBtw9O77WUcAeVDKCg/a6rP9n9dCztAzFvEFhugeeeYw9jtbH9PEq51XDWf5/TmUs9oMknEzdn03e5iQ==
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
