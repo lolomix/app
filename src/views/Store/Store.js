@@ -1,90 +1,69 @@
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
-import { getWeb3ReactContext } from "@web3-react/core";
+import React from 'react'
+import { withTranslation } from 'react-i18next'
 // material-ui
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from '@mui/material'
 // custom
-import CurrencyExchange from "../../components/CurrencyExchange";
-//import StoreSteps from "../../components/StoreSteps";
-import NFTBuy from "../../components/NFTBuy";
-import Headline from "../../components/layout/Headline";
-import DripDivider from "../../components/layout/DripDivider";
-import FAQ from "../../components/common/FAQ";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import CurrencyExchange from '../../components/CurrencyExchange'
+import NFTBuy from '../../components/NFTBuy'
+import Headline from '../../components/layout/Headline'
+import DripDivider from '../../components/layout/DripDivider'
+import FAQ from '../../components/common/FAQ'
 
 /**
  * List of FAQ items to display.
  * @type {string[]}
  */
-const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
+const faqKeys = [
+  'WhatIsAroma',
+  'WhatIsACryptochefNFT',
+  'WhatIsARecipe',
+  'WhatIsTheBuffet',
+  'WhyDoIHaveToLockUpAroma'
+]
 
-
-class Store extends Component {
-  static contextType = getWeb3ReactContext();
-  state = {
-    step: "buy-aroma",
-  };
-
-  // todo: get this from the ancestor - please remove if not used
-  walletHasAroma = () => {
-    return true;
-  };
-
-  // todo: get this from the ancestor - please remove if not used
-  walletHasEnoughAroma = () => {
-    return true;
-  };
-
-  // todo: get this from the ancestor - please remove if not used
-  // check for Season 1 CryptoChef
-  walletHasNFT = () => {
-    return true;
-  };
-
-  // if (this.walletHasAroma && this.walletHasNFT) {
-  //   this.setState({step: 'wait-for-reveal'})
-  // } else (this.walletHasAroma) {
-  //   this.setState({step: 'buy-nft'})
-  // }
-
-  render() {
-    const { t } = this.props;
-    const web3ready = this.context.chainId === NETWORKS[TARGET_CHAIN].chainId;
-    const error = this.context.error;
-
-    return (
-      <>
-        <Box id="store" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }} >
-          <Container as="section">
-            <Headline title={t("store.title")} />
-            <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-              <Grid item xs={12}>
-                {/*   <StoreSteps step={this.state.step} web3ready={web3ready} /> */}
-              </Grid>
-              <Grid item xs={12} lg={4}>
-                <CurrencyExchange fullheight="true" web3ready={web3ready} />
-              </Grid>
-              <Grid item xs={12} lg={8}>
-                <NFTBuy fullheight="true" web3ready={web3ready} error={error} />
-              </Grid>
+/**
+ * @param t
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function Store ({ t }) {
+  return (
+    <>
+      <Box id="store" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
+        <Container as="section">
+          <Headline title={t('store.title')}/>
+          <Grid container
+                spacing={3}
+                justifyContent="center"
+                alignItems="stretch"
+          >
+            <Grid item xs={12} lg={4}>
+              <CurrencyExchange fullheight="true"/>
             </Grid>
-          </Container>
-        </Box>
-
-        <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
-          <DripDivider variant={2} color="sunGlow.main" />
-          <Container as="section">
-            <Headline variant="h2" color="secondary.contrastText" title="FAQ" />
-            <Grid container justifyContent="center" alignItems="center" spacing={2}>
-              <Grid item xs={12} sm={10} md={8}>
-                <FAQ color="secondary.contrastText" faqKeys={faqKeys} />
-              </Grid>
+            <Grid item xs={12} lg={8}>
+              <NFTBuy fullheight="true"/>
             </Grid>
-          </Container>
-        </Box>
-      </>
-    );
-  }
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box id="faq" pb={10} sx={{ backgroundColor: 'secondary.main' }}>
+        <DripDivider variant={2} color="sunGlow.main"/>
+        <Container as="section">
+          <Headline variant="h2" color="secondary.contrastText" title="FAQ"/>
+          <Grid container
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+          >
+            <Grid item xs={12} sm={10} md={8}>
+              <FAQ color="secondary.contrastText" faqKeys={faqKeys}/>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
+  )
 }
 
-export default withTranslation()(Store);
+export default withTranslation()(Store)
