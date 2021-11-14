@@ -14,6 +14,13 @@ import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import Blockies from 'react-blockies'
 import NFT from '../../components/web3/NFT'
+import FAQ from '../../components/common/FAQ'
+
+/**
+ * List of FAQ items to display.
+ * @type {string[]}
+ */
+const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
 
 function Collection () {
   const [filterData] = useState(
@@ -30,8 +37,7 @@ function Collection () {
 
   return (
     <>
-      <Box pb={10} sx={{ backgroundColor: 'background.default' }}>
-        <DripDivider variant={1} color="sunGlow.main"/>
+      <Box id="collection" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }} >
         <Container as="section">
           <Grid container spacing={4}>
             <Grid item md={3}>
@@ -95,15 +101,13 @@ function Collection () {
         </Container>
       </Box>
 
-      <Box id="faq" pb={10} sx={{ backgroundColor: 'darkSkyBlue.main' }}>
-        <DripDivider variant={2} color="cafeNoir.main"/>
+      <Box id="faq" pb={10} sx={{ backgroundColor: 'secondary.main' }}>
+        <DripDivider variant={2} color="sunGlow.main"/>
         <Container as="section">
-          <Headline variant="h2" title="FAQ"/>
-          <Grid container justifyContent="center" alignItems="center"
-                spacing={2}>
+          <Headline variant="h2" color="secondary.contrastText" title="FAQ" />
+          <Grid container justifyContent="center" alignItems="center" spacing={2}>
             <Grid item xs={12} sm={10} md={8}>
-              {/* <FAQ faqKeys={faqKeys} /> */}
-              test
+              <FAQ color="secondary.contrastText" faqKeys={faqKeys} />
             </Grid>
           </Grid>
         </Container>
