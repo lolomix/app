@@ -8,6 +8,8 @@ import NFTBuy from '../../components/NFTBuy'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import FAQ from '../../components/common/FAQ'
+import PleaseConnectCard from '../../components/common/PleaseConnectCard'
+import { useWeb3React } from '@web3-react/core'
 
 /**
  * List of FAQ items to display.
@@ -27,6 +29,8 @@ const faqKeys = [
  * @constructor
  */
 function Store ({ t }) {
+  const { active } = useWeb3React();
+
   return (
     <>
       <Box id="store" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
@@ -37,12 +41,20 @@ function Store ({ t }) {
                 justifyContent="center"
                 alignItems="stretch"
           >
-            <Grid item xs={12} lg={4}>
-              <CurrencyExchange fullheight="true"/>
-            </Grid>
-            <Grid item xs={12} lg={8}>
-              <NFTBuy fullheight="true"/>
-            </Grid>
+            {active ? (
+              <>
+                <Grid item xs={12} lg={4}>
+                  <CurrencyExchange fullheight="true"/>
+                </Grid>
+                <Grid item xs={12} lg={8}>
+                  <NFTBuy fullheight="true"/>
+                </Grid>
+              </>
+            ):(
+              <Grid item xs={10} sm={7} md={5} lg={4}>
+                <PleaseConnectCard elevation={3}/>
+              </Grid>
+            )}
           </Grid>
         </Container>
       </Box>
