@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 // assets
-import logoText from '../../assets/logo-text-white.svg'
+import { Typography } from '@mui/material'
 
 /**
  * @param t
@@ -23,7 +23,9 @@ function LogoText ({ t }) {
               component={Link}
               to="/"
       >
-        <img style={{ width: '100%' }} alt="CryptoChefs logo" src={logoText}/>
+        <Typography color="tertiary.main" variant="h4" component="span">
+          CryptoChefs
+        </Typography>
       </Button>
     </Tooltip>
   )
