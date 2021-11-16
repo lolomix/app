@@ -15,7 +15,6 @@ export function getErrorMessage(error) {
   ) {
     return "Please authorize this website to access your Ethereum account.";
   } else {
-    //console.error(error);
-    return "Please connect to a web3 compatible wallet (e.g. Metamask)";
+    return "Please connect your wallet";
   }
 }
