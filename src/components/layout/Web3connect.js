@@ -138,7 +138,7 @@ function Web3connect(props) {
    * @returns {boolean}
    */
   const handleConnectorButtonDisabledProp = (connectorkey) => {
-    return !triedEager || !!activatingConnector || !!error || connectorsList[connectorkey].soon;
+    return !triedEager || !!activatingConnector || connectorsList[connectorkey].soon;
   };
 
   /**
