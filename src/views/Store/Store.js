@@ -8,7 +8,7 @@ import NFTBuy from '../../components/NFTBuy'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import FAQ from '../../components/common/FAQ'
-import PleaseConnectCard from '../../components/common/PleaseConnectCard'
+import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
 import { useWeb3React } from '@web3-react/core'
 
 /**
@@ -29,7 +29,7 @@ const faqKeys = [
  * @constructor
  */
 function Store ({ t }) {
-  const { active } = useWeb3React();
+  const { active, error } = useWeb3React();
 
   return (
     <>
@@ -52,7 +52,7 @@ function Store ({ t }) {
               </>
             ):(
               <Grid item xs={10} sm={7} md={5} lg={4}>
-                <PleaseConnectCard elevation={3}/>
+                <ConnectionErrorCard error={error} elevation={3}/>
               </Grid>
             )}
           </Grid>
