@@ -167,7 +167,7 @@ theme = createTheme(theme, {
             color: theme.palette.tertiary.main,
             boxShadow: "none"
           },
-          [`&.MuiButton-contained.Mui-disabled`]: {
+          [`&.MuiButton-containedTertiary.MuiButton-contained.Mui-disabled`]: {
             backgroundColor: alpha(theme.palette.tertiary.main, 0.04),
             color: alpha(theme.palette.tertiary.main, 0.5)
           }
