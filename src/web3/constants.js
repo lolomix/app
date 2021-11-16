@@ -9,22 +9,42 @@ export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
 export const NETWORKS = {
   rinkeby: {
-    name: "rinkeby",
+    name: "Rinkeby",
     chainId: 4,
-    rpcUrl: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
+    chainIdHex: "0x4",
+    rpcUrls: [
+      `https://rinkeby.infura.io/v3/${INFURA_ID}`
+    ],
     faucet: "https://faucet.rinkeby.io/",
-    blockExplorer: "https://rinkeby.etherscan.io/",
+    blockExplorerUrls: [
+      "https://rinkeby.etherscan.io/"
+    ],
+    nativeCurrency: {
+      "name": "TEST ETHER",
+      "symbol": "TEST ETHER",
+      "decimals": 18
+    },
     nativeToken: "TEST ETHER",
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
   },
   matic: {
-    name: "matic",
+    name: "Polygon Mainnet",
     chainId: 137,
-    rpcUrl: "https://rpc-mainnet.maticvigil.com",
+    chainIdHex: "0x89",
+    rpcUrls: [
+      "https://polygon-rpc.com/"
+    ],
     faucet: "https://faucet.matic.network/",
-    blockExplorer: "https://polygonscan.com/",
+    blockExplorerUrls: [
+      "https://polygonscan.com"
+    ],
+    nativeCurrency: {
+      "name": "MATIC",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
     nativeToken: "MATIC",
     contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
     contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",
@@ -37,25 +57,33 @@ export const NETWORKS = {
     chainId: 80001,
     price: 1,
     gasPrice: 1000000000,
-    rpcUrl: "https://rpc-mumbai.maticvigil.com",
+    rpcUrls: [
+      "https://rpc-mumbai.maticvigil.com"
+    ],
     faucet: "https://faucet.matic.network/",
-    blockExplorer: "https://mumbai-explorer.matic.today/",
+    blockExplorerUrls: [
+      "https://mumbai-explorer.matic.today/"
+    ],
   },
   ropsten: {
     name: "ropsten",
     color: "#F60D09",
     chainId: 3,
     faucet: "https://faucet.ropsten.be/",
-    blockExplorer: "https://ropsten.etherscan.io/",
-    rpcUrl: `https://ropsten.infura.io/v3/${INFURA_ID}`,
+    blockExplorerUrls: [
+      "https://ropsten.etherscan.io/"
+    ],
+    rpcUrls: `https://ropsten.infura.io/v3/${INFURA_ID}`,
   },
   goerli: {
     name: "goerli",
     color: "#0975F6",
     chainId: 5,
     faucet: "https://goerli-faucet.slock.it/",
-    blockExplorer: "https://goerli.etherscan.io/",
-    rpcUrl: `https://goerli.infura.io/v3/${INFURA_ID}`,
+    blockExplorerUrls: [
+      "https://goerli.etherscan.io/"
+    ],
+    rpcUrls: `https://goerli.infura.io/v3/${INFURA_ID}`,
   },
   xdai: {
     name: "xdai",
@@ -63,129 +91,171 @@ export const NETWORKS = {
     chainId: 100,
     price: 1,
     gasPrice: 1000000000,
-    rpcUrl: "https://dai.poa.network",
+    rpcUrls: [
+      "https://dai.poa.network"
+    ],
     faucet: "https://xdai-faucet.top/",
-    blockExplorer: "https://blockscout.com/poa/xdai/",
+    blockExplorerUrls: [
+      "https://blockscout.com/poa/xdai/"
+    ],
   },
     localhost: {
     name: "localhost",
     color: "#666666",
     chainId: 31337,
-    blockExplorer: "",
-    rpcUrl: "http://" + window.location.hostname + ":8545",
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: [
+      "http://" + window.location.hostname + ":8545"
+    ],
   },
   mainnet: {
     name: "mainnet",
     color: "#ff8b9e",
     chainId: 1,
-    rpcUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
-    blockExplorer: "https://etherscan.io/",
+    rpcUrls: `https://mainnet.infura.io/v3/${INFURA_ID}`,
+    blockExplorerUrls: [
+      "https://etherscan.io/"
+    ],
   },
   kovan: {
     name: "kovan",
     color: "#7003DD",
     chainId: 42,
-    rpcUrl: `https://kovan.infura.io/v3/${INFURA_ID}`,
-    blockExplorer: "https://kovan.etherscan.io/",
+    rpcUrls: `https://kovan.infura.io/v3/${INFURA_ID}`,
+    blockExplorerUrls: [
+      "https://kovan.etherscan.io/"
+    ],
     faucet: "https://gitter.im/kovan-testnet/faucet", // https://faucet.kovan.network/
   },
   localArbitrum: {
     name: "localArbitrum",
     color: "#50a0ea",
     chainId: 153869338190755,
-    blockExplorer: "",
-    rpcUrl: `http://localhost:8547`,
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: `http://localhost:8547`,
   },
   localArbitrumL1: {
     name: "localArbitrumL1",
     color: "#50a0ea",
     chainId: 44010,
-    blockExplorer: "",
-    rpcUrl: `http://localhost:7545`,
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: `http://localhost:7545`,
   },
   rinkebyArbitrum: {
     name: "Arbitrum Testnet",
     color: "#50a0ea",
     chainId: 421611,
-    blockExplorer: "https://rinkeby-explorer.arbitrum.io/#/",
-    rpcUrl: `https://rinkeby.arbitrum.io/rpc`,
+    blockExplorerUrls: [
+      "https://rinkeby-explorer.arbitrum.io/#/"
+    ],
+    rpcUrls: `https://rinkeby.arbitrum.io/rpc`,
   },
   arbitrum: {
     name: "Arbitrum",
     color: "#50a0ea",
     chainId: 42161,
-    blockExplorer: "https://explorer.arbitrum.io/#/",
-    rpcUrl: `https://arb1.arbitrum.io/rpc`,
+    blockExplorerUrls: [
+      "https://explorer.arbitrum.io/#/"
+    ],
+    rpcUrls: `https://arb1.arbitrum.io/rpc`,
     gasPrice: 0,
   },
   localOptimismL1: {
     name: "localOptimismL1",
     color: "#f01a37",
     chainId: 31337,
-    blockExplorer: "",
-    rpcUrl: "http://" + window.location.hostname + ":9545",
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: [
+      "http://" + window.location.hostname + ":9545"
+    ],
   },
   localOptimism: {
     name: "localOptimism",
     color: "#f01a37",
     chainId: 420,
-    blockExplorer: "",
-    rpcUrl: "http://" + window.location.hostname + ":8545",
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: [
+      "http://" + window.location.hostname + ":8545"
+    ],
     gasPrice: 0,
   },
   kovanOptimism: {
     name: "kovanOptimism",
     color: "#f01a37",
     chainId: 69,
-    blockExplorer: "https://kovan-optimistic.etherscan.io/",
-    rpcUrl: `https://kovan.optimism.io`,
+    blockExplorerUrls: [
+      "https://kovan-optimistic.etherscan.io/"
+    ],
+    rpcUrls: `https://kovan.optimism.io`,
     gasPrice: 0,
   },
   optimism: {
     name: "optimism",
     color: "#f01a37",
     chainId: 10,
-    blockExplorer: "https://optimistic.etherscan.io/",
-    rpcUrl: `https://mainnet.optimism.io`,
+    blockExplorerUrls: [
+      "https://optimistic.etherscan.io/"
+    ],
+    rpcUrls: `https://mainnet.optimism.io`,
   },
   localAvalanche: {
     name: "localAvalanche",
     color: "#666666",
     chainId: 43112,
-    blockExplorer: "",
-    rpcUrl: `http://localhost:9650/ext/bc/C/rpc`,
+    blockExplorerUrls: [
+      ""
+    ],
+    rpcUrls: `http://localhost:9650/ext/bc/C/rpc`,
     gasPrice: 225000000000,
   },
   fujiAvalanche: {
     name: "fujiAvalanche",
     color: "#666666",
     chainId: 43113,
-    blockExplorer: "https://cchain.explorer.avax-test.network/",
-    rpcUrl: `https://api.avax-test.network/ext/bc/C/rpc`,
+    blockExplorerUrls: [
+      "https://cchain.explorer.avax-test.network/"
+    ],
+    rpcUrls: `https://api.avax-test.network/ext/bc/C/rpc`,
     gasPrice: 225000000000,
   },
   mainnetAvalanche: {
     name: "mainnetAvalanche",
     color: "#666666",
     chainId: 43114,
-    blockExplorer: "https://cchain.explorer.avax.network/",
-    rpcUrl: `https://api.avax.network/ext/bc/C/rpc`,
+    blockExplorerUrls: [
+      "https://cchain.explorer.avax.network/"
+    ],
+    rpcUrls: `https://api.avax.network/ext/bc/C/rpc`,
     gasPrice: 225000000000,
   },
   testnetHarmony: {
     name: "Harmony Testnet",
     color: "#00b0ef",
     chainId: 1666700000,
-    blockExplorer: "https://explorer.pops.one/",
-    rpcUrl: `https://api.s0.b.hmny.io`,
+    blockExplorerUrls: [
+      "https://explorer.pops.one/"
+    ],
+    rpcUrls: `https://api.s0.b.hmny.io`,
     gasPrice: 1000000000,
   },
   mainnetHarmony: {
     name: "Harmony Mainnet",
     color: "#00b0ef",
     chainId: 1666600000,
-    blockExplorer: "https://explorer.harmony.one/",
-    rpcUrl: `https://api.harmony.one`,
+    blockExplorerUrls: [
+      "https://explorer.harmony.one/"
+    ],
+    rpcUrls: `https://api.harmony.one`,
     gasPrice: 1000000000,
   },
   */
