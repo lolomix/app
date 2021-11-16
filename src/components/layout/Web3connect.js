@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { withTranslation } from "react-i18next";
 import Blockies from "react-blockies";
-import { useWeb3React } from "@web3-react/core";
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 //import { useSnackbar } from "notistack";
 //mui
 import Tooltip from "@mui/material/Tooltip";
@@ -81,6 +81,12 @@ function Web3connect(props) {
    * @returns {boolean}
    */
   const isCurrentConnector = (connectorkey) => connectorsList[connectorkey]?.connector === connector;
+
+  /**
+   * @param error
+   * @returns {boolean}
+   */
+  const isUnsupportedNetwork = (error) => error instanceof UnsupportedChainIdError
 
   /**
    * Activates a new connector by its key
@@ -274,14 +280,14 @@ function Web3connect(props) {
                       <LoadingButton
                         fullWidth
                         disableElevation
-                        variant={isCurrentConnector(key) ? "contained" : "outlined"}
+                        variant={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? "contained" : "outlined"}
                         size="large"
                         color={isCurrentConnector(key) ? "success" : "primary"}
-                        startIcon={isCurrentConnector(key) ? <CheckIcon /> : null}
+                        startIcon={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? <CheckIcon /> : null}
                         loading={handleConnectorButtonLoadingProp(key)}
                         disabled={handleConnectorButtonDisabledProp(key)}
                         onClick={() => handleConnectorButtonClick(key)}>
-                        {connectorsList[key].name}
+                        {(isCurrentConnector(key) && isUnsupportedNetwork(error)) ? 'Switch to Polygon' : connectorsList[key].name}
                         {connectorsList[key].soon && (
                           <Typography pl={0.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
                             soon
