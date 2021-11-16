@@ -1,7 +1,7 @@
 // material-ui
 import buttonClasses from "@mui/material/Button/buttonClasses";
 import { createTheme } from "@mui/material/styles";
-import { alpha } from "@mui/material";
+import { alpha, darken, lighten } from "@mui/material";
 
 // images
 import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
@@ -13,7 +13,6 @@ const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
 const darkSkyBlue = "rgb(138, 193, 210)";
 const culturedWhite = "rgba(250, 250, 250, 1)";
-const cadetBlue = "rgba(181, 186, 195, 1)";
 
 // generators
 const shadow = (px, rgb) => `0.3px ${px}px 0.4px 0px ${alpha(rgb, 0.9)}`;
@@ -22,14 +21,15 @@ export let theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: ming
+      main: ming,
     },
     secondary: {
-      main: cafeNoir
+      main: cafeNoir,
     },
     tertiary: {
       main: culturedWhite,
-      shadow: cadetBlue,
+      light: lighten(culturedWhite, 0.3),
+      dark: darken(culturedWhite, 0.3),
       contrastText: cafeNoir,
     },
     sunGlow: {
@@ -195,11 +195,20 @@ theme = createTheme(theme, {
           }
         },
         {
+          props: { color: "primary", variant: "contained" },
+          style: {
+            boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
+            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
+              boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
+            },
+          },
+        },
+        {
           props: { color: "tertiary", variant: "contained" },
           style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
             [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.shadow),
+              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
             },
           },
         },

@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CheckIcon from "@mui/icons-material/Check";
 import WarningIcon from "@mui/icons-material/Warning";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //custom
 import connectorsList from "../../web3/connectorsList";
 import { getErrorMessage } from "../../web3/errors";
@@ -133,8 +134,13 @@ function Web3connect(props) {
     <Fragment>
       {!account ? (
         <Tooltip title={t("base.connectToYourWallet")}>
-          <Button elongatedwidth="true" color="secondary" variant="contained" onClick={loadWeb3Modal}>
-            {t("base.connect")}
+          <Button elongatedwidth="true"
+                  color="primary"
+                  variant="contained"
+                  onClick={loadWeb3Modal}
+                  startIcon={<AccountBalanceWalletIcon />}
+          >
+            {t("base.connectWallet")}
           </Button>
         </Tooltip>
       ) : (
