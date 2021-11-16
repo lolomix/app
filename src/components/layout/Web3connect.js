@@ -287,7 +287,7 @@ function Web3connect(props) {
                         loading={handleConnectorButtonLoadingProp(key)}
                         disabled={handleConnectorButtonDisabledProp(key)}
                         onClick={() => handleConnectorButtonClick(key)}>
-                        {(isCurrentConnector(key) && isUnsupportedNetwork(error)) ? 'Switch to Polygon' : connectorsList[key].name}
+                        {(isCurrentConnector(key) && isUnsupportedNetwork(error)) ? `Switch to ${NETWORKS[TARGET_CHAIN].name}` : connectorsList[key].name}
                         {connectorsList[key].soon && (
                           <Typography pl={0.5} color="purple" fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
                             soon
