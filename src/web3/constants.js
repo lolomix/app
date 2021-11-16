@@ -15,6 +15,11 @@ export const NETWORKS = {
     rpcUrl: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorer: "https://rinkeby.etherscan.io/",
+    nativeCurrency: {
+      "name": "TEST ETHER",
+      "symbol": "TEST ETHER",
+      "decimals": 18
+    },
     nativeToken: "TEST ETHER",
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
@@ -27,6 +32,11 @@ export const NETWORKS = {
     rpcUrl: "https://rpc-mainnet.maticvigil.com",
     faucet: "https://faucet.matic.network/",
     blockExplorer: "https://polygonscan.com/",
+    nativeCurrency: {
+      "name": "MATIC",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
     nativeToken: "MATIC",
     contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
     contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",
