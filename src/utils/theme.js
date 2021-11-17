@@ -78,7 +78,7 @@ export let theme = createTheme({
     shadow(6, brownSugar)
   ],
   shape: {
-    borderRadius: 11,
+    borderRadius: 20,
   },
   typography: {
     fontFamily: "'Balsamiq Sans', 'Helvetica', 'Arial', sans-serif",
