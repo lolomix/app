@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { convertToDesiredIpfsURL, isValidURL } from '../utils/url'
-import placeholder from '../assets/logo.png'
+import placeholder from '../assets/components/web3/nft-card/placeholder.png'
 
 /**
  * @param uri
@@ -47,7 +47,7 @@ export function useNFTWithMetadata(tokenAbi, tokenAddress, tokenID) {
         let tokenURI = await contract.methods.tokenURI(tokenID).call({ from: account })
 
         // todo: remove this hard coded ipfs link
-        if (1==1 || ! isValidURL(tokenURI)) {
+        if (true || ! isValidURL(tokenURI)) {
           tokenURI = `ipfs://QmZSN6YAZFEj4nPM9szfB49QudyvgZA8GN9Qudv65495BU/${tokenID}`;
         }
 
