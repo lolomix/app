@@ -15,6 +15,7 @@ import DripDivider from '../../components/layout/DripDivider'
 import Blockies from 'react-blockies'
 import NFT from '../../components/web3/NFT'
 import FAQ from '../../components/common/FAQ'
+import { Helmet } from 'react-helmet'
 
 /**
  * List of FAQ items to display.
@@ -37,6 +38,9 @@ function Collection () {
 
   return (
     <>
+      <Helmet>
+        <title>Collection</title>
+      </Helmet>
       <Box id="collection" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }} >
         <Container as="section">
           <Grid container spacing={4}>

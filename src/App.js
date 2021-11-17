@@ -19,6 +19,7 @@ import ServiceWorkerWrapper from './components/ServiceWorkerWrapper'
 import { Container, Box } from '@mui/material'
 import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
+import { Helmet } from 'react-helmet'
 // pages (lazy loading)
 const Main = lazy(() => import('./views/Main/Main'))
 // const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
@@ -67,6 +68,9 @@ function App () {
                 blue[500] + ')',
             },
           }}>
+          <Helmet titleTemplate="CryptoChefs | %s">
+            <title>Create Crypto Recipes and Start Earning!</title>
+          </Helmet>
           <CssBaseline/>
           <Container maxWidth="xl" disableGutters={true} >
             <Box sx={{ backgroundColor: 'background.default', boxShadow: 4 }}>

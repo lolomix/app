@@ -1,5 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
+import { Helmet } from "react-helmet";
 // material-ui
 import { Box, Container, Grid } from '@mui/material'
 // custom
@@ -33,6 +34,9 @@ function Store ({ t }) {
 
   return (
     <>
+      <Helmet>
+        <title>{t('store.title')}</title>
+      </Helmet>
       <Box id="store" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
         <Container as="section">
           <Headline title={t('store.title')}/>
