@@ -15,7 +15,9 @@ class Account extends Component {
     return (
       <Box pb={10}>
         <Container as="section">
-          <Headline color="white" title={t("internal.title")} />
+          <Headline color="white">
+            {t("internal.title")}
+          </Headline>
           <Grid container spacing={2}>
             <Grid item sm={12} md={6}>
               <Typography variant="h3">Your balance</Typography>

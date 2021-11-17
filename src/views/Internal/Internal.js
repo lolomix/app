@@ -106,7 +106,9 @@ function Internal({ t }) {
   return (
     <Box pb={10}>
       <Container as="section">
-        <Headline color="white" title={t("internal.title")} />
+        <Headline color="white">
+          {t("internal.title")}
+        </Headline>
         {web3ready ? ( // && isAdmin ? (
           <Grid container spacing={2}>
             <Grid item sm={12} md={6}>

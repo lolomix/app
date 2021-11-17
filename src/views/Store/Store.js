@@ -39,7 +39,9 @@ function Store ({ t }) {
       </Helmet>
       <Box id="store" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
         <Container as="section">
-          <Headline title={t('store.title')}/>
+          <Headline>
+            {t('store.title')}
+          </Headline>
           <Grid container
                 spacing={3}
                 justifyContent="center"
@@ -66,7 +68,9 @@ function Store ({ t }) {
       <Box id="faq" pb={10} sx={{ backgroundColor: 'secondary.main' }}>
         <DripDivider variant={2} color="sunGlow.main"/>
         <Container as="section">
-          <Headline variant="h2" color="secondary.contrastText" title="FAQ"/>
+          <Headline variant="h2" color="secondary.contrastText">
+            FAQ
+          </Headline>
           <Grid container
                 justifyContent="center"
                 alignItems="center"
