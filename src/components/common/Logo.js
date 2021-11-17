@@ -20,7 +20,7 @@ function Logo ({ t }) {
              aria-label={t("base.titleTooltip")}
     >
         <Button disableRipple component={Link} to='/'>
-          <Avatar sx={{ height: "65px", width: "65px"}} alt="CryptoChefs logo" src={logo} />
+          <Avatar sx={{ height: "65px", width: "65px"}} variant="rounded" alt="CryptoChefs logo" src={logo} />
         </Button>
     </Tooltip>
   );
