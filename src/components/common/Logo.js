@@ -6,7 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 // assets
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.png";
 
 /**
  * @param t
