@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { convertToDesiredIpfsURL, isValidURL } from '../utils/url'
+import placeholder from '../assets/logo.png'
 
 /**
  * @param uri
@@ -43,22 +44,19 @@ export function useNFTWithMetadata(tokenAbi, tokenAddress, tokenID) {
       try {
         const contract = new library.eth.Contract(tokenAbi, tokenAddress);
 
-        let tokenURI = await contract.methods.tokenURI(180).call({ from: account })
+        let tokenURI = await contract.methods.tokenURI(tokenID).call({ from: account })
 
-
-        // todo: remove hard coded ipfs link
-        if (! isValidURL(tokenURI)) {
-          tokenURI = `ipfs://QmQ89bTT7P9KqNWQw3n9f8zrA4xmDKGpFDZYJvoVex8ZsN/${tokenID}`;
+        // todo: remove this hard coded ipfs link
+        if (1==1 || ! isValidURL(tokenURI)) {
+          tokenURI = `ipfs://QmZSN6YAZFEj4nPM9szfB49QudyvgZA8GN9Qudv65495BU/${tokenID}`;
         }
+
         let metadata = await fetchMetadataByTokenURI(tokenURI)
 
-        // todo: remove hard coded ipfs link
-        metadata.image = `ipfs://QmaPevfa3tugsoGdGYwPYaH8FYBDiJoVrDaDKe2er8Vi8L/${tokenID}.png`
-
-        if (metadata.image) {
+        if (metadata.image && isValidURL(metadata.image)) {
           metadata.image = convertToDesiredIpfsURL(metadata.image)
         } else {
-          metadata.image = "https://placehold.it/600x600"
+          metadata.image = placeholder
         }
 
         setNFT({
