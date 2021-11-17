@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { withTranslation } from 'react-i18next'
 // material-ui
 import {
   Box,
-  Chip,
   Container,
   Grid
 } from '@mui/material'
 
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
-import NFT from '../../components/web3/NFT'
+import NFTCard from '../../components/web3/NFTCard'
 import FAQ from '../../components/common/FAQ'
 import { Helmet } from 'react-helmet'
+import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
+import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 
 /**
  * List of FAQ items to display.
@@ -20,9 +21,10 @@ import { Helmet } from 'react-helmet'
  */
 const faqKeys = ["WhatIsAroma", "WhatIsACryptochefNFT", "WhatIsARecipe", "WhatIsTheBuffet", "WhyDoIHaveToLockUpAroma"];
 
-function Collection ({t}) {
+function Collection () {
   // todo: remove hard-coded ids
-  const nfts = [1, 2, 3, 4, 5, 6, 9999]
+  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
+  const nfts = [184, 195, 180, 196, 197]
 
   return (
     <>
@@ -37,16 +39,18 @@ function Collection ({t}) {
           <Headline variant="h5" mt={0}>
             Total CHEFs Owned: 5
           </Headline>
-          <Grid container
-                spacing={3}
-                justifyContent="center"
-                alignItems="stretch"
-          >
-            {nfts.map((value) => (
-              <Grid key={value} item sm={4}>
-                <NFT tokenID={value}/>
-              </Grid>
-            ))}
+          <Grid container justifyContent="center" alignItems="stretch">
+            <Grid item md={12} lg={10} container spacing={5}>
+              {nfts.map((tokenID, index) => (
+                <Grid key={tokenID} item xs={12} sm={6} md={4}>
+                  <NFTCard tokenAbi={tokenAbi}
+                           tokenAddress={tokenAddress}
+                           tokenID={tokenID}
+                           lazyLoad={index > 2}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </Box>
