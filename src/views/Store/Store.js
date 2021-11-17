@@ -55,7 +55,7 @@ function Store ({ t }) {
                 </Grid>
               </>
             ):(
-              <Grid item xs={10} sm={7} md={5} lg={4}>
+              <Grid item xs={10} sm={7} md={5} lg={4} mb={21}>
                 <ConnectionErrorCard error={error} elevation={3}/>
               </Grid>
             )}
