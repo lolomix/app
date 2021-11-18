@@ -23,7 +23,7 @@ import { Helmet } from 'react-helmet'
 // pages (lazy loading)
 const Main = lazy(() => import('./views/Main/Main'))
 // const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
-const Store = lazy(() => import('./views/Store/Store'))
+const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
 const Buffet = lazy(() => import('./views/Buffet/Buffet'))
 const Internal = lazy(() => import('./views/Internal/Internal'))
@@ -79,10 +79,10 @@ function App () {
               <ServiceWorkerWrapper/>
               <Suspense fallback={<LoadingSpinner/>}>
                 <Routes>
-                  <Route path="/" element={<Store/>}/>
+                  <Route path="/" element={<Market/>}/>
                   <Route path="/start" element={<Main/>}/>
                   <Route path="/buffet" element={<Buffet/>}/>
-                  <Route path="/market" element={<Store/>}/>
+                  <Route path="/market" element={<Market/>}/>
                   <Route path="/kitchen" element={<Kitchen/>}/>
                   <Route path="/internal" element={<Internal/>}/>
                   <Route path="/collection" element={<Collection/>}/>

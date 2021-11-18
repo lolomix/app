@@ -29,18 +29,18 @@ const faqKeys = [
  * @returns {JSX.Element}
  * @constructor
  */
-function Store ({ t }) {
+function Market ({ t }) {
   const { active, error } = useWeb3React();
 
   return (
     <>
       <Helmet>
-        <title>{t('store.title')}</title>
+        <title>{t('market.title')}</title>
       </Helmet>
-      <Box id="store" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
+      <Box id="market" pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
         <Container as="section">
           <Headline>
-            {t('store.title')}
+            {t('market.title')}
           </Headline>
           <Grid container
                 spacing={3}
@@ -86,4 +86,4 @@ function Store ({ t }) {
   )
 }
 
-export default withTranslation()(Store)
+export default withTranslation()(Market)

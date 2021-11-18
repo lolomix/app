@@ -74,13 +74,13 @@ class Main extends Component {
               <Card>
                 <CardContent>
                   <Typography gutterBottom variant="h5">
-                    Go to the Store
+                    Go to the Market
                   </Typography>
                   <Typography gutterBottom variant="body2">
-                    Go to the store to get some AROMA.
+                    Go to the Market to get some AROMA.
                   </Typography>
                   <Button component={Link} to="/market" variant="contained">
-                    Go to Store
+                    Go to Market
                   </Button>
                 </CardContent>
               </Card>
@@ -94,7 +94,7 @@ class Main extends Component {
                   <Typography gutterBottom variant="body2">
                     In the current NFT sale round, 46 out of 100 CryptoChefs NFTs have been minted.{" "}
                   </Typography>
-                  <Button component={Link} to="/store" variant="contained">
+                  <Button component={Link} to="/market" variant="contained">
                     Get NFT now
                   </Button>
                 </CardContent>

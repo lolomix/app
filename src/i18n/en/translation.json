@@ -66,7 +66,7 @@
     "PersistentStorageSwitch": "Switch to persistent",
     "PersistentStorageStatus": "You are using persisted storage."
   },
-  "store": {
+  "market": {
     "title": "Market",
     "buyAroma": {
       "fieldLabel": "AROMA",
@@ -109,7 +109,7 @@
       "pricePerCryptoCHEF": "Price Per CHEF",
       "buyButton": "Buy a CHEF"
     },
-    "StoreSteps": {
+    "MarketSteps": {
       "steps": {
         "buyAroma": "Nice, seems like you are early! Get your hands on some AROMA to start your journey becoming one of our first Chefs!",
         "buyCHEF": "Wow! I can smell tantalizing AROMAs in the air. These can bring magical CHEFS to life! Approve and purchase a CHEF before it's too late!",

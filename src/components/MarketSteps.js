@@ -9,22 +9,22 @@ import CurrencyAROMAIcon from './icons/CurrencyAROMAIcon'
 import ChefApronIcon from './icons/ChefApronIcon'
 import { getErrorMessage} from "../web3/errors";
 
-function StoreSteps({ t, step }) {
+function MarketSteps({ t, step }) {
 
   const { error } = useWeb3React();
 
   const stepMap = {
     "buy-aroma": {
       progress: 15,
-      text: t('components.StoreSteps.steps.buyAroma')
+      text: t('components.MarketSteps.steps.buyAroma')
     },
     "buy-chef": {
       progress: 50,
-      text: t('components.StoreSteps.steps.buyCHEF')
+      text: t('components.MarketSteps.steps.buyCHEF')
     },
     "wait-for-reveal": {
       progress: 85,
-      text: t('components.StoreSteps.steps.waitForReveal')
+      text: t('components.MarketSteps.steps.waitForReveal')
     }
   }
 
@@ -41,7 +41,7 @@ function StoreSteps({ t, step }) {
               </Grid>
               <Grid item>
                 <Typography px={1}>
-                  {t('components.StoreSteps.buyAromaTokens')}
+                  {t('components.MarketSteps.buyAromaTokens')}
                 </Typography>
               </Grid>
             </Grid>
@@ -51,7 +51,7 @@ function StoreSteps({ t, step }) {
               </Grid>
               <Grid item>
                 <Typography px={1}>
-                  {t('components.StoreSteps.buyACHEF')}
+                  {t('components.MarketSteps.buyACHEF')}
                 </Typography>
               </Grid>
             </Grid>
@@ -61,7 +61,7 @@ function StoreSteps({ t, step }) {
               </Grid>
               <Grid item>
                 <Typography px={1}>
-                  {t('components.StoreSteps.waitForReveal')}
+                  {t('components.MarketSteps.waitForReveal')}
                 </Typography>
               </Grid>
             </Grid>
@@ -88,12 +88,12 @@ function StoreSteps({ t, step }) {
   )
 }
 
-StoreSteps.defaultProps = {
+MarketSteps.defaultProps = {
   step: 'buy-aroma'
 }
 
-StoreSteps.propTypes = {
+MarketSteps.propTypes = {
   step: PropTypes.string
 }
 
-export default withTranslation()(StoreSteps)
+export default withTranslation()(MarketSteps)
