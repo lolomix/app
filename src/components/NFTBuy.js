@@ -3,7 +3,15 @@ import { withTranslation } from "react-i18next";
 import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 // material-ui
-import { Card, CardContent, DialogTitle, Divider, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  DialogTitle,
+  Divider,
+  Grid, lighten,
+  Paper,
+  Typography,
+} from '@mui/material'
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -17,6 +25,7 @@ import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
 import { getErrorMessage } from "../web3/errors";
+import { theme } from '../utils/theme'
 
 function NFTBuy({ t }) {
   const { account, library, error, active } = useWeb3React();
@@ -114,7 +123,7 @@ function NFTBuy({ t }) {
             <Typography variant="h4" component="h2" align="center" mb={4}>
               {t("components.NFTBuy.title")}
             </Typography>
-            <Grid container spacing={6} justifyContent="center" alignItems="stretch">
+            <Grid container spacing={4} justifyContent="center" alignItems="stretch">
               <Grid item xs={12} md={6}>
                 <Typography gutterBottom variant="h5" component="div" textAlign="center" mt={3} sx={{ textTransform: "uppercase" }}>
                   {t("components.NFTBuy.remaining")}
@@ -157,26 +166,24 @@ function NFTBuy({ t }) {
                 </Grid>
               </Grid>
               <Grid item sm={12} md={6} spacing={4} container justifyContent="center">
-                <Grid item xs={8}>
-                  <Card
-                    fullheight="true"
-                    elevation={2}
-                    sx={{
-                      maxWidth: "280px",
-                      paddingTop: "16px",
-                      paddingBottom: "16px",
-                      backgroundColor: "white",
-                    }}>
-                    <CardContent>
-                      <Grid container justifyContent="center" alignItems="center">
-                        <Grid item>
-                          <ChefSilhouetteIcon sx={{ fontSize: 205 }} />
-                        </Grid>
+                <Grid item xs={12}>
+                  <Paper elevation={0}
+                         sx={{
+                           backgroundColor: lighten(theme.palette.primary.main, 0.91)
+                         }}
+                  >
+                    <Grid container justifyContent="center" alignItems="center" minHeight="250px">
+                      <Grid item xs={6}>
+                        <Card elevation={1}>
+                          <CardContent>
+                            <ChefSilhouetteIcon sx={{ width:"100%", height:"auto" }} />
+                          </CardContent>
+                        </Card>
                       </Grid>
-                    </CardContent>
-                  </Card>
+                    </Grid>
+                  </Paper>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                   <LoadingButton size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
                     {t("components.NFTBuy.buyButton")}
                   </LoadingButton>
