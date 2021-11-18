@@ -15,7 +15,7 @@ import { Helmet } from 'react-helmet'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
-import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
+import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
 
 /**
  * List of FAQ items to display.
@@ -65,7 +65,7 @@ function Collection () {
               </Grid>
             ) : (
               <Grid item md={6}>
-                <ConnectionErrorCard/>
+                <NoNFTNotificationCard/>
               </Grid>
             )}
           </Grid>
