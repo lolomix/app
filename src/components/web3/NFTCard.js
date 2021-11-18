@@ -18,7 +18,8 @@ import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
  */
 function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
   const NFT = useNFTWithMetadata(tokenAbi, tokenAddress, tokenID)
-  const baseName = NFT?.metadata?.basename ?? "Hipster"
+
+  const lore = NFT?.metadata?.attributes?.find(attr => attr.trait_type == 'Lore')?.value ?? 'Unrevealed'
   const image = NFT?.metadata?.image ?? placeholder
 
   return (
@@ -40,7 +41,7 @@ function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
         </Box>
         {/* todo: Retrieve base chef name from smart contract */}
         <Typography textAlign="center" variant="h5" mt={2}>
-          {baseName}
+          {lore}
         </Typography>
         <Typography textAlign="center" variant="h6" color="primary">
           CHEF #{tokenID}
