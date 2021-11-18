@@ -23,7 +23,7 @@ function NoNFTNotificationCard (props) {
                  style={{ maxWidth: '182px' }}
             />
             <Typography mt={3}>
-              It seems that you do not own any CHEFs. <Link to="/store">Visit our Store</Link> to dive into our delicious word.
+              It seems that you do not own any CHEFs. <Link to="/market">Visit our Store</Link> to dive into our delicious word.
             </Typography>
           </Grid>
         </Grid>

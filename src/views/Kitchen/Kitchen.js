@@ -21,7 +21,7 @@ class Kitchen extends Component {
         <Grid container spacing={2}>
           <Grid item sm={12} md={6}>
             <Card>
-              <CardActionArea component={Link} to="/store">
+              <CardActionArea component={Link} to="/market">
                 <CardContent>
                   <Typography gutterBottom variant="h5">
                     Become a chef

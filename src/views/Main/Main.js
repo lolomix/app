@@ -79,7 +79,7 @@ class Main extends Component {
                   <Typography gutterBottom variant="body2">
                     Go to the store to get some AROMA.
                   </Typography>
-                  <Button component={Link} to="/store" variant="contained">
+                  <Button component={Link} to="/market" variant="contained">
                     Go to Store
                   </Button>
                 </CardContent>

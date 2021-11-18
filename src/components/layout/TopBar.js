@@ -32,10 +32,10 @@ import LogoText from '../common/LogoText'
 
 const links = [
   {
-    name: 'Store',
+    name: 'Market',
     visible: true,
     disabled: false,
-    path: '/store',
+    path: '/market',
     description: 'Buy Aroma and CHEF',
   },
   {

@@ -67,7 +67,7 @@
     "PersistentStorageStatus": "You are using persisted storage."
   },
   "store": {
-    "title": "Store",
+    "title": "Market",
     "buyAroma": {
       "fieldLabel": "AROMA",
       "fieldHelper": "Enter amount of AROMA to buy",
