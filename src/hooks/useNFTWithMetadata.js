@@ -48,7 +48,7 @@ export function useNFTWithMetadata(tokenAbi, tokenAddress, tokenID) {
 
         // todo: remove this hard coded ipfs link
         if (true || ! isValidURL(tokenURI)) {
-          tokenURI = `ipfs://QmZSN6YAZFEj4nPM9szfB49QudyvgZA8GN9Qudv65495BU/${tokenID}`;
+          tokenURI = `ipfs://QmXj4xmXe9wHw3GTkCXHs9ihto3hgNhLy9Eh9sFsBEv1Nt/${tokenID}`;
         }
 
         let metadata = await fetchMetadataByTokenURI(tokenURI)
