@@ -203,13 +203,13 @@ function NFTBuy({ t }) {
         )}
       </Card>
       <Dialog onClose={handleBuyDialog} open={buyDialog} keepMounted maxWidth="md">
-        <DialogTitle>Buy CHEF</DialogTitle>
+        <DialogTitle>Buy a CHEF</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You can only buy CHEF NFT with AROMA.
+            You can only buy a CHEF NFT with AROMA.
           </Typography>
           <Typography p={1} variant="body2" gutterBottom>
-            1. Approve AROMA token in your wallet.
+            1. Approve AROMA token to give our app permission.
             <br />
             2. Spend AROMA token to buy the CHEF NFT.
           </Typography>
@@ -230,7 +230,7 @@ function NFTBuy({ t }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You bought a CryptoChef NFT. Click on your account (top right) to see the ID of your Chef.
+            You bought a CryptoChefs NFT. Click on your account (top right) to see the ID of your CHEF.
           </Typography>
           <Typography variant="body1" gutterBottom>
             Please check our Discord server to learn when the NFTs will be revealed.

@@ -181,10 +181,10 @@ function CurrencyExchange({ t, enableCurrencySwitch }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You acquired some AROMA tokens. Check your balance in your account (top right)
+            You acquired some AROMA tokens. Check the balance in your account (top right)
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Now go on and get your CryptoChef NFT!
+            Now go on and get your CryptoChefs NFT!
           </Typography>
         </DialogContent>
         <DialogActions>
