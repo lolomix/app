@@ -5,7 +5,7 @@ import { Card, CardContent, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 // custom
 import { getErrorMessage } from '../../web3/errors'
-import bg from '../../assets/components/common/please-connect/bg@2x.png'
+import bg from '../../assets/components/common/connection-error-card/bg@2x.png'
 
 /**
  * @param props
