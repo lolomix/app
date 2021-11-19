@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // material-ui
-import { Card, CardContent, Grid, Link } from '@mui/material'
+import { Card, CardContent, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 // custom
 import chefs from '../../assets/components/common/no-nft-notification-card/chefs@2x.png'
