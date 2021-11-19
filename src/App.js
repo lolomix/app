@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 import { SnackbarProvider } from 'notistack'
 import { Web3ReactProvider } from '@web3-react/core'
@@ -79,7 +79,7 @@ function App () {
               <ServiceWorkerWrapper/>
               <Suspense fallback={<LoadingSpinner/>}>
                 <Routes>
-                  <Route path="/" element={<Main/>}/>
+                  <Route path="/" element={<Navigate replace to="/market" />}/>
                   <Route path="/buffet" element={<Buffet/>}/>
                   <Route path="/market" element={<Market/>}/>
                   <Route path="/kitchen" element={<Kitchen/>}/>
