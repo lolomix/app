@@ -14,8 +14,8 @@ import FAQ from '../../components/common/FAQ'
 import { Helmet } from 'react-helmet'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
 import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
+import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
 
 /**
  * List of FAQ items to display.
@@ -54,12 +54,17 @@ function Collection () {
             {nfts.length ? (
               <Grid item md={12} lg={10} container spacing={5}>
                 {nfts.map((tokenID, index) => (
-                  <Grid key={tokenID} item xs={12} sm={6} md={4}>
-                    <NFTCard tokenAbi={tokenAbi}
-                             tokenAddress={tokenAddress}
-                             tokenID={tokenID}
-                             lazyLoad={index > 2}
-                    />
+                  <Grid key={tokenID} item sm={12} md={6}>
+                    <a target="_blank"
+                       href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
+                       style={{ textDecoration: "none" }}
+                    >
+                      <NFTCard tokenAbi={tokenAbi}
+                               tokenAddress={tokenAddress}
+                               tokenID={tokenID}
+                               lazyLoad={index > 2}
+                      />
+                    </a>
                   </Grid>
                 ))}
               </Grid>
