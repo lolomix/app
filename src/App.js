@@ -74,7 +74,7 @@ function App () {
           <CssBaseline/>
           <Container maxWidth="xl" disableGutters={true} >
             <Box sx={{ backgroundColor: 'background.default', boxShadow: 4 }}>
-              {process.env.REACT_APP_CHAIN !== 'matic' && <AnnouncementBar/>}
+              <AnnouncementBar/>
               <TopBar/>
               <ServiceWorkerWrapper/>
               <Suspense fallback={<LoadingSpinner/>}>
