@@ -79,8 +79,7 @@ function App () {
               <ServiceWorkerWrapper/>
               <Suspense fallback={<LoadingSpinner/>}>
                 <Routes>
-                  <Route path="/" element={<Market/>}/>
-                  <Route path="/start" element={<Main/>}/>
+                  <Route path="/" element={<Main/>}/>
                   <Route path="/buffet" element={<Buffet/>}/>
                   <Route path="/market" element={<Market/>}/>
                   <Route path="/kitchen" element={<Kitchen/>}/>
