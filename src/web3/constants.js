@@ -20,11 +20,11 @@ export const NETWORKS = {
       "https://rinkeby.etherscan.io/"
     ],
     nativeCurrency: {
-      "name": "TEST ETHER",
-      "symbol": "TEST ETHER",
+      "name": "ETH",
+      "symbol": "ETH",
       "decimals": 18
     },
-    nativeToken: "TEST ETHER",
+    nativeToken: "ETH",
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
