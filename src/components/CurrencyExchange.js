@@ -5,8 +5,20 @@ import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 // material-ui
 import { LoadingButton } from "@mui/lab";
-import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
-import { Card, CardContent, Typography, Stack, Divider, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { KeyboardArrowDown, ShowChart } from '@mui/icons-material'
+import {
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  Divider,
+  Chip,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material'
 // custom
 import CurrencyInputField from "./form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
@@ -15,33 +27,25 @@ import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../utils/formatters";
 import { getErrorMessage } from "../web3/errors";
+import { useTokenPrice } from '../hooks/useTokenPrice'
+import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
 
-function CurrencyExchange({ t, enableCurrencySwitch }) {
+/**
+ * @param t
+ * @param enableCurrencySwitch
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const { account, library, error, active } = useWeb3React();
-  const [price, setPrice] = React.useState();
+  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
+  const price = useTokenPrice(tokenAbi, tokenAddress);
   const [successDialog, setSuccessDialog] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleSuccessDialog = () => {
     setSuccessDialog(!successDialog);
   };
-
-  React.useEffect(() => {
-    if (!!account && !!library) {
-      async function loadPrice() {
-        try {
-          const contractMaster = NETWORKS[TARGET_CHAIN].contractMaster;
-          const contract = new library.eth.Contract(abi, contractMaster);
-          const price = await contract.methods.getAROMAPrice().call();
-          setPrice(price);
-          //console.log(price);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      loadPrice();
-    }
-  }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
   /**
    * Definition of the currency input field amounts/values
@@ -197,10 +201,9 @@ function CurrencyExchange({ t, enableCurrencySwitch }) {
   );
 }
 
-CurrencyExchange.defaultProps = {
-  enableCurrencySwitch: false,
-};
-
+/**
+ * @type {{enableCurrencySwitch: Requireable<boolean>}}
+ */
 CurrencyExchange.propTypes = {
   enableCurrencySwitch: PropTypes.bool,
 };
