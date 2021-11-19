@@ -56,6 +56,7 @@ function Collection () {
                 {nfts.map((tokenID, index) => (
                   <Grid key={tokenID} item sm={12} md={6}>
                     <a target="_blank"
+                       rel="noreferrer nofollow"
                        href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
                        style={{ textDecoration: "none" }}
                     >
