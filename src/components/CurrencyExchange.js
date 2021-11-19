@@ -160,7 +160,7 @@ function CurrencyExchange({ t, enableCurrencySwitch }) {
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
-              label={"For 1" + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(AROMA_DECIMALS / price) + " AROMA tokens."}
+              label={"For 1 " + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(AROMA_DECIMALS / price) + " AROMA tokens."}
               sx={{ margin: "8px 0" }}
               size="small"
               icon={(enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />}
