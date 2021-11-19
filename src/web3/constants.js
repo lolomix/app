@@ -9,7 +9,8 @@ export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
 export const NETWORKS = {
   rinkeby: {
-    name: "Rinkeby",
+    testnet: true,
+    name: "Rinkeby Testnet",
     chainId: 4,
     chainIdHex: "0x4",
     rpcUrls: [
@@ -30,7 +31,8 @@ export const NETWORKS = {
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
     openSeaLink: 'https://testnets.opensea.io/assets'
   },
-  matic: {
+  polygon: {
+    testnet: false,
     name: "Polygon Mainnet",
     chainId: 137,
     chainIdHex: "0x89",

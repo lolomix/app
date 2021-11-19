@@ -1,7 +1,7 @@
 import * as React from 'react';
 // material-ui
 import { Alert } from '@mui/material'
-import { TARGET_CHAIN } from "../../web3/constants";
+import { TARGET_CHAIN, NETWORKS} from "../../web3/constants";
 
 /**
  * @returns {JSX.Element|null}
@@ -10,16 +10,18 @@ import { TARGET_CHAIN } from "../../web3/constants";
  * @todo refactor this to be more sophisticated and remove constant dependency
  */
 function AnnouncementBar() {
-  const production = TARGET_CHAIN === 'matic'
+  const testnet = NETWORKS[TARGET_CHAIN].testnet === true
 
-  // early return if this is production
-  if (production) return null
+  // only show warning on testnet
+  if (testnet) {
+    return (
+      <Alert variant="filled" severity="error" sx={{ borderRadius: 0, justifyContent: 'center' }}>
+        TESTNET ALERT - Connected to {NETWORKS[TARGET_CHAIN].name}
+      </Alert>
+    );
+  }
 
-  return (
-    <Alert variant="filled" severity="error" sx={{ borderRadius: 0, justifyContent: 'center' }}>
-      THIS IS A TEST ENVIRONMENT
-    </Alert>
-  );
+  return null
 }
 
 export default AnnouncementBar
