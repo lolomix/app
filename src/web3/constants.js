@@ -25,7 +25,6 @@ export const NETWORKS = {
       "symbol": "ETH",
       "decimals": 18
     },
-    nativeToken: "ETH",
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
@@ -48,7 +47,6 @@ export const NETWORKS = {
       "symbol": "MATIC",
       "decimals": 18
     },
-    nativeToken: "MATIC",
     contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
     contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",
     adminAccount: "0x1b0D20b13622D19d7CAbC4A6862deCa249C4075f",

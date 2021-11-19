@@ -61,7 +61,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
   React.useEffect(() => {
-    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeToken);
+    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol);
   }, []);
 
   /**
@@ -164,7 +164,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
-              label={"For 1 " + NETWORKS[TARGET_CHAIN].nativeToken + " you get " + formatCurrency(AROMA_DECIMALS / price) + " AROMA tokens."}
+              label={"For 1 " + NETWORKS[TARGET_CHAIN].nativeCurrency.symbol + " you get " + formatCurrency(AROMA_DECIMALS / price) + " AROMA tokens."}
               sx={{ margin: "8px 0" }}
               size="small"
               icon={(enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />}
