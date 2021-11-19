@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // material-ui
-import { Box, Card, CardContent } from '@mui/material'
+import { Box, Card, CardContent, darken } from '@mui/material'
 import Typography from '@mui/material/Typography'
 // custom
 import { useNFTWithMetadata } from '../../hooks/useNFTWithMetadata'
@@ -25,8 +25,7 @@ function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
   return (
     <Card elevation={2}>
       <CardContent>
-        <Box p={2}
-             bgcolor="#F0F0F0"
+        <Box bgcolor={darken(theme.palette.tertiary.main, 0.06)}
              minHeight="320px"
              borderRadius={theme.shape.borderRadius + 'px'}
         >
