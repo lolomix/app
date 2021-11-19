@@ -70,7 +70,7 @@ function Collection () {
                 ))}
               </Grid>
             ) : (
-              <Grid item md={6}>
+              <Grid item md={6} mb={21}>
                 <NoNFTNotificationCard/>
               </Grid>
             )}
