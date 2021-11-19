@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import { withTranslation } from "react-i18next";
 import Blockies from "react-blockies";
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-//import { useSnackbar } from "notistack";
 //mui
 import Tooltip from "@mui/material/Tooltip";
 import List from "@mui/material/List";
@@ -38,9 +37,6 @@ import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
 import IconButtonVerifyExplorer from "../web3/IconButtonVerifyExplorer";
 import IconButtonCopy from "../IconButtonCopy";
 
-//import ToastLoading from "../../components/notification/ToastLoading";
-//import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
-
 function Web3connect(props) {
   const { t } = props;
 
@@ -51,7 +47,6 @@ function Web3connect(props) {
   const [activatingConnector, setActivatingConnector] = useState();
   const [connectionMenu, setConnectionMenu] = useState(false);
   const [dialogWeb3, setDialogWeb3] = useState(false);
-  // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   /**
    * Prettifies an ethereum address for presentation.
