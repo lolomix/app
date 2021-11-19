@@ -1,41 +1,45 @@
-import React, { useState, Fragment } from "react";
-import { withTranslation } from "react-i18next";
-import Blockies from "react-blockies";
+import React, { useState, Fragment } from 'react'
+import { withTranslation } from 'react-i18next'
+import Blockies from 'react-blockies'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 //mui
-import Tooltip from "@mui/material/Tooltip";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import CheckIcon from "@mui/icons-material/Check";
-import WarningIcon from "@mui/icons-material/Warning";
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import {
+  Tooltip,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Button,
+  Avatar,
+  IconButton,
+  Box,
+  Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+  Grid,
+} from '@mui/material'
+import {
+  AccountBalanceWallet,
+  Check,
+  Warning,
+} from '@mui/icons-material'
+import { LoadingButton } from '@mui/lab'
 //custom
-import connectorsList from "../../web3/connectorsList";
-import { getErrorMessage } from "../../web3/errors";
-import { useEagerConnect } from "../../web3/hooks";
-import Balance from "../web3/Balance";
-import NftList from "../web3/NftList";
-import AromaBalance from "../web3/AromaBalance";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import LoadingButton from "@mui/lab/LoadingButton";
-import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
-import WalletLedgerIcon from "../icons/WalletLedgerIcon";
-import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
-import IconButtonVerifyExplorer from "../web3/IconButtonVerifyExplorer";
-import IconButtonCopy from "../IconButtonCopy";
+import connectorsList from '../../web3/connectorsList'
+import { getErrorMessage } from '../../web3/errors'
+import { useEagerConnect } from '../../web3/hooks'
+import Balance from '../web3/Balance'
+import NftList from '../web3/NftList'
+import AromaBalance from '../web3/AromaBalance'
+import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
+import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
+import WalletLedgerIcon from '../icons/WalletLedgerIcon'
+import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
+import IconButtonVerifyExplorer from '../web3/IconButtonVerifyExplorer'
+import IconButtonCopy from '../IconButtonCopy'
 
 function Web3connect(props) {
   const { t } = props;
@@ -169,7 +173,7 @@ function Web3connect(props) {
                   color="primary"
                   variant="contained"
                   onClick={loadWeb3Modal}
-                  startIcon={<AccountBalanceWalletIcon />}
+                  startIcon={<AccountBalanceWallet />}
           >
             {t("base.connectWallet")}
           </Button>
@@ -208,7 +212,7 @@ function Web3connect(props) {
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar className="avatar-success">
-                        <CheckIcon color="tertiary" />
+                        <Check color="tertiary" />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText secondary={TARGET_CHAIN.toUpperCase() + " network"} primary="Connection Established" />
@@ -217,7 +221,7 @@ function Web3connect(props) {
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar className="avatar-warning">
-                        <WarningIcon />
+                        <Warning />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText secondary={"Please select " + TARGET_CHAIN.toUpperCase() + " in your wallet"} primary="WRONG NETWORK" />
@@ -278,7 +282,7 @@ function Web3connect(props) {
                         variant={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? "contained" : "outlined"}
                         size="large"
                         color={isCurrentConnector(key) ? "success" : "primary"}
-                        startIcon={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? <CheckIcon /> : null}
+                        startIcon={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? <Check /> : null}
                         loading={handleConnectorButtonLoadingProp(key)}
                         disabled={handleConnectorButtonDisabledProp(key)}
                         onClick={() => handleConnectorButtonClick(key)}>

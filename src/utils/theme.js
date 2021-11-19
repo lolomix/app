@@ -1,9 +1,12 @@
 // material-ui
-import buttonClasses from "@mui/material/Button/buttonClasses";
-import { createTheme } from "@mui/material/styles";
-import { alpha, darken, lighten } from "@mui/material";
+import {
+  alpha,
+  darken,
+  lighten,
+  createTheme,
+  buttonClasses,
+} from '@mui/material'
 
-// images
 import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
 
 // colors

@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // material-ui
-import { Box, Card, CardContent, darken } from '@mui/material'
-import Typography from '@mui/material/Typography'
+import { Box, Card, CardContent, Typography, darken } from '@mui/material'
 // custom
 import { useNFTWithMetadata } from '../../hooks/useNFTWithMetadata'
 import { theme } from '../../utils/theme'

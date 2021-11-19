@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 // material-ui
-import LoadingButton from "@mui/lab/LoadingButton";
+import { LoadingButton } from "@mui/lab";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
 import { Card, CardContent, Typography, Stack, Divider, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 // custom
