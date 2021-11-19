@@ -1,15 +1,35 @@
-import React from "react";
-import { withTranslation } from 'react-i18next'
-import { Box, Typography } from '@mui/material'
+import React from 'react'
+import { withTranslation } from "react-i18next";
+// material-ui
+import { Card, CardContent, Grid } from '@mui/material'
+import Typography from '@mui/material/Typography'
+import logo from '../../assets/logo.png'
 
-function OpeningSoon({ t }) {
+/**
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function OpeningSoon (props) {
+  const { t, rest } = props
+
   return (
-    <Box>
-      <Typography variant="h1" textAlign="center">
-        {t('base.openingSoon')}
-      </Typography>
-    </Box>
-  );
+    <Card {...rest}>
+      <CardContent>
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item textAlign="center">
+            <img src={logo}
+                 alt="Chef Silhouettes"
+                 style={{ maxWidth: '182px' }}
+            />
+            <Typography mt={3}>
+              {t('base.openingSoon')}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  )
 }
 
-export default withTranslation()(OpeningSoon);
+export default withTranslation()(OpeningSoon)
