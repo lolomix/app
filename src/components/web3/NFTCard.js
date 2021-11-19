@@ -51,12 +51,15 @@ function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
 }
 
 /**
- * @type {{tokenAddress: Validator<NonNullable<string>>, tokenID: Validator<NonNullable<number>>, tokenAbi: Validator<NonNullable<any[]>>, lazyLoad: Requireable<boolean>}}
+ * @type {{tokenAddress: Validator<NonNullable<string>>, tokenID: Validator<NonNullable<NonNullable<InferType<Requireable<string>|Requireable<number>>>>>, tokenAbi: Validator<NonNullable<any[]>>, lazyLoad: Requireable<boolean>}}
  */
 NFTCard.propTypes = {
   tokenAbi: PropTypes.array.isRequired,
   tokenAddress: PropTypes.string.isRequired,
-  tokenID: PropTypes.number.isRequired,
+  tokenID: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   lazyLoad: PropTypes.bool
 }
 
