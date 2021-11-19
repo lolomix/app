@@ -19,7 +19,7 @@ import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
 function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
   const NFT = useNFTWithMetadata(tokenAbi, tokenAddress, tokenID)
 
-  const lore = NFT?.metadata?.attributes?.find(attr => attr.trait_type == 'Lore')?.value ?? 'Unrevealed'
+  const lore = NFT?.metadata?.attributes?.find(attr => attr.trait_type === 'Lore')?.value ?? 'Unrevealed'
   const image = NFT?.metadata?.image ?? placeholder
 
   return (
