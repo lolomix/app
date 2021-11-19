@@ -21,8 +21,6 @@ import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 import { Helmet } from 'react-helmet'
 // pages (lazy loading)
-const Main = lazy(() => import('./views/Main/Main'))
-// const Web3Test = lazy(() => import("./views/Web3/Web3Test"));
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
 const Buffet = lazy(() => import('./views/Buffet/Buffet'))
