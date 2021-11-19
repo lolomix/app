@@ -6,7 +6,6 @@ import { useSnackbar } from "notistack";
 import { Box, Container, OutlinedInput, Button, InputAdornment, Grid, Typography } from "@mui/material";
 // custom
 import Headline from "../../components/layout/Headline";
-//import AromaPrice from "../../components/web3/AromaPrice";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../../web3/abi/AROMATokenMatic.json";
