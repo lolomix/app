@@ -10,6 +10,7 @@
 
 # firebase cache
 .firebase
+firebase-debug.log
 
 # webstorm
 .idea
