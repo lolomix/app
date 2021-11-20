@@ -185,8 +185,8 @@ function NFTBuy({ t }) {
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                  <LoadingButton size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
-                    {t("components.NFTBuy.buyButton")}
+                  <LoadingButton disabled={!remaining} size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
+                    {!!remaining ? t("components.NFTBuy.buyButton") : t("components.NFTBuy.soldOut")}
                   </LoadingButton>
                 </Grid>
               </Grid>

@@ -121,6 +121,7 @@
       "title": "Buy a CHEF",
       "remaining": "Remaining",
       "sold": "Sold",
+      "soldOut": "Sold Out",
       "season": "Season",
       "pricePerCHEF": "Price Per CHEF",
       "buyButton": "Buy a CHEF"
