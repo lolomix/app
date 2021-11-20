@@ -158,7 +158,7 @@ function NFTBuy({ t }) {
 
                   <Grid item xs p={1}>
                     <Typography variant="body2" textAlign="center" sx={{ textTransform: "uppercase" }}>
-                      {t("components.NFTBuy.pricePerCryptoCHEF")}
+                      {t("components.NFTBuy.pricePerCHEF")}
                     </Typography>
                     <Typography variant="h5" color="primary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
                       {price / AROMA_DECIMALS} AROMA
