@@ -23,7 +23,7 @@
       ]
     },
     {
-      "target": "dapp",
+      "target": "app",
       "public": "build",
       "rewrites": [
         {
