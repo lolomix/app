@@ -15,9 +15,6 @@
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.1.1",
     "@pinata/ipfs-gateway-tools": "^1.1.6",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@web3-react/abstract-connector": "^6.0.7",
     "@web3-react/authereum-connector": "^6.2.0",
     "@web3-react/core": "^6.1.9",
@@ -97,6 +94,10 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/user-event": "^13.5.0",
     "customize-cra": "^1.0.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "react-app-rewired": "^2.1.8"
