@@ -13,18 +13,6 @@ import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
 import { useWeb3React } from '@web3-react/core'
 
 /**
- * List of FAQ items to display.
- * @type {string[]}
- */
-const faqKeys = [
-  'WhatIsAroma',
-  'WhatIsACryptochefNFT',
-  'WhatIsARecipe',
-  'WhatIsTheBuffet',
-  'WhyDoIHaveToLockUpAroma'
-]
-
-/**
  * @param t
  * @returns {JSX.Element}
  * @constructor
@@ -77,7 +65,7 @@ function Market ({ t }) {
                 spacing={2}
           >
             <Grid item xs={12} sm={10} md={8}>
-              <FAQ color="secondary.contrastText" faqKeys={faqKeys}/>
+              <FAQ color="secondary.contrastText"/>
             </Grid>
           </Grid>
         </Container>

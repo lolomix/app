@@ -18,18 +18,6 @@ import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard
 import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
 
 /**
- * List of FAQ items to display.
- * @type {string[]}
- */
-const faqKeys = [
-  'WhatIsAroma',
-  'WhatIsACryptochefNFT',
-  'WhatIsARecipe',
-  'WhatIsTheBuffet',
-  'WhyDoIHaveToLockUpAroma'
-];
-
-/**
  * @returns {JSX.Element}
  * @constructor
  */
@@ -86,7 +74,7 @@ function Collection () {
           </Headline>
           <Grid container justifyContent="center" alignItems="center" spacing={2}>
             <Grid item xs={12} sm={10} md={8}>
-              <FAQ color="secondary.contrastText" faqKeys={faqKeys} />
+              <FAQ color="secondary.contrastText" />
             </Grid>
           </Grid>
         </Container>
