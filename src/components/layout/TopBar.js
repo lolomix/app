@@ -28,7 +28,6 @@ import Settings from '@mui/icons-material/Settings'
 import Web3connect from './Web3connect'
 import LanguageSelector from './LanguageSelector'
 import Logo from '../common/Logo'
-import LogoText from '../common/LogoText'
 
 const links = [
   {
@@ -91,9 +90,6 @@ function TopBar ({ t }) {
           >
             <Grid item xs="auto">
               <Logo/>
-            </Grid>
-            <Grid item xs>
-              <LogoText/>
             </Grid>
           </Grid>
           <Grid item

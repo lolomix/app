@@ -2,11 +2,10 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import { withTranslation } from "react-i18next";
 // material-ui
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 // assets
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logoWithWhiteText.png";
 
 /**
  * @param t
@@ -20,7 +19,7 @@ function Logo ({ t }) {
              aria-label={t("base.titleTooltip")}
     >
         <Button disableRipple component={Link} to='/'>
-          <Avatar sx={{ height: "65px", width: "65px"}} variant="rounded" alt="CryptoChefs logo" src={logo} />
+          <img style={{ height: "65px" }} alt="CryptoChefs logo" src={logo} />
         </Button>
     </Tooltip>
   );
