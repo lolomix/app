@@ -9,11 +9,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-body.kitchen {
-  background-image: url(./assets/background/kitchen.jpg);
-}
-body.buffet {
-  background-image: url(./assets/background/buffet.jpg);
+a.sunGlow {
+  color: #FFCB4C;
+  text-decoration: none
 }
 
 .avatar-success {
