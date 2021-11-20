@@ -68,9 +68,7 @@ function FAQ ({ t, faqKeys, color}) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                {answer}
-              </Typography>
+              <Typography dangerouslySetInnerHTML={{__html: answer}}/>
             </AccordionDetails>
           </Accordion>
         ))
