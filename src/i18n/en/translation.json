@@ -75,25 +75,41 @@
     }
   },
   "faqs": {
+    "HowDoIMintACryptoChefsNFT" : {
+      "question": "How do I mint a CryptoChefs NFT?",
+      "answer": "You can find a step-by-step guide <a class='sunGlow' target='_blank' rel='nofollow' href='https://cryptochefs.medium.com/cryptochefs-season-1-is-within-a-sniffing-distance-when-and-how-to-mint-496bbc0aa777'>here</a>. In case you still have questions or doubts, just hit us up on <a class='sunGlow' target='_blank' rel='nofollow' href='https://discord.com/invite/JufpFYBdKG'>Discord</a>."
+    },
+    "IGotAnError": {
+      "question": "I got an error/something stopped working. What should I do?",
+      "answer": "Drop us a message on <a class='sunGlow' target='_blank' rel='nofollow' href='https://discord.com/invite/JufpFYBdKG'>Discord</a> or on <a class='sunGlow' target='_blank' rel='nofollow' href='https://t.me/cryptochefs_io'>Telegram</a>, and we will assist you."
+    },
+    "WhyCanINotUseWalletXYZ?": {
+      "question": "Why can I not use wallet XYZ?",
+      "answer": "For the Season 1 mint, you can only use MetaMask. However, we plan to support the most common wallets from Season 2 onwards. As we will be collecting your feedback, tell us which wallet you want us to add for the future."
+    },
     "WhatIsAroma": {
       "question": "What is AROMA (ERC20)?",
-      "answer": "AROMA is CryptoChefs' in-kitchen currency that is required for all kinds of transactions such as: Buying an NFT, Creating a Recipe, Staking, Marketplace transactions, and so on."
+      "answer": "AROMA is CryptoChefs’ main utility token that enables you to buy a CHEF NFT, create a recipe later in the game, stake on recipes, and have access to other products and services of CrytpoChefs."
     },
-    "WhatIsACryptochefNFT": {
-      "question": "What is a CryptoChef NFT?",
-      "answer": "CryptoChef is the NFT that is issued on the Polygon Blockchain. CryptoChefs are unique tokens that represent the Chef and serve as a basis to participate in our CryptoKitchen game."
+    "HowCanIAddAROMAToMyMetaMaskWallet": {
+      "question": "How can I add AROMA to my MetaMask wallet?",
+      "answer": "If it is your first time acquiring AROMA tokens, you will need to add our custom token to your MetaMask wallet to make it visible. For this, you can follow our step-by-step guide <a class='sunGlow' target='_blank' rel='nofollow' href='https://cryptochefs.medium.com/how-to-claim-your-free-aroma-tokens-metamask-trust-wallet-2cb696c338ca'>here</a>."
     },
-    "WhatIsARecipe": {
-      "question": "What is a Recipe?",
-      "answer": "Recipes represent a Crypto Index Fund that a Chef believes will grow in value. It consists of a minimum of 3 and a maximum of 20 Cryptocurrencies (5% steps). Creating a recipe requires to own a CryptoChef and to lock-up AROMA tokens."
+    "WhatIsACHEFNFT": {
+      "question": "What is a CHEF NFT?",
+      "answer": "CHEF NFTs are unique tokens representing the player and serve as a basis to participate in our upcoming game. Each NFT is capable of holding up to three crypto recipes simultaneously to compete against Chefs around the globe."
     },
-    "WhatIsTheBuffet": {
-      "question": "What is the Buffet?",
-      "answer": "As the name suggests, the buffet is where all the active recipes and their details are displayed. It also contains historical performance data of the recipe and the accumulated rewards."
+    "DoesTheRarityOfMyCHEFNFTMatter": {
+      "question": "Does the rarity of my CHEF NFT matter?",
+      "answer": "Unlike other games, we value skill over luck. The rarity level of your NFT does not influence the gameplay itself or the earnings. Every Chef has to prove their skill in the fierce kitchen wars."
     },
-    "WhyDoIHaveToLockUpAroma": {
-      "question": "Why do I have to lock-up AROMA?",
-      "answer": "We want to promote Chefs that put the time and effort into creating amazing recipes in which they really believe in. To prove your commitment, every Chef has to lock-up at least 200 AROMA tokens. The amount of locked-up tokens also influences your share of the reward pool - the more tokens you lock-up, the higher your share gets!"
+    "HowManyNFTsWillThereEverBe": {
+      "question": "How many NFTs will there ever be?",
+      "answer": "In total, 5’555 CHEF NFTs are roaming the magical kitchen of CryptoChefs. They are not offered all at once, but rather in 9 seasons. Season 1 consists of 255 CHEF NFTs and with each season the price of the NFTs rises."
+    },
+    "WhereCanISeeTheDetailsOfMyNFT?": {
+      "question": "Where can I see the details of my NFT?",
+      "answer": "We set up an OpenSea page for you to download the image and see the rarity of each item of your NFT. Just click on your NFT on the collection page, or <a class='sunGlow' target='_blank' rel='nofollow' href='https://opensea.io/collection/cryptochefs-io'>this link</a> will take you there."
     }
   },
   "components": {
