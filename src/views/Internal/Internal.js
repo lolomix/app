@@ -25,6 +25,8 @@ function Internal({ t }) {
   const [chefPrice, setChefPrice] = useState(0);
   const [baseUri, setBaseUri] = useState(0);
   const [seasonSupply, setSeasonSupply] = useState(0);
+  const [aromaSalePaused, setAromaSalePaused] = useState();
+  const [cryptoChefSalePaused, setCryptoChefSalePaused] = useState();
 
   const handleAromaPrice = (event) => {
     setAromaPrice(event.target.value);
@@ -37,6 +39,12 @@ function Internal({ t }) {
   };
   const handleSeasonSupply = (event) => {
     setSeasonSupply(event.target.value);
+  };
+  const handlePauseAROMASale = (event) => {
+    setAromaSalePaused(event.target.value);
+  };
+  const handlePauseCryptoChefSale = (event) => {
+    setCryptoChefSalePaused(event.target.value);
   };
 
   const deploy = async (method, parameter) => {
@@ -191,6 +199,48 @@ function Internal({ t }) {
                         deploy("setCryptoChefSeasonSupply", seasonSupply);
                       }}>
                       Set Season
+                    </Button>
+                  </InputAdornment>
+                }
+              />
+              <Typography variant="h4">pauseAROMASale</Typography>
+              <Typography variant="body2">Enter TRUE or FALSE.</Typography>
+              <OutlinedInput
+                variant="outlined"
+                onChange={(e) => handlePauseAROMASale(e)}
+                value={aromaSalePaused}
+                fullWidth
+                endAdornment={
+                  <InputAdornment position="end">
+                    <Button
+                      variant="contained"
+                      edge="end"
+                      disabled={isLoading}
+                      onClick={() => {
+                        deploy("pauseAROMASale", Boolean(aromaSalePaused));
+                      }}>
+                      Set Bool
+                    </Button>
+                  </InputAdornment>
+                }
+              />
+              <Typography variant="h4">pauseCryptoChefSale</Typography>
+              <Typography variant="body2">Enter TRUE or FALSE</Typography>
+              <OutlinedInput
+                variant="outlined"
+                onChange={(e) => handlePauseCryptoChefSale(e)}
+                value={cryptoChefSalePaused}
+                fullWidth
+                endAdornment={
+                  <InputAdornment position="end">
+                    <Button
+                      variant="contained"
+                      edge="end"
+                      disabled={isLoading}
+                      onClick={() => {
+                        deploy("pauseCryptoChefSale", Boolean(cryptoChefSalePaused));
+                      }}>
+                      Set Bool
                     </Button>
                   </InputAdornment>
                 }
