@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
+import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
+import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
 
 /**
- * @param tokenAbi
- * @param tokenAddress
+ * Returns the current price of AROMA token
+ *
  * @returns {undefined}
  */
-export function useTokenPrice(tokenAbi, tokenAddress) {
+export function useAROMAPrice() {
+  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+
   const { account, library } = useWeb3React()
   const [price, setPrice] = useState()
 
@@ -30,7 +34,7 @@ export function useTokenPrice(tokenAbi, tokenAddress) {
     }
     loadPrice();
 
-  }, [account, library, tokenAbi, tokenAddress])
+  }, [account, library, tokenAddress])
 
   return price
 }

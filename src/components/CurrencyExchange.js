@@ -27,8 +27,7 @@ import ToastLoading from "./notification/ToastLoading";
 import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../utils/formatters";
 import { getErrorMessage } from "../web3/errors";
-import { useTokenPrice } from '../hooks/useTokenPrice'
-import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { useAROMAPrice } from '../hooks/useAROMAPrice'
 
 /**
  * @param t
@@ -38,8 +37,7 @@ import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const { account, library, error, active } = useWeb3React();
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
-  const price = useTokenPrice(tokenAbi, tokenAddress);
+  const price = useAROMAPrice();
   const [successDialog, setSuccessDialog] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
