@@ -35,7 +35,8 @@ const AromaBalance = function () {
     }
   }, [account, library]); // ensures refresh if referential identity of library doesn't change across chainIds
 
-  return balance === null ? <Skeleton variant="text" /> : balance ? <span>AROMA {formatCurrency(balance)}</span> : <Skeleton variant="text" />;
+
+  return balance === undefined ? <Skeleton variant="text" /> : <>{formatCurrency(balance)}</>;
 };
 
 export default AromaBalance;
