@@ -15,7 +15,7 @@ import { Helmet } from 'react-helmet'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
-import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
+import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
 
 /**
  * @returns {JSX.Element}
@@ -23,7 +23,7 @@ import { useTokensOfOwners } from '../../hooks/useTokensOfOwners'
  */
 function Collection () {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
-  const nfts = useTokensOfOwners(tokenAbi, tokenAddress)
+  const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
 
   return (
     <>

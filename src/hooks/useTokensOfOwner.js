@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core'
  * @param tokenAddress
  * @returns {undefined}
  */
-export function useTokensOfOwners(tokenAbi, tokenAddress) {
+export function useTokensOfOwner(tokenAbi, tokenAddress) {
   const { account, library } = useWeb3React()
   const [tokens, setTokens] = useState([])
 
