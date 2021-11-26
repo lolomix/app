@@ -4,10 +4,19 @@ import Skeleton from '@mui/material/Skeleton'
 import { formatCurrency } from '../../utils/formatters'
 import { useAROMABalanceOf } from '../../hooks/useAROMABalanceOf'
 
-const AromaBalance = function () {
+function AromaBalance () {
   const balance = useAROMABalanceOf()
 
-  return balance === undefined ? <Skeleton variant="text"/> : <>{formatCurrency(balance)}</>
+  return (
+    <>
+      {balance === undefined ? (
+          <Skeleton variant="text"/>
+        ) : (
+          <span>{formatCurrency(balance)}</span>
+        )
+      }
+    </>
+  )
 }
 
 export default AromaBalance
