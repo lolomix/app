@@ -1,27 +1,29 @@
 import React  from 'react'
+import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
+import { useWeb3React } from '@web3-react/core'
 // material-ui
-import {
-  Box,
-  Container,
-  Grid
-} from '@mui/material'
-
+import { Box, Container, Grid, Skeleton } from '@mui/material'
+// custom
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import NFTCard from '../../components/web3/NFTCard'
 import FAQ from '../../components/common/FAQ'
-import { Helmet } from 'react-helmet'
+import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
 import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
+import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
 
 /**
  * @returns {JSX.Element}
  * @constructor
+ *
+ * @todo refactor and get rid of if hell in jsx
  */
 function Collection () {
+  const { active, error } = useWeb3React();
+
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
   const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
 
@@ -35,31 +37,47 @@ function Collection () {
           <Headline mb={0}>
             Collection
           </Headline>
-          <Headline variant="h5" mt={0}>
-            Total CHEFs Owned: {nfts.length}
+          <Headline variant="h5" mt={0} textAlign="center">
+            {active && (nfts ? (
+              <>Total CHEFs Owned: {nfts.length}</>
+              ) : (
+              <Skeleton variant="h5" width={220} sx={{ margin: "auto" }}/>
+            ))}
           </Headline>
           <Grid container justifyContent="center" alignItems="stretch">
-            {nfts.length ? (
-              <Grid item md={12} lg={10} container spacing={5}>
-                {nfts.map((tokenID, index) => (
-                  <Grid key={tokenID} item sm={12} md={6}>
-                    <a target="_blank"
-                       rel="noreferrer nofollow"
-                       href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
-                       style={{ textDecoration: "none" }}
-                    >
-                      <NFTCard tokenAbi={tokenAbi}
-                               tokenAddress={tokenAddress}
-                               tokenID={tokenID}
-                               lazyLoad={index > 2}
-                      />
-                    </a>
+            {active ? (
+              nfts ? (
+                nfts.length ? (
+                  <Grid item md={12} lg={10} container spacing={5}>
+                    {nfts.map((tokenID, index) => (
+                      <Grid key={tokenID} item sm={12} md={6}>
+                        <a target="_blank"
+                           rel="noreferrer nofollow"
+                           href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
+                           style={{ textDecoration: 'none' }}
+                        >
+                          <NFTCard tokenAbi={tokenAbi}
+                                   tokenAddress={tokenAddress}
+                                   tokenID={tokenID}
+                                   lazyLoad={index > 2}
+                          />
+                        </a>
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
-              </Grid>
+                ) : (
+                  <Grid item md={6} mb={21}>
+                    <NoNFTNotificationCard/>
+                  </Grid>
+                )
+              ) : (
+                <Grid item md={6} mb={21}>
+                  <Skeleton variant="rectangular" height={350}/>
+                </Grid>
+              )
             ) : (
-              <Grid item md={6} mb={21}>
-                <NoNFTNotificationCard/>
+              <Grid item xs={10} sm={7} md={5} lg={4} mb={21}>
+                <ConnectionErrorCard error={error} elevation={3}/>
               </Grid>
             )}
           </Grid>
