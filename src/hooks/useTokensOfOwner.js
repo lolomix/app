@@ -8,7 +8,7 @@ import { useWeb3React } from '@web3-react/core'
  */
 export function useTokensOfOwner(tokenAbi, tokenAddress) {
   const { account, library } = useWeb3React()
-  const [tokens, setTokens] = useState([])
+  const [tokens, setTokens] = useState()
 
   useEffect(() => {
 
