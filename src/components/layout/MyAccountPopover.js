@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core'
 import {
   Avatar, Box, Button,
   List, ListItem, Stack, Tooltip,
-  ListItemAvatar, ListItemText, Dialog,
+  ListItemAvatar, ListItemText, Popover,
 } from '@mui/material'
 import { Check, Warning } from '@mui/icons-material'
 // custom
@@ -19,7 +19,7 @@ import NFTIdList from '../web3/NFTIdList'
 import CHEFAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 
 
-function MyAccountPopover({ t, connectionMenu, handleConnectionMenu, handleWeb3Modal }) {
+function MyAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnectionMenu, handleCloseConnectionMenu }) {
   const {account, chainId} = useWeb3React();
   const CHEFAddress = NETWORKS[TARGET_CHAIN].contractMaster
 
@@ -32,7 +32,19 @@ function MyAccountPopover({ t, connectionMenu, handleConnectionMenu, handleWeb3M
   const prettifyAccountAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   return (
-    <Dialog id="settings-menu" open={Boolean(connectionMenu)} onClose={handleConnectionMenu} maxWidth="md">
+    <Popover id="settings-menu"
+             open={Boolean(connectionMenu)}
+             onClose={handleCloseConnectionMenu}
+             anchorEl={connectionMenu}
+             anchorOrigin={{
+               vertical: 'bottom',
+               horizontal: 'right',
+             }}
+             transformOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+             }}
+    >
       <Box p={2}>
         <List dense>
           {account && (
@@ -86,7 +98,7 @@ function MyAccountPopover({ t, connectionMenu, handleConnectionMenu, handleWeb3M
           </ListItem>
         </List>
         <Stack spacing={1} direction="row" justifyContent="center">
-          <Button disableElevation color="primary" variant="contained" onClick={handleConnectionMenu}>
+          <Button disableElevation color="primary" variant="contained" onClick={handleCloseConnectionMenu}>
             {t("base.close")}
           </Button>
           <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
@@ -94,7 +106,7 @@ function MyAccountPopover({ t, connectionMenu, handleConnectionMenu, handleWeb3M
           </Button>
         </Stack>
       </Box>
-    </Dialog>
+    </Popover>
   )
 }
 
