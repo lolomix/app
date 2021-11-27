@@ -41,8 +41,12 @@ function Web3connect(props) {
   const [connectionMenu, setConnectionMenu] = useState(false);
   const [dialogWeb3, setDialogWeb3] = useState(false);
 
-  const handleConnectionMenu = () => {
-    setConnectionMenu(!connectionMenu);
+  const handleConnectionMenu = (event) => {
+    setConnectionMenu(event.currentTarget);
+  };
+
+  const handleCloseConnectionMenu = () => {
+    setConnectionMenu(null);
   };
 
   const handleWeb3Modal = () => {
@@ -168,9 +172,10 @@ function Web3connect(props) {
               </Avatar>
             </IconButton>
           </Tooltip>
-          <MyAccountPopover connectionMenu={connectionMenu}
-                            handleWeb3Modal={handleWeb3Modal}
+          <MyAccountPopover handleWeb3Modal={handleWeb3Modal}
+                            connectionMenu={connectionMenu}
                             handleConnectionMenu={handleConnectionMenu}
+                            handleCloseConnectionMenu={handleCloseConnectionMenu}
           />
         </>
       )}
