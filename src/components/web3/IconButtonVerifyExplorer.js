@@ -10,7 +10,7 @@ const IconButtonVerifyExplorer = function ({address}) {
         <IconButton 
             component="a" 
             aria-label="Verify on blockchain explorer" 
-            href={NETWORKS[TARGET_CHAIN].blockExplorer + "address/" + address} 
+            href={NETWORKS[TARGET_CHAIN].blockExplorerUrls[0] + "address/" + address}
             target="_blank">
         <Launch />
         </IconButton>
