@@ -32,7 +32,7 @@ import connectorsList from '../../web3/connectorsList'
 import { getErrorMessage } from '../../web3/errors'
 import { useEagerConnect } from '../../web3/hooks'
 import Balance from '../web3/Balance'
-import NftList from '../web3/NftList'
+import NFTIdList from '../web3/NFTIdList'
 import AromaBalance from '../web3/AromaBalance'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
@@ -40,8 +40,11 @@ import WalletLedgerIcon from '../icons/WalletLedgerIcon'
 import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
 import IconButtonVerifyExplorer from '../web3/IconButtonVerifyExplorer'
 import IconButtonCopy from '../IconButtonCopy'
+import CHEFAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 
 function Web3connect(props) {
+  const CHEFAddress = NETWORKS[TARGET_CHAIN].contractMaster
+
   const { t } = props;
 
   const Web3Context = useWeb3React();
@@ -234,7 +237,7 @@ function Web3connect(props) {
                   <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText secondary={<NftList />} primary="Your CHEF NFTs" />
+                  <ListItemText secondary={<NFTIdList tokenAbi={CHEFAbi} tokenAddress={CHEFAddress}/>} primary="Your CHEF NFTs" />
                 </ListItem>
                 <ListItem>
                   <ListItemText primary="Your CHEF NFTs will be revealed soon!" />
