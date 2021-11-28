@@ -28,7 +28,7 @@ import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
 import WalletLedgerIcon from '../icons/WalletLedgerIcon'
 import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
-import MyAccountPopover from './MyAccountPopover'
+import MyAccountPopover from './YourAccountPopover'
 
 function Web3connect(props) {
   const { t } = props;
