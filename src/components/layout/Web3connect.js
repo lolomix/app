@@ -165,7 +165,7 @@ function Web3connect(props) {
         </Tooltip>
       ) : (
         <>
-          <Tooltip disableFocusListener title={t("base.youraccount")} aria-label={t("base.youraccount")}>
+          <Tooltip disableFocusListener title={t("base.yourAccount")} aria-label={t("base.yourAccount")}>
             <IconButton color="inherit" onClick={handleConnectionMenu}>
               <Avatar>
                 <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
