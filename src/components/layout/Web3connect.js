@@ -238,7 +238,12 @@ function Web3connect(props) {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleWeb3Modal} disableElevation variant="contained" color="primary">
+          <Button
+            onClick={handleWeb3Modal}
+            disableElevation
+            variant="outlined"
+            color="secondary"
+          >
             {t("base.close")}
           </Button>
           {(active || error) && (
@@ -246,9 +251,10 @@ function Web3connect(props) {
               onClick={() => {
                 deactivate();
               }}
-              variant="outlined"
-              color="primary">
-              {t("base.deactivate")}
+              disableElevation
+              variant="contained"
+              color="error">
+              {t("base.disconnect")}
             </Button>
           )}
         </DialogActions>
