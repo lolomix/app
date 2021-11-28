@@ -4,18 +4,22 @@ import IconButton from "@mui/material/IconButton";
 import Launch from "@mui/icons-material/Launch";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
-const IconButtonVerifyExplorer = function ({address}) {
+function IconButtonVerifyExplorer ({ address, size, fontSize }) {
   return (
-    <Tooltip title="Verify on blockchain explorer">
-        <IconButton 
-            component="a" 
-            aria-label="Verify on blockchain explorer" 
-            href={NETWORKS[TARGET_CHAIN].blockExplorerUrls[0] + "address/" + address}
-            target="_blank">
-        <Launch />
-        </IconButton>
+    <Tooltip title="View on Explorer">
+      <IconButton
+        component="a"
+        size={size}
+        href={NETWORKS[TARGET_CHAIN].blockExplorerUrls[0] + 'address/' +
+        address}
+        target="_blank"
+        aria-label="View on Explorer"
+
+      >
+        <Launch sx={{ fontSize: fontSize }} />
+      </IconButton>
     </Tooltip>
-  );
-};
+  )
+}
 
 export default IconButtonVerifyExplorer;
