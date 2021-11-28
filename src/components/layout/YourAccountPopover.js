@@ -26,23 +26,12 @@ import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import AromaBalance from '../web3/AromaBalance'
 import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
+import { truncate } from '../../utils/formatters'
 
 function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnectionMenu, handleCloseConnectionMenu }) {
   const { account, deactivate } = useWeb3React();
 
-  /**
-   * Prettifies an ethereum address for presentation.
-   *
-   * @param address
-   * @param charsAtStart
-   * @param charsAtEnd
-   * @returns {string}
-   *
-   * @todo refactor this to a global helper
-   */
-  function prettifyAccountAddress (address, charsAtStart = 6, charsAtEnd = 4) {
-    return `${address.slice(0, charsAtStart)}...${address.slice(-(charsAtEnd))}`;
-  }
+
 
   return (
     <Popover id="settings-menu"
@@ -94,7 +83,7 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnecti
             <ListItemText secondary={
               <>
                 <span>
-                  {prettifyAccountAddress(account.toLowerCase(), 10, 6)}
+                  {truncate(account.toLowerCase(), 10, -4)}
                 </span>
                 <IconButtonCopy copyText={account} size="small" fontSize=".9rem" />
               </>
