@@ -10,7 +10,7 @@ import { useWeb3React } from '@web3-react/core'
  * @param targetAccount
  * @returns {undefined}
  */
-export function useBalanceOf(tokenAbi, tokenAddress, tokenDecimals, targetAccount) {
+export function useBalanceOf(tokenAbi, tokenAddress, tokenDecimals = null, targetAccount) {
   const { account, library } = useWeb3React()
   const [balance, setBalance] = useState()
 
@@ -28,7 +28,7 @@ export function useBalanceOf(tokenAbi, tokenAddress, tokenDecimals, targetAccoun
         const contract = new library.eth.Contract(tokenAbi, tokenAddress);
         const balance = await contract.methods.balanceOf(targetAccount).call({ from: account });
 
-        setBalance(balance / tokenDecimals)
+        setBalance(tokenDecimals ? balance / tokenDecimals : balance)
 
       } catch (e) {
         console.log(e);
