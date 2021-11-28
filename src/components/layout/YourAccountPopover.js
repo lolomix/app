@@ -4,23 +4,31 @@ import Blockies from 'react-blockies'
 import { useWeb3React } from '@web3-react/core'
 // material-ui
 import {
-  Avatar, Box, Button,
-  List, ListItem, Stack, Tooltip,
-  ListItemAvatar, ListItemText, Popover, Typography, IconButton,
+  Avatar,
+  Box,
+  Button,
+  List,
+  ListItem,
+  Tooltip,
+  ListItemAvatar,
+  ListItemText,
+  Popover,
+  Typography,
+  IconButton,
+  Divider,
+  Grid,
 } from '@mui/material'
-import { Check, Close } from '@mui/icons-material'
+import { Check, Close, Settings } from '@mui/icons-material'
 // custom
 import IconButtonVerifyExplorer from '../web3/IconButtonVerifyExplorer'
 import IconButtonCopy from '../IconButtonCopy'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import AromaBalance from '../web3/AromaBalance'
 import Balance from '../web3/Balance'
-import NFTIdList from '../web3/NFTIdList'
-import CHEFAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
+import CHEFBalance from '../web3/CHEFBalance'
 
 function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnectionMenu, handleCloseConnectionMenu }) {
-  const { account } = useWeb3React();
-  const CHEFAddress = NETWORKS[TARGET_CHAIN].contractMaster
+  const { account, deactivate } = useWeb3React();
 
   /**
    * Prettifies an ethereum address for presentation.
@@ -50,15 +58,17 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnecti
                horizontal: 'right',
              }}
     >
-      <Box py={2} px={4}>
+      <Box py={2} px={3}>
         <List sx={{padding: 0}}>
           <ListItem disableGutters
                     disablePadding
                     divider={true}
                     secondaryAction={
-                      <IconButton onClick={handleCloseConnectionMenu} aria-label="close">
-                        <Close />
-                      </IconButton>
+                      <Tooltip title="Close Menu">
+                        <IconButton onClick={handleCloseConnectionMenu} aria-label="close">
+                          <Close />
+                        </IconButton>
+                      </Tooltip>
                     }
 
           >
@@ -71,9 +81,7 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnecti
 
           <ListItem disableGutters
                     secondaryAction={
-                      <>
-                          <IconButtonVerifyExplorer address={account} />
-                      </>
+                      <IconButtonVerifyExplorer address={account} />
                     }
           >
             <Tooltip disableFocusListener title={t("base.yourAccount")}>
@@ -85,10 +93,12 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnecti
             </Tooltip>
             <ListItemText secondary={
               <>
-                <span>{prettifyAccountAddress(account.toLowerCase(), 10, 6)}</span>
-                <IconButtonCopy copyText={account} size="small" fontSize=".8rem"/>
+                <span>
+                  {prettifyAccountAddress(account.toLowerCase(), 10, 6)}
+                </span>
+                <IconButtonCopy copyText={account} size="small" fontSize=".9rem" />
               </>
-            } primary={t("base.yourAddress")} />
+            } primary={t("base.address")} />
           </ListItem>
 
           <ListItem disableGutters>
@@ -99,32 +109,58 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnecti
             </ListItemAvatar>
             <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
           </ListItem>
-
-          <ListItem disableGutters>
-            <ListItemText secondary={<AromaBalance />} primary="Your AROMA balance" />
-          </ListItem>
-          <ListItem disableGutters>
-            <ListItemText secondary={<Balance />} primary="Your MATIC balance" />
-          </ListItem>
-          <ListItem disableGutters>
-            <ListItemText secondary={<NFTIdList tokenAbi={CHEFAbi} tokenAddress={CHEFAddress}/>} primary="Your CHEF NFTs" />
-          </ListItem>
-          <ListItem disableGutters>
-            <ListItemText primary="Your CHEF NFTs will be revealed soon!" />
-          </ListItem>
         </List>
 
-        <Stack spacing={1} direction="row" justifyContent="center">
-          <Button disableElevation color="primary" variant="contained" onClick={handleCloseConnectionMenu}>
-            {t("base.close")}
-          </Button>
-          <Button color="primary" variant="outlined" onClick={handleWeb3Modal}>
-            Web3 Settings
-          </Button>
-          <Button disableElevation color="error" variant="contained" onClick={handleWeb3Modal}>
-            Disconnect
-          </Button>
-        </Stack>
+        <Divider />
+
+        <Typography mt={2} mb={1}>
+          Balance
+        </Typography>
+        <Grid container spacing={.5} mb={2}>
+          <Grid item xs={6}>
+            <Typography variant="body2">
+              AROMA
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2">
+              <AromaBalance />
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2">
+              {NETWORKS[TARGET_CHAIN].nativeCurrency.symbol}
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2">
+              <Balance />
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2">
+              CHEF NFTs
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <CHEFBalance />
+          </Grid>
+        </Grid>
+
+        <Grid container>
+          <Grid item xs>
+            <Button fullWidth disableElevation color="error" variant="contained" onClick={deactivate}>
+              {t('base.disconnect')}
+            </Button>
+          </Grid>
+          <Grid item xs={1}>
+            <Tooltip title="Wallet Settings">
+              <IconButton color="primary" variant="outlined" onClick={handleWeb3Modal}>
+                <Settings/>
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        </Grid>
       </Box>
     </Popover>
   )
