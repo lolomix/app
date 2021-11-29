@@ -28,7 +28,7 @@ import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
 import WalletLedgerIcon from '../icons/WalletLedgerIcon'
 import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
-import MyAccountPopover from './YourAccountPopover'
+import YourAccountPopover from './YourAccountPopover'
 
 function Web3connect(props) {
   const { t } = props;
@@ -172,7 +172,7 @@ function Web3connect(props) {
               </Avatar>
             </IconButton>
           </Tooltip>
-          <MyAccountPopover handleWeb3Modal={handleWeb3Modal}
+          <YourAccountPopover handleWeb3Modal={handleWeb3Modal}
                             connectionMenu={connectionMenu}
                             handleConnectionMenu={handleConnectionMenu}
                             handleCloseConnectionMenu={handleCloseConnectionMenu}

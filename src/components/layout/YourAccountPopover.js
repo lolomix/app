@@ -28,10 +28,8 @@ import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
 import { truncate } from '../../utils/formatters'
 
-function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleConnectionMenu, handleCloseConnectionMenu }) {
+function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleCloseConnectionMenu }) {
   const { account, deactivate } = useWeb3React();
-
-
 
   return (
     <Popover id="settings-menu"
