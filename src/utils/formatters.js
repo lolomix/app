@@ -1,10 +1,11 @@
 /**
  * @param num
+ * @param locales
  * @returns {string}
  */
-export function formatCurrency (num) {
+export function formatCurrency (num, locales) {
   // if undefined then browser default will be used
-  return new Intl.NumberFormat(undefined, {
+  return new Intl.NumberFormat(locales, {
     maximumFractionDigits: 2
   }).format(num)
 }

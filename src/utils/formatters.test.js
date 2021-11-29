@@ -1,4 +1,24 @@
-const { truncate } = require('./formatters')
+const { truncate, formatCurrency } = require('./formatters')
+
+describe('formatCurrency() formatter', () => {
+
+  it.each([
+    ['en-GB', 2000, '2,000', ],
+    ['en-GB', 2.555555555, '2.56'],
+    ['en-GB', 2.550000000, '2.55'],
+    ['en-GB', 6665656556, '6,665,656,556'],
+    ['de-DE', 2000, '2.000'],
+    ['de-DE', 2.555555555, '2,56'],
+    ['de-DE', 2.550000000, '2,55'],
+    ['de-DE', 6665656556, '6.665.656.556'],
+  ])('should format in locales `%s` from `%s` to `%s`', (locales, num, expected) => {
+    const formatted = formatCurrency(num, locales)
+
+    expect(formatted).toBe(expected);
+  });
+
+})
+
 
 describe('truncate() formatter', () => {
   let sample
