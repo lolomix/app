@@ -16,6 +16,7 @@ const brownSugar = "rgba(184, 125, 102, 1)";
 const sunGlow = "rgba(255, 203, 76, 1)";
 const darkSkyBlue = "rgb(138, 193, 210)";
 const culturedWhite = "rgba(250, 250, 250, 1)";
+const error = "rgba(255, 62, 62, 1)";
 
 // generators
 const shadow = (px, rgb) => `0.3px ${px}px 0.4px 0px ${alpha(rgb, 0.9)}`;
@@ -34,6 +35,9 @@ export let theme = createTheme({
       light: lighten(culturedWhite, 0.3),
       dark: darken(culturedWhite, 0.3),
       contrastText: cafeNoir,
+    },
+    error: {
+      main: error
     },
     sunGlow: {
       main: sunGlow,
