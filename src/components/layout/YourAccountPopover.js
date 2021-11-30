@@ -28,48 +28,36 @@ import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
 import { truncate } from '../../utils/formatters'
 
-function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleCloseConnectionMenu }) {
+function YourAccountPopover(props) {
+  const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props
   const { account, deactivate } = useWeb3React();
 
   return (
-    <Popover id="settings-menu"
-             open={Boolean(connectionMenu)}
-             onClose={handleCloseConnectionMenu}
-             anchorEl={connectionMenu}
-             anchorOrigin={{
-               vertical: 'bottom',
-               horizontal: 'right',
-             }}
-             transformOrigin={{
-               vertical: -5,
-               horizontal: 'right',
-             }}
-    >
-      <Box py={2} px={3}>
-        <List sx={{padding: 0}}>
-          <ListItem disableGutters
-                    disablePadding
-                    divider={true}
-                    secondaryAction={
-                      <Tooltip title="Close Menu">
-                        <IconButton onClick={handleCloseConnectionMenu} aria-label="close">
-                          <Close />
-                        </IconButton>
-                      </Tooltip>
-                    }
+    <Popover {...rest} anchorEl={anchorEl}>
+      <Box pt={2} pb={3} px={3} width="350px">
+        <Grid container alignItems="center" mb={1}>
+          <Grid item xs>
+            <Typography variant="h5">
+              {t('base.yourAccount')}
+            </Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Tooltip title="Close Menu">
+              <IconButton onClick={closePopover} aria-label="Close Popover">
+                <Close />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        </Grid>
 
-          >
-            <ListItemText disableTypography={true}>
-              <Typography variant="h5">
-                {t('base.yourAccount')}
-              </Typography>
-            </ListItemText>
-          </ListItem>
+        <Divider />
 
-          <ListItem disableGutters
-                    secondaryAction={
-                      <IconButtonVerifyExplorer address={account} />
-                    }
+        <List disablePadding>
+          <ListItem
+            disableGutters
+            secondaryAction={
+              <IconButtonVerifyExplorer address={account} />
+            }
           >
             <Tooltip disableFocusListener title={t("base.yourAccount")}>
               <ListItemAvatar>
@@ -136,13 +124,19 @@ function YourAccountPopover({ t, handleWeb3Modal, connectionMenu, handleCloseCon
 
         <Grid container>
           <Grid item xs>
-            <Button fullWidth disableElevation color="error" variant="contained" onClick={deactivate}>
+            <Button fullWidth disableElevation color="error" variant="contained" onClick={() => {
+              closePopover()
+              deactivate()
+            }}>
               {t('base.disconnect')}
             </Button>
           </Grid>
           <Grid item xs={1}>
             <Tooltip title="Wallet Settings">
-              <IconButton color="primary" variant="outlined" onClick={handleWeb3Modal}>
+              <IconButton color="primary" variant="outlined" onClick={() => {
+                closePopover()
+                openConnectorsPopover(anchorEl)
+              }}>
                 <Settings/>
               </IconButton>
             </Tooltip>
