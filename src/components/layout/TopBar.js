@@ -25,7 +25,7 @@ import {
 // icons
 import Settings from '@mui/icons-material/Settings'
 // custom
-import Web3connect from './Web3connect'
+import WalletSelector from './WalletSelector'
 import LanguageSelector from './LanguageSelector'
 import Logo from '../common/Logo'
 
@@ -178,7 +178,7 @@ function TopBar ({ t }) {
               </Hidden>
             </Grid>
             <Grid item>
-              <Web3connect/>
+              <WalletSelector/>
               <LanguageSelector/>
             </Grid>
           </Grid>

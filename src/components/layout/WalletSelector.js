@@ -33,7 +33,7 @@ const popoverOriginProps = {
   }
 }
 
-function Web3connect({ t }) {
+function WalletSelector({ t }) {
   const { active, account } = useWeb3React();
 
   const connectorsPopoverState = usePopupState({
@@ -85,4 +85,4 @@ function Web3connect({ t }) {
   );
 }
 
-export default withTranslation()(Web3connect);
+export default withTranslation()(WalletSelector);
