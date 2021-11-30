@@ -219,6 +219,16 @@ theme = createTheme(theme, {
             },
           },
         },
+        {
+          props: { alignedStartIcon: true },
+          style: {
+            [`.${buttonClasses.startIcon}`]: {
+              position: "absolute",
+              marginLeft: "0px",
+              left: "8px"
+            }
+          },
+        },
       ],
     },
     MuiLinearProgress: {
