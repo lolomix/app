@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "https://cryptochefs.github.io/",
   "engines": {
-    "npm": "6.x",
-    "node": "16.13"
+    "npm": "please-use-yarn",
+    "node": "16.13",
+    "yarn": ">= 1.19.1"
   },
   "jest": {
     "verbose": true,
