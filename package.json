@@ -5,7 +5,7 @@
   "homepage": "https://cryptochefs.github.io/",
   "engines": {
     "npm": "6.x",
-    "node": "14.x"
+    "node": "16.13"
   },
   "jest": {
     "verbose": true,
