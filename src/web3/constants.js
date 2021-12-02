@@ -1,3 +1,5 @@
+export const APP_NAME = process.env.REACT_APP_APP_NAME;
+export const APP_VERSION = process.env.REACT_APP_VERSION;
 export const TARGET_CHAIN = process.env.REACT_APP_CHAIN;
 export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 export const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
