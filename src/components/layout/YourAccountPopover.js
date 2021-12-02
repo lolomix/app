@@ -130,15 +130,7 @@ function YourAccountPopover(props) {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs>
-            <Button fullWidth disableElevation color="error" variant="contained" onClick={() => {
-              closePopover()
-              deactivate()
-            }}>
-              {t('base.disconnect')}
-            </Button>
-          </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Tooltip title="Wallet Settings">
               <IconButton color="primary" variant="outlined" onClick={() => {
                 closePopover()
@@ -147,6 +139,14 @@ function YourAccountPopover(props) {
                 <Settings/>
               </IconButton>
             </Tooltip>
+          </Grid>
+          <Grid item xs>
+            <Button fullWidth disableElevation color="error" variant="contained" onClick={() => {
+              closePopover()
+              deactivate()
+            }}>
+              {t('base.disconnect')}
+            </Button>
           </Grid>
         </Grid>
       </Box>
