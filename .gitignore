@@ -8,6 +8,9 @@
 # distribution folder
 /build
 
+# environmental file
+.env
+
 # firebase cache
 .firebase
 firebase-debug.log
