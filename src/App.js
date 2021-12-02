@@ -20,6 +20,7 @@ import { Container, Box } from '@mui/material'
 import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 import { Helmet } from 'react-helmet'
+import Version from './components/layout/Version'
 // pages (lazy loading)
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
@@ -85,6 +86,7 @@ function App () {
                   <Route path="/collection" element={<Collection/>}/>
                 </Routes>
               </Suspense>
+              <Version />
             </Box>
           </Container>
         </SnackbarProvider>
