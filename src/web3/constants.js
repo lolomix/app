@@ -1,7 +1,5 @@
 export const TARGET_CHAIN = process.env.REACT_APP_CHAIN;
 export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-export const ETHERSCAN_KEY = process.env.REACT_APP_ETHERSCAN_KEY;
-export const BLOCKNATIVE_DAPPID = process.env.REACT_APP_BLOCKNATIVE_DAPPID;
 export const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 export const ETHER_IN_WEI = 1000000000000000000;
 export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
