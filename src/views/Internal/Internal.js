@@ -57,7 +57,12 @@ function Internal({ t }) {
       action: <ToastLoadingIndeterminate />,
     });
     try {
-      const result = await contractErc721.methods[method](parameter).send({ from: account, gas: 10000000 });
+      let result;
+      if(parameter) {
+        result = await contractErc721.methods[method](parameter).send({ from: account, gas: 10000000 });
+      } else {
+        result = await contractErc721.methods[method]().send({ from: account, gas: 10000000 });
+      }
       console.log(result);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Success", {
@@ -98,6 +103,8 @@ function Internal({ t }) {
           dataTemp.totalSupply = result;
           result = await contractErc721.methods.symbol().call();
           dataTemp.symbol = result;
+          result = await contractErc721.methods.owner().call();
+          dataTemp.owner = result;
           setData(dataTemp);
         } catch (e) {
           console.log(e);
@@ -245,6 +252,17 @@ function Internal({ t }) {
                   </InputAdornment>
                 }
               />
+              <Typography variant="h4">withdrawFunds</Typography>
+              <Typography variant="body2">...</Typography>
+              <Button
+                variant="contained"
+                edge="end"
+                disabled={isLoading}
+                onClick={() => {
+                  deploy("withdrawFunds");
+                }}>
+                Withdraw Funds Now
+              </Button>
             </Grid>
             <Grid item sm={12} md={6}>
               <Typography variant="h4">Addresses (parameters)</Typography>
@@ -284,6 +302,11 @@ function Internal({ t }) {
               <Typography variant="body2">Decimals: </Typography>
               <Typography variant="body2" gutterBottom>
                 ...
+              </Typography>
+              <Typography variant="h4">Stats Basics</Typography>
+              <Typography variant="body2">Admin Account: </Typography>
+              <Typography variant="body2" gutterBottom>
+                {data.owner ? data.owner : "DATA UNAVAILABLE"}
               </Typography>
             </Grid>
           </Grid>
