@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.2",
   "private": true,
-  "homepage": "https://cryptochefs.github.io/",
+  "homepage": "https://app.cryptochefs.io/",
   "engines": {
     "npm": "please-use-yarn",
     "node": "16.13",
