@@ -62,9 +62,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Contribution Guidelines
-
-Please read out [Contribution Guidelines](CONTRIBUTING.md) for more information. 
+## How to Contribute?
+ - [Contribution Guidelines](CONTRIBUTING.md)
+ - [Style Guide](STYLEGUIDE.md) 
 
 ## Learn More
 
