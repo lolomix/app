@@ -1,12 +1,34 @@
-# Cryptochefs main app
+# CryptoChefs - Main App
 
-This is the source code of the main app of cryptochefs, including store, kitchen and buffet.
+This is the source code of the main app of CryptoChefs - including but not limited to market, kitchen and the buffet.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+We do not currently have a dockerized environment, so the easiest way to run the app is on your local machine. 
+The app can be up and running in minutes as long as you have all the requirements. 
+
+### Environmental Requirements
+
+These packages must be installed globally on your machine.
+  - Node > 16.13
+  - Yarn >= 1.19.1
+
+### App Dependencies
+
+Please install the dependencies of the app and try to keep it up to date for the best experience. 
+Running `yarn install` will install/update all the packages that the app needs according to the `yarn.lock` file.
+
+### Running the App
+
+Run the `yarn start` in order to run the app in development mode. It supports hot reloading, feel free to edit the
+files while the app is running. You should be able to see most of the changes instantly. If not, however, then you can 
+always close the app and then start it again.
+
+## Available Commands
+
+In the project directory, you can run the following commands:
 
 ### `yarn start`
 
@@ -30,6 +52,10 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Contribution Guidelines
+
+Please read out [Contribution Guidelines](CONTRIBUTING.md) for more information. 
 
 ## Learn More
 
@@ -60,10 +86,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## I18n / translations
-
-To handle translations, install i18next-scanner globally: `nnpm install -g i18next-scanner`.
-
-Next, run `i18next-scanner` to update all translation json files
-
