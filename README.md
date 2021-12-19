@@ -15,6 +15,15 @@ These packages must be installed globally on your machine.
   - Node > 16.13
   - Yarn >= 1.19.1
 
+### The .env file
+
+We use dotenv to provide all the environmental files to the application. There is an `.env.sample` file 
+in the repository that is almost ready for local development. 
+
+1. Please make copy of this file and name it `.env` by running the `cp .env.sample .env` command on macOS or Linux.
+2. Replace the `{ADD_INFURA_ID}` placeholder with an INFURA ID. You can use your own key or we can provide one for you. Please ask one of the members.
+
+
 ### App Dependencies
 
 Please install the dependencies of the app and try to keep it up to date for the best experience. 
