@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "test",
+      "target": "app",
       "public": "build",
       "rewrites": [
         {
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "target": "app",
+      "target": "test",
       "public": "build",
       "rewrites": [
         {
