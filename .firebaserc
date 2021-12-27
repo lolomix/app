@@ -5,11 +5,11 @@
   "targets": {
     "cryptochefsio": {
       "hosting": {
-        "test": [
-          "cryptochefstest"
-        ],
         "app": [
           "maindapp"
+        ],
+        "test": [
+          "cryptochefstest"
         ]
       }
     }
