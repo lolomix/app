@@ -1,3 +1,5 @@
+![Deploy on Live Channel](https://github.com/cryptoChefs/app/actions/workflows/deploy-to-firebase-hosting.yml/badge.svg?event=release)
+
 # CryptoChefs - Main App
 
 This is the source code of the main app of CryptoChefs - including but not limited to market, kitchen and the buffet.
