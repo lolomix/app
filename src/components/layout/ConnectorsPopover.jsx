@@ -150,6 +150,7 @@ function ConnectorsPopover(props) {
         <Stack spacing={2}>
           {Object.keys(connectorsList).map((key) => (
             <Tooltip
+              key={key}
               title={t(isCurrentConnector(key) ? "base.connectedWith" : "base.connectWith", {
                 connector: connectorsList[key].name
               })}
