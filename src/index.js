@@ -9,12 +9,17 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
 // components
 import AppLaunch from './AppLaunch'
+import { DAppProvider } from '@usedapp/core'
 const App = lazy(() => import("./App"));
+
+const config = {}
 
 ReactDOM.render(
   <BrowserRouter>
     <Suspense fallback={<AppLaunch />}>
-      <App/>
+      <DAppProvider config={config}>
+        <App/>
+      </DAppProvider>
     </Suspense>
   </BrowserRouter>,
   document.getElementById('root'),

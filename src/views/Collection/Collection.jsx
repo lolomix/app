@@ -1,7 +1,7 @@
 import React  from 'react'
 import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 // material-ui
 import { Box, Container, Grid, Skeleton } from '@mui/material'
 // custom
@@ -22,7 +22,7 @@ import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
  * @todo refactor and get rid of if hell in jsx
  */
 function Collection () {
-  const { active, error } = useWeb3React();
+  const { active, error } = useEthers();
 
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
   const nfts = useTokensOfOwner(tokenAbi, tokenAddress)

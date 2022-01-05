@@ -1,7 +1,7 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import Blockies from 'react-blockies'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 //mui
 import {
   Tooltip,
@@ -34,7 +34,7 @@ const popoverOriginProps = {
 }
 
 function WalletSelector({ t }) {
-  const { active, account } = useWeb3React();
+  const { active, account } = useEthers();
 
   const connectorsPopoverState = usePopupState({
     variant: 'popover',

@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 //import ToastLoading from "../../components/notification/ToastLoading";
 //import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 //web3
-import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
+import { UnsupportedChainIdError } from "@web3-react/core";
 import { NoEthereumProviderError, UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from "@web3-react/walletconnect-connector";
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from "@web3-react/frame-connector";
@@ -89,7 +89,7 @@ function getErrorMessage(error) {
 }
 
 function ChainId() {
-  const { chainId } = useWeb3React();
+  const { chainId } = useEthers();
   return (
     <>
       <span>Chain Id</span>
@@ -102,7 +102,7 @@ function ChainId() {
 }
 
 function Account() {
-  const { account } = useWeb3React();
+  const { account } = useEthers();
 
   return (
     <>
@@ -116,7 +116,7 @@ function Account() {
 }
 
 function Balance() {
-  const { account, library, chainId } = useWeb3React();
+  const { account, library, chainId } = useEthers();
 
   const [balance, setBalance] = React.useState();
   React.useEffect(() => {
@@ -153,7 +153,7 @@ function Balance() {
 }
 
 function Header() {
-  const { active, error } = useWeb3React();
+  const { active, error } = useEthers();
 
   return (
     <>
@@ -176,7 +176,7 @@ function Header() {
 }
 
 function App() {
-  const context = useWeb3React();
+  const context = useEthers();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
 
   // handle logic to recognize the connector currently being activated

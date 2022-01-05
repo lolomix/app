@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 import { convertToDesiredIpfsURL, isValidURL } from '../utils/url'
 import placeholder from '../assets/components/web3/nft-card/placeholder.png'
 
@@ -30,7 +30,7 @@ async function fetchMetadataByTokenURI (uri) {
  * @returns {undefined}
  */
 export function useNFTWithMetadata(tokenAbi, tokenAddress, tokenID) {
-  const { account, library } = useWeb3React()
+  const { account, library } = useEthers()
   const [NFT, setNFT] = useState()
 
   useEffect(() => {

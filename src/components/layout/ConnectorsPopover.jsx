@@ -1,4 +1,3 @@
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { withTranslation } from 'react-i18next'
 // material-ui
 import {
@@ -18,6 +17,8 @@ import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
 import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
 import WalletLedgerIcon from '../icons/WalletLedgerIcon'
 import { useState } from 'react'
+import { useEthers } from '@usedapp/core'
+import { UnsupportedChainIdError } from '@web3-react/core'
 
 /**
  * @param props
@@ -27,7 +28,7 @@ import { useState } from 'react'
 function ConnectorsPopover(props) {
   const { t, closePopover, ...rest } = props
 
-  const { connector, activate, error, chainId } = useWeb3React();
+  const { connector, activate, error, chainId } = useEthers()
   const triedEager = useEagerConnect();
 
   const [activatingConnector, setActivatingConnector] = useState();

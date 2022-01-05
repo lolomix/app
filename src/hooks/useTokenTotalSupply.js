@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 
 /**
  * Returns the total amount of tokens stored by the contract.
@@ -9,7 +9,7 @@ import { useWeb3React } from '@web3-react/core'
  * @returns {undefined}
  */
 export function useTokenTotalSupply(tokenAbi, tokenAddress) {
-  const { account, library } = useWeb3React()
+  const { account, library } = useEthers()
   const [totalSupply, setTotalSupply] = useState()
 
   useEffect(() => {

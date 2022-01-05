@@ -10,7 +10,7 @@ import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import FAQ from '../../components/common/FAQ'
 import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 
 /**
  * @param t
@@ -18,7 +18,7 @@ import { useWeb3React } from '@web3-react/core'
  * @constructor
  */
 function Market ({ t }) {
-  const { active, error } = useWeb3React();
+  const { active, error } = useEthers();
 
   return (
     <>

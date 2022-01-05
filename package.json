@@ -17,11 +17,13 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
+    "@ethersproject/units": "^5.5.0",
     "@fontsource/balsamiq-sans": "^4.5.0",
     "@mui/icons-material": "^5.0.1",
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.1.1",
     "@pinata/ipfs-gateway-tools": "^1.1.6",
+    "@usedapp/core": "^0.7.3",
     "@web3-react/abstract-connector": "^6.0.7",
     "@web3-react/authereum-connector": "^6.2.0",
     "@web3-react/core": "^6.1.9",

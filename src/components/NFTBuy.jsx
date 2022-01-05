@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core';
 import { useSnackbar } from "notistack";
 // material-ui
 import {
@@ -29,7 +29,8 @@ import { getErrorMessage } from "../web3/errors";
 import { theme } from '../utils/theme'
 
 function NFTBuy({ t }) {
-  const { account, library, error, active } = useWeb3React();
+  const { account, library, error, active } = useEthers();
+  console.log(library)
   const [sold, setSold] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [price, setPrice] = useState(0);

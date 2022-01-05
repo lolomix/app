@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
 import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
 
@@ -11,7 +11,7 @@ import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
 export function useAROMAPrice() {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
 
-  const { account, library } = useWeb3React()
+  const { account, library } = useEthers()
   const [price, setPrice] = useState()
 
   useEffect(() => {

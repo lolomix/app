@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 
 /**
  * @param tokenAbi
@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core'
  * @returns {undefined}
  */
 export function useTokensOfOwner(tokenAbi, tokenAddress) {
-  const { account, library } = useWeb3React()
+  const { account, library } = useEthers()
   const [tokens, setTokens] = useState()
 
   useEffect(() => {

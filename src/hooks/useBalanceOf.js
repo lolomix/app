@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 
 /**
  * Returns the current price of an ERC20 token
@@ -11,7 +11,7 @@ import { useWeb3React } from '@web3-react/core'
  * @returns {undefined}
  */
 export function useBalanceOf(tokenAbi, tokenAddress, tokenDecimals = null, targetAccount) {
-  const { account, library } = useWeb3React()
+  const { account, library } = useEthers()
   const [balance, setBalance] = useState()
 
   targetAccount = targetAccount ?? account

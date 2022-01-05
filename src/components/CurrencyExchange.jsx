@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core';
 import { useSnackbar } from "notistack";
 // material-ui
 import { LoadingButton } from "@mui/lab";
@@ -36,7 +36,7 @@ import { useAROMAPrice } from '../hooks/useAROMAPrice'
  * @constructor
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
-  const { account, library, error, active } = useWeb3React();
+  const { account, library, error, active } = useEthers();
   const price = useAROMAPrice();
   const [successDialog, setSuccessDialog] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

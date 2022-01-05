@@ -1,5 +1,5 @@
 import React from "react";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core'
 import { utils } from "web3";
 import Skeleton from "@mui/material/Skeleton";
 
@@ -7,7 +7,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { formatCurrency } from "../../utils/formatters";
 
 const Balance = function () {
-  const { account, library, chainId } = useWeb3React();
+  const { account, library, chainId } = useEthers();
 
   const [balance, setBalance] = React.useState();
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core';
 // material-ui
 import { Box, CardContent, Card, LinearProgress, Grid, Typography } from '@mui/material'
 import { ContactSupport } from '@mui/icons-material';
@@ -11,7 +11,7 @@ import { getErrorMessage} from "../web3/errors";
 
 function MarketSteps({ t, step }) {
 
-  const { error } = useWeb3React();
+  const { error } = useEthers();
 
   const stepMap = {
     "buy-aroma": {

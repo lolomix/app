@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core';
 import { withTranslation } from "react-i18next";
 //import { utils } from "web3";
 import mainProxyAbi from "../../web3/abi/CryptoChefsERC721Facet.json";

@@ -1,12 +1,12 @@
 import React from "react";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core'
 import {
     Button, Tooltip
   } from '@mui/material'
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
 const ButtonAddAssetToWallet = function () {
-  const { library } = useWeb3React();
+  const { library } = useEthers();
 
   const walletWatchAsset = () => {
     if (!!library && window.ethereum) {

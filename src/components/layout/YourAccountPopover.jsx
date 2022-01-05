@@ -1,7 +1,7 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import Blockies from 'react-blockies'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 // material-ui
 import {
   Avatar,
@@ -31,7 +31,7 @@ import { truncate } from '../../utils/formatters'
 
 function YourAccountPopover(props) {
   const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props
-  const { account, deactivate } = useWeb3React();
+  const { account, deactivate } = useEthers();
 
   return (
     <Popover {...rest} anchorEl={anchorEl}>

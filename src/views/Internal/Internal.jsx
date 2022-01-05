@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core'
 import { useSnackbar } from "notistack";
 // material-ui
 import { Box, Container, OutlinedInput, Button, InputAdornment, Grid, Typography } from "@mui/material";
@@ -13,7 +13,7 @@ import ToastLoading from "../../components/notification/ToastLoading";
 import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 
 function Internal({ t }) {
-  const { account, library, chainId } = useWeb3React();
+  const { account, library, chainId } = useEthers();
   const [isLoading, setIsLoading] = useState(false);
   const [contractErc721, setContractErc721] = useState(false);
   const [contractAroma, setContractAroma] = useState(false);
