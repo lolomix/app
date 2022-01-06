@@ -25,12 +25,11 @@ import {
   NETWORKS,
   TARGET_CHAIN
 } from '../../web3/constants'
-import ToastLoading from "../notification/ToastLoading";
-import ToastLoadingIndeterminate from "../notification/ToastLoadingIndeterminate";
 import { formatCurrency } from "../../utils/formatters";
 import { getErrorMessage } from "../../web3/errors";
 import { useAROMAPrice } from '../../hooks/useAROMAPrice'
 import { useAROMABuy } from '../../hooks/useAROMABuy'
+import SnackbarAction from '../notifications/SnackbarAction'
 
 /**
  * @param t
@@ -91,8 +90,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     if (aromaBuyState.status === 'Exception') {
       setTransactionInProgress(false);
       enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
     }
 
@@ -102,9 +100,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
 
     if (aromaBuyState.status === 'Success') {
       setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      enqueueSnackbar("Transaction was successful", {
+        variant: "success"
       });
       setSuccessDialog(true)
     }
@@ -126,7 +123,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
       {
         variant: 'warning',
         persist: true,
-        action: <ToastLoadingIndeterminate/>,
+        action: <SnackbarAction/>
       }
     )
   }, [transactionInProgress])
@@ -137,8 +134,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const handleExchange = async () => {
     if (isNaN(currencyToAmount) || currencyToAmount % 1 !== 0 || currencyToAmount < 5 || currencyToAmount > 10000) {
       enqueueSnackbar('Invalid input amount', {
-        variant: 'error',
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar}/>,
+        variant: 'error'
       })
 
       return
@@ -147,15 +143,14 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
       variant: "warning",
       persist: true,
-      action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      action: <SnackbarAction/>
     });
 
     try {
       await sendAromaBuy(currencyToAmount, { value: currencyToAmount * price });
     } catch (error) {
       enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
 
     }

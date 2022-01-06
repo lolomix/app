@@ -10,8 +10,6 @@ import Grid from "@mui/material/Grid";
 //import ListItemText from "@mui/material/ListItemText";
 //import Card from "@mui/material/Card";
 //import CardContent from "@mui/material/CardContent";
-//import ToastLoading from "../../components/notification/ToastLoading";
-//import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
 //web3
 import { UnsupportedChainIdError } from "@web3-react/core";
 import { NoEthereumProviderError, UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";

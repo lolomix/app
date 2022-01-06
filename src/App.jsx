@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
-import { SnackbarProvider } from 'notistack'
 // fonts
 import '@fontsource/balsamiq-sans/400.css'
 import '@fontsource/balsamiq-sans/700.css'
@@ -19,6 +18,7 @@ import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 import { Helmet } from 'react-helmet'
 import Version from './components/layout/Version'
+import SnackbarProvider from './components/notifications/SnackbarProvider'
 // pages (lazy loading)
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
@@ -28,31 +28,7 @@ const Internal = lazy(() => import('./views/Internal/Internal'))
 function App () {
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        maxSnack={3}
-        autoHideDuration={6000}
-        classes={{
-          variantSuccess: {
-            backgroundImage: 'linear-gradient(90deg,' + green[700] + ',' +
-              green[500] + ')',
-          },
-          variantError: {
-            backgroundImage: 'linear-gradient(90deg,' + red[700] + ',' +
-              red[400] + ')',
-          },
-          variantWarning: {
-            backgroundImage: 'linear-gradient(90deg,' + blue[700] + ',' +
-              blue[500] + ')',
-          },
-          variantInfo: {
-            backgroundImage: 'linear-gradient(90deg,' + blue[700] + ',' +
-              blue[500] + ')',
-          },
-        }}>
+      <SnackbarProvider>
         <Helmet titleTemplate="CryptoChefs | %s">
           <title>Create Crypto Recipes and Start Earning!</title>
         </Helmet>

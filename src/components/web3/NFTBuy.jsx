@@ -20,8 +20,6 @@ import {
 import { LoadingButton } from '@mui/lab'
 // custom
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import ToastLoading from "../notification/ToastLoading";
-import ToastLoadingIndeterminate from "../notification/ToastLoadingIndeterminate";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { getErrorMessage } from "../../web3/errors";
 import { theme } from '../../utils/theme'
@@ -31,6 +29,7 @@ import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
 import { useCHEFTotalSupply } from '../../hooks/useCHEFTotalSupply'
 import { useAROMAApprove } from '../../hooks/useAROMAApprove'
 import { useCHEFBuy } from '../../hooks/useCHEFBuy'
+import SnackbarAction from '../notifications/SnackbarAction'
 
 function NFTBuy({ t }) {
   const { error, active } = useEthers();
@@ -70,8 +69,7 @@ function NFTBuy({ t }) {
     if (aromaApprovalState.status === 'Exception') {
       setTransactionInProgress(false);
       enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
     }
 
@@ -82,8 +80,7 @@ function NFTBuy({ t }) {
     if (aromaApprovalState.status === 'Success') {
       setTransactionInProgress(false);
       enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "success"
       });
     }
   }, [ aromaApprovalState, closeSnackbar, enqueueSnackbar])
@@ -95,15 +92,14 @@ function NFTBuy({ t }) {
     walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
       variant: "warning",
       persist: true,
-      action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      action: <SnackbarAction/>
     });
 
     try {
       await sendAromaApproval(contractAddressChef, price);
     } catch (error) {
       enqueueSnackbar("Error", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
     }
   };
@@ -123,8 +119,7 @@ function NFTBuy({ t }) {
     if (chefBuyState.status === 'Exception') {
       setTransactionInProgress(false);
       enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
     }
 
@@ -135,8 +130,7 @@ function NFTBuy({ t }) {
     if (chefBuyState.status === 'Success') {
       setTransactionInProgress(false);
       enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "success"
       });
     }
   }, [ chefBuyState, closeSnackbar, enqueueSnackbar ])
@@ -148,15 +142,14 @@ function NFTBuy({ t }) {
     walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
       variant: "warning",
       persist: true,
-      action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+      action: <SnackbarAction/>
     });
 
     try {
       await sendChefBuy();
     } catch (error) {
       enqueueSnackbar("Error", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
     }
   };
@@ -177,7 +170,7 @@ function NFTBuy({ t }) {
       {
         variant: 'warning',
         persist: true,
-        action: <ToastLoadingIndeterminate/>,
+        action: <SnackbarAction/>
       }
     )
   }, [transactionInProgress])
