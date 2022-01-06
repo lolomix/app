@@ -1,21 +1,19 @@
 import React  from 'react'
-import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { useEthers } from '@usedapp/core'
 // material-ui
 import { Box, Container, Grid, Skeleton } from '@mui/material'
 // custom
+import { Helmet } from 'react-helmet'
+import { useEthers } from '@usedapp/core'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import NFTCard from '../../components/web3/NFTCard'
 import FAQ from '../../components/common/FAQ'
 import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
-import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
-import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
 import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
 import { useCHEFOfOwner } from '../../hooks/useCHEFofOwner'
-import { BigNumber } from 'ethers'
+import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
+import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 
 /**
  * @returns {JSX.Element}

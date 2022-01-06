@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useContractCall, useEthers } from '@usedapp/core'
+import { useContractCall } from '@usedapp/core'
 import { convertToDesiredIpfsURL, isValidURL } from '../utils/url'
 import placeholder from '../assets/components/web3/nft-card/placeholder.png'
 import { utils } from 'ethers'
