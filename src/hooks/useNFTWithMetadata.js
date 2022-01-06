@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useEthers } from '@usedapp/core'
+import { useContractCall, useEthers } from '@usedapp/core'
 import { convertToDesiredIpfsURL, isValidURL } from '../utils/url'
 import placeholder from '../assets/components/web3/nft-card/placeholder.png'
+import { utils } from 'ethers'
 
 /**
  * @param uri
@@ -24,50 +25,46 @@ async function fetchMetadataByTokenURI (uri) {
 }
 
 /**
- * @param tokenAbi
- * @param tokenAddress
- * @param tokenID
- * @returns {undefined}
+ * @param abi
+ * @param address
+ * @param id
+ * @returns {undefined|any}
  */
-export function useNFTWithMetadata(tokenAbi, tokenAddress, tokenID) {
-  const { account, library } = useEthers()
+export function useNFTWithMetadata(abi, address, id) {
+  const abiInterface = new utils.Interface(abi)
   const [NFT, setNFT] = useState()
 
+  const [tokenURI] = useContractCall(
+    address && {
+      abi: abiInterface,
+      address: address,
+      method: "tokenURI",
+      args: [id]
+    }
+  ) ?? [undefined];
+
   useEffect(() => {
+    async function loadNFTMetadata() {
 
-    // early return if no connection to blockchain
-    if (!account || !library) {
-      return
-    }
+      if (tokenURI === undefined) return
 
-    async function loadNFT() {
-      try {
-        const contract = new library.eth.Contract(tokenAbi, tokenAddress);
+      let metadata = await fetchMetadataByTokenURI(tokenURI)
 
-        let tokenURI = await contract.methods.tokenURI(tokenID).call({ from: account })
-
-        let metadata = await fetchMetadataByTokenURI(tokenURI)
-
-        if (metadata.image && isValidURL(metadata.image)) {
-          metadata.image = convertToDesiredIpfsURL(metadata.image)
-        } else {
-          metadata.image = placeholder
-        }
-
-        setNFT({
-          tokenID: tokenID,
-          tokenURI: tokenURI,
-          metadata: metadata
-        })
-
-      } catch (e) {
-        console.log(e);
+      if (metadata.image && isValidURL(metadata.image)) {
+        metadata.image = convertToDesiredIpfsURL(metadata.image)
+      } else {
+        metadata.image = placeholder
       }
-    }
-    loadNFT();
 
-  }, [account, library, tokenAbi, tokenID, tokenAddress])
+      setNFT({
+        tokenID: id,
+        tokenURI: tokenURI,
+        metadata: metadata
+      })
+    }
+
+    loadNFTMetadata()
+  }, [abi, id, address, tokenURI])
 
   return NFT
 }
-

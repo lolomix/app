@@ -14,6 +14,8 @@ import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
 import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
+import { useCHEFOfOwner } from '../../hooks/useCHEFofOwner'
+import { BigNumber } from 'ethers'
 
 /**
  * @returns {JSX.Element}
@@ -25,7 +27,7 @@ function Collection () {
   const { active, error } = useEthers();
 
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
-  const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
+  const nfts = useCHEFOfOwner()
 
   return (
     <>
@@ -50,15 +52,15 @@ function Collection () {
                 nfts.length ? (
                   <Grid item md={12} lg={10} container spacing={5}>
                     {nfts.map((tokenID, index) => (
-                      <Grid key={tokenID} item sm={12} md={6}>
+                      <Grid key={tokenID.toString()} item sm={12} md={6}>
                         <a target="_blank"
                            rel="noreferrer nofollow"
-                           href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
+                           href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID.toString()}`}
                            style={{ textDecoration: 'none' }}
                         >
                           <NFTCard tokenAbi={tokenAbi}
                                    tokenAddress={tokenAddress}
-                                   tokenID={tokenID}
+                                   tokenID={tokenID.toNumber()}
                                    lazyLoad={index > 2}
                           />
                         </a>

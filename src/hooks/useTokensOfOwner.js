@@ -1,36 +1,23 @@
-import { useEffect, useState } from 'react'
-import { useEthers } from '@usedapp/core'
+import { useContractCall, useEthers } from '@usedapp/core'
+import { utils } from 'ethers'
 
 /**
- * @param tokenAbi
- * @param tokenAddress
- * @returns {undefined}
+ * @param abi
+ * @param address
+ * @returns {(any)[]|*[]}
  */
-export function useTokensOfOwner(tokenAbi, tokenAddress) {
-  const { account, library } = useEthers()
-  const [tokens, setTokens] = useState()
+export function useTokensOfOwner(abi, address) {
+  const abiInterface = new utils.Interface(abi)
+  const { account } = useEthers()
 
-  useEffect(() => {
-
-    // early return if no connection to blockchain
-    if (!account || !library) {
-      return
+  const [tokens] = useContractCall(
+    address && {
+      abi: abiInterface,
+      address: address,
+      method: "tokensOfOwner",
+      args: [account]
     }
-
-    async function loadTokens() {
-      try {
-        const contract = new library.eth.Contract(tokenAbi, tokenAddress);
-        const tokens = await contract.methods.tokensOfOwner(account).call({ from: account });
-
-        setTokens(tokens)
-
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    loadTokens();
-
-  }, [account, library, tokenAbi, tokenAddress])
+  ) ?? [];
 
   return tokens
 }

@@ -29,4 +29,5 @@ export function useTokenTotalSupply(tokenAddress, tokenAbi = null) {
   const totalSupplyFormatted = totalSupply.toNumber()
 
   return [ totalSupply, totalSupplyFormatted ]
+
 }
