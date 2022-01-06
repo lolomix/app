@@ -1,39 +1,32 @@
-import { useEffect, useState } from 'react'
-import { useEthers } from '@usedapp/core'
+import { useContractCall } from '@usedapp/core'
+import { ERC20Interface } from '@usedapp/core'
+import { utils } from 'ethers'
 
 /**
  * Returns the total amount of tokens stored by the contract.
  *
- * @param tokenAbi
  * @param tokenAddress
- * @returns {undefined}
+ * @returns {any}
  */
-export function useTokenTotalSupply(tokenAbi, tokenAddress) {
-  const { account, library } = useEthers()
-  const [totalSupply, setTotalSupply] = useState()
+export function useTokenTotalSupply(tokenAddress, tokenAbi = null) {
+  let abiInterface = ERC20Interface
 
-  useEffect(() => {
+  if (tokenAbi !== null) {
+    abiInterface = new utils.Interface(tokenAbi)
+  }
 
-    // early return if no connection to blockchain
-    if (!account || !library) {
-      return
+  const [totalSupply] = useContractCall(
+    tokenAddress && {
+      abi: abiInterface,
+      address: tokenAddress,
+      method: "totalSupply",
+      args: []
     }
+  ) ?? [];
 
-    async function loadTotalSupply() {
-      try {
-        const contract = new library.eth.Contract(tokenAbi, tokenAddress);
-        const totalSupply = await contract.methods.totalSupply().call();
+  if (totalSupply === undefined) return []
 
-        setTotalSupply(totalSupply)
+  const totalSupplyFormatted = totalSupply.toNumber()
 
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    loadTotalSupply();
-
-  }, [account, library, tokenAbi, tokenAddress])
-
-  return totalSupply
+  return [ totalSupply, totalSupplyFormatted ]
 }
-

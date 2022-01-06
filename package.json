@@ -17,6 +17,7 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
+    "@ethersproject/contracts": "^5.5.0",
     "@ethersproject/units": "^5.5.0",
     "@fontsource/balsamiq-sans": "^4.5.0",
     "@mui/icons-material": "^5.0.1",
@@ -42,6 +43,7 @@
     "babel-plugin-direct-import": "^1.0.0",
     "caniuse-lite": "^1.0.30001263",
     "date-fns": "^2.24.0",
+    "ethers": "^5.5.2",
     "i18next": "^17.3.1",
     "i18next-browser-languagedetector": "^3.1.1",
     "isomorphic-fetch": "^3.0.0",

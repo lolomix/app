@@ -1,19 +1,20 @@
-import { useTokenTotalSupply } from './useTokenTotalSupply'
-import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import tokenAbi from "../web3/abi/CryptoChefsERC721Facet.json";
 import { useCHEFSeasonSupply } from './useCHEFSeasonSupply'
+import { useCHEFTotalSupply } from './useCHEFTotalSupply'
 
 /**
  * Returns the remaining amount of CHEFs for sale in the Season.
  *
  * @returns {undefined}
  */
-export function useCHEFSeasonRemaining() {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+export function useCHEFSeasonRemaining () {
+  const [totalSupply] = useCHEFTotalSupply()
+  const [seasonSupply] = useCHEFSeasonSupply()
 
-  const totalSupply = useTokenTotalSupply(tokenAbi, tokenAddress)
-  const seasonSupply = useCHEFSeasonSupply()
+  if (seasonSupply === undefined || totalSupply === undefined) return []
 
-  return (seasonSupply - totalSupply);
+  const seasonRemaining = seasonSupply.sub(totalSupply)
+  const seasonRemainingFormatted = seasonRemaining.toNumber()
+
+  return [seasonRemaining, seasonRemainingFormatted]
 }
 
