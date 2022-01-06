@@ -19,18 +19,18 @@ import {
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 // custom
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
-import ToastLoading from "./notification/ToastLoading";
-import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
-import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
-import { getErrorMessage } from "../web3/errors";
-import { theme } from '../utils/theme'
-import { useCHEFPrice } from '../hooks/useCHEFPrice'
-import { formatCurrency } from '../utils/formatters'
-import { useCHEFSeasonRemaining } from '../hooks/useCHEFSeasonRemaining'
-import { useCHEFTotalSupply } from '../hooks/useCHEFTotalSupply'
-import { useAROMAApprove } from '../hooks/useAROMAApprove'
-import { useCHEFBuy } from '../hooks/useCHEFBuy'
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import ToastLoading from "../notification/ToastLoading";
+import ToastLoadingIndeterminate from "../notification/ToastLoadingIndeterminate";
+import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
+import { getErrorMessage } from "../../web3/errors";
+import { theme } from '../../utils/theme'
+import { useCHEFPrice } from '../../hooks/useCHEFPrice'
+import { formatCurrency } from '../../utils/formatters'
+import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
+import { useCHEFTotalSupply } from '../../hooks/useCHEFTotalSupply'
+import { useAROMAApprove } from '../../hooks/useAROMAApprove'
+import { useCHEFBuy } from '../../hooks/useCHEFBuy'
 
 function NFTBuy({ t }) {
   const { error, active } = useEthers();

@@ -20,17 +20,17 @@ import {
   DialogActions,
 } from '@mui/material'
 // custom
-import CurrencyInputField from "./form/CurrencyInputField";
+import CurrencyInputField from "../form/CurrencyInputField";
 import {
   NETWORKS,
   TARGET_CHAIN
-} from '../web3/constants'
-import ToastLoading from "./notification/ToastLoading";
-import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
-import { formatCurrency } from "../utils/formatters";
-import { getErrorMessage } from "../web3/errors";
-import { useAROMAPrice } from '../hooks/useAROMAPrice'
-import { useAROMABuy } from '../hooks/useAROMABuy'
+} from '../../web3/constants'
+import ToastLoading from "../notification/ToastLoading";
+import ToastLoadingIndeterminate from "../notification/ToastLoadingIndeterminate";
+import { formatCurrency } from "../../utils/formatters";
+import { getErrorMessage } from "../../web3/errors";
+import { useAROMAPrice } from '../../hooks/useAROMAPrice'
+import { useAROMABuy } from '../../hooks/useAROMABuy'
 
 /**
  * @param t
