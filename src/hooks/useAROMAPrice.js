@@ -1,41 +1,31 @@
-import { useEffect, useState } from 'react'
-import { useEthers } from '@usedapp/core'
-import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { useContractCall } from '@usedapp/core'
+import { AROMA_DECIMALS_DIGIT, NETWORKS, TARGET_CHAIN } from '../web3/constants'
+import abi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { utils } from 'ethers'
+import { formatUnits } from '@ethersproject/units'
 
 /**
  * Returns the current price of AROMA token
  *
- * @returns {undefined}
+ * @returns {(any|string)[]|*[]}
  */
 export function useAROMAPrice() {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const abiInterface = new utils.Interface(abi)
+  const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
-  const { account, library } = useEthers()
-  const [price, setPrice] = useState()
-
-  useEffect(() => {
-
-    // early return if no connection to blockchain
-    if (!account || !library) {
-      return
+  const [price] = useContractCall(
+    {
+      abi: abiInterface,
+      address: address,
+      method: "getAROMAPrice",
+      args: []
     }
+  ) ?? [];
 
-    async function loadPrice() {
-      try {
-        const contract = new library.eth.Contract(tokenAbi, tokenAddress);
-        const price = await contract.methods.getAROMAPrice().call({ from: account });
+  if (price === undefined) return []
 
-        setPrice(price)
+  const priceFormatted = formatUnits(price, AROMA_DECIMALS_DIGIT)
 
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    loadPrice();
-
-  }, [account, library, tokenAddress])
-
-  return price
+  return [ price, priceFormatted ]
 }
 
