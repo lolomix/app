@@ -4,7 +4,7 @@ import { useCHEFTotalSupply } from './useCHEFTotalSupply'
 /**
  * Returns the remaining amount of CHEFs for sale in the Season.
  *
- * @returns {undefined}
+ * @returns {*[]}
  */
 export function useCHEFSeasonRemaining () {
   const [totalSupply] = useCHEFTotalSupply()
