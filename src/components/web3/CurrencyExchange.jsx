@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { withTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import { useEthers } from '@usedapp/core'
-import { useSnackbar } from "notistack";
+import { useSnackbar } from 'notistack'
 // material-ui
-import { LoadingButton } from "@mui/lab";
+import { LoadingButton } from '@mui/lab'
 import { KeyboardArrowDown, ShowChart } from '@mui/icons-material'
 import {
   Card,
@@ -20,13 +20,13 @@ import {
   DialogActions,
 } from '@mui/material'
 // custom
-import CurrencyInputField from "../form/CurrencyInputField";
+import CurrencyInputField from '../form/CurrencyInputField'
 import {
   NETWORKS,
-  TARGET_CHAIN
+  TARGET_CHAIN,
 } from '../../web3/constants'
-import { formatCurrency } from "../../utils/formatters";
-import { getErrorMessage } from "../../web3/errors";
+import { formatCurrency } from '../../utils/formatters'
+import { getErrorMessage } from '../../web3/errors'
 import { useAROMAPrice } from '../../hooks/useAROMAPrice'
 import { useAROMABuy } from '../../hooks/useAROMABuy'
 import SnackbarAction from '../notifications/SnackbarAction'
@@ -37,96 +37,103 @@ import SnackbarAction from '../notifications/SnackbarAction'
  * @returns {JSX.Element}
  * @constructor
  */
-function CurrencyExchange({ t, enableCurrencySwitch = false }) {
-  const { error, active } = useEthers();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [ price, priceFormatted ] = useAROMAPrice();
+function CurrencyExchange ({ t, enableCurrencySwitch = false }) {
+  const { error, active } = useEthers()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const [price, priceFormatted] = useAROMAPrice()
 
-  let transactionInProgressSnackBar
-  let walletInteractionSnackBar
-
+  let transactionInProgressSnackBarKey = 'transactionInProgress'
+  let walletInteractionSnackBarKey = 'walletInteraction'
 
   /**
    * Definition of the success dialog state
    */
-  const [successDialog, setSuccessDialog] = React.useState(false);
+  const [successDialog, setSuccessDialog] = React.useState(false)
 
   /**
    * Definition of the currency input field amounts/values
    */
-  const [currencyFromAmount, setCurrencyFromAmount] = useState(0);
-  const [currencyToAmount, setCurrencyToAmount] = useState(0);
+  const [currencyFromAmount, setCurrencyFromAmount] = useState(0)
+  const [currencyToAmount, setCurrencyToAmount] = useState(0)
 
   /**
    * Definition of the exchange currencies
    */
-  const [currencyFrom, setCurrencyFrom] = useState("MATIC");
-  const [currencyTo, setCurrencyTo] = useState("AROMA");
+  const [currencyFrom, setCurrencyFrom] = useState('MATIC')
+  const [currencyTo, setCurrencyTo] = useState('AROMA')
 
   React.useEffect(() => {
-    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol);
-  }, []);
+    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol)
+  }, [])
 
   /**
    * Handles the switch of currencies if `enableCurrencySwitch` is enabled
    */
   const switchCurrencies = () => {
     // if currency switch is not enabled return early
-    if (!enableCurrencySwitch) return;
-    setCurrencyTo(currencyFrom);
-    setCurrencyFrom(currencyTo);
-  };
+    if (!enableCurrencySwitch) return
+    setCurrencyTo(currencyFrom)
+    setCurrencyFrom(currencyTo)
+  }
 
   /**
    * Definition of the aroma buy state
    */
-  const [ sendAromaBuy, aromaBuyState ] = useAROMABuy()
+  const [sendAromaBuy, aromaBuyState] = useAROMABuy()
 
   React.useEffect(() => {
     if (aromaBuyState.status === 'None') {
-      setTransactionInProgress(false);
+      setTransactionInProgress(false)
     }
 
     if (aromaBuyState.status === 'Exception') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
     }
 
     if (aromaBuyState.status === 'Mining') {
-      setTransactionInProgress(true);
+      setTransactionInProgress(true)
     }
 
     if (aromaBuyState.status === 'Success') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Transaction was successful", {
-        variant: "success"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Transaction was successful', {
+        variant: 'success',
+      })
       setSuccessDialog(true)
     }
-  }, [ aromaBuyState, closeSnackbar, enqueueSnackbar ])
+  }, [aromaBuyState, closeSnackbar, enqueueSnackbar])
 
   /**
    * Definition of the transaction in progress state
    */
-  const [transactionInProgress, setTransactionInProgress] = React.useState(false);
+  const [transactionInProgress, setTransactionInProgress] = React.useState(
+    false)
 
   React.useEffect(() => {
     if (transactionInProgress === false) {
-      closeSnackbar(transactionInProgressSnackBar)
+      closeSnackbar(transactionInProgressSnackBarKey)
       return
     }
-    closeSnackbar(walletInteractionSnackBar)
-    transactionInProgressSnackBar = enqueueSnackbar(
+    closeSnackbar(walletInteractionSnackBarKey)
+    enqueueSnackbar(
       'Transaction in progress',
       {
+        key: transactionInProgressSnackBarKey,
         variant: 'warning',
         persist: true,
-        action: <SnackbarAction/>
-      }
+        action: <SnackbarAction/>,
+      },
     )
-  }, [transactionInProgress])
+  }, [
+    transactionInProgress,
+    enqueueSnackbar,
+    closeSnackbar,
+    walletInteractionSnackBarKey,
+    transactionInProgressSnackBarKey,
+  ])
 
   /**
    * Handles the actual exchange by triggering a blockchain transaction
@@ -140,18 +147,19 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
       return
     }
 
-    walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
-      variant: "warning",
+    enqueueSnackbar('Waiting for interaction in Wallet', {
+      key: walletInteractionSnackBarKey,
+      variant: 'warning',
       persist: true,
-      action: <SnackbarAction/>
-    });
+      action: <SnackbarAction/>,
+    })
 
     try {
-      await sendAromaBuy(currencyToAmount, { value: currencyToAmount * price });
+      await sendAromaBuy(currencyToAmount, { value: currencyToAmount * price })
     } catch (error) {
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error"
-      });
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
 
     }
   };
@@ -161,9 +169,9 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
    * todo: connect to web3
    */
   const handleCurrencyToUserInput = (event) => {
-    setCurrencyToAmount(event.target.value);
-    setCurrencyFromAmount(event.target.value * priceFormatted);
-  };
+    setCurrencyToAmount(event.target.value)
+    setCurrencyFromAmount(event.target.value * priceFormatted)
+  }
 
   return (
     <Card elevation={3}>
@@ -173,7 +181,15 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             {t("components.CurrencyExchange.title")}
           </Typography>
           <Stack spacing={2.5} alignItems="center">
-            <CurrencyInputField id="token-exchange-from" currency={currencyFrom} label="You Pay" type="sell" value={currencyFromAmount} disabled required />
+            <CurrencyInputField
+              id="token-exchange-from"
+              disabled
+              required
+              currency={currencyFrom}
+              label="You Pay"
+              type="sell"
+              value={currencyFromAmount}
+            />
             <Divider flexItem>
               <Chip
                 size="small"
@@ -197,14 +213,22 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             <Typography variant="body2" gutterBottom>
               Please enter amount between 5 and 10 000
             </Typography>
-            <LoadingButton size="xlarge" variant="contained" fullWidth onClick={handleExchange} loading={transactionInProgress}>
+            <LoadingButton
+              size="xlarge"
+              variant="contained"
+              fullWidth
+              onClick={handleExchange}
+              loading={transactionInProgress}
+            >
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
             <Chip
               label={"For 1 " + NETWORKS[TARGET_CHAIN].nativeCurrency.symbol + " you get " + formatCurrency(1/priceFormatted) + " AROMA tokens."}
               sx={{ margin: "8px 0" }}
               size="small"
-              icon={(enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />}
+              icon={(
+                enableCurrencySwitch && <ShowChart onClick={switchCurrencies} />) || <ShowChart />
+              }
             />
           </Stack>
         </CardContent>
@@ -213,23 +237,38 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           <Typography variant="body2" my={4}>
             {getErrorMessage(error)}
           </Typography>
-          <Button variant="contained" component="a" href="https://cryptochefs.medium.com/" target="_blank" rel="noopener">
+          <Button
+            variant="contained"
+            component="a"
+            href="https://cryptochefs.medium.com/"
+            target="_blank"
+            rel="noopener">
             Learn more
           </Button>
         </CardContent>
       )}
-      <Dialog onClose={() => setSuccessDialog(false)} open={successDialog} maxWidth="md">
+      <Dialog
+        maxWidth="md"
+        onClose={() => setSuccessDialog(false)}
+        open={successDialog}
+      >
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You acquired some AROMA tokens. Check the balance in your account (top right)
+            You acquired some AROMA tokens. Check the balance in your account
+            (top right)
           </Typography>
           <Typography variant="body1" gutterBottom>
             Now go on and get your CryptoChefs NFT!
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button disableElevation onClick={() => setSuccessDialog(false)} variant="contained" color="primary">
+          <Button
+            disableElevation
+            onClick={() => setSuccessDialog(false)}
+            variant="contained"
+            color="primary"
+          >
             {t("base.close")}
           </Button>
         </DialogActions>
