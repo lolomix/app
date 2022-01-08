@@ -29,7 +29,7 @@ import { formatCurrency } from '../../utils/formatters'
 import { getErrorMessage } from '../../web3/errors'
 import { useAROMAPrice } from '../../hooks/useAROMAPrice'
 import { useAROMABuy } from '../../hooks/useAROMABuy'
-import SnackbarAction from '../notifications/SnackbarAction'
+import SnackbarAction from '../snackbars/SnackbarAction'
 
 /**
  * @param t

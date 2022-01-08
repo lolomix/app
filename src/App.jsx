@@ -17,7 +17,7 @@ import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 import { Helmet } from 'react-helmet'
 import Version from './components/layout/Version'
-import SnackbarProvider from './components/notifications/SnackbarProvider'
+import SnackbarProvider from './components/snackbars/SnackbarProvider'
 // pages (lazy loading)
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))

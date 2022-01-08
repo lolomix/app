@@ -9,7 +9,7 @@ import Headline from "../../components/layout/Headline";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../../web3/abi/AROMATokenMatic.json";
-import SnackbarAction from '../../components/notifications/SnackbarAction'
+import SnackbarAction from '../../components/snackbars/SnackbarAction'
 
 function Internal({ t }) {
   const { account, library, chainId } = useEthers();

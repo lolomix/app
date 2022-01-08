@@ -29,7 +29,7 @@ import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
 import { useCHEFTotalSupply } from '../../hooks/useCHEFTotalSupply'
 import { useAROMAApprove } from '../../hooks/useAROMAApprove'
 import { useCHEFBuy } from '../../hooks/useCHEFBuy'
-import SnackbarAction from '../notifications/SnackbarAction'
+import SnackbarAction from '../snackbars/SnackbarAction'
 
 function NFTBuy ({ t }) {
   const { error, active } = useEthers()
