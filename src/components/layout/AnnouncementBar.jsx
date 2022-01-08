@@ -15,7 +15,7 @@ import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
  */
 function AnnouncementBar() {
   const testnet = NETWORKS[TARGET_CHAIN].testnet === true
-  const chefSeasonRemaining = useCHEFSeasonRemaining()
+  const [, chefSeasonRemainingFormatted] = useCHEFSeasonRemaining()
 
   // only show warning on testnet
   if (testnet) {
@@ -26,7 +26,7 @@ function AnnouncementBar() {
     );
   }
 
-  if (chefSeasonRemaining === 0) {
+  if (chefSeasonRemainingFormatted === 0) {
     return (
       <Alert icon={<ChefSilhouetteIcon fontSize="inherit" />}
              variant="filled"
