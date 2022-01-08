@@ -133,7 +133,7 @@ function ConnectorsPopover(props) {
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
             <Typography variant="h5">
-              {t("base.connectToYourWallet")}
+              {t("base.connectToMyWallet")}
             </Typography>
           </Grid>
           <Grid item xs={1}>

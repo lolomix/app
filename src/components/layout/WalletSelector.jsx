@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { AccountBalanceWallet } from '@mui/icons-material'
 //custom
-import YourAccountPopover from './YourAccountPopover'
+import MyAccountPopover from './MyAccountPopover'
 import ConnectorsPopover from './ConnectorsPopover'
 import {
   usePopupState,
@@ -41,31 +41,31 @@ function WalletSelector({ t }) {
     popupId: 'connectorsPopover',
   })
 
-  const yourAccountPopoverState = usePopupState({
+  const myAccountPopoverState = usePopupState({
     variant: 'popover',
-    popupId: 'yourAccountPopover',
+    popupId: 'myAccountPopover',
   })
 
   return (
     <>
       {active && account ? (
           <>
-            <Tooltip disableFocusListener title={t("base.yourAccount")} aria-label={t("base.yourAccount")}>
-              <IconButton color="inherit" {...bindTrigger(yourAccountPopoverState)}>
+            <Tooltip disableFocusListener title={t("base.myAccount")} aria-label={t("base.myAccount")}>
+              <IconButton color="inherit" {...bindTrigger(myAccountPopoverState)}>
                 <Avatar>
                   <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
                 </Avatar>
               </IconButton>
             </Tooltip>
-            <YourAccountPopover
+            <MyAccountPopover
               {...popoverOriginProps}
-              {...bindPopover(yourAccountPopoverState)}
-              closePopover={yourAccountPopoverState.close}
+              {...bindPopover(myAccountPopoverState)}
+              closePopover={myAccountPopoverState.close}
               openConnectorsPopover={connectorsPopoverState.open}
             />
           </>
       ) : (
-        <Tooltip title={t("base.connectToYourWallet")}>
+        <Tooltip title={t("base.connectToMyWallet")}>
           <Button elongatedwidth="true"
                   color="primary"
                   variant="contained"
