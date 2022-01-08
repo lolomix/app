@@ -29,7 +29,7 @@ import ChefBalance from '../web3/ChefBalance'
 import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
 import { truncate } from '../../utils/formatters'
 
-function YourAccountPopover(props) {
+function MyAccountPopover(props) {
   const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props
   const { account, deactivate } = useEthers();
 
@@ -39,7 +39,7 @@ function YourAccountPopover(props) {
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
             <Typography variant="h5">
-              {t('base.yourAccount')}
+              {t('base.myAccount')}
             </Typography>
           </Grid>
           <Grid item xs={1}>
@@ -60,7 +60,7 @@ function YourAccountPopover(props) {
               <VerifyExplorerIconButton address={account} />
             }
           >
-            <Tooltip disableFocusListener title={t("base.yourAccount")}>
+            <Tooltip disableFocusListener title={t("base.myAccount")}>
               <ListItemAvatar>
                 <Avatar>
                   <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
@@ -154,4 +154,4 @@ function YourAccountPopover(props) {
   )
 }
 
-export default withTranslation()(YourAccountPopover)
+export default withTranslation()(MyAccountPopover)

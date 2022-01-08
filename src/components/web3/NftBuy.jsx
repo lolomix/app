@@ -303,7 +303,7 @@ function NftBuy ({ t }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You bought a CryptoChefs NFT. Click on your account (top right) to see the ID of your CHEF.
+            You bought a CryptoChefs NFT. Click on my account (top right) to see the ID of your CHEF.
           </Typography>
           <Typography variant="body1" gutterBottom>
             Please check our Discord server to learn when the NFTs will be revealed.
