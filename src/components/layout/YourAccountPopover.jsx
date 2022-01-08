@@ -20,7 +20,7 @@ import {
 } from '@mui/material'
 import { Check, Close, Settings } from '@mui/icons-material'
 // custom
-import IconButtonVerifyExplorer from '../web3/IconButtonVerifyExplorer'
+import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
 import IconButtonCopy from '../common/IconButtonCopy'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import AromaBalance from '../web3/AromaBalance'
@@ -57,7 +57,7 @@ function YourAccountPopover(props) {
           <ListItem
             disableGutters
             secondaryAction={
-              <IconButtonVerifyExplorer address={account} />
+              <VerifyExplorerIconButton address={account} />
             }
           >
             <Tooltip disableFocusListener title={t("base.yourAccount")}>
