@@ -23,7 +23,7 @@ import { Check, Close, Settings } from '@mui/icons-material'
 import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
 import IconButtonCopy from '../buttons/CopyIconButton'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import AromaBalance from '../web3/AromaBalance'
+import AROMABalance from '../web3/AROMABalance'
 import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
 import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
@@ -100,7 +100,7 @@ function YourAccountPopover(props) {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2">
-              <AromaBalance />
+              <AROMABalance />
             </Typography>
           </Grid>
           <Grid item xs={6}>

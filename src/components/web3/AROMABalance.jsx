@@ -6,7 +6,7 @@ import { useAROMABalanceOf } from '../../hooks/useAROMABalanceOf'
 import Skeleton from '@mui/material/Skeleton'
 import { useEthers } from '@usedapp/core'
 
-function AromaBalance () {
+function AROMABalance () {
   const { account } = useEthers()
   const [balance, balanceFormatted] = useAROMABalanceOf(account)
 
@@ -17,4 +17,4 @@ function AromaBalance () {
   )
 }
 
-export default AromaBalance
+export default AROMABalance
