@@ -5,7 +5,7 @@ import {
   } from '@mui/material'
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
-const ButtonAddAssetToWallet = function () {
+const AddTokenToWalletButton = function () {
   const { library } = useEthers();
 
   const walletWatchAsset = () => {
@@ -37,10 +37,10 @@ const ButtonAddAssetToWallet = function () {
       library && window.ethereum && (
         <Tooltip title="You will see your AROMA balance directly in Metamask">
           <Button fullWidth disableElevation color="primary" variant="outlined" onClick={() => walletWatchAsset()}>
-              Show AROMA in Wallet
+              Add AROMA in Wallet
           </Button>
         </Tooltip>
   ))
 };
 
-export default ButtonAddAssetToWallet;
+export default AddTokenToWalletButton;

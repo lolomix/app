@@ -26,7 +26,7 @@ import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import AromaBalance from '../web3/AromaBalance'
 import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
-import ButtonAddAssetToWallet from '../web3/ButtonAddAssetToWallet'
+import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
 import { truncate } from '../../utils/formatters'
 
 function YourAccountPopover(props) {
@@ -125,7 +125,7 @@ function YourAccountPopover(props) {
         <Grid container>
           <Grid item xs>
             <Box mb={2}>
-              <ButtonAddAssetToWallet />
+              <AddTokenToWalletButton />
             </Box>
           </Grid>
         </Grid>
