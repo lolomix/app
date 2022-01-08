@@ -23,19 +23,19 @@ import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import ChefSilhouetteIcon from '../icons/ChefSilhouetteIcon'
 import { getErrorMessage } from '../../web3/errors'
 import { theme } from '../../utils/theme'
-import { useCHEFPrice } from '../../hooks/useCHEFPrice'
+import { useChefPrice } from '../../hooks/useChefPrice'
 import { formatCurrency } from '../../utils/formatters'
-import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
-import { useCHEFTotalSupply } from '../../hooks/useCHEFTotalSupply'
-import { useAROMAApprove } from '../../hooks/useAROMAApprove'
-import { useCHEFBuy } from '../../hooks/useCHEFBuy'
+import { useChefSeasonRemaining } from '../../hooks/useChefSeasonRemaining'
+import { useChefTotalSupply } from '../../hooks/useChefTotalSupply'
+import { useAromaApprove } from '../../hooks/useAromaApprove'
+import { useChefBuy } from '../../hooks/useChefBuy'
 import SnackbarAction from '../snackbars/SnackbarAction'
 
-function NFTBuy ({ t }) {
+function NftBuy ({ t }) {
   const { error, active } = useEthers()
-  const [, soldFormatted] = useCHEFTotalSupply()
-  const [, remainingFormatted] = useCHEFSeasonRemaining()
-  const [price, priceFormatted] = useCHEFPrice()
+  const [, soldFormatted] = useChefTotalSupply()
+  const [, remainingFormatted] = useChefSeasonRemaining()
+  const [price, priceFormatted] = useChefPrice()
 
   let transactionInProgressSnackBarKey = 'transactionInProgress'
   let walletInteractionSnackBarKey = 'walletInteraction'
@@ -59,7 +59,7 @@ function NFTBuy ({ t }) {
    *
    * @todo: refactors due to duplication
    */
-  const [sendAromaApproval, aromaApprovalState] = useAROMAApprove()
+  const [sendAromaApproval, aromaApprovalState] = useAromaApprove()
 
   React.useEffect(() => {
     if (aromaApprovalState.status === 'None') {
@@ -110,7 +110,7 @@ function NFTBuy ({ t }) {
    *
    * @todo: refactors due to duplication
    */
-  const [sendChefBuy, chefBuyState] = useCHEFBuy()
+  const [sendChefBuy, chefBuyState] = useChefBuy()
 
   React.useEffect(() => {
     if (chefBuyState.status === 'None') {
@@ -191,12 +191,12 @@ function NFTBuy ({ t }) {
         {active ? (
           <CardContent>
             <Typography variant="h4" component="h2" align="center" mb={4}>
-              {t("components.NFTBuy.title")}
+              {t("components.NftBuy.title")}
             </Typography>
             <Grid container spacing={4} justifyContent="center" alignItems="stretch">
               <Grid item xs={12} md={6}>
                 <Typography gutterBottom variant="h5" component="div" textAlign="center" mt={3} sx={{ textTransform: "uppercase" }}>
-                  {t("components.NFTBuy.remaining")}
+                  {t("components.NftBuy.remaining")}
                 </Typography>
                 <Typography
                   gutterBottom
@@ -208,7 +208,7 @@ function NFTBuy ({ t }) {
                   {remainingFormatted}
                 </Typography>
                 <Typography gutterBottom variant="h6" component="div" textAlign="center" mb={3} sx={{ textTransform: "uppercase" }}>
-                  {soldFormatted} {t("components.NFTBuy.sold")}
+                  {soldFormatted} {t("components.NftBuy.sold")}
                 </Typography>
 
                 <Divider variant="middle" />
@@ -216,7 +216,7 @@ function NFTBuy ({ t }) {
                 <Grid container alignContent="center" alignItems="center" mt={3} mb={6}>
                   <Grid item xs p={1}>
                     <Typography textAlign="center" sx={{ textTransform: "uppercase" }}>
-                      {t("components.NFTBuy.season")}
+                      {t("components.NftBuy.season")}
                     </Typography>
                     <Typography textAlign="center" color="primary" sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
                       ONE
@@ -227,7 +227,7 @@ function NFTBuy ({ t }) {
 
                   <Grid item xs p={1}>
                     <Typography variant="body2" textAlign="center" sx={{ textTransform: "uppercase" }}>
-                      {t("components.NFTBuy.pricePerCHEF")}
+                      {t("components.NftBuy.pricePerCHEF")}
                     </Typography>
                     <Typography variant="h5" color="primary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
                       {formatCurrency(priceFormatted)} AROMA
@@ -255,7 +255,7 @@ function NFTBuy ({ t }) {
                 </Grid>
                 <Grid item xs={12}>
                   <LoadingButton disabled={!remainingFormatted} size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={transactionInProgress}>
-                    {!!remainingFormatted ? t("components.NFTBuy.buyButton") : t("components.NFTBuy.soldOut")}
+                    {!!remainingFormatted ? t("components.NftBuy.buyButton") : t("components.NftBuy.soldOut")}
                   </LoadingButton>
                 </Grid>
               </Grid>
@@ -322,4 +322,4 @@ function NFTBuy ({ t }) {
   );
 }
 
-export default withTranslation()(NFTBuy);
+export default withTranslation()(NftBuy);

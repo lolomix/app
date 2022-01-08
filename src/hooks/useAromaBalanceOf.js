@@ -8,7 +8,7 @@ import { formatUnits } from '@ethersproject/units'
  * @param targetAccount
  * @returns {(BigNumber|string)[]|*[]}
  */
-export function useAROMABalanceOf(targetAccount) {
+export function useAromaBalanceOf(targetAccount) {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractAroma;
   const balance = useTokenBalance(tokenAddress, targetAccount);
 

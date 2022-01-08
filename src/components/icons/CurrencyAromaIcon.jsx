@@ -2,7 +2,7 @@ import * as React from 'react';
 // material-ui
 import { SvgIcon } from '@mui/material'
 
-function CurrencyAROMAIcon(props) {
+function CurrencyAromaIcon(props) {
 
   return (
     <SvgIcon viewBox="0 0 1080 1080" {...props}>
@@ -13,4 +13,4 @@ function CurrencyAROMAIcon(props) {
   );
 }
 
-export default CurrencyAROMAIcon
+export default CurrencyAromaIcon

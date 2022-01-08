@@ -2,16 +2,16 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import { FormControl, InputAdornment, OutlinedInput, Typography } from "@mui/material";
-import CurrencyAROMAIcon from "../icons/CurrencyAROMAIcon";
-import CurrencyMATICIcon from "../icons/CurrencyMATICIcon";
-import CurrencyETHIcon from "../icons/CurrencyETHIcon";
+import CurrencyAromaIcon from "../icons/CurrencyAromaIcon";
+import CurrencyMaticIcon from "../icons/CurrencyMaticIcon";
+import CurrencyEthIcon from "../icons/CurrencyEthIcon";
 
 function CurrencyInputField({ id, label, currency, onUserInput, value, disabled }) {
   const currencyIconComponents = {
-    MATIC: CurrencyMATICIcon,
-    AROMA: CurrencyAROMAIcon,
-    ETH: CurrencyETHIcon,
-    "TEST ETHER": CurrencyETHIcon,
+    MATIC: CurrencyMaticIcon,
+    AROMA: CurrencyAromaIcon,
+    ETH: CurrencyEthIcon,
+    "TEST ETHER": CurrencyEthIcon,
   };
 
   // dynamically reference the icon component

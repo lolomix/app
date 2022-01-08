@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { Box, Container, Grid } from '@mui/material'
 // custom
 import CurrencyExchange from '../../components/web3/CurrencyExchange'
-import NFTBuy from '../../components/web3/NFTBuy'
+import NftBuy from '../../components/web3/NftBuy'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import FAQ from '../../components/common/FAQ'
@@ -41,7 +41,7 @@ function Market ({ t }) {
                   <CurrencyExchange fullheight="true"/>
                 </Grid>
                 <Grid item xs={12} lg={8}>
-                  <NFTBuy fullheight="true"/>
+                  <NftBuy fullheight="true"/>
                 </Grid>
               </>
             ):(

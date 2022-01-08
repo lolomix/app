@@ -11,7 +11,7 @@ import chefs from '../../assets/components/common/no-nft-notification-card/chefs
  * @returns {JSX.Element}
  * @constructor
  */
-function NoNFTNotificationCard (props) {
+function NoNftNotificationCard (props) {
   const { rest } = props
 
   return (
@@ -33,4 +33,4 @@ function NoNFTNotificationCard (props) {
   )
 }
 
-export default NoNFTNotificationCard
+export default NoNftNotificationCard

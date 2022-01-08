@@ -2,7 +2,7 @@ import * as React from 'react';
 // material-ui
 import { SvgIcon } from '@mui/material'
 
-function CurrencyETHIcon(props) {
+function CurrencyEthIcon(props) {
   return (
     <SvgIcon viewBox="0 0 731.58 731.58" {...props}>
       <defs>
@@ -30,4 +30,4 @@ function CurrencyETHIcon(props) {
   );
 }
 
-export default CurrencyETHIcon
+export default CurrencyEthIcon

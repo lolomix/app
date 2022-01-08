@@ -11,7 +11,7 @@ import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
  * @returns {JSX.Element}
  * @constructor
  */
-function NFTIdList ({ tokenAbi, tokenAddress }) {
+function NftIdList ({ tokenAbi, tokenAddress }) {
   const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
 
   return nfts ? (
@@ -29,9 +29,9 @@ function NFTIdList ({ tokenAbi, tokenAddress }) {
 /**
  * @type {{tokenAddress: Validator<NonNullable<string>>, tokenAbi: Validator<NonNullable<any[]>>}}
  */
-NFTIdList.propTypes = {
+NftIdList.propTypes = {
   tokenAbi: PropTypes.array.isRequired,
   tokenAddress: PropTypes.string.isRequired
 }
 
-export default NFTIdList;
+export default NftIdList;

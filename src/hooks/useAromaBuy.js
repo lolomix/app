@@ -6,7 +6,7 @@ import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 /**
  * @returns {(((...args: any[]) => Promise<void>)|TransactionStatus|LogDescription[])[]}
  */
-export function useAROMABuy() {
+export function useAromaBuy() {
   const contractAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const contract = new Contract(contractAddress, abi)
   const {send, state, events} = useContractFunction(

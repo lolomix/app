@@ -10,7 +10,7 @@ import { utils } from 'ethers'
  * @param targetAccount
  * @returns {undefined}
  */
-export function useCHEFBalanceOf(targetAccount) {
+export function useChefBalanceOf(targetAccount) {
   const abiInterface = new utils.Interface(abi)
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
