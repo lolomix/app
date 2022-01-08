@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
-import { withTranslation } from "react-i18next";
+import React, { Fragment } from 'react'
+import { withTranslation } from 'react-i18next'
 import { useEthers } from '@usedapp/core'
-import { useSnackbar } from "notistack";
+import { useSnackbar } from 'notistack'
 // material-ui
 import {
   Card,
@@ -15,13 +15,13 @@ import {
   Grid,
   Paper,
   Typography,
-  lighten
+  lighten,
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 // custom
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
-import { getErrorMessage } from "../../web3/errors";
+import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
+import ChefSilhouetteIcon from '../icons/ChefSilhouetteIcon'
+import { getErrorMessage } from '../../web3/errors'
 import { theme } from '../../utils/theme'
 import { useCHEFPrice } from '../../hooks/useCHEFPrice'
 import { formatCurrency } from '../../utils/formatters'
@@ -31,28 +31,28 @@ import { useAROMAApprove } from '../../hooks/useAROMAApprove'
 import { useCHEFBuy } from '../../hooks/useCHEFBuy'
 import SnackbarAction from '../notifications/SnackbarAction'
 
-function NFTBuy({ t }) {
-  const { error, active } = useEthers();
-  const [sold, soldFormatted] = useCHEFTotalSupply()
-  const [remaining, remainingFormatted] = useCHEFSeasonRemaining()
+function NFTBuy ({ t }) {
+  const { error, active } = useEthers()
+  const [, soldFormatted] = useCHEFTotalSupply()
+  const [, remainingFormatted] = useCHEFSeasonRemaining()
   const [price, priceFormatted] = useCHEFPrice()
 
-  let transactionInProgressSnackBar
-  let walletInteractionSnackBar
+  let transactionInProgressSnackBarKey = 'transactionInProgress'
+  let walletInteractionSnackBarKey = 'walletInteraction'
 
-  const [buyDialog, setBuyDialog] = React.useState(false);
-  const [successDialog, setSuccessDialog] = React.useState(false);
+  const [buyDialog, setBuyDialog] = React.useState(false)
+  const [successDialog, setSuccessDialog] = React.useState(false)
 
   const contractAddressChef = NETWORKS[TARGET_CHAIN].contractMaster
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   const handleBuyDialog = () => {
-    setBuyDialog(!buyDialog);
-  };
+    setBuyDialog(!buyDialog)
+  }
   const handleSuccessDialog = () => {
-    setSuccessDialog(!successDialog);
-  };
+    setSuccessDialog(!successDialog)
+  }
 
   /**
    * Defines Aroma Approval State
@@ -63,46 +63,47 @@ function NFTBuy({ t }) {
 
   React.useEffect(() => {
     if (aromaApprovalState.status === 'None') {
-      setTransactionInProgress(false);
+      setTransactionInProgress(false)
     }
 
     if (aromaApprovalState.status === 'Exception') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
     }
 
     if (aromaApprovalState.status === 'Mining') {
-      setTransactionInProgress(true);
+      setTransactionInProgress(true)
     }
 
     if (aromaApprovalState.status === 'Success') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Success', {
+        variant: 'success',
+      })
     }
-  }, [ aromaApprovalState, closeSnackbar, enqueueSnackbar])
+  }, [aromaApprovalState, closeSnackbar, enqueueSnackbar])
 
   /**
    * Handles Aroma Approval a blockchain transaction
    */
   const handleApprove = async () => {
-    walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
-      variant: "warning",
+    enqueueSnackbar('Waiting for interaction in Wallet', {
+      key: walletInteractionSnackBarKey,
+      variant: 'warning',
       persist: true,
-      action: <SnackbarAction/>
-    });
+      action: <SnackbarAction/>,
+    })
 
     try {
-      await sendAromaApproval(contractAddressChef, price);
+      await sendAromaApproval(contractAddressChef, price)
     } catch (error) {
-      enqueueSnackbar("Error", {
-        variant: "error"
-      });
+      enqueueSnackbar('Error', {
+        variant: 'error',
+      })
     }
-  };
+  }
 
   /**
    * Defines Chef Buy State
@@ -113,67 +114,76 @@ function NFTBuy({ t }) {
 
   React.useEffect(() => {
     if (chefBuyState.status === 'None') {
-      setTransactionInProgress(false);
+      setTransactionInProgress(false)
     }
 
     if (chefBuyState.status === 'Exception') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
     }
 
     if (chefBuyState.status === 'Mining') {
-      setTransactionInProgress(true);
+      setTransactionInProgress(true)
     }
 
     if (chefBuyState.status === 'Success') {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success"
-      });
+      setTransactionInProgress(false)
+      enqueueSnackbar('Success', {
+        variant: 'success',
+      })
     }
-  }, [ chefBuyState, closeSnackbar, enqueueSnackbar ])
+  }, [chefBuyState, closeSnackbar, enqueueSnackbar])
 
   /**
    * Handles Chef Buy blockchain transaction
    */
   const handleBuy = async () => {
-    walletInteractionSnackBar = enqueueSnackbar("Waiting for interaction in Wallet", {
-      variant: "warning",
+    enqueueSnackbar('Waiting for interaction in Wallet', {
+      key: walletInteractionSnackBarKey,
+      variant: 'warning',
       persist: true,
-      action: <SnackbarAction/>
-    });
+      action: <SnackbarAction/>,
+    })
 
     try {
-      await sendChefBuy();
+      await sendChefBuy()
     } catch (error) {
-      enqueueSnackbar("Error", {
-        variant: "error"
-      });
+      enqueueSnackbar('Error', {
+        variant: 'error',
+      })
     }
-  };
+  }
 
   /**
    * Definition of the transaction in progress state
    */
-  const [transactionInProgress, setTransactionInProgress] = React.useState(false);
+  const [transactionInProgress, setTransactionInProgress] = React.useState(
+    false)
 
   React.useEffect(() => {
     if (transactionInProgress === false) {
-      closeSnackbar(transactionInProgressSnackBar)
+      closeSnackbar(transactionInProgressSnackBarKey)
       return
     }
-    closeSnackbar(walletInteractionSnackBar)
-    transactionInProgressSnackBar = enqueueSnackbar(
+    closeSnackbar(walletInteractionSnackBarKey)
+    enqueueSnackbar(
       'Transaction in progress',
       {
+        key: transactionInProgressSnackBarKey,
         variant: 'warning',
         persist: true,
-        action: <SnackbarAction/>
-      }
+        action: <SnackbarAction/>,
+      },
     )
-  }, [transactionInProgress])
+  }, [
+    transactionInProgress,
+    enqueueSnackbar,
+    closeSnackbar,
+    transactionInProgressSnackBarKey,
+    walletInteractionSnackBarKey
+  ])
 
   return (
     <Fragment>
