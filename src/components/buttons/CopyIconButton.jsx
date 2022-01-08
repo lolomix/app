@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 
-function IconButtonCopy ({ t, copyText, size, fontSize }) {
+function CopyIconButton ({ t, copyText, size, fontSize }) {
 
   /**
    * Handles the copy to clipboard using Clipboard API OR regular method
@@ -54,4 +54,4 @@ function IconButtonCopy ({ t, copyText, size, fontSize }) {
   )
 }
 
-export default withTranslation()(IconButtonCopy);
+export default withTranslation()(CopyIconButton);

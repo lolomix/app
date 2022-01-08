@@ -21,7 +21,7 @@ import {
 import { Check, Close, Settings } from '@mui/icons-material'
 // custom
 import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
-import IconButtonCopy from '../common/IconButtonCopy'
+import IconButtonCopy from '../buttons/CopyIconButton'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 import AromaBalance from '../web3/AromaBalance'
 import Balance from '../web3/Balance'
