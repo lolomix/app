@@ -1,19 +1,19 @@
 import React  from 'react'
-import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { useWeb3React } from '@web3-react/core'
 // material-ui
 import { Box, Container, Grid, Skeleton } from '@mui/material'
 // custom
+import { Helmet } from 'react-helmet'
+import { useEthers } from '@usedapp/core'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import NFTCard from '../../components/web3/NFTCard'
 import FAQ from '../../components/common/FAQ'
 import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
+import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
+import { useCHEFOfOwner } from '../../hooks/useCHEFofOwner'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
-import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
 
 /**
  * @returns {JSX.Element}
@@ -22,10 +22,10 @@ import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
  * @todo refactor and get rid of if hell in jsx
  */
 function Collection () {
-  const { active, error } = useWeb3React();
+  const { active, error } = useEthers();
 
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
-  const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
+  const nfts = useCHEFOfOwner()
 
   return (
     <>
@@ -50,15 +50,15 @@ function Collection () {
                 nfts.length ? (
                   <Grid item md={12} lg={10} container spacing={5}>
                     {nfts.map((tokenID, index) => (
-                      <Grid key={tokenID} item sm={12} md={6}>
+                      <Grid key={tokenID.toString()} item sm={12} md={6}>
                         <a target="_blank"
                            rel="noreferrer nofollow"
-                           href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID}`}
+                           href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID.toString()}`}
                            style={{ textDecoration: 'none' }}
                         >
                           <NFTCard tokenAbi={tokenAbi}
                                    tokenAddress={tokenAddress}
-                                   tokenID={tokenID}
+                                   tokenID={tokenID.toNumber()}
                                    lazyLoad={index > 2}
                           />
                         </a>

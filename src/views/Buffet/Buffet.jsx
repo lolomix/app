@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { Box, Container } from '@mui/material'
 // custom
 import Headline from '../../components/layout/Headline'
-import OpeningSoon from "../../components/common/OpeningSoon";
+import OpeningSoon from "../../components/common/OpeningSoonCard";
 
 /**
  * @returns {JSX.Element}

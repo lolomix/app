@@ -1,14 +1,14 @@
 import React from 'react'
-// utils
+// custom
 import { formatCurrency } from '../../utils/formatters'
-import { useCHEFBalanceOf } from '../../hooks/useCHEFBalanceOf'
-import { useEthers } from '@usedapp/core'
+import { useAROMABalanceOf } from '../../hooks/useAROMABalanceOf'
 // material-ui
 import Skeleton from '@mui/material/Skeleton'
+import { useEthers } from '@usedapp/core'
 
-function CHEFBalance () {
+function AROMABalance () {
   const { account } = useEthers()
-  const [balance, balanceFormatted] = useCHEFBalanceOf(account)
+  const [balance, balanceFormatted] = useAROMABalanceOf(account)
 
   return balance === undefined ? (
     <Skeleton variant="text"/>
@@ -17,4 +17,4 @@ function CHEFBalance () {
   )
 }
 
-export default CHEFBalance
+export default AROMABalance

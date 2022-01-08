@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useWeb3React } from "@web3-react/core";
+import { useEthers } from '@usedapp/core'
 import { useSnackbar } from "notistack";
 // material-ui
 import { Box, Container, OutlinedInput, Button, InputAdornment, Grid, Typography } from "@mui/material";
@@ -9,11 +9,10 @@ import Headline from "../../components/layout/Headline";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../../web3/abi/AROMATokenMatic.json";
-import ToastLoading from "../../components/notification/ToastLoading";
-import ToastLoadingIndeterminate from "../../components/notification/ToastLoadingIndeterminate";
+import SnackbarAction from '../../components/snackbars/SnackbarAction'
 
 function Internal({ t }) {
-  const { account, library, chainId } = useWeb3React();
+  const { account, library, chainId } = useEthers();
   const [isLoading, setIsLoading] = useState(false);
   const [contractErc721, setContractErc721] = useState(false);
   const [contractAroma, setContractAroma] = useState(false);
@@ -54,7 +53,7 @@ function Internal({ t }) {
     let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
       variant: "warning",
       persist: true,
-      action: <ToastLoadingIndeterminate />,
+      action: <SnackbarAction/>,
     });
     try {
       let result;
@@ -66,16 +65,14 @@ function Internal({ t }) {
       console.log(result);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "success"
       });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       closeSnackbar(loadingSnackbar);
       enqueueSnackbar("Error", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
+        variant: "error"
       });
       setIsLoading(false);
     }

@@ -9,12 +9,34 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
 // components
 import AppLaunch from './AppLaunch'
+import { DAppProvider, Polygon, Rinkeby } from '@usedapp/core'
+import { TARGET_CHAIN } from './web3/constants'
 const App = lazy(() => import("./App"));
+
+/**
+ * @type {{networks: Chain[]}}
+ *
+ * @todo decouple configuration from the index file
+ */
+const config = {
+  networks: [
+    Rinkeby
+  ]
+}
+
+if (TARGET_CHAIN === 'polygon') {
+  config.networks = [
+    Polygon
+  ]
+}
+
 
 ReactDOM.render(
   <BrowserRouter>
     <Suspense fallback={<AppLaunch />}>
-      <App/>
+      <DAppProvider config={config}>
+        <App/>
+      </DAppProvider>
     </Suspense>
   </BrowserRouter>,
   document.getElementById('root'),

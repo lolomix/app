@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Launch from "@mui/icons-material/Launch";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 
-function IconButtonVerifyExplorer ({ address, size, fontSize }) {
+function VerifyExplorerIconButton ({ address, size, fontSize }) {
   return (
     <Tooltip title="View on Explorer">
       <IconButton
@@ -22,4 +22,4 @@ function IconButtonVerifyExplorer ({ address, size, fontSize }) {
   )
 }
 
-export default IconButtonVerifyExplorer;
+export default VerifyExplorerIconButton;

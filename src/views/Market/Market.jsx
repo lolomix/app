@@ -4,13 +4,13 @@ import { Helmet } from "react-helmet";
 // material-ui
 import { Box, Container, Grid } from '@mui/material'
 // custom
-import CurrencyExchange from '../../components/CurrencyExchange'
-import NFTBuy from '../../components/NFTBuy'
+import CurrencyExchange from '../../components/web3/CurrencyExchange'
+import NFTBuy from '../../components/web3/NFTBuy'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
 import FAQ from '../../components/common/FAQ'
 import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 
 /**
  * @param t
@@ -18,7 +18,7 @@ import { useWeb3React } from '@web3-react/core'
  * @constructor
  */
 function Market ({ t }) {
-  const { active, error } = useWeb3React();
+  const { active, error } = useEthers();
 
   return (
     <>

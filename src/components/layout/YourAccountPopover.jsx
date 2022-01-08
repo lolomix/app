@@ -1,7 +1,7 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import Blockies from 'react-blockies'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 // material-ui
 import {
   Avatar,
@@ -20,18 +20,18 @@ import {
 } from '@mui/material'
 import { Check, Close, Settings } from '@mui/icons-material'
 // custom
-import IconButtonVerifyExplorer from '../web3/IconButtonVerifyExplorer'
-import IconButtonCopy from '../common/IconButtonCopy'
+import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
+import IconButtonCopy from '../buttons/CopyIconButton'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import AromaBalance from '../web3/AromaBalance'
+import AROMABalance from '../web3/AROMABalance'
 import Balance from '../web3/Balance'
 import CHEFBalance from '../web3/CHEFBalance'
-import ButtonAddAssetToWallet from '../web3/ButtonAddAssetToWallet'
+import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
 import { truncate } from '../../utils/formatters'
 
 function YourAccountPopover(props) {
   const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props
-  const { account, deactivate } = useWeb3React();
+  const { account, deactivate } = useEthers();
 
   return (
     <Popover {...rest} anchorEl={anchorEl}>
@@ -57,7 +57,7 @@ function YourAccountPopover(props) {
           <ListItem
             disableGutters
             secondaryAction={
-              <IconButtonVerifyExplorer address={account} />
+              <VerifyExplorerIconButton address={account} />
             }
           >
             <Tooltip disableFocusListener title={t("base.yourAccount")}>
@@ -100,7 +100,7 @@ function YourAccountPopover(props) {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2">
-              <AromaBalance />
+              <AROMABalance />
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -125,7 +125,7 @@ function YourAccountPopover(props) {
         <Grid container>
           <Grid item xs>
             <Box mb={2}>
-              <ButtonAddAssetToWallet />
+              <AddTokenToWalletButton />
             </Box>
           </Grid>
         </Grid>

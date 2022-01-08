@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Link, NavLink } from 'react-router-dom'
-import { useWeb3React } from '@web3-react/core'
+import { useEthers } from '@usedapp/core'
 // material-ui
 import {
   Toolbar,
@@ -69,7 +69,7 @@ const NavLinkRef = React.forwardRef((props, ref) => (
 
 function TopBar ({ t }) {
   const [popover, setPopover] = useState(false)
-  const { active } = useWeb3React()
+  const { active } = useEthers()
 
   const handleConnectionIconClick = () => {
     setPopover(true)

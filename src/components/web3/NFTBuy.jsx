@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from "react";
-import { withTranslation } from "react-i18next";
-import { useWeb3React } from "@web3-react/core";
-import { useSnackbar } from "notistack";
+import React, { Fragment } from 'react'
+import { withTranslation } from 'react-i18next'
+import { useEthers } from '@usedapp/core'
+import { useSnackbar } from 'notistack'
 // material-ui
 import {
   Card,
@@ -15,106 +15,175 @@ import {
   Grid,
   Paper,
   Typography,
-  lighten
+  lighten,
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 // custom
-import { NETWORKS, TARGET_CHAIN, AROMA_DECIMALS } from "../web3/constants";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
-import abiAroma from "../web3/abi/AROMATokenMatic.json";
-import ToastLoading from "./notification/ToastLoading";
-import ToastLoadingIndeterminate from "./notification/ToastLoadingIndeterminate";
-import ChefSilhouetteIcon from "./icons/ChefSilhouetteIcon";
-import { getErrorMessage } from "../web3/errors";
-import { theme } from '../utils/theme'
+import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
+import ChefSilhouetteIcon from '../icons/ChefSilhouetteIcon'
+import { getErrorMessage } from '../../web3/errors'
+import { theme } from '../../utils/theme'
+import { useCHEFPrice } from '../../hooks/useCHEFPrice'
+import { formatCurrency } from '../../utils/formatters'
+import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
+import { useCHEFTotalSupply } from '../../hooks/useCHEFTotalSupply'
+import { useAROMAApprove } from '../../hooks/useAROMAApprove'
+import { useCHEFBuy } from '../../hooks/useCHEFBuy'
+import SnackbarAction from '../snackbars/SnackbarAction'
 
-function NFTBuy({ t }) {
-  const { account, library, error, active } = useWeb3React();
-  const [sold, setSold] = useState(0);
-  const [remaining, setRemaining] = useState(0);
-  const [price, setPrice] = useState(0);
-  //const season = 1; // set season manually for the time being
+function NFTBuy ({ t }) {
+  const { error, active } = useEthers()
+  const [, soldFormatted] = useCHEFTotalSupply()
+  const [, remainingFormatted] = useCHEFSeasonRemaining()
+  const [price, priceFormatted] = useCHEFPrice()
 
-  /**
-   * Definition of the `Buy CryptoCHEF` Button loading state
-   */
-  const [buyLoading, setBuyLoading] = React.useState(false);
-  const [buyDialog, setBuyDialog] = React.useState(false);
-  const [successDialog, setSuccessDialog] = React.useState(false);
-  const [contractErc721, setContractErc721] = React.useState(false);
-  const contractMasterAddress = NETWORKS[TARGET_CHAIN].contractMaster;
-  const contractAromaAddress = NETWORKS[TARGET_CHAIN].contractAroma;
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  let transactionInProgressSnackBarKey = 'transactionInProgress'
+  let walletInteractionSnackBarKey = 'walletInteraction'
+
+  const [buyDialog, setBuyDialog] = React.useState(false)
+  const [successDialog, setSuccessDialog] = React.useState(false)
+
+  const contractAddressChef = NETWORKS[TARGET_CHAIN].contractMaster
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   const handleBuyDialog = () => {
-    setBuyDialog(!buyDialog);
-  };
+    setBuyDialog(!buyDialog)
+  }
   const handleSuccessDialog = () => {
-    setSuccessDialog(!successDialog);
-  };
+    setSuccessDialog(!successDialog)
+  }
 
   /**
-   * Handles the actual exchange by triggering the blockchain transaction
+   * Defines Aroma Approval State
+   *
+   * @todo: refactors due to duplication
    */
-  const handleApprove = async () => {
-    setBuyLoading(true);
-    let loadingSnackbar = enqueueSnackbar("Transaction ongoing", {
-      variant: "warning",
-      persist: true,
-      action: <ToastLoadingIndeterminate />,
-    });
-    try {
-      const contractAroma = new library.eth.Contract(abiAroma, contractAromaAddress);
-      const resultApprove = await contractAroma.methods.approve(contractMasterAddress, price).send({ from: account });
-      console.log(resultApprove);
-      const result = await contractErc721.methods.buyCryptoChef().send({ from: account });
-      console.log(result);
-      closeSnackbar(loadingSnackbar);
-      enqueueSnackbar("Success", {
-        variant: "success",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
-      });
-      setBuyLoading(false);
-      handleBuyDialog();
-      handleSuccessDialog();
-    } catch (error) {
-      console.log(error);
-      closeSnackbar(loadingSnackbar);
-      enqueueSnackbar("Error", {
-        variant: "error",
-        action: (snackKey) => <ToastLoading snackKey={snackKey} closeSnackbar={closeSnackbar} />,
-      });
-      setBuyLoading(false);
-    }
-  };
+  const [sendAromaApproval, aromaApprovalState] = useAROMAApprove()
 
   React.useEffect(() => {
-    if (!!library && !contractErc721) {
-      setContractErc721(new library.eth.Contract(abi, contractMasterAddress));
+    if (aromaApprovalState.status === 'None') {
+      setTransactionInProgress(false)
     }
-    if (!!library && contractErc721) {
-      async function loadSupply() {
-        try {
-          const cryptoChefSeasonSupply = await contractErc721.methods.getCryptoChefSeasonSupply().call();
-          const totalSupply = await contractErc721.methods.totalSupply().call();
-          setRemaining(cryptoChefSeasonSupply - totalSupply);
-          setSold(totalSupply);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      async function loadPrice() {
-        try {
-          const cryptoChefPrice = await contractErc721.methods.getCryptoChefPrice().call();
-          setPrice(cryptoChefPrice);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      loadSupply();
-      loadPrice();
+
+    if (aromaApprovalState.status === 'Exception') {
+      setTransactionInProgress(false)
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
     }
-  }, [library, contractErc721, contractMasterAddress]); // ensures refresh if referential identity of library doesn't change across chainIds
+
+    if (aromaApprovalState.status === 'Mining') {
+      setTransactionInProgress(true)
+    }
+
+    if (aromaApprovalState.status === 'Success') {
+      setTransactionInProgress(false)
+      enqueueSnackbar('Success', {
+        variant: 'success',
+      })
+    }
+  }, [aromaApprovalState, closeSnackbar, enqueueSnackbar])
+
+  /**
+   * Handles Aroma Approval a blockchain transaction
+   */
+  const handleApprove = async () => {
+    enqueueSnackbar('Waiting for interaction in Wallet', {
+      key: walletInteractionSnackBarKey,
+      variant: 'warning',
+      persist: true,
+      action: <SnackbarAction/>,
+    })
+
+    try {
+      await sendAromaApproval(contractAddressChef, price)
+    } catch (error) {
+      enqueueSnackbar('Error', {
+        variant: 'error',
+      })
+    }
+  }
+
+  /**
+   * Defines Chef Buy State
+   *
+   * @todo: refactors due to duplication
+   */
+  const [sendChefBuy, chefBuyState] = useCHEFBuy()
+
+  React.useEffect(() => {
+    if (chefBuyState.status === 'None') {
+      setTransactionInProgress(false)
+    }
+
+    if (chefBuyState.status === 'Exception') {
+      setTransactionInProgress(false)
+      enqueueSnackbar('Something must have gone wrong', {
+        variant: 'error',
+      })
+    }
+
+    if (chefBuyState.status === 'Mining') {
+      setTransactionInProgress(true)
+    }
+
+    if (chefBuyState.status === 'Success') {
+      setTransactionInProgress(false)
+      enqueueSnackbar('Success', {
+        variant: 'success',
+      })
+    }
+  }, [chefBuyState, closeSnackbar, enqueueSnackbar])
+
+  /**
+   * Handles Chef Buy blockchain transaction
+   */
+  const handleBuy = async () => {
+    enqueueSnackbar('Waiting for interaction in Wallet', {
+      key: walletInteractionSnackBarKey,
+      variant: 'warning',
+      persist: true,
+      action: <SnackbarAction/>,
+    })
+
+    try {
+      await sendChefBuy()
+    } catch (error) {
+      enqueueSnackbar('Error', {
+        variant: 'error',
+      })
+    }
+  }
+
+  /**
+   * Definition of the transaction in progress state
+   */
+  const [transactionInProgress, setTransactionInProgress] = React.useState(
+    false)
+
+  React.useEffect(() => {
+    if (transactionInProgress === false) {
+      closeSnackbar(transactionInProgressSnackBarKey)
+      return
+    }
+    closeSnackbar(walletInteractionSnackBarKey)
+    enqueueSnackbar(
+      'Transaction in progress',
+      {
+        key: transactionInProgressSnackBarKey,
+        variant: 'warning',
+        persist: true,
+        action: <SnackbarAction/>,
+      },
+    )
+  }, [
+    transactionInProgress,
+    enqueueSnackbar,
+    closeSnackbar,
+    transactionInProgressSnackBarKey,
+    walletInteractionSnackBarKey
+  ])
 
   return (
     <Fragment>
@@ -136,10 +205,10 @@ function NFTBuy({ t }) {
                   textAlign="center"
                   color="primary"
                   sx={{ textTransform: "uppercase", fontWeight: "bold" }}>
-                  {remaining}
+                  {remainingFormatted}
                 </Typography>
                 <Typography gutterBottom variant="h6" component="div" textAlign="center" mb={3} sx={{ textTransform: "uppercase" }}>
-                  {sold} {t("components.NFTBuy.sold")}
+                  {soldFormatted} {t("components.NFTBuy.sold")}
                 </Typography>
 
                 <Divider variant="middle" />
@@ -161,7 +230,7 @@ function NFTBuy({ t }) {
                       {t("components.NFTBuy.pricePerCHEF")}
                     </Typography>
                     <Typography variant="h5" color="primary" textAlign="center" sx={{ fontWeight: "bold", textTransform: "uppercase" }}>
-                      {price / AROMA_DECIMALS} AROMA
+                      {formatCurrency(priceFormatted)} AROMA
                     </Typography>
                   </Grid>
                 </Grid>
@@ -185,8 +254,8 @@ function NFTBuy({ t }) {
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                  <LoadingButton disabled={!remaining} size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={buyLoading}>
-                    {!!remaining ? t("components.NFTBuy.buyButton") : t("components.NFTBuy.soldOut")}
+                  <LoadingButton disabled={!remainingFormatted} size="xlarge" variant="contained" fullWidth onClick={handleBuyDialog} loading={transactionInProgress}>
+                    {!!remainingFormatted ? t("components.NFTBuy.buyButton") : t("components.NFTBuy.soldOut")}
                   </LoadingButton>
                 </Grid>
               </Grid>
@@ -210,20 +279,23 @@ function NFTBuy({ t }) {
             You can only buy a CHEF NFT with AROMA.
           </Typography>
           <Typography p={1} variant="body2" gutterBottom>
-            1. Approve AROMA token to give our app permission.
+            1. Approve AROMA token which gives our app permission.
             <br />
-            2. Spend AROMA token to buy the CHEF NFT.
+            2. Buy the CHEF NFT with AROMA Token.
           </Typography>
           <Typography variant="caption" gutterBottom>
-            (Please be patient and stay on this site until both transactions are successful.)
+            (We only approve {formatCurrency(priceFormatted)} AROMA per approval transaction. You can increase in your wallet before confirming the transaction)
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button disableElevation onClick={handleBuyDialog} variant="contained" color="primary">
             {t("base.close")}
           </Button>
-          <Button disableElevation onClick={handleApprove} variant="contained" disabled={buyLoading}>
-            Approve & Buy CHEF NFT
+          <Button disableElevation onClick={handleApprove} variant="contained" disabled={transactionInProgress}>
+            Approve AROMA
+          </Button>
+          <Button disableElevation onClick={handleBuy} variant="contained" disabled={transactionInProgress}>
+            Buy CHEF NFT
           </Button>
         </DialogActions>
       </Dialog>

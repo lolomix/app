@@ -10,7 +10,7 @@ import logo from '../../assets/logo.png'
  * @returns {JSX.Element}
  * @constructor
  */
-function OpeningSoon (props) {
+function OpeningSoonCard (props) {
   const { t, rest } = props
 
   return (
@@ -32,4 +32,4 @@ function OpeningSoon (props) {
   )
 }
 
-export default withTranslation()(OpeningSoon)
+export default withTranslation()(OpeningSoonCard)

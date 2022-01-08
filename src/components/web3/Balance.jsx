@@ -1,45 +1,26 @@
-import React from "react";
-import { useWeb3React } from "@web3-react/core";
-import { utils } from "web3";
-import Skeleton from "@mui/material/Skeleton";
-
-// utils
-import { formatCurrency } from "../../utils/formatters";
+import React from 'react'
+// custom
+import { useEtherBalance, useEthers } from '@usedapp/core'
+import { formatCurrency } from '../../utils/formatters'
+import { formatEther } from '@ethersproject/units'
+// material-ui
+import Skeleton from '@mui/material/Skeleton'
 
 const Balance = function () {
-  const { account, library, chainId } = useWeb3React();
+  const { account } = useEthers()
+  const etherBalance = useEtherBalance(account)
 
-  const [balance, setBalance] = React.useState();
+  let balance
 
-  React.useEffect(() => {
-    if (!!account && !!library) {
-      let stale = false;
-      library.eth
-        .getBalance(account)
-        .then((balance) => {
-          if (!stale) {
-            setBalance(balance);
-          }
-        })
-        .catch(() => {
-          if (!stale) {
-            setBalance(null);
-          }
-        });
-      return () => {
-        stale = true;
-        setBalance(undefined);
-      };
-    }
-  }, [account, library, chainId]); // ensures refresh if referential identity of library doesn't change across chainIds
+  if (etherBalance) {
+    balance = formatEther(etherBalance)
+  }
 
-  return balance === null ? (
-    <Skeleton variant="text" />
-  ) : balance ? (
-    <span>{formatCurrency(utils.fromWei(balance, "ether"))}</span>
+  return balance === undefined ? (
+    <Skeleton variant="text"/>
   ) : (
-    <Skeleton variant="text" />
-  );
-};
+    <span>{formatCurrency(balance)}</span>
+  )
+}
 
-export default Balance;
+export default Balance

@@ -1,41 +1,31 @@
-import { useEffect, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useContractCall } from '@usedapp/core'
 import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { utils } from 'ethers'
+import abi from '../web3/abi/CryptoChefsERC721Facet.json'
 
 /**
  * Returns the total amount of CHEFs in the Season.
  *
- * @returns {undefined}
+ * @returns {(any)[]|*[]}
  */
-export function useCHEFSeasonSupply() {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+export function useCHEFSeasonSupply () {
+  const abiInterface = new utils.Interface(abi)
+  const address = NETWORKS[TARGET_CHAIN].contractMaster
 
-  const { account, library } = useWeb3React()
-  const [seasonSupply, setSeasonSupply] = useState()
+  const [seasonSupply] = useContractCall(
+    address &&
+    abiInterface && {
+      abi: abiInterface,
+      address: address,
+      method: 'getCryptoChefSeasonSupply',
+      args: [],
+    },
+  ) ?? []
 
-  useEffect(() => {
+  if (seasonSupply === undefined) return []
 
-    // early return if no connection to blockchain
-    if (!account || !library) {
-      return
-    }
+  const seasonSupplyFormatted = seasonSupply.toNumber()
 
-    async function loadSeasonSupply() {
-      try {
-        const contract = new library.eth.Contract(tokenAbi, tokenAddress);
-        const seasonSupply = await contract.methods.getCryptoChefSeasonSupply().call();
-
-        setSeasonSupply(seasonSupply)
-
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    loadSeasonSupply();
-
-  }, [account, library, tokenAddress])
-
-  return seasonSupply
+  return [seasonSupply, seasonSupplyFormatted]
 }
 

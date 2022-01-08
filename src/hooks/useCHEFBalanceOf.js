@@ -1,6 +1,8 @@
-import { useBalanceOf } from './useBalanceOf'
-import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { AROMA_DECIMALS_DIGIT, NETWORKS, TARGET_CHAIN } from '../web3/constants'
+import abi from '../web3/abi/CryptoChefsERC721Facet.json'
+import { formatUnits } from '@ethersproject/units'
+import { useContractCall } from '@usedapp/core'
+import { utils } from 'ethers'
 
 /**
  * Returns the balance of an CHEF NFTs for an address
@@ -9,8 +11,24 @@ import tokenAbi from '../web3/abi/CryptoChefsERC721Facet.json'
  * @returns {undefined}
  */
 export function useCHEFBalanceOf(targetAccount) {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const abiInterface = new utils.Interface(abi)
+  const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
-  return useBalanceOf(tokenAbi, tokenAddress, null, targetAccount)
+  const [balance] =
+    useContractCall(
+      targetAccount && {
+        abi: abiInterface,
+        address: address,
+        method: 'balanceOf',
+        args: [targetAccount],
+      }
+    ) ?? []
+
+  if (balance === undefined) return [];
+
+  let balanceFormatted = formatUnits(balance, AROMA_DECIMALS_DIGIT)
+
+  return [ balance, balanceFormatted ]
 }
+
 
