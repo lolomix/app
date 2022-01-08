@@ -4,7 +4,7 @@ import { Alert, darken, Link } from '@mui/material'
 import { TARGET_CHAIN, NETWORKS} from "../../web3/constants";
 import ChefSilhouetteIcon from '../icons/ChefSilhouetteIcon'
 import { theme } from '../../utils/theme'
-import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
+import { useChefSeasonRemaining } from '../../hooks/useChefSeasonRemaining'
 
 
 /**
@@ -15,7 +15,7 @@ import { useCHEFSeasonRemaining } from '../../hooks/useCHEFSeasonRemaining'
  */
 function AnnouncementBar() {
   const testnet = NETWORKS[TARGET_CHAIN].testnet === true
-  const [, chefSeasonRemainingFormatted] = useCHEFSeasonRemaining()
+  const [, chefSeasonRemainingFormatted] = useChefSeasonRemaining()
 
   // only show warning on testnet
   if (testnet) {

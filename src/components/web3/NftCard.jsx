@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // material-ui
 import { Box, Card, CardContent, Typography, darken } from '@mui/material'
 // custom
-import { useNFTWithMetadata } from '../../hooks/useNFTWithMetadata'
+import { useNftWithMetadata } from '../../hooks/useNftWithMetadata'
 import { theme } from '../../utils/theme'
 import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
 
@@ -15,11 +15,11 @@ import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
  * @returns {JSX.Element}
  * @constructor
  */
-function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
-  const NFT = useNFTWithMetadata(tokenAbi, tokenAddress, tokenID)
+function NftCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
+  const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID)
 
-  const lore = NFT?.metadata?.attributes?.find(attr => attr.trait_type === 'Lore')?.value ?? 'Unrevealed'
-  const image = NFT?.metadata?.image ?? placeholder
+  const lore = nft?.metadata?.attributes?.find(attr => attr.trait_type === 'Lore')?.value ?? 'Unrevealed'
+  const image = nft?.metadata?.image ?? placeholder
 
   return (
     <Card elevation={2}>
@@ -52,7 +52,7 @@ function NFTCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
 /**
  * @type {{tokenAddress: Validator<NonNullable<string>>, tokenID: Validator<NonNullable<NonNullable<InferType<Requireable<string>|Requireable<number>>>>>, tokenAbi: Validator<NonNullable<any[]>>, lazyLoad: Requireable<boolean>}}
  */
-NFTCard.propTypes = {
+NftCard.propTypes = {
   tokenAbi: PropTypes.array.isRequired,
   tokenAddress: PropTypes.string.isRequired,
   tokenID: PropTypes.oneOfType([
@@ -62,4 +62,4 @@ NFTCard.propTypes = {
   lazyLoad: PropTypes.bool
 }
 
-export default NFTCard
+export default NftCard

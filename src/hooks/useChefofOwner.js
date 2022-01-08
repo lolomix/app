@@ -5,7 +5,7 @@ import { NETWORKS, TARGET_CHAIN } from '../web3/constants'
 /**
  * @returns {*[]}
  */
-export function useCHEFOfOwner() {
+export function useChefofOwner() {
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
   return useTokensOfOwner(abi, address);

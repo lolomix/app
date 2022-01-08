@@ -9,7 +9,7 @@ import { formatUnits } from '@ethersproject/units'
  *
  * @returns {(any|string)[]|*[]}
  */
-export function useCHEFPrice() {
+export function useAromaPrice() {
   const abiInterface = new utils.Interface(abi)
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
@@ -17,7 +17,7 @@ export function useCHEFPrice() {
     {
       abi: abiInterface,
       address: address,
-      method: "getCryptoChefPrice",
+      method: "getAROMAPrice",
       args: []
     }
   ) ?? [];

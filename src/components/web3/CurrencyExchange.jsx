@@ -27,8 +27,8 @@ import {
 } from '../../web3/constants'
 import { formatCurrency } from '../../utils/formatters'
 import { getErrorMessage } from '../../web3/errors'
-import { useAROMAPrice } from '../../hooks/useAROMAPrice'
-import { useAROMABuy } from '../../hooks/useAROMABuy'
+import { useAromaPrice } from '../../hooks/useAromaPrice'
+import { useAromaBuy } from '../../hooks/useAromaBuy'
 import SnackbarAction from '../snackbars/SnackbarAction'
 
 /**
@@ -40,7 +40,7 @@ import SnackbarAction from '../snackbars/SnackbarAction'
 function CurrencyExchange ({ t, enableCurrencySwitch = false }) {
   const { error, active } = useEthers()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-  const [price, priceFormatted] = useAROMAPrice()
+  const [price, priceFormatted] = useAromaPrice()
 
   let transactionInProgressSnackBarKey = 'transactionInProgress'
   let walletInteractionSnackBarKey = 'walletInteraction'
@@ -79,7 +79,7 @@ function CurrencyExchange ({ t, enableCurrencySwitch = false }) {
   /**
    * Definition of the aroma buy state
    */
-  const [sendAromaBuy, aromaBuyState] = useAROMABuy()
+  const [sendAromaBuy, aromaBuyState] = useAromaBuy()
 
   React.useEffect(() => {
     if (aromaBuyState.status === 'None') {

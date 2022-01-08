@@ -30,7 +30,7 @@ async function fetchMetadataByTokenURI (uri) {
  * @param id
  * @returns {undefined|any}
  */
-export function useNFTWithMetadata(abi, address, id) {
+export function useNftWithMetadata(abi, address, id) {
   const abiInterface = new utils.Interface(abi)
   const [NFT, setNFT] = useState()
 

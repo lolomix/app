@@ -1,14 +1,14 @@
-import { useCHEFSeasonSupply } from './useCHEFSeasonSupply'
-import { useCHEFTotalSupply } from './useCHEFTotalSupply'
+import { useChefSeasonSupply } from './useChefSeasonSupply'
+import { useChefTotalSupply } from './useChefTotalSupply'
 
 /**
  * Returns the remaining amount of CHEFs for sale in the Season.
  *
  * @returns {*[]}
  */
-export function useCHEFSeasonRemaining () {
-  const [totalSupply] = useCHEFTotalSupply()
-  const [seasonSupply] = useCHEFSeasonSupply()
+export function useChefSeasonRemaining () {
+  const [totalSupply] = useChefTotalSupply()
+  const [seasonSupply] = useChefSeasonSupply()
 
   if (seasonSupply === undefined || totalSupply === undefined) return []
 

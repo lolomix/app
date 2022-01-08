@@ -7,11 +7,11 @@ import { Helmet } from 'react-helmet'
 import { useEthers } from '@usedapp/core'
 import Headline from '../../components/layout/Headline'
 import DripDivider from '../../components/layout/DripDivider'
-import NFTCard from '../../components/web3/NFTCard'
+import NftCard from '../../components/web3/NftCard'
 import FAQ from '../../components/common/FAQ'
-import NoNFTNotificationCard from '../../components/common/NoNFTNotificationCard'
+import NoNftNotificationCard from '../../components/common/NoNftNotificationCard'
 import ConnectionErrorCard from '../../components/common/ConnectionErrorCard'
-import { useCHEFOfOwner } from '../../hooks/useCHEFofOwner'
+import { useChefofOwner } from '../../hooks/useChefofOwner'
 import tokenAbi from '../../web3/abi/CryptoChefsERC721Facet.json'
 import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
 
@@ -25,7 +25,7 @@ function Collection () {
   const { active, error } = useEthers();
 
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster
-  const nfts = useCHEFOfOwner()
+  const nfts = useChefofOwner()
 
   return (
     <>
@@ -56,7 +56,7 @@ function Collection () {
                            href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${NETWORKS[TARGET_CHAIN].contractMaster}/${tokenID.toString()}`}
                            style={{ textDecoration: 'none' }}
                         >
-                          <NFTCard tokenAbi={tokenAbi}
+                          <NftCard tokenAbi={tokenAbi}
                                    tokenAddress={tokenAddress}
                                    tokenID={tokenID.toNumber()}
                                    lazyLoad={index > 2}
@@ -67,7 +67,7 @@ function Collection () {
                   </Grid>
                 ) : (
                   <Grid item md={6} mb={21}>
-                    <NoNFTNotificationCard/>
+                    <NoNftNotificationCard/>
                   </Grid>
                 )
               ) : (

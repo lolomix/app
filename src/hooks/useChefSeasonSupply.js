@@ -8,7 +8,7 @@ import abi from '../web3/abi/CryptoChefsERC721Facet.json'
  *
  * @returns {(any)[]|*[]}
  */
-export function useCHEFSeasonSupply () {
+export function useChefSeasonSupply () {
   const abiInterface = new utils.Interface(abi)
   const address = NETWORKS[TARGET_CHAIN].contractMaster
 

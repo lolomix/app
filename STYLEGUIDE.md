@@ -24,7 +24,6 @@ const errorItem = <ErrorCard />;
 ```
 
 - **Component Naming**: Use the filename as the component name. For example, ReservationCard.jsx should have a reference name of ReservationCard. However, for root components of a directory, use index.jsx as the filename and use the directory name as the component name:
-- **Specials:** `CHEF` (referring to the NFT) and `AROMA` (referring to the Token) is always written with uppercase letters
 ```javascript
 // bad
 import Footer from './Footer/Footer';
