@@ -7,9 +7,10 @@ import {
   buttonClasses,
 } from '@mui/material'
 
-import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
-
 // colors
+const paleCerulean = "rgba(152, 198, 229)";
+
+// colors to deprecate (old)
 const cafeNoir = "rgba(39, 12, 10, 1)";
 const ming = "rgba(29, 96, 104, 1)"
 const brownSugar = "rgba(184, 125, 102, 1)";
@@ -125,8 +126,7 @@ theme = createTheme(theme, {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background: "#fff",
-          backgroundImage: `url("${rootBgPattern}")`,
+          background: paleCerulean,
         },
       },
     },
