@@ -44,6 +44,10 @@ export let theme = createTheme({
     error: {
       main: redSalsa
     },
+    background: {
+      default: paleCerulean
+    },
+
     // colors to deprecate
     sunGlow: {
       main: sunGlow,
@@ -117,7 +121,8 @@ export let theme = createTheme({
       fontWeight: 400,
     },
     button: {
-      textTransform: "none"
+      textTransform: "none",
+      fontWeight: 600
     }
   },
   zIndex: {},
@@ -125,16 +130,9 @@ export let theme = createTheme({
 
 theme = createTheme(theme, {
   components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          background: paleCerulean,
-        },
-      },
-    },
     MuiAppBar: {
       defaultProps: {
-        color: "cafeNoir",
+        color: "transparent",
       },
     },
     MuiToolbar: {
@@ -167,6 +165,26 @@ theme = createTheme(theme, {
           },
         },
       ],
+    },
+    MuiIconButton: {
+      variants: [
+        {
+          props: { shape: "inherit" },
+          style: {
+            borderRadius: theme.shape.borderRadius
+          }
+        }
+      ]
+    },
+    MuiAvatar: {
+      variants: [
+        {
+          props: { variant: "inheritBorderRadius" },
+          style: {
+            borderRadius: theme.shape.borderRadius
+          }
+        }
+      ]
     },
     MuiButton: {
       styleOverrides: {

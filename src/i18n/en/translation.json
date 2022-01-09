@@ -18,7 +18,7 @@
     "connectedWith": "Connected with {{ connector }}",
     "connect": "Connect",
     "connectToMyWallet": "Connect to My wallet",
-    "connectWallet": "Connect wallet",
+    "connectWallet": "Connect Wallet",
     "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network.",
     "connectWith": "Connect with {{ connector }}",
     "openingSoon": "Opening Soon"

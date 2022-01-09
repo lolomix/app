@@ -9,7 +9,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { theme } from './utils/theme'
 // shell
-import TopBar from './components/layout/TopBar'
+import Navigation from './components/layout/Navigation'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ServiceWorkerWrapper from './components/ServiceWorkerWrapper'
 import { Container } from '@mui/material'
@@ -35,7 +35,7 @@ function App () {
         <CssBaseline/>
         <Container maxWidth="xl" disableGutters={true} >
           <AnnouncementBar/>
-          <TopBar/>
+          <Navigation/>
           <ServiceWorkerWrapper/>
           <Suspense fallback={<LoadingSpinner/>}>
             <Routes>

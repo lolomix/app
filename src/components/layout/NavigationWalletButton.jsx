@@ -2,17 +2,13 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import Blockies from 'react-blockies'
 import { useEthers } from '@usedapp/core'
-//mui
-import {
-  Tooltip,
-  Button,
-  Avatar,
-  IconButton,
-} from '@mui/material'
+// material-ui
+import { Tooltip, Avatar, } from '@mui/material'
 import { AccountBalanceWallet } from '@mui/icons-material'
-//custom
+// custom
 import MyAccountPopover from './MyAccountPopover'
 import ConnectorsPopover from './ConnectorsPopover'
+import NavigationButton from './NavigationButton'
 import {
   usePopupState,
   bindTrigger,
@@ -33,7 +29,7 @@ const popoverOriginProps = {
   }
 }
 
-function WalletSelector({ t }) {
+function NavigationWalletButton({ t }) {
   const { active, account } = useEthers();
 
   const connectorsPopoverState = usePopupState({
@@ -51,11 +47,17 @@ function WalletSelector({ t }) {
       {active && account ? (
           <>
             <Tooltip disableFocusListener title={t("base.myAccount")} aria-label={t("base.myAccount")}>
-              <IconButton color="inherit" {...bindTrigger(myAccountPopoverState)}>
-                <Avatar>
-                  <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
-                </Avatar>
-              </IconButton>
+              <NavigationButton
+                icon={
+                  <Avatar variant="inheritBorderRadius">
+                    <Blockies seed={account.toLowerCase()} size={10}/>
+                  </Avatar>
+                }
+                sx={{
+                  padding: 0.1
+                }}
+                {...bindTrigger(myAccountPopoverState)}
+              />
             </Tooltip>
             <MyAccountPopover
               {...popoverOriginProps}
@@ -66,14 +68,11 @@ function WalletSelector({ t }) {
           </>
       ) : (
         <Tooltip title={t("base.connectToMyWallet")}>
-          <Button elongatedwidth="true"
-                  color="primary"
-                  variant="contained"
-                  startIcon={<AccountBalanceWallet />}
-                  {...bindTrigger(connectorsPopoverState)}
-          >
-            {t("base.connectWallet")}
-          </Button>
+          <NavigationButton
+            icon={<AccountBalanceWallet/>}
+            title={t("base.connectWallet")}
+            {...bindTrigger(connectorsPopoverState)}
+          />
         </Tooltip>
       )}
       <ConnectorsPopover
@@ -85,4 +84,4 @@ function WalletSelector({ t }) {
   );
 }
 
-export default withTranslation()(WalletSelector);
+export default withTranslation()(NavigationWalletButton);
