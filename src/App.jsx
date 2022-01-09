@@ -12,7 +12,7 @@ import { theme } from './utils/theme'
 import TopBar from './components/layout/TopBar'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ServiceWorkerWrapper from './components/ServiceWorkerWrapper'
-import { Container, Box } from '@mui/material'
+import { Container } from '@mui/material'
 import AnnouncementBar from './components/layout/AnnouncementBar'
 import Collection from './views/Collection/Collection'
 import { Helmet } from 'react-helmet'
@@ -34,22 +34,20 @@ function App () {
         </Helmet>
         <CssBaseline/>
         <Container maxWidth="xl" disableGutters={true} >
-          <Box sx={{ backgroundColor: 'background.default', boxShadow: 4 }}>
-            <AnnouncementBar/>
-            <TopBar/>
-            <ServiceWorkerWrapper/>
-            <Suspense fallback={<LoadingSpinner/>}>
-              <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/buffet" element={<Buffet/>}/>
-                <Route path="/market" element={<Market/>}/>
-                <Route path="/kitchen" element={<Kitchen/>}/>
-                <Route path="/internal" element={<Internal/>}/>
-                <Route path="/collection" element={<Collection/>}/>
-              </Routes>
-            </Suspense>
-            <Version />
-          </Box>
+          <AnnouncementBar/>
+          <TopBar/>
+          <ServiceWorkerWrapper/>
+          <Suspense fallback={<LoadingSpinner/>}>
+            <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/buffet" element={<Buffet/>}/>
+              <Route path="/market" element={<Market/>}/>
+              <Route path="/kitchen" element={<Kitchen/>}/>
+              <Route path="/internal" element={<Internal/>}/>
+              <Route path="/collection" element={<Collection/>}/>
+            </Routes>
+          </Suspense>
+          <Version />
         </Container>
       </SnackbarProvider>
     </ThemeProvider>
