@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 // fonts
 import '@fontsource/balsamiq-sans/400.css'
@@ -19,6 +19,7 @@ import { Helmet } from 'react-helmet'
 import Version from './components/layout/Version'
 import SnackbarProvider from './components/snackbars/SnackbarProvider'
 // pages (lazy loading)
+const Home = lazy(() => import('./views/Home/Home'))
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
 const Buffet = lazy(() => import('./views/Buffet/Buffet'))
@@ -39,7 +40,7 @@ function App () {
             <ServiceWorkerWrapper/>
             <Suspense fallback={<LoadingSpinner/>}>
               <Routes>
-                <Route path="/" element={<Navigate replace to="/market" />}/>
+                <Route path="/" element={<Home/>}/>
                 <Route path="/buffet" element={<Buffet/>}/>
                 <Route path="/market" element={<Market/>}/>
                 <Route path="/kitchen" element={<Kitchen/>}/>
