@@ -91,7 +91,7 @@ export let theme = createTheme({
     borderRadius: 10,
   },
   typography: {
-    fontFamily: "'Balsamiq Sans', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: "'Rubik', 'Helvetica', 'Arial', sans-serif",
     h1: {
       fontSize: "3.052rem",
       fontWeight: 400,

@@ -2487,10 +2487,15 @@
     "@ethersproject/properties" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
 
-"@fontsource/balsamiq-sans@^4.5.0":
+"@fontsource/luckiest-guy@^4.5.0":
   version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/balsamiq-sans/-/balsamiq-sans-4.5.0.tgz#4c3fd89ca9d8b207912f3559e3fac23a5201740e"
-  integrity sha512-2N73S/bBtw9O77WUcAeVDKCg/a6rP9n9dCztAzFvEFhugeeeYw9jtbH9PEq51XDWf5/TmUs9oMknEzdn03e5iQ==
+  resolved "https://registry.yarnpkg.com/@fontsource/luckiest-guy/-/luckiest-guy-4.5.0.tgz#ecd722838d80a86520d978e78f1a8fb3e93337b1"
+  integrity sha512-TxyV4v6F+KTf4XRPUthTfB5kyWcrwbLddKLQvmpUIFfZjC66qVhS75mONn4XQ6NFQAYwfLQ5OlEGwv5IWj/6wg==
+
+"@fontsource/rubik@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/rubik/-/rubik-4.5.0.tgz#e6e86606903d7102c565eec4b1339298308c3acb"
+  integrity sha512-evvN6wFvc4gH9X3PuRkAfaWXJya5jcZxbMpAsiQIfq8KUCSBx74Rknm5M6hpRuB9AdxdchF/A3p18VkR9RZy2g==
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
