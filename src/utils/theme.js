@@ -8,16 +8,17 @@ import {
 } from '@mui/material'
 
 // colors
-const paleCerulean = "rgba(152, 198, 229)";
+// https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd294
+const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
+const darkCornflowerBlue = "rgba(40, 58, 143, 1)"; // 283A8F
+const paleCerulean = "rgba(152, 199, 229, 1)"; // 98C7E5
+const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
+const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
 
 // colors to deprecate (old)
 const cafeNoir = "rgba(39, 12, 10, 1)";
-const ming = "rgba(29, 96, 104, 1)"
 const brownSugar = "rgba(184, 125, 102, 1)";
-const sunGlow = "rgba(255, 203, 76, 1)";
-const darkSkyBlue = "rgb(138, 193, 210)";
 const culturedWhite = "rgba(250, 250, 250, 1)";
-const error = "rgba(255, 62, 62, 1)";
 
 // generators
 const shadow = (px, rgb) => `0.3px ${px}px 0.4px 0px ${alpha(rgb, 0.9)}`;
@@ -26,10 +27,10 @@ export let theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: ming,
+      main: sunGlow,
     },
     secondary: {
-      main: cafeNoir,
+      main: darkCornflowerBlue,
     },
     tertiary: {
       main: culturedWhite,
@@ -37,19 +38,20 @@ export let theme = createTheme({
       dark: darken(culturedWhite, 0.3),
       contrastText: cafeNoir,
     },
-    error: {
-      main: error
+    success: {
+      main: oceanGreen
     },
+    error: {
+      main: redSalsa
+    },
+    // colors to deprecate
     sunGlow: {
       main: sunGlow,
       contrastText: "white",
     },
     cafeNoir: {
       main: cafeNoir,
-    },
-    darkSkyBlue: {
-      main: darkSkyBlue,
-    },
+    }
   },
   generators: {
     shadow: shadow,
