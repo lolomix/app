@@ -7,8 +7,6 @@ import {
   buttonClasses,
 } from '@mui/material'
 
-import rootBgPattern from "../assets/background/outer-bg-pattern-opacity30.png";
-
 // colors
 const cafeNoir = "rgba(39, 12, 10, 1)";
 const ming = "rgba(29, 96, 104, 1)"
@@ -126,7 +124,6 @@ theme = createTheme(theme, {
       styleOverrides: {
         body: {
           background: "#fff",
-          backgroundImage: `url("${rootBgPattern}")`,
         },
       },
     },
