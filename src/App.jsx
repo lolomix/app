@@ -2,8 +2,8 @@ import React, { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 // fonts
-import '@fontsource/balsamiq-sans/400.css'
-import '@fontsource/balsamiq-sans/700.css'
+import "@fontsource/rubik"
+import "@fontsource/luckiest-guy"
 // material-ui
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
