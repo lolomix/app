@@ -2,71 +2,29 @@ import React from "react";
 import { withSnackbar } from "notistack";
 //mui
 import Grid from "@mui/material/Grid";
-//import Box from "@mui/material/Box";
-//import Button from "@mui/material/Button";
-//import ListItemIcon from "@mui/material/ListItemIcon";
-//import List from "@mui/material/List";
-//import ListItem from "@mui/material/ListItem";
-//import ListItemText from "@mui/material/ListItemText";
-//import Card from "@mui/material/Card";
-//import CardContent from "@mui/material/CardContent";
 //web3
 import { UnsupportedChainIdError } from "@web3-react/core";
-import { NoEthereumProviderError, UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
-import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from "@web3-react/walletconnect-connector";
-import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from "@web3-react/frame-connector";
+import {
+  NoEthereumProviderError,
+  UserRejectedRequestError,
+} from '@web3-react/injected-connector'
 import { utils } from "web3";
 import { useEagerConnect, useInactiveListener } from "../../web3/hooks";
 import {
-  injected,
-  network,
-  walletconnect,
-  walletlink,
-  ledger,
-  trezor,
-  lattice,
-  frame,
-  authereum,
-  fortmatic,
-  magic,
-  portis,
-  torus,
+  injected
 } from "../../web3/connectors";
-import BuyAroma from "../../components/web3/BuyAroma";
+import CurrencyExchange from "../../components/web3/CurrencyExchange";
 
 // utils
 import {formatCurrency} from '../../utils/formatters'
+import { useEthers } from '@usedapp/core'
 
 const ConnectorNames = {
-  Injected: "Injected",
-  Network: "Network",
-  WalletConnect: "WalletConnect",
-  WalletLink: "WalletLink",
-  Ledger: "Ledger",
-  Trezor: "Trezor",
-  Lattice: "Lattice",
-  Frame: "Frame",
-  Authereum: "Authereum",
-  Fortmatic: "Fortmatic",
-  Magic: "Magic",
-  Portis: "Portis",
-  Torus: "Torus",
+  Injected: "Injected"
 };
 
 const connectorsByName = {
-  [ConnectorNames.Injected]: injected,
-  [ConnectorNames.Network]: network,
-  [ConnectorNames.WalletConnect]: walletconnect,
-  [ConnectorNames.WalletLink]: walletlink,
-  [ConnectorNames.Ledger]: ledger,
-  [ConnectorNames.Trezor]: trezor,
-  [ConnectorNames.Lattice]: lattice,
-  [ConnectorNames.Frame]: frame,
-  [ConnectorNames.Authereum]: authereum,
-  [ConnectorNames.Fortmatic]: fortmatic,
-  [ConnectorNames.Magic]: magic,
-  [ConnectorNames.Portis]: portis,
-  [ConnectorNames.Torus]: torus,
+  [ConnectorNames.Injected]: injected
 };
 
 function getErrorMessage(error) {
@@ -75,9 +33,7 @@ function getErrorMessage(error) {
   } else if (error instanceof UnsupportedChainIdError) {
     return "You're connected to an unsupported network. Please use Polygon network.";
   } else if (
-    error instanceof UserRejectedRequestErrorInjected ||
-    error instanceof UserRejectedRequestErrorWalletConnect ||
-    error instanceof UserRejectedRequestErrorFrame
+    error instanceof UserRejectedRequestError
   ) {
     return "Please authorize this website to access your Ethereum account.";
   } else {
@@ -298,7 +254,7 @@ function App() {
               Sign Message
             </button>
           )}
-          <BuyAroma />
+          <CurrencyExchange />
           {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
             <button
               style={{
