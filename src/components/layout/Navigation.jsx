@@ -4,7 +4,6 @@ import {
   Toolbar,
   AppBar,
   Grid,
-  Hidden,
   Stack,
 } from '@mui/material'
 import NotificationsIcon from '@mui/icons-material/Notifications'
@@ -13,6 +12,7 @@ import NavigationWalletButton from './NavigationWalletButton'
 import LanguageSelector from './LanguageSelector'
 import NavigationButton from './NavigationButton'
 import NavigationMenuButton from './NavigationMainMenuButton'
+import NavigationAromaBalance from './NavigationAromaBalance'
 
 /**
  * @param t
@@ -38,7 +38,7 @@ function Navigation ({ t }) {
                 justifyContent="left"
                 alignItems="center"
           >
-            {/* @todo: aroma balance component */}
+            <NavigationAromaBalance/>
           </Grid>
           <Grid item
                 container
@@ -48,15 +48,13 @@ function Navigation ({ t }) {
                 alignItems="center"
           >
             <Grid item>
-              <Hidden mdDown>
-                <Stack spacing={1} direction="row" mr={4}>
-                  {notifications.length > 0 &&
-                    <NavigationButton icon={<NotificationsIcon/>}/>
-                  }
-                  <NavigationWalletButton/>
-                  <NavigationMenuButton/>
-                </Stack>
-              </Hidden>
+              <Stack spacing={1} direction="row" mr={4}>
+                {notifications.length > 0 &&
+                  <NavigationButton icon={<NotificationsIcon/>}/>
+                }
+                <NavigationWalletButton/>
+                <NavigationMenuButton/>
+              </Stack>
             </Grid>
             <Grid item>
               {/* @todo: remove this but keep the language selected */}
