@@ -135,16 +135,6 @@ theme = createTheme(theme, {
         color: "transparent",
       },
     },
-    MuiToolbar: {
-      variants: [
-        {
-          props: { variant: "large" },
-          style: {
-            minHeight: "88px",
-          },
-        },
-      ],
-    },
     MuiAccordion: {
       defaultProps: {
         square: true,

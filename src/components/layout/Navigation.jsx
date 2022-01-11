@@ -30,7 +30,7 @@ function Navigation ({ t }) {
 
   return (
     <AppBar elevation={0} position="static">
-      <Toolbar variant="large">
+      <Toolbar>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item container
                 xs={6}
