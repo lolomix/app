@@ -12,7 +12,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import NavigationWalletButton from './NavigationWalletButton'
 import LanguageSelector from './LanguageSelector'
 import NavigationButton from './NavigationButton'
-import NavigationMenuButton from './NavigationMenuButton'
+import NavigationMenuButton from './NavigationMainMenuButton'
 
 /**
  * @param t
@@ -20,6 +20,14 @@ import NavigationMenuButton from './NavigationMenuButton'
  * @constructor
  */
 function Navigation ({ t }) {
+
+  /**
+   * @type {*[]}
+   *
+   * @todo create a hook that gathers all related notifications
+   */
+  const notifications = []
+
   return (
     <AppBar elevation={0} position="static">
       <Toolbar variant="large">
@@ -42,7 +50,9 @@ function Navigation ({ t }) {
             <Grid item>
               <Hidden mdDown>
                 <Stack spacing={1} direction="row" mr={4}>
-                  <NavigationButton icon={<NotificationsIcon/>}/>
+                  {notifications.length > 0 &&
+                    <NavigationButton icon={<NotificationsIcon/>}/>
+                  }
                   <NavigationWalletButton/>
                   <NavigationMenuButton/>
                 </Stack>
