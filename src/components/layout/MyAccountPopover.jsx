@@ -18,14 +18,11 @@ import {
   Divider,
   Grid,
 } from '@mui/material'
-import { Check, Close, Settings } from '@mui/icons-material'
+import { Check, Settings } from '@mui/icons-material'
 // custom
 import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
 import IconButtonCopy from '../buttons/CopyIconButton'
-import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import AromaBalance from '../web3/AromaBalance'
-import Balance from '../web3/Balance'
-import ChefBalance from '../web3/ChefBalance'
+import { TARGET_CHAIN } from '../../web3/constants'
 import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
 import { truncate } from '../../utils/formatters'
 
@@ -43,9 +40,12 @@ function MyAccountPopover(props) {
             </Typography>
           </Grid>
           <Grid item xs={1}>
-            <Tooltip title="Close Menu">
-              <IconButton onClick={closePopover} aria-label="Close Popover">
-                <Close />
+            <Tooltip title="Wallet Settings">
+              <IconButton variant="outlined" onClick={() => {
+                closePopover()
+                openConnectorsPopover(anchorEl)
+              }}>
+                <Settings/>
               </IconButton>
             </Tooltip>
           </Grid>
@@ -79,8 +79,12 @@ function MyAccountPopover(props) {
 
           <ListItem disableGutters>
             <ListItemAvatar>
-              <Avatar className="avatar-success">
-                <Check color="tertiary" />
+              <Avatar sx={{
+                backgroundColor:"primary.main"
+              }}>
+                <Check sx={{
+                  color:"common.white"
+                }}/>
               </Avatar>
             </ListItemAvatar>
             <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
@@ -89,59 +93,16 @@ function MyAccountPopover(props) {
 
         <Divider />
 
-        <Typography mt={2} mb={1}>
-          Balance
-        </Typography>
-        <Grid container spacing={.5} mb={2}>
-          <Grid item xs={6}>
-            <Typography variant="body2">
-              AROMA
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="body2">
-              <AromaBalance />
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="body2">
-              {NETWORKS[TARGET_CHAIN].nativeCurrency.symbol}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="body2">
-              <Balance />
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="body2">
-              CHEF NFTs
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <ChefBalance />
-          </Grid>
-        </Grid>
         <Grid container>
           <Grid item xs>
-            <Box mb={2}>
+            <Box my={2}>
               <AddTokenToWalletButton />
             </Box>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={2}>
-            <Tooltip title="Wallet Settings">
-              <IconButton color="primary" variant="outlined" onClick={() => {
-                closePopover()
-                openConnectorsPopover(anchorEl)
-              }}>
-                <Settings/>
-              </IconButton>
-            </Tooltip>
-          </Grid>
           <Grid item xs>
-            <Button fullWidth disableElevation color="error" variant="contained" onClick={() => {
+            <Button fullWidth color="error" variant="contained" onClick={() => {
               closePopover()
               deactivate()
             }}>
