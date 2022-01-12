@@ -8,20 +8,17 @@ import {
 } from '@mui/material'
 
 // colors
-// https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd294
+// https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
 const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
 const darkCornflowerBlue = "rgba(40, 58, 143, 1)"; // 283A8F
 const paleCerulean = "rgba(152, 199, 229, 1)"; // 98C7E5
 const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
 const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
-
-// colors to deprecate (old)
-const cafeNoir = "rgba(39, 12, 10, 1)";
-const brownSugar = "rgba(184, 125, 102, 1)";
-const culturedWhite = "rgba(250, 250, 250, 1)";
+const coffee = "rgba(109, 81, 63, 1)" // 6D513F
+const bistre = "rgba(58, 39, 23, 1)" // 3A2717
 
 // generators
-const shadow = (px, rgb) => `0.3px ${px}px 0.4px 0px ${alpha(rgb, 0.9)}`;
+const shadow = (px, color) => `0.3px ${px}px 0.4px 0px ${color}`;
 
 export let theme = createTheme({
   palette: {
@@ -33,10 +30,10 @@ export let theme = createTheme({
       main: darkCornflowerBlue,
     },
     tertiary: {
-      main: culturedWhite,
-      light: lighten(culturedWhite, 0.3),
-      dark: darken(culturedWhite, 0.3),
-      contrastText: cafeNoir,
+      main: coffee,
+      light: lighten(coffee, 0.3),
+      dark: darken(coffee, 0.3),
+      contrastText: "white",
     },
     success: {
       main: oceanGreen
@@ -53,9 +50,6 @@ export let theme = createTheme({
       main: sunGlow,
       contrastText: "white",
     },
-    cafeNoir: {
-      main: cafeNoir,
-    }
   },
   generators: {
     shadow: shadow,
@@ -66,30 +60,30 @@ export let theme = createTheme({
   // @todo: work with a UI/UX designer to fix and introduce more depth
   shadows: [
     "none",
-    shadow(1.5, brownSugar),
-    shadow(3, brownSugar),
-    shadow(4.5, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar),
-    shadow(6, brownSugar)
+    shadow(1.5, bistre),
+    shadow(3, bistre),
+    shadow(4.5, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre),
+    shadow(6, bistre)
   ],
   shape: {
     borderRadius: 10,
@@ -134,16 +128,6 @@ theme = createTheme(theme, {
       defaultProps: {
         color: "transparent",
       },
-    },
-    MuiToolbar: {
-      variants: [
-        {
-          props: { variant: "large" },
-          style: {
-            minHeight: "88px",
-          },
-        },
-      ],
     },
     MuiAccordion: {
       defaultProps: {
