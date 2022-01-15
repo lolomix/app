@@ -207,19 +207,6 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { elongatedwidth: "true" },
-          style: {
-            paddingLeft: "32px",
-            paddingRight: "32px",
-          },
-        },
-        {
-          props: { color: "secondary", variant: "contained", disabled: true },
-          style: {
-            backgroundColor: "white"
-          }
-        },
-        {
           props: { color: "primary", variant: "contained" },
           style: {
             boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
@@ -270,21 +257,6 @@ theme = createTheme(theme, {
           }
         }
       }
-    },
-    MuiLinearProgress: {
-      styleOverrides: {
-        root: {
-          height: 30,
-          borderRadius: 11,
-          border: "5px solid lightgray",
-        },
-        barColorPrimary: {
-          backgroundColor: sunGlow,
-        },
-        colorPrimary: {
-          backgroundColor: "lightgray",
-        },
-      },
-    },
+    }
   }
 });
