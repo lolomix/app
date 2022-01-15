@@ -6,12 +6,16 @@ import { useAromaBalanceOf } from "../../hooks/useAromaBalanceOf";
 import Skeleton from "@mui/material/Skeleton";
 import { useEthers } from "@usedapp/core";
 
-function AromaBalance() {
+function AromaBalance({ placeholder }) {
   const { account } = useEthers();
   const [balance, balanceFormatted] = useAromaBalanceOf(account);
 
   return balance === undefined ? (
-    <Skeleton variant="text" />
+    placeholder ? (
+      placeholder
+    ) : (
+      <Skeleton variant="text" width={30} sx={{ display: "inline-block" }} />
+    )
   ) : (
     <span>{formatCurrency(balanceFormatted)}</span>
   );
