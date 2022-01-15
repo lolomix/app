@@ -77,7 +77,8 @@ i18n
               locale: dateLang[lng],
             });
           default:
-            if (value instanceof Date) return format(value, formatting, { locale: dateLang[lng] });
+            if (value instanceof Date)
+              return format(value, formatting, { locale: dateLang[lng] });
             else return value;
         }
       },

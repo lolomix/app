@@ -6,7 +6,7 @@ import {
   createTheme,
   buttonClasses,
   stepLabelClasses,
-} from '@mui/material'
+} from "@mui/material";
 
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
@@ -15,8 +15,8 @@ const darkCornflowerBlue = "rgba(40, 58, 143, 1)"; // 283A8F
 const paleCerulean = "rgba(152, 199, 229, 1)"; // 98C7E5
 const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
 const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
-const coffee = "rgba(109, 81, 63, 1)" // 6D513F
-const bistre = "rgba(58, 39, 23, 1)" // 3A2717
+const coffee = "rgba(109, 81, 63, 1)"; // 6D513F
+const bistre = "rgba(58, 39, 23, 1)"; // 3A2717
 
 // generators
 const shadow = (px, color) => `0.3px ${px}px 0.4px 0px ${color}`;
@@ -37,13 +37,13 @@ export let theme = createTheme({
       contrastText: "white",
     },
     success: {
-      main: oceanGreen
+      main: oceanGreen,
     },
     error: {
-      main: redSalsa
+      main: redSalsa,
     },
     background: {
-      default: paleCerulean
+      default: paleCerulean,
     },
 
     // colors to deprecate
@@ -84,10 +84,10 @@ export let theme = createTheme({
     shadow(6, bistre),
     shadow(6, bistre),
     shadow(6, bistre),
-    shadow(6, bistre)
+    shadow(6, bistre),
   ],
   shape: {
-    borderRadius: 10
+    borderRadius: 10,
   },
   typography: {
     fontFamily: "'Rubik', 'Helvetica', 'Arial', sans-serif",
@@ -117,8 +117,8 @@ export let theme = createTheme({
     },
     button: {
       textTransform: "none",
-      fontWeight: 600
-    }
+      fontWeight: 600,
+    },
   },
   zIndex: {},
 });
@@ -154,8 +154,8 @@ theme = createTheme(theme, {
     MuiCardActions: {
       styleOverrides: {
         root: {
-          padding: theme.spacing(2)
-        }
+          padding: theme.spacing(2),
+        },
       },
     },
     MuiAvatar: {
@@ -163,33 +163,34 @@ theme = createTheme(theme, {
         {
           props: { variant: "inheritBorderRadius" },
           style: {
-            borderRadius: theme.shape.borderRadius
-          }
-        }
-      ]
+            borderRadius: theme.shape.borderRadius,
+          },
+        },
+      ],
     },
     MuiIconButton: {
       variants: [
         {
           props: { shape: "inherit" },
           style: {
-            borderRadius: theme.shape.borderRadius
-          }
-        }
-      ]
+            borderRadius: theme.shape.borderRadius,
+          },
+        },
+      ],
     },
     MuiButton: {
       styleOverrides: {
         contained: {
-          [`&.MuiButton-containedTertiary:not(.Mui-disabled):not(.MuiButton-active)`]: {
-            backgroundColor: alpha(theme.palette.tertiary.main, 0.1),
-            color: theme.palette.tertiary.main,
-            boxShadow: "none"
-          },
+          [`&.MuiButton-containedTertiary:not(.Mui-disabled):not(.MuiButton-active)`]:
+            {
+              backgroundColor: alpha(theme.palette.tertiary.main, 0.1),
+              color: theme.palette.tertiary.main,
+              boxShadow: "none",
+            },
           [`&.MuiButton-containedTertiary.MuiButton-contained.Mui-disabled`]: {
             backgroundColor: alpha(theme.palette.tertiary.main, 0.04),
-            color: alpha(theme.palette.tertiary.main, 0.5)
-          }
+            color: alpha(theme.palette.tertiary.main, 0.5),
+          },
         },
       },
       variants: [
@@ -203,7 +204,7 @@ theme = createTheme(theme, {
         {
           props: { shape: "squarish" },
           style: {
-            borderRadius: 7.5
+            borderRadius: 7.5,
           },
         },
         {
@@ -220,7 +221,10 @@ theme = createTheme(theme, {
           style: {
             boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
             [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
+              boxShadow: theme.generators.shadow(
+                2,
+                theme.palette.tertiary.dark
+              ),
             },
           },
         },
@@ -230,8 +234,8 @@ theme = createTheme(theme, {
             [`.${buttonClasses.startIcon}`]: {
               position: "absolute",
               marginLeft: "0px",
-              left: "8px"
-            }
+              left: "8px",
+            },
           },
         },
       ],
@@ -239,24 +243,24 @@ theme = createTheme(theme, {
     MuiStepIcon: {
       styleOverrides: {
         root: {
-          color: theme.palette.grey['300']
+          color: theme.palette.grey["300"],
         },
         text: {
           fill: theme.palette.secondary.main,
           fontWeight: 600,
-          fontSize: "0.9rem"
-        }
-      }
+          fontSize: "0.9rem",
+        },
+      },
     },
     MuiStepLabel: {
       styleOverrides: {
         label: {
           color: theme.palette.secondary.main,
           [`&.${stepLabelClasses.active}`]: {
-            color: theme.palette.secondary.main
-          }
-        }
-      }
-    }
-  }
+            color: theme.palette.secondary.main,
+          },
+        },
+      },
+    },
+  },
 });

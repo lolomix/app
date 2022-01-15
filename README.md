@@ -8,33 +8,33 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Getting Started
 
-We do not currently have a dockerized environment, so the easiest way to run the app is on your local machine. 
-The app can be up and running in minutes as long as you have all the requirements. 
+We do not currently have a dockerized environment, so the easiest way to run the app is on your local machine.
+The app can be up and running in minutes as long as you have all the requirements.
 
 ### Environmental Requirements
 
 These packages must be installed globally on your machine.
-  - Node > 16.13 (LTS)
-  - Yarn >= 1.19.1
+
+- Node > 16.13 (LTS)
+- Yarn >= 1.19.1
 
 ### The .env file
 
-We use dotenv to provide all the environmental files to the application. There is an `.env.sample` file 
-in the repository that is almost ready for local development. 
+We use dotenv to provide all the environmental files to the application. There is an `.env.sample` file
+in the repository that is almost ready for local development.
 
 1. Please make copy of this file and name it `.env` by running the `cp .env.sample .env` command on macOS or Linux.
 2. Replace the `{ADD_INFURA_ID}` placeholder with an INFURA ID. You can use your own key or we can provide one for you. Please ask one of the members.
 
-
 ### App Dependencies
 
-Please install the dependencies of the app and try to keep it up to date for the best experience. 
+Please install the dependencies of the app and try to keep it up to date for the best experience.
 Running `yarn install` will install/update all the packages that the app needs according to the `yarn.lock` file.
 
 ### Running the App
 
 Run the `yarn start` in order to run the app in development mode. It supports hot reloading, feel free to edit the
-files while the app is running. You should be able to see most of the changes instantly. If not, however, then you can 
+files while the app is running. You should be able to see most of the changes instantly. If not, however, then you can
 always close the app and then start it again.
 
 ## Available Commands
@@ -65,6 +65,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Documentation
+
 - [Contribution Guidelines](CONTRIBUTING.md)
 - [Deployment Workflows](DEPLOYMENT.md)
 - [Style Guide](STYLEGUIDE.md)

@@ -1,5 +1,5 @@
-import { useContractCall, useEthers } from '@usedapp/core'
-import { utils } from 'ethers'
+import { useContractCall, useEthers } from "@usedapp/core";
+import { utils } from "ethers";
 
 /**
  * @param abi
@@ -7,18 +7,18 @@ import { utils } from 'ethers'
  * @returns {(any)[]|*[]}
  */
 export function useTokensOfOwner(abi, address) {
-  const abiInterface = new utils.Interface(abi)
-  const { account } = useEthers()
+  const abiInterface = new utils.Interface(abi);
+  const { account } = useEthers();
 
-  const [tokens] = useContractCall(
-    address && {
-      abi: abiInterface,
-      address: address,
-      method: "tokensOfOwner",
-      args: [account]
-    }
-  ) ?? [];
+  const [tokens] =
+    useContractCall(
+      address && {
+        abi: abiInterface,
+        address: address,
+        method: "tokensOfOwner",
+        args: [account],
+      }
+    ) ?? [];
 
-  return tokens
+  return tokens;
 }
-

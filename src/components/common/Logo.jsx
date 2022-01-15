@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 // material-ui
 import Tooltip from "@mui/material/Tooltip";
@@ -12,15 +12,16 @@ import logo from "../../assets/logoWithWhiteText.png";
  * @returns {JSX.Element}
  * @constructor
  */
-function Logo ({ t }) {
+function Logo({ t }) {
   return (
-    <Tooltip disableFocusListener
-             title={t("base.titleTooltip")}
-             aria-label={t("base.titleTooltip")}
+    <Tooltip
+      disableFocusListener
+      title={t("base.titleTooltip")}
+      aria-label={t("base.titleTooltip")}
     >
-        <Button disableRipple component={Link} to='/'>
-          <img style={{ height: "65px" }} alt="CryptoChefs logo" src={logo} />
-        </Button>
+      <Button disableRipple component={Link} to="/">
+        <img style={{ height: "65px" }} alt="CryptoChefs logo" src={logo} />
+      </Button>
     </Tooltip>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useEthers } from '@usedapp/core';
+import { useEthers } from "@usedapp/core";
 import { injected } from "./connectors";
 
 export function useEagerConnect() {

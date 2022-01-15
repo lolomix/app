@@ -1,34 +1,40 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
+import React from "react";
+import { withTranslation } from "react-i18next";
 // material-ui
-import Grid from '@mui/material/Grid'
-import { Helmet } from 'react-helmet'
+import Grid from "@mui/material/Grid";
+import { Helmet } from "react-helmet";
 import {
-  Box, Button, Card,
+  Box,
+  Button,
+  Card,
   CardActions,
   CardContent,
   CardHeader,
-  Container, Dialog, DialogActions, DialogContent, DialogTitle, Typography,
-} from '@mui/material'
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 // custom
-import Headline from '../../components/layout/Headline'
-import RecipeCreateStepper from '../../components/common/RecipeCreateStepper'
-import RecipeOnPlaceIcon from '../../components/icons/RecipeOnPlaceIcon'
+import Headline from "../../components/layout/Headline";
+import RecipeCreateStepper from "../../components/common/RecipeCreateStepper";
+import RecipeOnPlaceIcon from "../../components/icons/RecipeOnPlaceIcon";
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
-function KitchenRecipeCreate () {
-
-  const [open, setOpen] = React.useState(false)
+function KitchenRecipeCreate() {
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <>
@@ -38,29 +44,18 @@ function KitchenRecipeCreate () {
       <Box pb={10} pt={1}>
         <Container as="section">
           {/* @todo maybe we could leave some headline? However, we need a back button for sure.  */}
-          <Headline>
-            Kitchen
-          </Headline>
-          <Grid
-            mb={4}
-            container
-            justifyContent="center"
-            alignItems="center"
-          >
+          <Headline>Kitchen</Headline>
+          <Grid mb={4} container justifyContent="center" alignItems="center">
             <Grid item xs sm={8} md={6} textAlign="center">
               <Card>
                 {/* Box used as CardContent adds an annoying padding */}
                 <Box p={2}>
-                  <RecipeCreateStepper/>
+                  <RecipeCreateStepper />
                 </Box>
               </Card>
             </Grid>
           </Grid>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-          >
+          <Grid container justifyContent="center" alignItems="center">
             <Grid item xs sm={6} md={4} textAlign="center">
               <Card>
                 <CardHeader
@@ -71,11 +66,12 @@ function KitchenRecipeCreate () {
                   }
                 />
                 <CardContent>
-                  <RecipeOnPlaceIcon sx={{ fontSize: '12rem' }}/>
+                  <RecipeOnPlaceIcon sx={{ fontSize: "12rem" }} />
                 </CardContent>
                 <CardActions>
                   <Button
-                    fullWidth shape="squarish"
+                    fullWidth
+                    shape="squarish"
                     variant="contained"
                     onClick={handleClickOpen}
                   >
@@ -83,19 +79,15 @@ function KitchenRecipeCreate () {
                   </Button>
                   {/* @todo abstraction of this Dialog Component */}
                   <Dialog
+                    open={open}
                     onClose={handleClose}
                     aria-labelledby="customized-dialog-title"
-                    open={open}
                   >
                     <DialogTitle>Select a token</DialogTitle>
-                    <DialogContent>
-                      Content
-                    </DialogContent>
+                    <DialogContent>Content</DialogContent>
                     <DialogActions>
                       {/* @todo proper styling of button */}
-                      <Button onClick={handleClose}>
-                        Save changes
-                      </Button>
+                      <Button onClick={handleClose}>Save changes</Button>
                     </DialogActions>
                   </Dialog>
                 </CardActions>
@@ -105,7 +97,7 @@ function KitchenRecipeCreate () {
         </Container>
       </Box>
     </>
-  )
+  );
 }
 
-export default withTranslation()(KitchenRecipeCreate)
+export default withTranslation()(KitchenRecipeCreate);

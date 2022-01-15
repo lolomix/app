@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 // material-ui
 import Skeleton from "@mui/material/Skeleton";
 // custom
-import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
+import { useTokensOfOwner } from "../../hooks/useTokensOfOwner";
 
 /**
  * @param tokenAbi
@@ -11,19 +11,19 @@ import { useTokensOfOwner } from '../../hooks/useTokensOfOwner'
  * @returns {JSX.Element}
  * @constructor
  */
-function NftIdList ({ tokenAbi, tokenAddress }) {
-  const nfts = useTokensOfOwner(tokenAbi, tokenAddress)
+function NftIdList({ tokenAbi, tokenAddress }) {
+  const nfts = useTokensOfOwner(tokenAbi, tokenAddress);
 
   return nfts ? (
     <div>
       <span>
-        {nfts.map(id => "#"+id).join(', ')}
+        {nfts.map((id) => "#" + id).join(", ")}
         {nfts.length === 0 && "None"}
       </span>
     </div>
-    ) : (
-      <Skeleton variant="text" />
-    )
+  ) : (
+    <Skeleton variant="text" />
+  );
 }
 
 /**
@@ -31,7 +31,7 @@ function NftIdList ({ tokenAbi, tokenAddress }) {
  */
 NftIdList.propTypes = {
   tokenAbi: PropTypes.array.isRequired,
-  tokenAddress: PropTypes.string.isRequired
-}
+  tokenAddress: PropTypes.string.isRequired,
+};
 
 export default NftIdList;

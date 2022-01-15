@@ -1,26 +1,26 @@
-import React from 'react'
+import React from "react";
 // custom
-import { useEtherBalance, useEthers } from '@usedapp/core'
-import { formatCurrency } from '../../utils/formatters'
-import { formatEther } from '@ethersproject/units'
+import { useEtherBalance, useEthers } from "@usedapp/core";
+import { formatCurrency } from "../../utils/formatters";
+import { formatEther } from "@ethersproject/units";
 // material-ui
-import Skeleton from '@mui/material/Skeleton'
+import Skeleton from "@mui/material/Skeleton";
 
 const Balance = function () {
-  const { account } = useEthers()
-  const etherBalance = useEtherBalance(account)
+  const { account } = useEthers();
+  const etherBalance = useEtherBalance(account);
 
-  let balance
+  let balance;
 
   if (etherBalance) {
-    balance = formatEther(etherBalance)
+    balance = formatEther(etherBalance);
   }
 
   return balance === undefined ? (
-    <Skeleton variant="text"/>
+    <Skeleton variant="text" />
   ) : (
     <span>{formatCurrency(balance)}</span>
-  )
-}
+  );
+};
 
-export default Balance
+export default Balance;

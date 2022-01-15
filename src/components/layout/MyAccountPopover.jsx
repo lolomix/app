@@ -1,7 +1,7 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import Blockies from 'react-blockies'
-import { useEthers } from '@usedapp/core'
+import React from "react";
+import { withTranslation } from "react-i18next";
+import Blockies from "react-blockies";
+import { useEthers } from "@usedapp/core";
 // material-ui
 import {
   Avatar,
@@ -17,17 +17,17 @@ import {
   IconButton,
   Divider,
   Grid,
-} from '@mui/material'
-import { Check, Settings } from '@mui/icons-material'
+} from "@mui/material";
+import { Check, Settings } from "@mui/icons-material";
 // custom
-import VerifyExplorerIconButton from '../buttons/VerifyExplorerIconButton'
-import IconButtonCopy from '../buttons/CopyIconButton'
-import { TARGET_CHAIN } from '../../web3/constants'
-import AddTokenToWalletButton from '../web3/AddTokenToWalletButton'
-import { truncate } from '../../utils/formatters'
+import VerifyExplorerIconButton from "../buttons/VerifyExplorerIconButton";
+import IconButtonCopy from "../buttons/CopyIconButton";
+import { TARGET_CHAIN } from "../../web3/constants";
+import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
+import { truncate } from "../../utils/formatters";
 
 function MyAccountPopover(props) {
-  const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props
+  const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props;
   const { account, deactivate } = useEthers();
 
   return (
@@ -35,17 +35,18 @@ function MyAccountPopover(props) {
       <Box pt={2} pb={3} px={3} width="350px">
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
-            <Typography variant="h5">
-              {t('base.myAccount')}
-            </Typography>
+            <Typography variant="h5">{t("base.myAccount")}</Typography>
           </Grid>
           <Grid item xs={1}>
             <Tooltip title="Wallet Settings">
-              <IconButton variant="outlined" onClick={() => {
-                closePopover()
-                openConnectorsPopover(anchorEl)
-              }}>
-                <Settings/>
+              <IconButton
+                variant="outlined"
+                onClick={() => {
+                  closePopover();
+                  openConnectorsPopover(anchorEl);
+                }}
+              >
+                <Settings />
               </IconButton>
             </Tooltip>
           </Grid>
@@ -56,38 +57,55 @@ function MyAccountPopover(props) {
         <List disablePadding>
           <ListItem
             disableGutters
-            secondaryAction={
-              <VerifyExplorerIconButton address={account} />
-            }
+            secondaryAction={<VerifyExplorerIconButton address={account} />}
           >
             <Tooltip disableFocusListener title={t("base.myAccount")}>
               <ListItemAvatar>
                 <Avatar>
-                  <Blockies seed={account.toLowerCase()} size={10} scale={4} className="blockies" />
+                  <Blockies
+                    seed={account.toLowerCase()}
+                    size={10}
+                    scale={4}
+                    className="blockies"
+                  />
                 </Avatar>
               </ListItemAvatar>
             </Tooltip>
-            <ListItemText secondary={
-              <>
-                <span>
-                  {truncate(account.toLowerCase(), 10, -4)}
-                </span>
-                <IconButtonCopy copyText={account} size="small" fontSize=".9rem" />
-              </>
-            } primary={t("base.address")} />
+            <ListItemText
+              secondary={
+                <>
+                  <span>{truncate(account.toLowerCase(), 10, -4)}</span>
+                  <IconButtonCopy
+                    copyText={account}
+                    size="small"
+                    fontSize=".9rem"
+                  />
+                </>
+              }
+              primary={t("base.address")}
+            />
           </ListItem>
 
           <ListItem disableGutters>
             <ListItemAvatar>
-              <Avatar sx={{
-                backgroundColor:"primary.main"
-              }}>
-                <Check sx={{
-                  color:"common.white"
-                }}/>
+              <Avatar
+                sx={{
+                  backgroundColor: "primary.main",
+                }}
+              >
+                <Check
+                  sx={{
+                    color: "common.white",
+                  }}
+                />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText secondary={"Successfully connected to " + TARGET_CHAIN.toUpperCase()} primary="Connected" />
+            <ListItemText
+              secondary={
+                "Successfully connected to " + TARGET_CHAIN.toUpperCase()
+              }
+              primary="Connected"
+            />
           </ListItem>
         </List>
 
@@ -102,17 +120,22 @@ function MyAccountPopover(props) {
         </Grid>
         <Grid container>
           <Grid item xs>
-            <Button fullWidth color="error" variant="contained" onClick={() => {
-              closePopover()
-              deactivate()
-            }}>
-              {t('base.disconnect')}
+            <Button
+              fullWidth
+              color="error"
+              variant="contained"
+              onClick={() => {
+                closePopover();
+                deactivate();
+              }}
+            >
+              {t("base.disconnect")}
             </Button>
           </Grid>
         </Grid>
       </Box>
     </Popover>
-  )
+  );
 }
 
-export default withTranslation()(MyAccountPopover)
+export default withTranslation()(MyAccountPopover);

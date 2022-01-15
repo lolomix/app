@@ -1,24 +1,28 @@
-import { withTranslation } from 'react-i18next'
+import { withTranslation } from "react-i18next";
 // material-ui
 import {
   Box,
   Divider,
-  Grid, IconButton, Popover, Stack,
-  Tooltip, Typography,
-} from '@mui/material'
-import { LoadingButton } from '@mui/lab'
-import { Check, Close } from '@mui/icons-material'
+  Grid,
+  IconButton,
+  Popover,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Check, Close } from "@mui/icons-material";
 // custom
-import { useEagerConnect } from '../../web3/hooks'
-import connectorsList from '../../web3/connectorsList'
-import { NETWORKS, TARGET_CHAIN } from '../../web3/constants'
-import { getErrorMessage } from '../../web3/errors'
-import WalletMetaMaskIcon from '../icons/WalletMetaMaskIcon'
-import WalletWalletConnectIcon from '../icons/WalletWalletConnectIcon'
-import WalletLedgerIcon from '../icons/WalletLedgerIcon'
-import { useState } from 'react'
-import { useEthers } from '@usedapp/core'
-import { UnsupportedChainIdError } from '@web3-react/core'
+import { useEagerConnect } from "../../web3/hooks";
+import connectorsList from "../../web3/connectorsList";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { getErrorMessage } from "../../web3/errors";
+import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
+import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
+import WalletLedgerIcon from "../icons/WalletLedgerIcon";
+import { useState } from "react";
+import { useEthers } from "@usedapp/core";
+import { UnsupportedChainIdError } from "@web3-react/core";
 
 /**
  * @param props
@@ -26,9 +30,9 @@ import { UnsupportedChainIdError } from '@web3-react/core'
  * @constructor
  */
 function ConnectorsPopover(props) {
-  const { t, closePopover, ...rest } = props
+  const { t, closePopover, ...rest } = props;
 
-  const { connector, activate, error, chainId } = useEthers()
+  const { connector, activate, error, chainId } = useEthers();
   const triedEager = useEagerConnect();
 
   const [activatingConnector, setActivatingConnector] = useState();
@@ -39,13 +43,15 @@ function ConnectorsPopover(props) {
    * @param connectorkey
    * @returns {boolean}
    */
-  const isCurrentConnector = (connectorkey) => connectorsList[connectorkey]?.connector === connector;
+  const isCurrentConnector = (connectorkey) =>
+    connectorsList[connectorkey]?.connector === connector;
 
   /**
    * @param error
    * @returns {boolean}
    */
-  const isUnsupportedNetwork = (error) => error instanceof UnsupportedChainIdError
+  const isUnsupportedNetwork = (error) =>
+    error instanceof UnsupportedChainIdError;
 
   /**
    * Activates a new connector by its key
@@ -53,42 +59,45 @@ function ConnectorsPopover(props) {
    * @param connectorkey
    */
   const handleConnectorButtonClick = async (connectorkey) => {
-    const newConnector = connectorsList[connectorkey].connector
-    setActivatingConnector(newConnector)
+    const newConnector = connectorsList[connectorkey].connector;
+    setActivatingConnector(newConnector);
 
-    closePopover()
+    closePopover();
 
     activate(newConnector).then(() => {
-      setActivatingConnector(undefined)
-    })
+      setActivatingConnector(undefined);
+    });
 
-    if (connectorkey === 'injected') { // only works for metamask
+    if (connectorkey === "injected") {
+      // only works for metamask
       if (chainId !== NETWORKS[TARGET_CHAIN].chainId) {
-        try { // check if the chain to connect to is installed
+        try {
+          // check if the chain to connect to is installed
           await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
+            method: "wallet_switchEthereumChain",
             params: [{ chainId: NETWORKS[TARGET_CHAIN].chainIdHex }], // chainId must be in hexadecimal numbers
-          })
+          });
         } catch (error) {
-          if (error.code === 4902) {  // This error code indicates that the chain has not been added to MetaMask
+          if (error.code === 4902) {
+            // This error code indicates that the chain has not been added to MetaMask
             try {
               await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
+                method: "wallet_addEthereumChain",
                 params: [
                   {
                     chainId: NETWORKS[TARGET_CHAIN].chainIdHex,
                     blockExplorerUrls: NETWORKS[TARGET_CHAIN].blockExplorerUrls,
                     chainName: NETWORKS[TARGET_CHAIN].name,
                     nativeCurrency: NETWORKS[TARGET_CHAIN].nativeCurrency,
-                    rpcUrls: NETWORKS[TARGET_CHAIN].rpcUrls
-                  }
+                    rpcUrls: NETWORKS[TARGET_CHAIN].rpcUrls,
+                  },
                 ],
-              })
+              });
             } catch (addError) {
-              console.error(addError)
+              console.error(addError);
             }
           }
-          console.error(error)
+          console.error(error);
         }
       }
     }
@@ -98,14 +107,17 @@ function ConnectorsPopover(props) {
    * @param connectorkey
    * @returns {boolean}
    */
-  const handleConnectorButtonLoadingProp = (connectorkey) => connectorsList[connectorkey].connector === activatingConnector;
+  const handleConnectorButtonLoadingProp = (connectorkey) =>
+    connectorsList[connectorkey].connector === activatingConnector;
 
   /**
    * @param connectorkey
    * @returns {boolean}
    */
   const handleConnectorButtonDisabledProp = (connectorkey) => {
-    return !triedEager || !!activatingConnector || connectorsList[connectorkey].soon;
+    return (
+      !triedEager || !!activatingConnector || connectorsList[connectorkey].soon
+    );
   };
 
   /**
@@ -132,9 +144,7 @@ function ConnectorsPopover(props) {
       <Box pt={2} pb={3} px={3} width="350px">
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
-            <Typography variant="h5">
-              {t("base.connectToMyWallet")}
-            </Typography>
+            <Typography variant="h5">{t("base.connectToMyWallet")}</Typography>
           </Grid>
           <Grid item xs={1}>
             <Tooltip title="Close Menu">
@@ -151,30 +161,49 @@ function ConnectorsPopover(props) {
           {Object.keys(connectorsList).map((key) => (
             <Tooltip
               key={key}
-              title={t(isCurrentConnector(key) ? "base.connectedWith" : "base.connectWith", {
-                connector: connectorsList[key].name
-              })}
+              title={t(
+                isCurrentConnector(key)
+                  ? "base.connectedWith"
+                  : "base.connectWith",
+                {
+                  connector: connectorsList[key].name,
+                }
+              )}
             >
-                <LoadingButton
-                  fullWidth
-                  disableElevation
-                  variant={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? "contained" : "outlined"}
-                  size="large"
-                  color={isCurrentConnector(key) ? "success" : "primary"}
-                  startIcon={<ConnectorIcon connectorkey={key} />}
-                  alignedStartIcon
-                  endIcon={(isCurrentConnector(key) && !isUnsupportedNetwork(error)) ? <Check /> : null}
-                  loading={handleConnectorButtonLoadingProp(key)}
-                  disabled={handleConnectorButtonDisabledProp(key)}
-                  onClick={() => handleConnectorButtonClick(key)}
-                >
-                  {(isCurrentConnector(key) && isUnsupportedNetwork(error)) ? `Switch to ${NETWORKS[TARGET_CHAIN].name}` : connectorsList[key].name}
-                  {connectorsList[key].soon && (
-                    <Typography pl={0.5} fontWeight="bold" sx={{ fontSize: "0.65rem" }}>
-                      SOON
-                    </Typography>
-                  )}
-                </LoadingButton>
+              <LoadingButton
+                fullWidth
+                disableElevation
+                variant={
+                  isCurrentConnector(key) && !isUnsupportedNetwork(error)
+                    ? "contained"
+                    : "outlined"
+                }
+                size="large"
+                color={isCurrentConnector(key) ? "success" : "primary"}
+                startIcon={<ConnectorIcon connectorkey={key} />}
+                alignedStartIcon
+                endIcon={
+                  isCurrentConnector(key) && !isUnsupportedNetwork(error) ? (
+                    <Check />
+                  ) : null
+                }
+                loading={handleConnectorButtonLoadingProp(key)}
+                disabled={handleConnectorButtonDisabledProp(key)}
+                onClick={() => handleConnectorButtonClick(key)}
+              >
+                {isCurrentConnector(key) && isUnsupportedNetwork(error)
+                  ? `Switch to ${NETWORKS[TARGET_CHAIN].name}`
+                  : connectorsList[key].name}
+                {connectorsList[key].soon && (
+                  <Typography
+                    pl={0.5}
+                    fontWeight="bold"
+                    sx={{ fontSize: "0.65rem" }}
+                  >
+                    SOON
+                  </Typography>
+                )}
+              </LoadingButton>
             </Tooltip>
           ))}
 
@@ -186,7 +215,7 @@ function ConnectorsPopover(props) {
         </Stack>
       </Box>
     </Popover>
-  )
+  );
 }
 
-export default withTranslation()(ConnectorsPopover)
+export default withTranslation()(ConnectorsPopover);

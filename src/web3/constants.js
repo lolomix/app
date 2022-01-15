@@ -19,45 +19,37 @@ export const NETWORKS = {
     name: "Rinkeby Testnet",
     chainId: 4,
     chainIdHex: "0x4",
-    rpcUrls: [
-      `https://rinkeby.infura.io/v3/${INFURA_ID}`
-    ],
+    rpcUrls: [`https://rinkeby.infura.io/v3/${INFURA_ID}`],
     faucet: "https://faucet.rinkeby.io/",
-    blockExplorerUrls: [
-      "https://rinkeby.etherscan.io/"
-    ],
+    blockExplorerUrls: ["https://rinkeby.etherscan.io/"],
     nativeCurrency: {
-      "name": "ETH",
-      "symbol": "ETH",
-      "decimals": 18
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18,
     },
     contractAroma: "0x41E0984a75d6Ad506Ff5551BE38B0d97C88Ea4A3",
     contractMaster: "0xc543A0E22e3c757B712a8924EcFc2bCF1db1b47f",
     adminAccount: "0x3c88774b71C6e57CD3CE110199d30FE67C54a7De",
-    openSeaLink: 'https://testnets.opensea.io/assets'
+    openSeaLink: "https://testnets.opensea.io/assets",
   },
   polygon: {
     testnet: false,
     name: "Polygon Mainnet",
     chainId: 137,
     chainIdHex: "0x89",
-    rpcUrls: [
-      "https://polygon-rpc.com/"
-    ],
+    rpcUrls: ["https://polygon-rpc.com/"],
     faucet: "https://faucet.matic.network/",
-    blockExplorerUrls: [
-      "https://polygonscan.com"
-    ],
+    blockExplorerUrls: ["https://polygonscan.com"],
     nativeCurrency: {
-      "name": "MATIC",
-      "symbol": "MATIC",
-      "decimals": 18
+      name: "MATIC",
+      symbol: "MATIC",
+      decimals: 18,
     },
     contractAroma: "0x444DBcb15Ea0d706C04DaB615374a11759E07A25",
     contractMaster: "0x12c0Cafb740Dc26879A3DB57Db185c9f2475192F",
     adminAccount: "0x1b0D20b13622D19d7CAbC4A6862deCa249C4075f",
-    openSeaLink: 'https://opensea.io/assets/matic'
-  }
+    openSeaLink: "https://opensea.io/assets/matic",
+  },
 };
 
 export const NETWORK = (chainId) => {

@@ -1,5 +1,5 @@
-import { IPFS_GATEWAY } from '../web3/constants'
-import IPFSGatewayTools from '@pinata/ipfs-gateway-tools/dist/browser';
+import { IPFS_GATEWAY } from "../web3/constants";
+import IPFSGatewayTools from "@pinata/ipfs-gateway-tools/dist/browser";
 
 /**
  * If the provided string contains an IPFS CID then convert to desired Gateway URL
@@ -8,14 +8,14 @@ import IPFSGatewayTools from '@pinata/ipfs-gateway-tools/dist/browser';
  * @returns string
  */
 export function convertToDesiredIpfsURL(string) {
-  const ipfsGatewayTools = new IPFSGatewayTools()
-  const { containsCid } = ipfsGatewayTools.containsCID(string)
+  const ipfsGatewayTools = new IPFSGatewayTools();
+  const { containsCid } = ipfsGatewayTools.containsCID(string);
 
   if (containsCid) {
-    string = ipfsGatewayTools.convertToDesiredGateway(string, IPFS_GATEWAY)
+    string = ipfsGatewayTools.convertToDesiredGateway(string, IPFS_GATEWAY);
   }
 
-  return string
+  return string;
 }
 
 /**
@@ -30,7 +30,7 @@ export function isValidURL(string) {
   try {
     url = new URL(string);
   } catch (_) {
-    return false
+    return false;
   }
 
   return url;

@@ -1,5 +1,5 @@
-name: 'Prepare Node Environment'
-description: 'Prepare Node.js environment and set up caching of dependencies'
+name: "Prepare Node Environment"
+description: "Prepare Node.js environment and set up caching of dependencies"
 outputs:
   cache-hit:
     description: "Forward actions/cache cache-hit output"
@@ -15,7 +15,7 @@ runs:
     - name: Set up Node.js from `.nvmrc`
       uses: actions/setup-node@v2
       with:
-        node-version-file: '.nvmrc'
+        node-version-file: ".nvmrc"
 
     - name: Cache all dependencies
       uses: actions/cache@v2

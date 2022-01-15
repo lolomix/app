@@ -5,8 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 
-function CopyIconButton ({ t, copyText, size, fontSize }) {
-
+function CopyIconButton({ t, copyText, size, fontSize }) {
   /**
    * Handles the copy to clipboard using Clipboard API OR regular method
    *
@@ -14,33 +13,33 @@ function CopyIconButton ({ t, copyText, size, fontSize }) {
    */
   const handleAccountCopyToClipboardIconClick = () => {
     if (!success) {
-      setSuccess(true)
+      setSuccess(true);
     }
     // navigator clipboard api needs a secure context (https)
     if (navigator.clipboard && navigator.permissions) {
-      navigator.clipboard.writeText(copyText)
-    } else if (document.queryCommandSupported('copy')) {
-      const ele = document.createElement('textarea')
-      ele.value = copyText
-      document.body.appendChild(ele)
-      ele.select()
-      document.execCommand('copy')
-      document.body.removeChild(ele)
+      navigator.clipboard.writeText(copyText);
+    } else if (document.queryCommandSupported("copy")) {
+      const ele = document.createElement("textarea");
+      ele.value = copyText;
+      document.body.appendChild(ele);
+      ele.select();
+      document.execCommand("copy");
+      document.body.removeChild(ele);
     }
-  }
+  };
 
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        setSuccess(false)
-      }, 1000)
+        setSuccess(false);
+      }, 1000);
     }
-  }, [success])
+  }, [success]);
 
   return (
-    <Tooltip title={success ? 'copied' : t('base.copyToClipboard')}>
+    <Tooltip title={success ? "copied" : t("base.copyToClipboard")}>
       <IconButton
         component="a"
         size={size}
@@ -48,10 +47,14 @@ function CopyIconButton ({ t, copyText, size, fontSize }) {
         edge="end"
         aria-label="Copy account address"
       >
-        {success ? <CheckIcon sx={{ fontSize: fontSize }}/> : <ContentCopyIcon sx={{ fontSize: fontSize }}/>}
+        {success ? (
+          <CheckIcon sx={{ fontSize: fontSize }} />
+        ) : (
+          <ContentCopyIcon sx={{ fontSize: fontSize }} />
+        )}
       </IconButton>
     </Tooltip>
-  )
+  );
 }
 
 export default withTranslation()(CopyIconButton);

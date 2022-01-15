@@ -2,37 +2,34 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import Grid from "@mui/material/Grid";
-import { Helmet } from 'react-helmet'
-import { Box, Container } from '@mui/material'
+import { Helmet } from "react-helmet";
+import { Box, Container } from "@mui/material";
 // custom
-import Headline from '../../components/layout/Headline'
+import Headline from "../../components/layout/Headline";
 import OpeningSoon from "../../components/common/OpeningSoonCard";
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
-function Buffet () {
-
+function Buffet() {
   return (
     <>
       <Helmet>
         <title>Buffet</title>
       </Helmet>
-      <Box pb={10} pt={1} sx={{ backgroundColor: 'sunGlow.main' }}>
+      <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
-          <Headline>
-            Buffet
-          </Headline>
+          <Headline>Buffet</Headline>
           <Grid container justifyContent="center" alignItems="stretch">
             <Grid item md={6} mb={21}>
-              <OpeningSoon/>
+              <OpeningSoon />
             </Grid>
           </Grid>
         </Container>
       </Box>
     </>
-  )
+  );
 }
 
-export default withTranslation()(Buffet)
+export default withTranslation()(Buffet);

@@ -1,8 +1,12 @@
-import { useContractCall } from '@usedapp/core'
-import { AROMA_DECIMALS_DIGIT, NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import abi from '../web3/abi/CryptoChefsERC721Facet.json'
-import { utils } from 'ethers'
-import { formatUnits } from '@ethersproject/units'
+import { useContractCall } from "@usedapp/core";
+import {
+  AROMA_DECIMALS_DIGIT,
+  NETWORKS,
+  TARGET_CHAIN,
+} from "../web3/constants";
+import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import { utils } from "ethers";
+import { formatUnits } from "@ethersproject/units";
 
 /**
  * Returns the current price of AROMA token
@@ -10,22 +14,20 @@ import { formatUnits } from '@ethersproject/units'
  * @returns {(any|string)[]|*[]}
  */
 export function useAromaPrice() {
-  const abiInterface = new utils.Interface(abi)
+  const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
 
-  const [price] = useContractCall(
-    {
+  const [price] =
+    useContractCall({
       abi: abiInterface,
       address: address,
       method: "getAROMAPrice",
-      args: []
-    }
-  ) ?? [];
+      args: [],
+    }) ?? [];
 
-  if (price === undefined) return []
+  if (price === undefined) return [];
 
-  const priceFormatted = formatUnits(price, AROMA_DECIMALS_DIGIT)
+  const priceFormatted = formatUnits(price, AROMA_DECIMALS_DIGIT);
 
-  return [ price, priceFormatted ]
+  return [price, priceFormatted];
 }
-

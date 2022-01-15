@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 //material-ui
 import Box from "@mui/material/Box";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 class LoadingSpinner extends Component {
   render() {
     return (
-      <Box 
+      <Box
         my={6}
         textAlign="center"
         alignItems="center"

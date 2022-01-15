@@ -2,14 +2,14 @@ const plugins = [
   [
     "babel-plugin-direct-import",
     {
-      "modules": [
+      modules: [
         "@mui/lab",
         "@mui/system",
         "@mui/material",
-        "@mui/icons-material"
-      ]
-    }
-  ]
+        "@mui/icons-material",
+      ],
+    },
+  ],
 ];
 
 module.exports = { plugins };

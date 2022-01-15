@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 // material-ui
-import { Box, Card, CardContent, Typography, darken } from '@mui/material'
+import { Box, Card, CardContent, Typography, darken } from "@mui/material";
 // custom
-import { useNftWithMetadata } from '../../hooks/useNftWithMetadata'
-import { theme } from '../../utils/theme'
-import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
+import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
+import { theme } from "../../utils/theme";
+import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 
 /**
  * @param tokenAbi
@@ -15,25 +15,29 @@ import placeholder from '../../assets/components/web3/nft-card/placeholder.png'
  * @returns {JSX.Element}
  * @constructor
  */
-function NftCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
-  const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID)
+function NftCard({ tokenAbi, tokenAddress, tokenID, lazyLoad = false }) {
+  const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
 
-  const lore = nft?.metadata?.attributes?.find(attr => attr.trait_type === 'Lore')?.value ?? 'Unrevealed'
-  const image = nft?.metadata?.image ?? placeholder
+  const lore =
+    nft?.metadata?.attributes?.find((attr) => attr.trait_type === "Lore")
+      ?.value ?? "Unrevealed";
+  const image = nft?.metadata?.image ?? placeholder;
 
   return (
     <Card elevation={2}>
       <CardContent>
-        <Box bgcolor={darken(theme.palette.tertiary.main, 0.06)}
-             minHeight="320px"
-             borderRadius={theme.shape.borderRadius + 'px'}
+        <Box
+          bgcolor={darken(theme.palette.tertiary.main, 0.06)}
+          minHeight="320px"
+          borderRadius={theme.shape.borderRadius + "px"}
         >
           <picture>
-            <source srcSet={image}/>
-            <img style={{ maxWidth: '100%' }}
-                 src={image}
-                 alt={'CHEF #' + tokenID + ' image'}
-                 {...(lazyLoad && { loading: "lazy" })}
+            <source srcSet={image} />
+            <img
+              style={{ maxWidth: "100%" }}
+              src={image}
+              alt={"CHEF #" + tokenID + " image"}
+              {...(lazyLoad && { loading: "lazy" })}
             />
           </picture>
         </Box>
@@ -46,7 +50,7 @@ function NftCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
         </Typography>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 /**
@@ -55,11 +59,8 @@ function NftCard ({ tokenAbi, tokenAddress, tokenID, lazyLoad = false}) {
 NftCard.propTypes = {
   tokenAbi: PropTypes.array.isRequired,
   tokenAddress: PropTypes.string.isRequired,
-  tokenID: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
-  lazyLoad: PropTypes.bool
-}
+  tokenID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  lazyLoad: PropTypes.bool,
+};
 
-export default NftCard
+export default NftCard;

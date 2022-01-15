@@ -15,15 +15,18 @@ class ServiceWorkerWrapper extends React.Component {
 
   onSWUpdate = (registration) => {
     this.setState({ waitingWorker: registration.waiting });
-    const activeSnackbar = this.props.enqueueSnackbar("A new version is available", {
-      variant: "warning",
-      persist: true,
-      action: (
-        <Button color="inherit" size="small" onClick={this.reloadPage}>
-          Update now
-        </Button>
-      ),
-    });
+    const activeSnackbar = this.props.enqueueSnackbar(
+      "A new version is available",
+      {
+        variant: "warning",
+        persist: true,
+        action: (
+          <Button color="inherit" size="small" onClick={this.reloadPage}>
+            Update now
+          </Button>
+        ),
+      }
+    );
     this.setState({ showReload: activeSnackbar });
   };
 

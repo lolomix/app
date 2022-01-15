@@ -55,19 +55,27 @@ module.exports = {
     const content = fs.readFileSync(file.path, enc);
     let count = 0;
 
-    parser.parseFuncFromString(content, { list: ["i18next._", "i18next.__", "t"] }, (key, options) => {
-      parser.set(
-        key,
-        Object.assign({}, options, {
-          nsSeparator: false,
-          keySeparator: ".",
-        })
-      );
-      ++count;
-    });
+    parser.parseFuncFromString(
+      content,
+      { list: ["i18next._", "i18next.__", "t"] },
+      (key, options) => {
+        parser.set(
+          key,
+          Object.assign({}, options, {
+            nsSeparator: false,
+            keySeparator: ".",
+          })
+        );
+        ++count;
+      }
+    );
 
     if (count > 0) {
-      console.log(`i18next-scanner: count=${chalk.cyan(count)}, file=${chalk.yellow(JSON.stringify(file.relative))}`);
+      console.log(
+        `i18next-scanner: count=${chalk.cyan(count)}, file=${chalk.yellow(
+          JSON.stringify(file.relative)
+        )}`
+      );
     }
 
     done();

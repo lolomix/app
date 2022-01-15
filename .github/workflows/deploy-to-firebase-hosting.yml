@@ -90,8 +90,8 @@ jobs:
         id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTOCHEFSIO }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTOCHEFSIO }}"
           expires: ${{ github.event_name == 'release' && '' || github.event_name == 'push' && '30d' || '7d' }}
           channelId: ${{ github.event_name == 'release' && 'live' || github.event_name == 'push' && 'staging' || '' }}
           projectId: cryptochefsio

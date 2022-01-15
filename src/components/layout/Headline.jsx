@@ -1,6 +1,6 @@
 import React from "react";
 // material-ui
-import Typography from '@mui/material/Typography'
+import Typography from "@mui/material/Typography";
 
 /**
  * @param props
@@ -8,13 +8,9 @@ import Typography from '@mui/material/Typography'
  * @constructor
  */
 function Headline(props) {
-  const {t, children, ...rest} = props
+  const { t, children, ...rest } = props;
 
-  return (
-    <Typography {...rest}>
-      {children}
-    </Typography>
-  );
+  return <Typography {...rest}>{children}</Typography>;
 }
 
 /**
@@ -24,7 +20,7 @@ Headline.defaultProps = {
   variant: "h1",
   align: "center",
   mt: 3,
-  mb: 6
+  mb: 6,
 };
 
 export default Headline;

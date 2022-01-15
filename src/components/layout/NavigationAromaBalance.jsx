@@ -1,22 +1,22 @@
 // material-ui
-import { alpha, Box, IconButton, Typography } from '@mui/material'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
+import { alpha, Box, IconButton, Typography } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 // custom
-import AromaBalance from '../web3/AromaBalance'
-import CurrencyAromaCartoonIcon from '../icons/CurrencyAromaCartoonIcon'
-import { theme } from '../../utils/theme'
+import AromaBalance from "../web3/AromaBalance";
+import CurrencyAromaCartoonIcon from "../icons/CurrencyAromaCartoonIcon";
+import { theme } from "../../utils/theme";
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
-function NavigationAromaBalance () {
+function NavigationAromaBalance() {
   return (
     <Box position="relative">
       <CurrencyAromaCartoonIcon
         sx={{
-          fontSize: '3rem',
-          position: 'absolute',
+          fontSize: "3rem",
+          position: "absolute",
           zIndex: 100,
           left: 0,
           top: 0,
@@ -32,28 +32,28 @@ function NavigationAromaBalance () {
           backgroundColor={alpha(theme.palette.common.black, 0.5)}
         >
           <Typography color="white" variant="button" as="span">
-            <AromaBalance/>
+            <AromaBalance />
           </Typography>
           {/* @todo href should not be hard-coded */}
           <IconButton
             href="/market/aroma/buy"
             sx={{
               padding: 0,
-              backgroundColor: 'common.white',
-              color: 'success.main',
-              position: 'absolute',
-              right: '-0.75rem',
-              '&:hover': {
-                backgroundColor: 'common.white',
+              backgroundColor: "common.white",
+              color: "success.main",
+              position: "absolute",
+              right: "-0.75rem",
+              "&:hover": {
+                backgroundColor: "common.white",
               },
             }}
           >
-            <AddCircleIcon/>
+            <AddCircleIcon />
           </IconButton>
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default NavigationAromaBalance
+export default NavigationAromaBalance;

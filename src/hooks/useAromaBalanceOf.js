@@ -1,6 +1,10 @@
-import { AROMA_DECIMALS_DIGIT, NETWORKS, TARGET_CHAIN } from '../web3/constants'
-import { useTokenBalance } from '@usedapp/core'
-import { formatUnits } from '@ethersproject/units'
+import {
+  AROMA_DECIMALS_DIGIT,
+  NETWORKS,
+  TARGET_CHAIN,
+} from "../web3/constants";
+import { useTokenBalance } from "@usedapp/core";
+import { formatUnits } from "@ethersproject/units";
 
 /**
  * Returns the balance of an AROMA token for an address
@@ -14,7 +18,7 @@ export function useAromaBalanceOf(targetAccount) {
 
   if (balance === undefined) return [];
 
-  let balanceFormatted = formatUnits(balance, AROMA_DECIMALS_DIGIT)
+  let balanceFormatted = formatUnits(balance, AROMA_DECIMALS_DIGIT);
 
-  return [ balance, balanceFormatted ]
+  return [balance, balanceFormatted];
 }
