@@ -5,6 +5,7 @@ import {
   lighten,
   createTheme,
   buttonClasses,
+  stepLabelClasses,
 } from '@mui/material'
 
 // colors
@@ -86,7 +87,7 @@ export let theme = createTheme({
     shadow(6, bistre)
   ],
   shape: {
-    borderRadius: 10,
+    borderRadius: 10
   },
   typography: {
     fontFamily: "'Rubik', 'Helvetica', 'Arial', sans-serif",
@@ -104,15 +105,15 @@ export let theme = createTheme({
     },
     h4: {
       fontSize: "1.563rem",
-      fontWeight: 400,
+      fontWeight: 500,
     },
     h5: {
       fontSize: "1.25rem",
-      fontWeight: 400,
+      fontWeight: 500,
     },
     h6: {
       fontSize: "1rem",
-      fontWeight: 400,
+      fontWeight: 500,
     },
     button: {
       textTransform: "none",
@@ -150,20 +151,27 @@ theme = createTheme(theme, {
         },
       ],
     },
-    MuiIconButton: {
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: theme.spacing(2)
+        }
+      },
+    },
+    MuiAvatar: {
       variants: [
         {
-          props: { shape: "inherit" },
+          props: { variant: "inheritBorderRadius" },
           style: {
             borderRadius: theme.shape.borderRadius
           }
         }
       ]
     },
-    MuiAvatar: {
+    MuiIconButton: {
       variants: [
         {
-          props: { variant: "inheritBorderRadius" },
+          props: { shape: "inherit" },
           style: {
             borderRadius: theme.shape.borderRadius
           }
@@ -190,6 +198,12 @@ theme = createTheme(theme, {
           style: {
             padding: "14px 22px",
             fontSize: "1rem",
+          },
+        },
+        {
+          props: { shape: "squarish" },
+          style: {
+            borderRadius: 7.5
           },
         },
         {
@@ -234,6 +248,28 @@ theme = createTheme(theme, {
           },
         },
       ],
+    },
+    MuiStepIcon: {
+      styleOverrides: {
+        root: {
+          color: theme.palette.grey['300']
+        },
+        text: {
+          fill: theme.palette.secondary.main,
+          fontWeight: 600,
+          fontSize: "0.9rem"
+        }
+      }
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          color: theme.palette.secondary.main,
+          [`&.${stepLabelClasses.active}`]: {
+            color: theme.palette.secondary.main
+          }
+        }
+      }
     },
     MuiLinearProgress: {
       styleOverrides: {
