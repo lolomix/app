@@ -22,6 +22,7 @@ import SnackbarProvider from './components/snackbars/SnackbarProvider'
 const Home = lazy(() => import('./views/Home/Home'))
 const Market = lazy(() => import('./views/Market/Market'))
 const Kitchen = lazy(() => import('./views/Kitchen/Kitchen'))
+const KitchenRecipeCreate = lazy(() => import('./views/KitchenRecipeCreate/KitchenRecipeCreate'))
 const Buffet = lazy(() => import('./views/Buffet/Buffet'))
 const Internal = lazy(() => import('./views/Internal/Internal'))
 
@@ -43,6 +44,7 @@ function App () {
               <Route path="/buffet" element={<Buffet/>}/>
               <Route path="/market" element={<Market/>}/>
               <Route path="/kitchen" element={<Kitchen/>}/>
+              <Route path="/kitchen/recipe/create" element={<KitchenRecipeCreate/>}/>
               <Route path="/internal" element={<Internal/>}/>
               <Route path="/collection" element={<Collection/>}/>
             </Routes>
