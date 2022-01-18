@@ -1,8 +1,7 @@
 import { withTranslation } from "react-i18next";
-import { Grid, Button } from "@mui/material";
-import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlaceIcon";
+import { Button, Stack } from "@mui/material";
+import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlateIcon";
 import WhiteFlameIcon from "../../assets/white-flame-icon.svg";
-import { Link } from "react-router-dom";
 import SquareButton from "../../components/buttons/SquareButton";
 import Market from "../../assets/market-icon.svg";
 import MyChefs from "../../assets/my-chefs-icon.png";
@@ -11,144 +10,79 @@ import Buffet from "../../assets/buffet-icon.svg";
 
 function Home() {
   return (
-    <Grid container justifyContent="center" alignItems="center">
-      <Grid
-        container
-        item
-        xs={12}
-        md={12}
-        xl={12}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
+    <Stack alignItems="center" spacing={3} mb="5vw">
+      <RecipeOnPlateIcon sx={{ fontSize: 350 }} />
+      <Button
+        variant="yellowContained"
+        href="/kitchen/recipe/create/"
+        style={{
+          width: "258px",
+          height: "60px",
+          fontSize: "21px",
+        }}
       >
-        <Grid item>
-          <RecipeOnPlateIcon sx={{ fontSize: 350 }} />
-        </Grid>
-        <Grid item>
-          <Button
-            variant="yellowContained"
-            style={{
-              width: "258px",
-              height: "60px",
-              fontSize: "21px",
-            }}
-            component={Link}
-            to="/kitchen/recipe/create/"
-          >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={WhiteFlameIcon}
-                alt="WhiteFlameIcon"
-                width="8%"
-                height="auto"
-                style={{ marginBottom: "4px" }}
-              ></img>
-              <h4>Cook A Recipe</h4>
-            </div>
-          </Button>
-        </Grid>
-        <Grid item mt="1%">
-          <Button
-            variant="yellowContained"
-            style={{
-              width: "128px",
-              height: "32px",
-              borderRadius: "25px",
-              background: "#FFFFFF",
-              fontSize: "16px",
-              fontFamily: "Rubik",
-              fontWeight: "bold",
-            }}
-            component={Link}
-            to="/tutorial/"
-          >
-            <h4>Tutorial</h4>
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        item
-        xs={12}
-        md={12}
-        xl={12}
-        mt="100px"
-        mr="5vw"
-        ml="5vw"
-        justifyContent="space-between"
-        alignItems="flex-end"
+        <img
+          src={WhiteFlameIcon}
+          alt="WhiteFlameIcon"
+          width="8%"
+          height="auto"
+          style={{ marginBottom: "5px", marginRight: "12px" }}
+        ></img>
+        Cook A Recipe
+      </Button>
+      <Button
+        variant="yellowContained"
+        style={{
+          borderRadius: "25px",
+          background: "#FFFFFF",
+        }}
+        href="/tutorial/"
       >
-        <Grid container item xs={6} md={6} xl={6} alignItems="flex-end">
-          <Grid container item xs={6} md={3} xl={3}>
-            <SquareButton
-              size={"large"}
-              color={"light"}
-              image={Market}
-              title={"Market"}
-              component={Link}
-              to="/market/"
-            >
-              Market
-            </SquareButton>
-          </Grid>
-          <Grid container item xs={6} md={3} xl={3}>
-            <SquareButton
-              size={"medium"}
-              color={"light"}
-              image={MyChefs}
-              title={"My Chefs"}
-              component={Link}
-              to="/collection/"
-            >
-              My Chefs
-            </SquareButton>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={6}
-          md={6}
-          xl={6}
-          justifyContent="flex-end"
-          alignItems="flex-end"
-        >
-          <Grid container item xs={6} md={3} xl={3}>
-            <SquareButton
-              size={"medium"}
-              color={"light"}
-              image={Kitchen}
-              title={"Kitchen"}
-              component={Link}
-              to="/kitchen/"
-            >
-              Kitchen
-            </SquareButton>
-          </Grid>
-          <Grid container item xs={6} md={3} xl={3}>
-            <SquareButton
-              size={"large"}
-              color={"light"}
-              image={Buffet}
-              title={"Buffet"}
-              component={Link}
-              to="/buffet/"
-            >
-              Buffet
-            </SquareButton>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+        Tutorial
+      </Button>
+      <Stack direction="row" justifyContent="space-between" width="95%"  spacing={2}>
+        <Stack direction="row" spacing={2}>
+          <SquareButton
+            size={"large"}
+            color={"light"}
+            image={Market}
+            title={"Market"}
+            href="/market/"
+          >
+            Market
+          </SquareButton>
+          <SquareButton
+            size={"medium"}
+            color={"light"}
+            image={MyChefs}
+            title={"My Chefs"}
+            href="/collection/"
+          >
+            My Chefs
+          </SquareButton>
+        </Stack>
+        <Stack direction="row" spacing={2}>
+          <SquareButton
+            size={"medium"}
+            color={"light"}
+            image={Kitchen}
+            title={"Kitchen"}
+            href="/kitchen/"
+          >
+            Kitchen
+          </SquareButton>
+          <SquareButton
+            size={"large"}
+            color={"light"}
+            image={Buffet}
+            title={"Buffet"}
+            href="/buffet/"
+          >
+            Buffet
+          </SquareButton>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
 
