@@ -1,5 +1,5 @@
 import { withTranslation } from "react-i18next";
-import { Grid, Button, Icon } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlaceIcon";
 import WhiteFlameIcon from "../../assets/white-flame-icon.svg";
 import { Link } from "react-router-dom";
