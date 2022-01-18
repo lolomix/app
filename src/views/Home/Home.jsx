@@ -47,7 +47,7 @@ function Home() {
             color={"light"}
             image={Market}
             title={"Market"}
-            href="/market/"
+            href={"/market/"}
           >
             Market
           </SquareButton>
@@ -56,7 +56,7 @@ function Home() {
             color={"light"}
             image={MyChefs}
             title={"My Chefs"}
-            href="/collection/"
+            href={"/collection/"}
           >
             My Chefs
           </SquareButton>
@@ -67,7 +67,7 @@ function Home() {
             color={"light"}
             image={Kitchen}
             title={"Kitchen"}
-            href="/kitchen/"
+            href={"/kitchen/"}
           >
             Kitchen
           </SquareButton>
@@ -76,7 +76,7 @@ function Home() {
             color={"light"}
             image={Buffet}
             title={"Buffet"}
-            href="/buffet/"
+            href={"/buffet/"}
           >
             Buffet
           </SquareButton>

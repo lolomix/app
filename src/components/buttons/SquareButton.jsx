@@ -47,6 +47,7 @@ const SquareButton = (props) => {
   return (
     <Button
       variant="contained"
+      href={props.href}
       sx={{
         width: widthSize,
         backgroundColor: squareColor,
