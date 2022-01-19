@@ -132,7 +132,6 @@ theme = createTheme(theme, {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          height: "100vh",
           background:
             "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
         },
@@ -235,27 +234,9 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { color: "primary", variant: "contained" },
+          props: { shape: "roundish" },
           style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-              transform: "translateY(2px)",
-              backgroundColor: theme.palette.hover.default,
-            },
-            borderRadius: "20%",
-          },
-        },
-        {
-          props: { color: "tertiary", variant: "contained" },
-          style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(
-                2,
-                theme.palette.tertiary.dark
-              ),
-            },
+            borderRadius: 25,
           },
         },
         {

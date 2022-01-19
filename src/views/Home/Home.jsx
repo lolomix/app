@@ -35,10 +35,10 @@ function Home() {
       <Stack
         direction="row"
         justifyContent="space-between"
-        width="95%"
-        spacing={2}
+        width="90%"
+        spacing={0.5}
       >
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={0.5}>
           <SquareButton
             size={"large"}
             color={"light"}
@@ -58,7 +58,7 @@ function Home() {
             My Chefs
           </SquareButton>
         </Stack>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={0.5}>
           <SquareButton
             size={"medium"}
             color={"light"}
