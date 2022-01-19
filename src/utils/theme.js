@@ -215,6 +215,20 @@ theme = createTheme(theme, {
           },
         },
         {
+          props: { size: "massive" },
+          style: {
+            fontSize: "1.3rem",
+            lineHeight: "2",
+          },
+        },
+        {
+          props: { elongatedWidth: true },
+          style: {
+            paddingLeft: "30px",
+            paddingRight: "30px",
+          },
+        },
+        {
           props: { shape: "squarish" },
           style: {
             borderRadius: 7.5,
