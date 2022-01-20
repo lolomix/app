@@ -59,6 +59,10 @@ export let theme = createTheme({
   // we have to make all heights the same because of the type of shadow we use.
   //
   // @todo: work with a UI/UX designer to fix and introduce more depth
+  blurredShadows: [
+    "none",
+    "inset 0px 3px 6px #00000012, 0px 3px 25px #00000029",
+  ],
   shadows: [
     "none",
     shadow(1.5, bistre),
