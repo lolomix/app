@@ -35,14 +35,14 @@ function Collection() {
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
           <ViewHeading mb={0}>Collection</ViewHeading>
-          <Headline variant="h5" mt={0} textAlign="center">
+          <ViewHeading variant="h5" mt={0} textAlign="center">
             {active &&
               (nfts ? (
                 <>Total CHEFs Owned: {nfts.length}</>
               ) : (
                 <Skeleton variant="h5" width={220} sx={{ margin: "auto" }} />
               ))}
-          </Headline>
+          </ViewHeading>
           <Grid container justifyContent="center" alignItems="stretch">
             {active ? (
               nfts ? (
@@ -90,9 +90,9 @@ function Collection() {
       <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
         <DripDivider variant={2} color="sunGlow.main" />
         <Container as="section">
-          <Headline variant="h2" color="secondary.contrastText">
+          <ViewHeading variant="h2" color="secondary.contrastText">
             FAQ
-          </Headline>
+          </ViewHeading>
           <Grid
             container
             justifyContent="center"
