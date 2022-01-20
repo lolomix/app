@@ -8,8 +8,6 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
 import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
 import AromaCoinSide from "../../assets/aroma-coin-side.svg";
 import ChefHolder from "../../assets/chef-holder.png";
-import PinkArrow from "../../assets/pink-arrow.svg";
-
 /**
  * @param t
  * @returns {JSX.Element}
