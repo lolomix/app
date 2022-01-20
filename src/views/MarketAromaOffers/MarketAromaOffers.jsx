@@ -74,7 +74,7 @@ const MarketAromaOffers = () => {
                     {card.amount}
                   </Typography>
                 </Stack>
-                <Box as="span">{card.freeAmount}</Box>
+                <Box as="span" color="#8D5719" fontWeight="bold">{card.freeAmount}</Box>
                 {card.icon}
                 <Button
                   elongatedWidth
