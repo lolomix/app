@@ -30,14 +30,14 @@ function Market({ t }) {
       text: "Buy Aroma",
       subText: "An ERC20 token",
       href: "/market/aroma/buy",
-      mainImage: <AromaCoinSideIcon sx={{fontSize:"130px"}}/>,
+      mainImage: <AromaCoinSideIcon sx={{ fontSize: "130px" }} />,
       extraImg: null,
     },
     {
       text: "Buy a CHEF",
       subText: "If you already have AROMA Token",
       href: "/market/chef/buy",
-      mainImage: <CardChefIcon sx={{fontSize:"130px"}}/>,
+      mainImage: <CardChefIcon sx={{ fontSize: "130px" }} />,
       extraImg: (
         <>
           <PinkArrowIcon
