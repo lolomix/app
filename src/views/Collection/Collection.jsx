@@ -5,7 +5,7 @@ import { Box, Container, Grid, Skeleton } from "@mui/material";
 // custom
 import { Helmet } from "react-helmet";
 import { useEthers } from "@usedapp/core";
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import DripDivider from "../../components/layout/DripDivider";
 import NftCard from "../../components/web3/NftCard";
 import FAQ from "../../components/common/FAQ";
@@ -34,7 +34,7 @@ function Collection() {
       </Helmet>
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
-          <Headline mb={0}>Collection</Headline>
+          <ViewHeading mb={0}>Collection</ViewHeading>
           <Headline variant="h5" mt={0} textAlign="center">
             {active &&
               (nfts ? (

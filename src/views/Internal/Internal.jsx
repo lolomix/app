@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 // custom
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import abiAroma from "../../web3/abi/AROMATokenMatic.json";
@@ -141,7 +141,7 @@ function Internal({ t }) {
   return (
     <Box pb={10}>
       <Container as="section">
-        <Headline color="white">{t("internal.title")}</Headline>
+        <ViewHeading color="white">{t("internal.title")}</ViewHeading>
         {web3ready ? ( // && isAdmin ? (
           <Grid container spacing={2}>
             <Grid item sm={12} md={6}>

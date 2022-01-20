@@ -18,7 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 // custom
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import RecipeCreateStepper from "../../components/common/RecipeCreateStepper";
 import RecipeOnPlaceIcon from "../../components/icons/RecipeOnPlaceIcon";
 
@@ -43,8 +43,8 @@ function KitchenRecipeCreate() {
       </Helmet>
       <Box pb={10} pt={1}>
         <Container as="section">
-          {/* @todo maybe we could leave some headline? However, we need a back button for sure.  */}
-          <Headline>Kitchen</Headline>
+          {/* @todo maybe we could leave some ViewHeading? However, we need a back button for sure.  */}
+          <ViewHeading>Kitchen</ViewHeading>
           <Grid mb={4} container justifyContent="center" alignItems="center">
             <Grid item xs sm={8} md={6} textAlign="center">
               <Card>
