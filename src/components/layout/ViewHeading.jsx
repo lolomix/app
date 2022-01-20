@@ -6,9 +6,7 @@ function ViewHeading(props) {
   return (
     <Stack alignItems="center" mt={6}>
       <Stack direction="row" spacing={2}>
-        {props.icon && (
-          <img src={props.icon} alt={props.icon} width="55px" height="55px" />
-        )}
+        {props.icon}
         <Typography variant="h1">{props.title}</Typography>
       </Stack>
       {props.subTitle && (
