@@ -23,6 +23,9 @@ import SnackbarProvider from "./components/snackbars/SnackbarProvider";
 // pages (lazy loading)
 const Home = lazy(() => import("./views/Home/Home"));
 const Market = lazy(() => import("./views/Market/Market"));
+const MarketAromaOffers = lazy(() =>
+  import("./views/MarketAromaOffers/MarketAromaOffers")
+);
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const KitchenRecipeCreate = lazy(() =>
   import("./views/KitchenRecipeCreate/KitchenRecipeCreate")
@@ -47,6 +50,10 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/buffet" element={<Buffet />} />
               <Route path="/market" element={<Market />} />
+              <Route
+                path="/market/aroma/offers"
+                element={<MarketAromaOffers />}
+              />
               <Route path="/kitchen" element={<Kitchen />} />
               <Route
                 path="/kitchen/recipe/create"
