@@ -2,7 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import { Container, Grid, Button, Typography, Box } from "@mui/material";
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import { styled } from "@mui/material/styles";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
