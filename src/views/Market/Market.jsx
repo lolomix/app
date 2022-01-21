@@ -58,7 +58,7 @@ function Market({ t }) {
 
   return (
     <Container>
-      <Headline>{t("market.title")}</Headline>
+      <ViewHeading>{t("market.title")}</ViewHeading>
       <Grid container justifyContent="center">
         {buttonText.map((button) => (
           <Grid item mx="5vw" mb="3vh">
