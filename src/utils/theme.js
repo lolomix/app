@@ -7,6 +7,7 @@ import {
   buttonClasses,
   stepLabelClasses,
 } from "@mui/material";
+import YellowButtonBackground from "../assets/yellow-button-background.svg";
 
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
@@ -19,7 +20,7 @@ const coffee = "rgba(109, 81, 63, 1)"; // 6D513F
 const bistre = "rgba(58, 39, 23, 1)"; // 3A2717
 
 // generators
-const shadow = (px, color) => `0.3px ${px}px 0.4px 0px ${color}`;
+const shadow = (px, color) => `0px ${px}px 0px 0px ${color}`;
 
 export let theme = createTheme({
   palette: {
@@ -45,6 +46,9 @@ export let theme = createTheme({
     background: {
       default: paleCerulean,
     },
+    hover: {
+      default: "#D4D4D4",
+    },
 
     // colors to deprecate
     sunGlow: {
@@ -67,28 +71,28 @@ export let theme = createTheme({
     "none",
     shadow(1.5, bistre),
     shadow(3, bistre),
-    shadow(4.5, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
   ],
   shape: {
     borderRadius: 10,
@@ -135,6 +139,14 @@ export let theme = createTheme({
 
 theme = createTheme(theme, {
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background:
+            "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
+        },
+      },
+    },
     MuiAppBar: {
       defaultProps: {
         color: "transparent",
@@ -212,30 +224,29 @@ theme = createTheme(theme, {
           },
         },
         {
+          props: { size: "massive" },
+          style: {
+            fontSize: "1.3rem",
+            lineHeight: "2",
+          },
+        },
+        {
+          props: { elongatedWidth: true },
+          style: {
+            paddingLeft: "30px",
+            paddingRight: "30px",
+          },
+        },
+        {
           props: { shape: "squarish" },
           style: {
             borderRadius: 7.5,
           },
         },
         {
-          props: { color: "primary", variant: "contained" },
+          props: { shape: "roundish" },
           style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-            },
-          },
-        },
-        {
-          props: { color: "tertiary", variant: "contained" },
-          style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(
-                2,
-                theme.palette.tertiary.dark
-              ),
-            },
+            borderRadius: 25,
           },
         },
         {
@@ -245,6 +256,20 @@ theme = createTheme(theme, {
               position: "absolute",
               marginLeft: "0px",
               left: "8px",
+            },
+          },
+        },
+        {
+          props: { variant: "yellowContained" },
+          style: {
+            background: `transparent url(${YellowButtonBackground}) no-repeat center`,
+            backgroundSize: "cover",
+            borderBottom: "2.5px solid #3A2717",
+            boxShadow: "none",
+            borderRadius: "9px",
+            "&:hover": {
+              transform: "translateY(2px)",
+              backgroundColor: theme.palette.hover.default,
             },
           },
         },

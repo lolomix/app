@@ -20,7 +20,7 @@ import {
 // custom
 import ViewHeading from "../../components/layout/ViewHeading";
 import RecipeCreateStepper from "../../components/common/RecipeCreateStepper";
-import RecipeOnPlaceIcon from "../../components/icons/RecipeOnPlaceIcon";
+import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlateIcon";
 
 /**
  * @returns {JSX.Element}
@@ -66,7 +66,7 @@ function KitchenRecipeCreate() {
                   }
                 />
                 <CardContent>
-                  <RecipeOnPlaceIcon sx={{ fontSize: "12rem" }} />
+                  <RecipeOnPlateIcon sx={{ fontSize: "12rem" }} />
                 </CardContent>
                 <CardActions>
                   <Button

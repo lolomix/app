@@ -2,7 +2,7 @@ import * as React from "react";
 // material-ui
 import { SvgIcon } from "@mui/material";
 
-function RecipeOnPlaceIcon(props) {
+function RecipeOnPlateIcon(props) {
   return (
     <SvgIcon viewBox="0 0 312.433 252.815" {...props}>
       <g transform="translate(0.009)">
@@ -575,4 +575,4 @@ function RecipeOnPlaceIcon(props) {
   );
 }
 
-export default RecipeOnPlaceIcon;
+export default RecipeOnPlateIcon;
