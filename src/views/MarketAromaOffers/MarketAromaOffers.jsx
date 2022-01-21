@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, Typography, Button, Box, Stack } from "@mui/material";
+import { Grid, Card, Typography, Button, Stack } from "@mui/material";
 import AromaCoinsIcon from "../../components/icons/AromaCoinsIcon";
 import CurrencyMaticIcon from "../../components/icons/CurrencyMaticIcon";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
@@ -72,10 +72,10 @@ const MarketAromaOffers = () => {
                     {card.amount && formatCurrency(card.amount)}
                   </Typography>
                 </Stack>
-                <Box as="span" color="#8D5719" fontWeight="bold">
+                <Typography variant="h6" component="span" color="tertiary.main">
                   {card.freeAmount &&
                     `+ ${formatCurrency(card.freeAmount)} Free`}
-                </Box>
+                </Typography>
                 {card.icon}
                 <Button
                   elongatedWidth
