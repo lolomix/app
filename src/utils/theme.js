@@ -217,6 +217,13 @@ theme = createTheme(theme, {
       },
       variants: [
         {
+          props: { size: "xsmall" },
+          style: {
+            padding: 0,
+            fontSize: "0.9rem",
+          },
+        },
+        {
           props: { size: "xlarge" },
           style: {
             padding: "14px 22px",
