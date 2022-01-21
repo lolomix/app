@@ -97,14 +97,22 @@ export let theme = createTheme({
   shape: {
     borderRadius: 10,
   },
+  zIndex: {},
   typography: {
+    // Keep `fontFamily` here as it is used to generate the typography objects
     fontFamily: "'Rubik', 'Helvetica', 'Arial', sans-serif",
+  },
+});
+
+// The following just overrides the properties of a generated theme from above
+theme = createTheme(theme, {
+  typography: {
     h1: {
       fontSize: "3.052rem",
       fontWeight: 400,
-      color: "white",
-      WebkitTextStroke: "0.15rem black",
-      textShadow: "0 4px 0 black",
+      color: theme.palette.common.white,
+      WebkitTextStroke: `0.15rem ${theme.palette.common.black}`,
+      textShadow: `0 4px 0 ${theme.palette.common.black}`,
       paddingTop: "8px",
       textTransform: "uppercase",
       fontFamily: "Luckiest Guy",
@@ -122,22 +130,20 @@ export let theme = createTheme({
       fontWeight: 500,
     },
     h5: {
-      fontSize: "1.25rem",
-      fontWeight: 500,
+      fontSize: "1rem",
+      fontWeight: 600,
+      color: theme.palette.text.secondary,
     },
     h6: {
-      fontSize: "1rem",
-      fontWeight: 500,
+      fontSize: "0.85rem",
+      fontWeight: 600,
+      color: theme.palette.text.disabled,
     },
     button: {
       textTransform: "none",
       fontWeight: 600,
     },
   },
-  zIndex: {},
-});
-
-theme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
