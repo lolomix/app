@@ -7,6 +7,7 @@ import {
   buttonClasses,
   stepLabelClasses,
 } from "@mui/material";
+import YellowButtonBackground from "../assets/yellow-button-background.svg";
 
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
@@ -44,6 +45,9 @@ export let theme = createTheme({
     },
     background: {
       default: paleCerulean,
+    },
+    hover: {
+      default: "#D4D4D4",
     },
 
     // colors to deprecate
@@ -213,7 +217,10 @@ theme = createTheme(theme, {
             boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
             [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
               boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
+              transform: "translateY(2px)",
+              backgroundColor: theme.palette.hover.default,
             },
+            borderRadius: "20%",
           },
         },
         {
@@ -235,6 +242,20 @@ theme = createTheme(theme, {
               position: "absolute",
               marginLeft: "0px",
               left: "8px",
+            },
+          },
+        },
+        {
+          props: { variant: "yellowContained" },
+          style: {
+            background: `transparent url(${YellowButtonBackground}) no-repeat center`,
+            backgroundSize: "cover",
+            borderBottom: "2.5px solid #3A2717",
+            boxShadow: "none",
+            borderRadius: "9px",
+            "&:hover": {
+              transform: "translateY(2px)",
+              backgroundColor: theme.palette.hover.default,
             },
           },
         },
