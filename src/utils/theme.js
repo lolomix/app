@@ -98,6 +98,12 @@ export let theme = createTheme({
     h1: {
       fontSize: "3.052rem",
       fontWeight: 400,
+      color: "white",
+      WebkitTextStroke: "0.15rem black",
+      textShadow: "0 4px 0 black",
+      paddingTop: "8px",
+      textTransform: "uppercase",
+      fontFamily: "Luckiest Guy",
     },
     h2: {
       fontSize: "2.441rem",
