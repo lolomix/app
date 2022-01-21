@@ -24,6 +24,9 @@ import SnackbarProvider from "./components/snackbars/SnackbarProvider";
 const Home = lazy(() => import("./views/Home/Home"));
 const Tutorial = lazy(() => import("./views/Tutorial/Tutorial"));
 const Market = lazy(() => import("./views/Market/Market"));
+const MarketAromaOffers = lazy(() =>
+  import("./views/MarketAromaOffers/MarketAromaOffers")
+);
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const KitchenRecipeCreate = lazy(() =>
   import("./views/KitchenRecipeCreate/KitchenRecipeCreate")
@@ -49,6 +52,10 @@ function App() {
               <Route path="/tutorial" element={<Tutorial />} />
               <Route path="/buffet" element={<Buffet />} />
               <Route path="/market" element={<Market />} />
+              <Route
+                path="/market/aroma/offers"
+                element={<MarketAromaOffers />}
+              />
               <Route path="/kitchen" element={<Kitchen />} />
               <Route
                 path="/kitchen/recipe/create"

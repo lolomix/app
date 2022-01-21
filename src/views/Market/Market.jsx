@@ -1,76 +1,85 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { Helmet } from "react-helmet";
 // material-ui
-import { Box, Container, Grid } from "@mui/material";
-// custom
-import CurrencyExchange from "../../components/web3/CurrencyExchange";
-import NftBuy from "../../components/web3/NftBuy";
+import { Container, Grid, Button, Typography, Box } from "@mui/material";
 import ViewHeading from "../../components/layout/ViewHeading";
-import DripDivider from "../../components/layout/DripDivider";
-import FAQ from "../../components/common/FAQ";
-import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
-import { useEthers } from "@usedapp/core";
+import { styled } from "@mui/material/styles";
+import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
+import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
+import CardChefIcon from "../../components/icons/CardChefIcon";
+import AromaCoinSideIcon from "../../components/icons/AromaCoinSideIcon";
 
-/**
- * @param t
- * @returns {JSX.Element}
- * @constructor
- */
+const CustomButton = styled(Button)(({ theme }) => ({
+  width: "280px",
+  height: "280px",
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.common.white,
+  boxShadow: theme.blurredShadows[1],
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  textAlign: "center",
+}));
+
 function Market({ t }) {
-  const { active, error } = useEthers();
+  const buttonText = [
+    {
+      text: "Buy Aroma",
+      subText: "An ERC20 token",
+      href: "/market/aroma/buy",
+      mainImage: <AromaCoinSideIcon sx={{ fontSize: "130px" }} />,
+      extraImg: null,
+    },
+    {
+      text: "Buy a CHEF",
+      subText: "If you already have AROMA Token",
+      href: "/market/chef/buy",
+      mainImage: <CardChefIcon sx={{ fontSize: "130px" }} />,
+      extraImg: (
+        <>
+          <PinkArrowIcon
+            style={{
+              position: "absolute",
+              left: "55px",
+              top: "100px",
+            }}
+          />
+          <CurrencyAromaCartoonIcon
+            style={{
+              position: "absolute",
+              left: "25px",
+              top: "132px",
+              fontSize: "40px",
+            }}
+          />
+        </>
+      ),
+    },
+  ];
 
   return (
-    <>
-      <Helmet>
-        <title>{t("market.title")}</title>
-      </Helmet>
-      <Box id="market" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
-        <Container as="section">
-          <ViewHeading>{t("market.title")}</ViewHeading>
-          <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            alignItems="stretch"
-          >
-            {active ? (
-              <>
-                <Grid item xs={12} lg={4}>
-                  <CurrencyExchange fullheight="true" />
-                </Grid>
-                <Grid item xs={12} lg={8}>
-                  <NftBuy fullheight="true" />
-                </Grid>
-              </>
-            ) : (
-              <Grid item xs={10} sm={7} md={5} lg={4} mb={21}>
-                <ConnectionErrorCard error={error} elevation={3} />
-              </Grid>
-            )}
+    <Container>
+      <ViewHeading>{t("market.title")}</ViewHeading>
+      <Grid container justifyContent="center">
+        {buttonText.map((button) => (
+          <Grid item mx="5vw" mb="3vh">
+            <CustomButton
+              variant="contained"
+              shape="roundish"
+              href={button.href}
+            >
+              {button.mainImage}
+              {button.extraImg}
+              <Box>
+                <Typography variant="h6" color="common.black">
+                  {button.text}
+                </Typography>
+                {button.subText}
+              </Box>
+            </CustomButton>
           </Grid>
-        </Container>
-      </Box>
-
-      <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
-        <DripDivider variant={2} color="sunGlow.main" />
-        <Container as="section">
-          <ViewHeading variant="h2" color="secondary.contrastText">
-            FAQ
-          </ViewHeading>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <Grid item xs={12} sm={10} md={8}>
-              <FAQ color="secondary.contrastText" />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 
