@@ -44,23 +44,32 @@ const MarketAromaOffers = () => {
     },
   ];
   return (
-    <Grid container justifyContent="center">
-      <Typography variant="h1">AROMA</Typography>
-      <Grid container item mt={6} justifyContent="center">
+    <Grid container justifyContent="center" alignItems="center" rowSpacing={6}>
+      <Grid item xs={12} textAlign="center">
+        <Typography variant="h1">AROMA</Typography>
+      </Grid>
+      <Grid
+        container
+        item
+        xs={12}
+        sm={11}
+        spacing={3}
+        justifyContent="center"
+        alignItems="stretch"
+      >
         {cardsContent.map((card) => (
-          <Grid item m={1.3}>
-            <Card sx={{ width: "300px", height: "400px", padding: "15px" }}>
-              <Card
+          <Grid item xs={10} sm={8} md={6} lg={4} columns={16}>
+            <Card fullheight="true" sx={{ padding: 2 }}>
+              <Stack
                 sx={{
-                  backgroundColor: "rgba(255, 241, 243, 0.33)",
                   height: "100%",
-                  width: "100%",
+                  backgroundColor: "rgba(255, 241, 243, 0.33)",
                   boxShadow: "inset 0px 1px 3px #FF000029",
-                  display: "flex",
-                  flexDirection: "column",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "15px",
+                  borderRadius: "inherit",
+                  padding: 2,
+                  textAlign: "center",
                 }}
               >
                 <Typography variant="h4" color="secondary.main">
@@ -89,7 +98,7 @@ const MarketAromaOffers = () => {
                     <Typography variant="h5">Enter</Typography>
                   )}
                 </Button>
-              </Card>
+              </Stack>
             </Card>
           </Grid>
         ))}
