@@ -8,23 +8,19 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
 import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
 import CardChefIcon from "../../components/icons/CardChefIcon";
 import AromaCoinSideIcon from "../../components/icons/AromaCoinSideIcon";
-/**
- * @param t
- * @returns {JSX.Element}
- * @constructor
- */
-function Market({ t }) {
-  const CustomButton = styled(Button)(({ theme }) => ({
-    width: "280px",
-    height: "280px",
-    color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.common.white,
-    boxShadow: theme.blurredShadows[1],
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    textAlign: "center",
-  }));
 
+const CustomButton = styled(Button)(({ theme }) => ({
+  width: "280px",
+  height: "280px",
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.common.white,
+  boxShadow: theme.blurredShadows[1],
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  textAlign: "center",
+}));
+
+function Market({ t }) {
   const buttonText = [
     {
       text: "Buy Aroma",
@@ -61,7 +57,7 @@ function Market({ t }) {
   ];
 
   return (
-    <Container maxWidth="xl">
+    <Container>
       <Headline>{t("market.title")}</Headline>
       <Grid container justifyContent="center">
         {buttonText.map((button) => (
