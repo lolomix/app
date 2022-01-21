@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Helmet } from "react-helmet";
 import { Box, Container } from "@mui/material";
 // custom
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import OpeningSoon from "../../components/common/OpeningSoonCard";
 
 /**
@@ -20,7 +20,7 @@ function Kitchen() {
       </Helmet>
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
-          <Headline>Kitchen</Headline>
+          <ViewHeading>Kitchen</ViewHeading>
           <Grid container justifyContent="center" alignItems="stretch">
             <Grid item md={6} mb={21}>
               <OpeningSoon />

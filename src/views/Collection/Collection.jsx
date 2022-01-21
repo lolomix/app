@@ -5,7 +5,7 @@ import { Box, Container, Grid, Skeleton } from "@mui/material";
 // custom
 import { Helmet } from "react-helmet";
 import { useEthers } from "@usedapp/core";
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import DripDivider from "../../components/layout/DripDivider";
 import NftCard from "../../components/web3/NftCard";
 import FAQ from "../../components/common/FAQ";
@@ -34,15 +34,15 @@ function Collection() {
       </Helmet>
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
-          <Headline mb={0}>Collection</Headline>
-          <Headline variant="h5" mt={0} textAlign="center">
+          <ViewHeading mb={0}>Collection</ViewHeading>
+          <ViewHeading variant="h5" mt={0} textAlign="center">
             {active &&
               (nfts ? (
                 <>Total CHEFs Owned: {nfts.length}</>
               ) : (
                 <Skeleton variant="h5" width={220} sx={{ margin: "auto" }} />
               ))}
-          </Headline>
+          </ViewHeading>
           <Grid container justifyContent="center" alignItems="stretch">
             {active ? (
               nfts ? (
@@ -90,9 +90,9 @@ function Collection() {
       <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
         <DripDivider variant={2} color="sunGlow.main" />
         <Container as="section">
-          <Headline variant="h2" color="secondary.contrastText">
+          <ViewHeading variant="h2" color="secondary.contrastText">
             FAQ
-          </Headline>
+          </ViewHeading>
           <Grid
             container
             justifyContent="center"

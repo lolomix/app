@@ -6,7 +6,7 @@ import { Box, Container, Grid } from "@mui/material";
 // custom
 import CurrencyExchange from "../../components/web3/CurrencyExchange";
 import NftBuy from "../../components/web3/NftBuy";
-import Headline from "../../components/layout/Headline";
+import ViewHeading from "../../components/layout/ViewHeading";
 import DripDivider from "../../components/layout/DripDivider";
 import FAQ from "../../components/common/FAQ";
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
@@ -27,7 +27,7 @@ function Market({ t }) {
       </Helmet>
       <Box id="market" pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
-          <Headline>{t("market.title")}</Headline>
+          <ViewHeading>{t("market.title")}</ViewHeading>
           <Grid
             container
             spacing={3}
@@ -55,9 +55,9 @@ function Market({ t }) {
       <Box id="faq" pb={10} sx={{ backgroundColor: "secondary.main" }}>
         <DripDivider variant={2} color="sunGlow.main" />
         <Container as="section">
-          <Headline variant="h2" color="secondary.contrastText">
+          <ViewHeading variant="h2" color="secondary.contrastText">
             FAQ
-          </Headline>
+          </ViewHeading>
           <Grid
             container
             justifyContent="center"
