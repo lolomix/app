@@ -6,43 +6,41 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
 import AromaBagOfCoinsIcon from "../../components/icons/AromaBagOfCoinsIcon";
 import AromaPotOfCoinsIcon from "../../components/icons/AromPotOfCoinsIcon";
 import AromaCoinWithBackgroundIcon from "../../components/icons/AromaCoinWithBackgroundIcon";
+import { formatCurrency } from "../../utils/formatters";
 
 const MarketAromaOffers = () => {
   const cardsContent = [
     {
       title: "Handful AROMA",
-      amount: "1'000",
-      freeAmount: "",
+      amount: 1000,
+      freeAmount: null,
       icon: <AromaCoinsIcon style={{ fontSize: "170px" }} />,
-      matic: true,
-      price: "1000",
+      price: 1000,
     },
     {
       title: "Pile of AROMA",
-      amount: "3'000",
-      freeAmount: "+500 Free",
+      amount: 3000,
+      freeAmount: 500,
       icon: <AromaBagOfCoinsIcon style={{ fontSize: "170px" }} />,
-      matic: true,
-      price: "3000",
+      price: 3000,
     },
     {
       title: "Sack of AROMA",
-      amount: "10'000",
-      freeAmount: "+2'000 Free",
+      amount: 10000,
+      freeAmount: 2000,
       icon: <AromaPotOfCoinsIcon style={{ fontSize: "170px" }} />,
-      matic: true,
-      price: "6000",
+      price: 6000,
     },
     {
       title: "Custom",
-      amount: "",
+      amount: null,
+      freeAmount: null,
       icon: (
         <AromaCoinWithBackgroundIcon
           style={{ fontSize: "230px", marginBottom: "20px" }}
         />
       ),
-      matic: false,
-      price: "Enter",
+      price: null,
     },
   ];
   return (
@@ -69,20 +67,27 @@ const MarketAromaOffers = () => {
                   {card.title}
                 </Typography>
                 <Stack direction="row" alignItems="center">
-                  {card.matic && <CurrencyAromaCartoonIcon />}
+                  {card.amount && <CurrencyAromaCartoonIcon />}
                   <Typography variant="h3" fontWeight="bold" ml={1}>
-                    {card.amount}
+                    {card.amount && formatCurrency(card.amount)}
                   </Typography>
                 </Stack>
-                <Box as="span" color="#8D5719" fontWeight="bold">{card.freeAmount}</Box>
+                <Box as="span" color="#8D5719" fontWeight="bold">
+                  {card.freeAmount &&
+                    `+ ${formatCurrency(card.freeAmount)} Free`}
+                </Box>
                 {card.icon}
                 <Button
                   elongatedWidth
                   size="massive"
                   variant="yellowContained"
-                  startIcon={card.matic && <CurrencyMaticIcon />}
+                  startIcon={card.price && <CurrencyMaticIcon />}
                 >
-                  {card.price}
+                  {card.price ? (
+                    formatCurrency(card.price)
+                  ) : (
+                    <Typography variant="h5">Enter</Typography>
+                  )}
                 </Button>
               </Card>
             </Card>
