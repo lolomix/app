@@ -50,7 +50,7 @@ const SquareButton = (props) => {
       size={props.size}
     >
       <Stack>
-        <img src={image} width="100%" height="auto" alt={image}></img>
+        {image}
         {title}
       </Stack>
     </StyledButton>
