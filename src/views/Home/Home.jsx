@@ -2,11 +2,11 @@ import { withTranslation } from "react-i18next";
 import { Button, Stack } from "@mui/material";
 import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlateIcon";
 import SquareButton from "../../components/buttons/SquareButton";
-import Market from "../../assets/market-icon.svg";
-import MyChefs from "../../assets/my-chefs-icon.png";
-import Kitchen from "../../assets/kitchen-icon.svg";
-import Buffet from "../../assets/buffet-icon.svg";
 import WhiteFlameIcon from "../../components/icons/WhiteFlameIcon";
+import MarketIcon from "../../components/icons/MarketIcon";
+import KitchenIcon from "../../components/icons/KitchenIcon";
+import BuffetIcon from "../../components/icons/BuffetIcon";
+import MyChefsIcon from "../../components/icons/MyChefsIcon";
 
 function Home() {
   return (
@@ -38,11 +38,11 @@ function Home() {
         width="90%"
         spacing={0.5}
       >
-        <Stack direction="row" spacing={0.5}>
+        <Stack direction="row" spacing={0.5} alignItems="flex-end">
           <SquareButton
             size={"large"}
             color={"light"}
-            image={Market}
+            image={<MarketIcon sx={{ fontSize: "550%" }} />}
             title={"Market"}
             href={"/market/"}
           >
@@ -51,18 +51,18 @@ function Home() {
           <SquareButton
             size={"medium"}
             color={"light"}
-            image={MyChefs}
+            image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
             title={"My Chefs"}
             href={"/collection/"}
           >
             My Chefs
           </SquareButton>
         </Stack>
-        <Stack direction="row" spacing={0.5}>
+        <Stack direction="row" spacing={0.5} alignItems="flex-end">
           <SquareButton
             size={"medium"}
             color={"light"}
-            image={Kitchen}
+            image={<KitchenIcon sx={{ fontSize: "50px" }} />}
             title={"Kitchen"}
             href={"/kitchen/"}
           >
@@ -71,7 +71,7 @@ function Home() {
           <SquareButton
             size={"large"}
             color={"light"}
-            image={Buffet}
+            image={<BuffetIcon sx={{ fontSize: "550%" }} />}
             title={"Buffet"}
             href={"/buffet/"}
           >
