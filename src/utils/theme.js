@@ -7,6 +7,7 @@ import {
   buttonClasses,
   stepLabelClasses,
 } from "@mui/material";
+import YellowButtonBackground from "../assets/yellow-button-background.svg";
 
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
@@ -19,7 +20,7 @@ const coffee = "rgba(109, 81, 63, 1)"; // 6D513F
 const bistre = "rgba(58, 39, 23, 1)"; // 3A2717
 
 // generators
-const shadow = (px, color) => `0.3px ${px}px 0.4px 0px ${color}`;
+const shadow = (px, color) => `0px ${px}px 0px 0px ${color}`;
 
 export let theme = createTheme({
   palette: {
@@ -45,6 +46,9 @@ export let theme = createTheme({
     background: {
       default: paleCerulean,
     },
+    hover: {
+      default: "#D4D4D4",
+    },
 
     // colors to deprecate
     sunGlow: {
@@ -67,37 +71,51 @@ export let theme = createTheme({
     "none",
     shadow(1.5, bistre),
     shadow(3, bistre),
-    shadow(4.5, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
-    shadow(6, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
+    shadow(3, bistre),
   ],
   shape: {
     borderRadius: 10,
   },
+  zIndex: {},
   typography: {
+    // Keep `fontFamily` here as it is used to generate the typography objects
     fontFamily: "'Rubik', 'Helvetica', 'Arial', sans-serif",
+  },
+});
+
+// The following just overrides the properties of a generated theme from above
+theme = createTheme(theme, {
+  typography: {
     h1: {
       fontSize: "3.052rem",
       fontWeight: 400,
+      color: theme.palette.common.white,
+      WebkitTextStroke: `0.15rem ${theme.palette.common.black}`,
+      textShadow: `0 4px 0 ${theme.palette.common.black}`,
+      paddingTop: "8px",
+      textTransform: "uppercase",
+      fontFamily: "Luckiest Guy",
     },
     h2: {
       fontSize: "2.441rem",
@@ -112,23 +130,29 @@ export let theme = createTheme({
       fontWeight: 500,
     },
     h5: {
-      fontSize: "1.25rem",
-      fontWeight: 500,
+      fontSize: "1rem",
+      fontWeight: 600,
+      color: theme.palette.text.secondary,
     },
     h6: {
-      fontSize: "1rem",
-      fontWeight: 500,
+      fontSize: "0.85rem",
+      fontWeight: 600,
+      color: theme.palette.text.disabled,
     },
     button: {
       textTransform: "none",
       fontWeight: 600,
     },
   },
-  zIndex: {},
-});
-
-theme = createTheme(theme, {
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background:
+            "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
+        },
+      },
+    },
     MuiAppBar: {
       defaultProps: {
         color: "transparent",
@@ -199,10 +223,31 @@ theme = createTheme(theme, {
       },
       variants: [
         {
+          props: { size: "xsmall" },
+          style: {
+            padding: 0,
+            fontSize: "0.9rem",
+          },
+        },
+        {
           props: { size: "xlarge" },
           style: {
             padding: "14px 22px",
             fontSize: "1rem",
+          },
+        },
+        {
+          props: { size: "massive" },
+          style: {
+            fontSize: "1.3rem",
+            lineHeight: "2",
+          },
+        },
+        {
+          props: { elongatedWidth: true },
+          style: {
+            paddingLeft: "30px",
+            paddingRight: "30px",
           },
         },
         {
@@ -212,24 +257,9 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { color: "primary", variant: "contained" },
+          props: { shape: "roundish" },
           style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(2, theme.palette.primary.dark),
-            },
-          },
-        },
-        {
-          props: { color: "tertiary", variant: "contained" },
-          style: {
-            boxShadow: theme.generators.shadow(2, theme.palette.tertiary.dark),
-            [`&.${buttonClasses.focusVisible}, &:active, &:hover`]: {
-              boxShadow: theme.generators.shadow(
-                2,
-                theme.palette.tertiary.dark
-              ),
-            },
+            borderRadius: 25,
           },
         },
         {
@@ -239,6 +269,20 @@ theme = createTheme(theme, {
               position: "absolute",
               marginLeft: "0px",
               left: "8px",
+            },
+          },
+        },
+        {
+          props: { variant: "yellowContained" },
+          style: {
+            background: `transparent url(${YellowButtonBackground}) no-repeat center`,
+            backgroundSize: "cover",
+            borderBottom: "2.5px solid #3A2717",
+            boxShadow: "none",
+            borderRadius: "9px",
+            "&:hover": {
+              transform: "translateY(2px)",
+              backgroundColor: theme.palette.hover.default,
             },
           },
         },
