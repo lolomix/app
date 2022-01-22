@@ -1,50 +1,25 @@
-import { withTranslation } from "react-i18next";
-import { Button, Step, StepLabel, Stepper } from "@mui/material";
-import { useState } from "react";
 // material-ui
-
-const steps = ["Choose ingredients", "Review", "Cook recipe"];
+import { Step, StepLabel, Stepper } from "@mui/material";
+import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
 
 /**
- * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-function RecipeCreateStepper(props) {
-  const [activeStep, setActiveStep] = useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) =>
-      prevActiveStep <= 0 ? prevActiveStep : prevActiveStep - 1
-    );
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+function RecipeCreateStepper() {
+  const [{ steps, activeStep }] = useRecipeCreator();
 
   return (
-    <>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label) => {
-          const stepProps = {};
-          const labelProps = {};
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      <Button onClick={handleNext}>Next</Button>
-      <Button onClick={handleBack}>Back</Button>
-      <Button onClick={handleReset}>Reset</Button>
-    </>
+    <Stepper activeStep={activeStep}>
+      {steps.map((label) => {
+        return (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        );
+      })}
+    </Stepper>
   );
 }
 
-export default withTranslation()(RecipeCreateStepper);
+export default RecipeCreateStepper;
