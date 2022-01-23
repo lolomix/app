@@ -84,20 +84,8 @@ const Tutorial = () => {
           </Typography>
           {steps.map((step) => (
             <>
-              <Grid
-                container
-                item
-                justifyContent="center"
-                alignItems="center"
-                p={2}
-              >
-                <Grid
-                  item
-                  xl={12}
-                  md={12}
-                  sm={12}
-                  order={{ xl: 1, md: 1, sm: 1, xs: 1 }}
-                >
+              <Grid container justifyContent="center" alignItems="center" p={2}>
+                <Grid item sm={12} order={{ xs: 1 }}>
                   <Typography
                     variant="h5"
                     color="text.primary"
@@ -106,25 +94,12 @@ const Tutorial = () => {
                     {step.title}
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  xl={7}
-                  md={7}
-                  sm={7}
-                  order={{ xl: 2, md: 2, sm: 2, xs: 3 }}
-                >
+                <Grid item sm={7} order={{ sm: 2, xs: 3 }}>
                   <Typography variant="h5" textAlign="justify">
                     {step.description}
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  xl={5}
-                  md={5}
-                  sm={5}
-                  xs={12}
-                  order={{ xl: 3, md: 3, sm: 3, xs: 2 }}
-                >
+                <Grid item sm={5} xs={12} order={{ sm: 3, xs: 2 }}>
                   {step.icon}
                 </Grid>
               </Grid>
