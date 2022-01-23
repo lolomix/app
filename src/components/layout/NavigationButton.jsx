@@ -15,14 +15,14 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
  * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<{}> & React.RefAttributes<unknown>>}
  */
 const NavigationButton = React.forwardRef((props, ref) => {
-  const { icon, title, ...rest } = props;
+  const { icon, text, ...rest } = props;
 
   return (
     <StyledIconButton shape="inherit" {...rest} ref={ref}>
       {icon}
-      {title && (
+      {text && (
         <Typography pl={icon ? 0.5 : 0} variant="button">
-          {title}
+          {text}
         </Typography>
       )}
     </StyledIconButton>
