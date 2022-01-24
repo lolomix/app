@@ -64,48 +64,55 @@ const Footer = () => {
       maxWidth={false}
       sx={{
         backgroundColor: "common.black",
-        height: "25vh",
+        height: "fit-content",
         position: "absolute",
-        bottom: 0,
         left: 0,
       }}
     >
-      <Grid container justifyContent="center" mt={6}>
+      <Grid container justifyContent="space-around" xs={12} pt={6} pb={6} >
         <Grid
           container
           item
-          xs={12}
+          xs={11}
           alignItems="center"
-          justifyContent="space-around"
+          justifyContent="space-between"
         >
-          <Grid item xs={3}>
+          <Grid item xs={12} lg={3} xl={2} order={{ xs: 1 }} textAlign="center">
             <Logo />
           </Grid>
-          <Grid container item xs={3} justifyContent="space-around">
+          <Grid
+            container
+            item
+            xs={12}
+            lg={4.5}
+            xl={3.5}
+            order={{ xs: 3, lg: 2 }}
+            justifyContent="space-around"
+          >
             {externalLinks.map((item) => (
-              <Grid item px={1}>
-                <Link underline="hover" target="blank" href={item.ref}>
-                  <Typography variant="h5" color="common.white">
-                    {item.title}
-                  </Typography>
+              <Grid item lg={2.4} py={1} textAlign="center">
+                <Link
+                  underline="hover"
+                  target="blank"
+                  href={item.ref}
+                  color="common.white"
+                >
+                  {item.title}
                 </Link>
               </Grid>
             ))}
           </Grid>
-          <Grid container item xs={3} justifyContent="space-around">
+          <Grid container item lg={4} xl={3.5} order={{ xs: 2, lg: 3 }} py={3}>
             {views.map((item) => (
-              <Grid item px={1}>
-                <Link underline="hover" href={item.ref}>
-                  <Typography variant="h5" color="common.white">
-                    {item.title}
-                  </Typography>
+              <Grid item xs={12} lg={2.4} py={1} textAlign="center">
+                <Link underline="hover" href={item.ref} color="common.white">
+                  {item.title}
                 </Link>
               </Grid>
             ))}
           </Grid>
         </Grid>
         <Divider
-          light
           style={{
             width: "91%",
             backgroundColor: "#E9E9E947",
@@ -113,24 +120,44 @@ const Footer = () => {
             marginBottom: 5,
           }}
         />
-        <Grid container item xs={11} justifyContent="space-between">
-          <Grid item xs={6} p={2}>
-            <Typography variant="h6" color="grey.500">
-              {new Date().getFullYear()}, All Rights Reserved
-            </Typography>
+        <Grid
+          container
+          item
+          xs={11}
+          alignItems="center"
+          justifyContent="space-between"
+          texAlign="center"
+        >
+          <Grid
+            item
+            xs={12}
+            lg={2.6}
+            xl={2}
+            color="grey.500"
+            order={{ xs: 2, lg: 1 }}
+            textAlign="center"
+          >
+            {new Date().getFullYear()}, All Rights Reserved
           </Grid>
-          <Grid container item xs={2} p={2} justifyContent="space-between">
+          <Grid
+            container
+            item
+            xs={12}
+            lg={3}
+            xl={2}
+            order={{ xs: 1, lg: 2 }}
+            py={3}
+            justifyContent="center"
+          >
             {privacyPolicyAndCookies.map((item) => (
-              <Grid item>
+              <Grid item px={2}>
                 <Link
                   underline="hover"
                   target="blank"
                   href={item.ref}
-                  style={{ opacity: "0.66" }}
+                  color="grey.500"
                 >
-                  <Typography variant="h5" color="grey.500">
-                    {item.title}
-                  </Typography>
+                  {item.title}
                 </Link>
               </Grid>
             ))}
