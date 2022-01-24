@@ -69,7 +69,7 @@ const Footer = () => {
         left: 0,
       }}
     >
-      <Grid container justifyContent="space-around" xs={12} pt={6} pb={6} >
+      <Grid container justifyContent="space-around" xs={12} pt={6} pb={6}>
         <Grid
           container
           item
