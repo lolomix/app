@@ -76,7 +76,7 @@ const Tutorial = () => {
 
   return (
     <Container maxWidth="sm">
-      <ViewHeading title={"Tutorial"} />
+      <ViewHeading title="Tutorial" />
       <Card sx={{ marginY: 5 }}>
         <Stack p={2} textAlign="center">
           <Typography variant="h4" color="secondary">
