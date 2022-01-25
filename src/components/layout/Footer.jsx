@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Divider, Grid, Link, Typography } from "@mui/material";
-import Logo from "../common/Logo";
+import Logo from "../icons/Logo";
 
 const Footer = () => {
   const externalLinks = [
@@ -69,7 +69,7 @@ const Footer = () => {
         left: 0,
       }}
     >
-      <Grid container justifyContent="space-around" xs={12} pt={6} pb={6}>
+      <Grid container justifyContent="space-around" xs={12} pt={8} pb={6}>
         <Grid
           container
           item
@@ -78,7 +78,7 @@ const Footer = () => {
           justifyContent="space-between"
         >
           <Grid item xs={12} lg={3} xl={2} order={{ xs: 1 }} textAlign="center">
-            <Logo />
+            <Logo sx={{ fontSize: "18rem", height: "fit-content" }} />
           </Grid>
           <Grid
             container
