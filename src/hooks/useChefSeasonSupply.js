@@ -2,6 +2,7 @@ import { useContractCall } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
 import { utils } from "ethers";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the total amount of CHEFs in the Season.
@@ -11,6 +12,7 @@ import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 export function useChefSeasonSupply() {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const [seasonSupplyFormatted, setSeasonSupplyFormatted] = useState();
 
   const [seasonSupply] =
     useContractCall(
@@ -23,9 +25,9 @@ export function useChefSeasonSupply() {
         }
     ) ?? [];
 
-  if (seasonSupply === undefined) return [];
-
-  const seasonSupplyFormatted = seasonSupply.toNumber();
+  useEffect(() => {
+    setSeasonSupplyFormatted(seasonSupply?.toNumber());
+  }, [seasonSupply]);
 
   return [seasonSupply, seasonSupplyFormatted];
 }
