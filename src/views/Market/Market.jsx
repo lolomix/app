@@ -26,7 +26,7 @@ function Market({ t }) {
     {
       text: "Buy Aroma",
       subText: "An ERC20 token",
-      href: "/market/aroma/buy",
+      href: "/market/aroma/offers",
       mainImage: <AromaCoinSideIcon sx={{ fontSize: "130px" }} />,
       extraImg: null,
     },
@@ -77,7 +77,7 @@ function Market({ t }) {
               {button.mainImage}
               {button.extraImg}
               <Box>
-                <Typography variant="h6" color="common.black">
+                <Typography variant="h5" color="common.black">
                   {button.text}
                 </Typography>
                 {button.subText}
