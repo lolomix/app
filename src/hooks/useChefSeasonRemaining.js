@@ -1,5 +1,6 @@
 import { useChefSeasonSupply } from "./useChefSeasonSupply";
 import { useChefTotalSupply } from "./useChefTotalSupply";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the remaining amount of CHEFs for sale in the Season.
@@ -9,11 +10,16 @@ import { useChefTotalSupply } from "./useChefTotalSupply";
 export function useChefSeasonRemaining() {
   const [totalSupply] = useChefTotalSupply();
   const [seasonSupply] = useChefSeasonSupply();
+  const [seasonRemaining, setSeasonRemaining] = useState();
+  const [seasonRemainingFormatted, setSeasonRemainingFormatted] = useState();
 
-  if (seasonSupply === undefined || totalSupply === undefined) return [];
+  useEffect(() => {
+    setSeasonRemaining(seasonSupply?.sub(totalSupply));
+  }, [seasonSupply, totalSupply]);
 
-  const seasonRemaining = seasonSupply.sub(totalSupply);
-  const seasonRemainingFormatted = seasonRemaining.toNumber();
+  useEffect(() => {
+    setSeasonRemainingFormatted(seasonRemaining?.toNumber());
+  }, [seasonRemaining]);
 
   return [seasonRemaining, seasonRemainingFormatted];
 }
