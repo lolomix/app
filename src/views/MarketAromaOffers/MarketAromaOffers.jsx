@@ -93,9 +93,10 @@ const MarketAromaOffers = () => {
                 </Typography>
                 {card.icon}
                 <Button
+                  fullWidth
                   size="massive"
                   variant="yellowContained"
-                  sx={{ width: "100%", marginTop: 3 }}
+                  sx={{ marginTop: 3 }}
                   startIcon={card.price && <CurrencyMaticIcon />}
                 >
                   {card.price ? formatCurrency(card.price) : "Enter"}
