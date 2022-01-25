@@ -22,6 +22,7 @@ import Version from "./components/layout/Version";
 import SnackbarProvider from "./components/snackbars/SnackbarProvider";
 // pages (lazy loading)
 const Home = lazy(() => import("./views/Home/Home"));
+const Tutorial = lazy(() => import("./views/Tutorial/Tutorial"));
 const Market = lazy(() => import("./views/Market/Market"));
 const MarketAromaOffers = lazy(() =>
   import("./views/MarketAromaOffers/MarketAromaOffers")
@@ -48,6 +49,7 @@ function App() {
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/tutorial" element={<Tutorial />} />
               <Route path="/buffet" element={<Buffet />} />
               <Route path="/market" element={<Market />} />
               <Route

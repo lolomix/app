@@ -1,6 +1,7 @@
 import { useContractCall } from "@usedapp/core";
 import { ERC20Interface } from "@usedapp/core";
 import { utils } from "ethers";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the total amount of tokens stored by the contract.
@@ -16,6 +17,8 @@ export function useTokenTotalSupply(tokenAddress, tokenAbi = null) {
     abiInterface = new utils.Interface(tokenAbi);
   }
 
+  const [totalSupplyFormatted, setTotalSupplyFormatted] = useState();
+
   const [totalSupply] =
     useContractCall(
       tokenAddress && {
@@ -26,9 +29,9 @@ export function useTokenTotalSupply(tokenAddress, tokenAbi = null) {
       }
     ) ?? [];
 
-  if (totalSupply === undefined) return [];
-
-  const totalSupplyFormatted = totalSupply.toNumber();
+  useEffect(() => {
+    setTotalSupplyFormatted(totalSupply?.toNumber());
+  }, [totalSupply]);
 
   return [totalSupply, totalSupplyFormatted];
 }

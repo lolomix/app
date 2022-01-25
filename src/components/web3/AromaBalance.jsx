@@ -8,9 +8,9 @@ import { useEthers } from "@usedapp/core";
 
 function AromaBalance({ placeholder }) {
   const { account } = useEthers();
-  const [balance, balanceFormatted] = useAromaBalanceOf(account);
+  const [, balanceFormatted] = useAromaBalanceOf(account);
 
-  return balance === undefined ? (
+  return balanceFormatted === undefined ? (
     placeholder ? (
       placeholder
     ) : (

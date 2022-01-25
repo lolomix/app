@@ -8,6 +8,7 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
 import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
 import CardChefIcon from "../../components/icons/CardChefIcon";
 import AromaCoinSideIcon from "../../components/icons/AromaCoinSideIcon";
+import MarketIcon from "../../components/icons/MarketIcon";
 
 const CustomButton = styled(Button)(({ theme }) => ({
   width: "280px",
@@ -25,7 +26,7 @@ function Market({ t }) {
     {
       text: "Buy Aroma",
       subText: "An ERC20 token",
-      href: "/market/aroma/buy",
+      href: "/market/aroma/offers",
       mainImage: <AromaCoinSideIcon sx={{ fontSize: "130px" }} />,
       extraImg: null,
     },
@@ -58,8 +59,14 @@ function Market({ t }) {
 
   return (
     <Container>
-      <ViewHeading>{t("market.title")}</ViewHeading>
-      <Grid container justifyContent="center">
+      <ViewHeading
+        title={"Market"}
+        subTitle={
+          "A place where you can buy tokens and CHEF which will be used in kitchen"
+        }
+        icon={<MarketIcon sx={{ fontSize: 45, marginTop: 1 }} />}
+      />
+      <Grid container justifyContent="center" my={7}>
         {buttonText.map((button) => (
           <Grid item mx="5vw" mb="3vh">
             <CustomButton
@@ -70,7 +77,7 @@ function Market({ t }) {
               {button.mainImage}
               {button.extraImg}
               <Box>
-                <Typography variant="h6" color="common.black">
+                <Typography variant="h5" color="common.black">
                   {button.text}
                 </Typography>
                 {button.subText}
