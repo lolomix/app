@@ -10,7 +10,7 @@ import KitchenIcon from "../icons/KitchenIcon";
 import MyChefsIcon from "../icons/MyChefsIcon";
 import BuffetIcon from "../icons/BuffetIcon";
 
-function NavigationMainMenuButton({ t }) {
+function NavigationMainMenuButton() {
   const [open, setOpen] = useState(false);
 
   const externalLinks = [
