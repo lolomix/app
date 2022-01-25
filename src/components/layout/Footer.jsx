@@ -93,7 +93,7 @@ const Footer = () => {
               <Grid item lg={2.4} py={1} textAlign="center">
                 <Link
                   underline="hover"
-                  target="blank"
+                  target="_blank"
                   href={item.ref}
                   color="common.white"
                 >
@@ -153,9 +153,10 @@ const Footer = () => {
               <Grid item px={2}>
                 <Link
                   underline="hover"
-                  target="blank"
+                  target="_blank"
                   href={item.ref}
                   color="grey.500"
+                  rel="nofollow noindex"
                 >
                   {item.title}
                 </Link>
