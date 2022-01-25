@@ -7,6 +7,7 @@ import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import { formatUnits } from "@ethersproject/units";
 import { useContractCall } from "@usedapp/core";
 import { utils } from "ethers";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the balance of an CHEF NFTs for an address
@@ -17,6 +18,7 @@ import { utils } from "ethers";
 export function useChefBalanceOf(targetAccount) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const [balanceFormatted, setBalanceFormatted] = useState();
 
   const [balance] =
     useContractCall(
@@ -28,9 +30,9 @@ export function useChefBalanceOf(targetAccount) {
       }
     ) ?? [];
 
-  if (balance === undefined) return [];
-
-  let balanceFormatted = formatUnits(balance, AROMA_DECIMALS_DIGIT);
+  useEffect(() => {
+    balance && setBalanceFormatted(formatUnits(balance, AROMA_DECIMALS_DIGIT));
+  }, [balance]);
 
   return [balance, balanceFormatted];
 }
