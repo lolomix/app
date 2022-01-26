@@ -1,6 +1,6 @@
 import { useState } from "react";
 // material-ui
-import { Dialog, Tooltip, Typography, Grid, Link } from "@mui/material";
+import { Dialog, Tooltip, Grid, Link, DialogContent } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 // custom
 import NavigationButton from "./NavigationButton";
@@ -40,27 +40,27 @@ function NavigationMainMenuButton() {
     {
       title: "Home",
       ref: "/",
-      icon: <HomeIcon sx={{ fontSize: "2.5rem" }} />,
+      icon: <HomeIcon sx={{ fontSize: "3.8rem" }} />,
     },
     {
       title: "Market",
       ref: "/market",
-      icon: <MarketIcon sx={{ fontSize: "2.5rem" }} />,
+      icon: <MarketIcon sx={{ fontSize: "3.8rem" }} />,
     },
     {
       title: "My Chefs",
       ref: "/collection",
-      icon: <MyChefsIcon sx={{ fontSize: "2.5rem" }} />,
+      icon: <MyChefsIcon sx={{ fontSize: "4rem" }} />,
     },
     {
       title: "Kitchen",
       ref: "/kitchen",
-      icon: <KitchenIcon sx={{ fontSize: "2.5rem" }} />,
+      icon: <KitchenIcon sx={{ fontSize: "3.8rem" }} />,
     },
     {
       title: "Buffet",
       ref: "/buffet",
-      icon: <BuffetIcon sx={{ fontSize: "2.5rem" }} />,
+      icon: <BuffetIcon sx={{ fontSize: "3.8rem" }} />,
     },
   ];
 
@@ -77,36 +77,47 @@ function NavigationMainMenuButton() {
       <Tooltip disableFocusListener title="Menu" aria-label="Menu">
         <NavigationButton icon={<MenuIcon />} onClick={handleClickOpen} />
       </Tooltip>
-      <Dialog fullScreen open={open}>
-        <Grid
-          container
-          height="100%"
-          justifyContent="center"
-          p={1.2}
-          sx={{ backgroundColor: "common.black" }}
+      <Dialog
+        fullScreen
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: "common.black",
+          },
+        }}
+      >
+        <DialogContent
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+          }}
         >
-          <Grid item xs={12} maxWidth="xl" textAlign="right" px={6}>
-            <NavigationButton icon={<MenuIcon />} onClick={handleClose} />
-          </Grid>
-          <Grid container item height="90%" maxWidth="xl">
-            <Grid container item xs={12} md={6} flexDirection="column" px={3}>
+          <Grid container maxWidth="xl">
+            <Grid item xs={12} textAlign="right">
+              <NavigationButton icon={<MenuIcon />} onClick={handleClose} />
+            </Grid>
+            <Grid
+              container
+              item
+              mt={8}
+              xs={12}
+              md={6}
+              flexDirection="column"
+              rowSpacing={5}
+            >
               {views.map((item) => (
-                <Grid
-                  container
-                  item
-                  alignItems="center"
-                  spacing={2}
-                  px={3}
-                  py={2}
-                >
-                  <Grid item> {item.icon}</Grid>
+                <Grid container item alignItems="center" columnSpacing={2}>
+                  <Grid item>{item.icon}</Grid>
                   <Grid item>
                     <Link
+                      variant="h2"
                       underline="hover"
                       href={item.ref}
                       color="common.white"
+                      fontWeight={500}
                     >
-                      <Typography variant="h3">{item.title}</Typography>
+                      {item.title}
                     </Link>
                   </Grid>
                 </Grid>
@@ -115,20 +126,20 @@ function NavigationMainMenuButton() {
             <Grid
               container
               item
-              flexDirection="column"
-              textAlign={["left", "left", "right"]}
+              mt={10}
               xs={12}
               md={6}
-              px={3}
+              flexDirection="column"
+              rowSpacing={4}
             >
               {externalLinks.map((item) => (
-                <Grid item px={3} py={1.5}>
+                <Grid item textAlign={["left", "left", "right"]}>
                   <Link
+                    variant="h4"
                     underline="hover"
                     target="_blank"
                     href={item.ref}
                     color="grey.500"
-                    variant="h4"
                   >
                     {item.title}
                   </Link>
@@ -136,7 +147,7 @@ function NavigationMainMenuButton() {
               ))}
             </Grid>
           </Grid>
-        </Grid>
+        </DialogContent>
       </Dialog>
     </>
   );
