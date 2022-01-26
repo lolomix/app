@@ -31,7 +31,14 @@ function CurrencyInputField({
 
   return (
     <FormControl variant="outlined" fullWidth>
-      <Typography variant="overline">{label}</Typography>
+      <Typography
+        variant="overline"
+        sx={{
+          textTransform: "none",
+        }}
+      >
+        {label}
+      </Typography>
       <OutlinedInput
         id={id}
         value={value}
