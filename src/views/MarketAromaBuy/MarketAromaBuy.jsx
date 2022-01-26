@@ -5,7 +5,7 @@ import ViewHeading from "../../components/layout/ViewHeading";
 
 const MarketAromaBuy = () => {
   return (
-    <Container maxWidth="xs" >
+    <Container maxWidth="xs">
       <ViewHeading title="Aroma" />
       <CurrencyExchange />
     </Container>
