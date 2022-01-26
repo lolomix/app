@@ -44,7 +44,13 @@ const MarketAromaOffers = () => {
     },
   ];
   return (
-    <Grid container justifyContent="center" alignItems="center" rowSpacing={6}>
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      rowSpacing={6}
+      my={1}
+    >
       <Grid item xs={12} textAlign="center">
         <Typography variant="h1">AROMA</Typography>
       </Grid>
@@ -87,16 +93,13 @@ const MarketAromaOffers = () => {
                 </Typography>
                 {card.icon}
                 <Button
-                  elongatedWidth
+                  fullWidth
                   size="massive"
                   variant="yellowContained"
+                  sx={{ marginTop: 3 }}
                   startIcon={card.price && <CurrencyMaticIcon />}
                 >
-                  {card.price ? (
-                    formatCurrency(card.price)
-                  ) : (
-                    <Typography variant="h5">Enter</Typography>
-                  )}
+                  {card.price ? formatCurrency(card.price) : "Enter"}
                 </Button>
               </Stack>
             </Card>
