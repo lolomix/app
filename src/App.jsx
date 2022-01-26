@@ -16,7 +16,6 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 import { Container } from "@mui/material";
 import AnnouncementBar from "./components/layout/AnnouncementBar";
-import Collection from "./views/Collection/Collection";
 import { Helmet } from "react-helmet";
 import Version from "./components/layout/Version";
 import SnackbarProvider from "./components/snackbars/SnackbarProvider";
@@ -33,6 +32,7 @@ const KitchenRecipeCreate = lazy(() =>
 );
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 const Internal = lazy(() => import("./views/Internal/Internal"));
+const MyChefs = lazy(() => import("./views/MyChefs/MyChefs"));
 
 function App() {
   return (
@@ -62,7 +62,7 @@ function App() {
                 element={<KitchenRecipeCreate />}
               />
               <Route path="/internal" element={<Internal />} />
-              <Route path="/collection" element={<Collection />} />
+              <Route path="/my-chefs" element={<MyChefs />} />
             </Routes>
           </Suspense>
           <Version />

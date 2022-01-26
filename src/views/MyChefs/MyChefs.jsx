@@ -21,7 +21,7 @@ import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
  *
  * @todo refactor and get rid of if hell in jsx
  */
-function Collection() {
+function MyChefs() {
   const { active, error } = useEthers();
 
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
@@ -109,4 +109,4 @@ function Collection() {
   );
 }
 
-export default withTranslation()(Collection);
+export default withTranslation()(MyChefs);
