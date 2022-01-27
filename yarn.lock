@@ -2103,6 +2103,11 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-4.72.0.tgz#43df23af013ad1135407e5cf33ca6e4c4c7708d5"
   integrity sha512-o+TYF8vBcyySRsb2kqBDv/KMeme8a2nwWoG+lAWzbDmWfb2/MrVWYCVYDYvjXdSoI/Cujqy1i0gIDrkdxa9chA==
 
+"@metamask/detect-provider@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@metamask/detect-provider/-/detect-provider-1.2.0.tgz#3667a7531f2a682e3c3a43eaf3a1958bdb42a696"
+  integrity sha512-ocA76vt+8D0thgXZ7LxFPyqw3H7988qblgzddTDA6B8a/yU0uKV42QR/DhA+Jh11rJjxW0jKvwb5htA6krNZDQ==
+
 "@mui/base@5.0.0-alpha.64":
   version "5.0.0-alpha.64"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.64.tgz#1d108458932a81694efbf49f8b588e0a6bba3ff3"
@@ -2754,14 +2759,6 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@17.0.1":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.1.tgz#eb1f1407dea8da3bc741879c1192aa703ab9975b"
-  integrity sha512-w8t9f53B2ei4jeOqf/gxtc2Sswnc3LBK5s0DyJcg5xd10tMHXts2N31cKjWfH9IC/JvEPa/YF1U4YeP1t4R6HQ==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
 "@types/resolve@0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-0.0.8.tgz#f26074d238e02659e323ce1a13d041eee280e194"
@@ -2962,16 +2959,13 @@
   resolved "https://registry.yarnpkg.com/@uniswap/token-lists/-/token-lists-1.0.0-beta.27.tgz#8b02a979b0b0024cc96f60e694a3f6db6b2ccab2"
   integrity sha512-x5hmIniQ9TGqOBCRqfWcmZi/U5kB0qrHMDQ9igs3nMbK0wwmYLraL4owbIwXFGR/co6/lJYJC4K/Gjn4wZY5mQ==
 
-"@usedapp/core@^0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-0.7.3.tgz#867cc57a9ad95ebc00377d80fc28beb4b2174687"
-  integrity sha512-0Jaidc5E62YdkH4GUKio6Z9cP9ZK81OTgra7UAREMGHhqYuT18EVtvUbDezHqf1jDnYB5E+hZ/J2o17XLOo63w==
+"@usedapp/core@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-0.10.0.tgz#054f88cdcb40bbd7a0969964a8e98569fba106bb"
+  integrity sha512-Ep2hnh4AL/Ygv7Hx77a7BvoFySIl+2ocmfUiiR+E+HhCuMHvr7+CiyXLWWRe6jhSFnMtqQJpNjRsvLWrSepRpw==
   dependencies:
-    "@types/react" "17.0.1"
+    "@metamask/detect-provider" "^1.2.0"
     "@uniswap/token-lists" "^1.0.0-beta.27"
-    "@web3-react/core" "6.1.1"
-    "@web3-react/injected-connector" "6.0.7"
-    "@web3-react/network-connector" "6.1.5"
     ethers "5.5.1"
     lodash.merge "^4.6.2"
     nanoid "3.1.22"
@@ -2982,17 +2976,6 @@
   integrity sha512-RhQasA4Ox8CxUC0OENc1AJJm8UTybu/oOCM61Zjg6y0iF7Z0sqv1Ai1VdhC33hrQpA8qSBgoXN9PaP8jKmtdqg==
   dependencies:
     "@web3-react/types" "^6.0.7"
-
-"@web3-react/core@6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@web3-react/core/-/core-6.1.1.tgz#06c853890723f600b387b738a4b71ef41d5cccb7"
-  integrity sha512-HKXOgPNCmFvrVsed+aW/HlVhwzs8t3b+nzg3BoxgJQo/5yLiJXSumHRBdUrPxhBQiHkHRZiVPAvzf/8JMnm74Q==
-  dependencies:
-    "@ethersproject/keccak256" "^5.0.0-beta.130"
-    "@web3-react/abstract-connector" "^6.0.7"
-    "@web3-react/types" "^6.0.7"
-    tiny-invariant "^1.0.6"
-    tiny-warning "^1.0.3"
 
 "@web3-react/core@^6.1.9":
   version "6.1.9"
@@ -3005,7 +2988,7 @@
     tiny-invariant "^1.0.6"
     tiny-warning "^1.0.3"
 
-"@web3-react/injected-connector@6.0.7", "@web3-react/injected-connector@^6.0.7":
+"@web3-react/injected-connector@^6.0.7":
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/@web3-react/injected-connector/-/injected-connector-6.0.7.tgz#1e0be23f51fa07fe6547fe986768a46b74c3a426"
   integrity sha512-Y7aJSz6pg+MWKtvdyuqyy6LWuH+4Tqtph1LWfiyVms9II9ar/9B/de4R8wh4wjg91wmHkU+D75yP09E/Soh2RA==
@@ -3013,15 +2996,6 @@
     "@web3-react/abstract-connector" "^6.0.7"
     "@web3-react/types" "^6.0.7"
     tiny-warning "^1.0.3"
-
-"@web3-react/network-connector@6.1.5":
-  version "6.1.5"
-  resolved "https://registry.yarnpkg.com/@web3-react/network-connector/-/network-connector-6.1.5.tgz#1fcce1dc7b03dac23fcc01ad0b0c870cb0e39e0b"
-  integrity sha512-Uwk8iMG8YCnTeKmyXt3Q7QJN28qTs0YTTW8/aes2R26KmYWCk3GdL2eal0QcXUixJy/IjrhXzbwzHgpneJqrWg==
-  dependencies:
-    "@web3-react/abstract-connector" "^6.0.7"
-    "@web3-react/types" "^6.0.7"
-    tiny-invariant "^1.0.6"
 
 "@web3-react/types@^6.0.7":
   version "6.0.7"
