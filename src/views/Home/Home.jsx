@@ -16,7 +16,7 @@ function Home() {
         elongatedWidth
         size="massive"
         variant="yellowContained"
-        href="/kitchen/recipe/create/"
+        href="/kitchen/recipe/create"
         startIcon={<WhiteFlameIcon />}
       >
         Cook A Recipe
@@ -28,7 +28,7 @@ function Home() {
         sx={{
           backgroundColor: "common.white",
         }}
-        href="/tutorial/"
+        href="/tutorial"
       >
         Tutorial
       </Button>
@@ -44,7 +44,7 @@ function Home() {
             color={"light"}
             image={<MarketIcon sx={{ fontSize: "550%" }} />}
             title={"Market"}
-            href={"/market/"}
+            href={"/market"}
           >
             Market
           </SquareButton>
@@ -53,7 +53,7 @@ function Home() {
             color={"light"}
             image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
             title={"My Chefs"}
-            href={"/collection/"}
+            href={"/my-chefs"}
           >
             My Chefs
           </SquareButton>
@@ -64,7 +64,7 @@ function Home() {
             color={"light"}
             image={<KitchenIcon sx={{ fontSize: "50px" }} />}
             title={"Kitchen"}
-            href={"/kitchen/"}
+            href={"/kitchen"}
           >
             Kitchen
           </SquareButton>
@@ -73,7 +73,7 @@ function Home() {
             color={"light"}
             image={<BuffetIcon sx={{ fontSize: "550%" }} />}
             title={"Buffet"}
-            href={"/buffet/"}
+            href={"/buffet"}
           >
             Buffet
           </SquareButton>
