@@ -1,10 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
-import {
-  Container,
-  Grid,
-} from "@mui/material";
+import { Container, Grid } from "@mui/material";
 // custom
 import { useEthers } from "@usedapp/core";
 import ViewHeading from "../../components/layout/ViewHeading";
