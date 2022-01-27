@@ -7,10 +7,11 @@ import "./index.css";
 // other
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-// components
-import AppLaunch from "./AppLaunch";
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { DAppProvider, Polygon, Rinkeby } from "@usedapp/core";
 import { TARGET_CHAIN } from "./web3/constants";
+// components
+import AppLaunch from "./AppLaunch";
 const App = lazy(() => import("./App"));
 
 /**
@@ -24,11 +25,15 @@ if (TARGET_CHAIN === "polygon") {
   config.networks = [Polygon];
 }
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
   <BrowserRouter>
     <Suspense fallback={<AppLaunch />}>
       <DAppProvider config={config}>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </DAppProvider>
     </Suspense>
   </BrowserRouter>,
