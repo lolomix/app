@@ -56,7 +56,6 @@ function MyChefs() {
                     tokenAddress={tokenAddress}
                     tokenID={tokenID.toNumber()}
                     lazyLoad={index > 2}
-                    firstCard={false}
                   />
                 </a>
               </Grid>

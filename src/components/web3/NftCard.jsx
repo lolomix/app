@@ -30,7 +30,7 @@ function NftCard({
   tokenAddress,
   tokenID,
   lazyLoad = false,
-  firstCard,
+  firstCard = false,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
