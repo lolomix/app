@@ -175,7 +175,13 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     <Card elevation={3}>
       {active ? (
         <CardContent>
-          <Typography variant="h4" component="h2" align="center" mb={4}>
+          <Typography
+            variant="h4"
+            component="h2"
+            color="secondary"
+            align="center"
+            mb={4}
+          >
             {t("components.CurrencyExchange.title")}
           </Typography>
           <Stack spacing={2.5} alignItems="center">
@@ -209,11 +215,11 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
               required
             />
             <Typography variant="body2" gutterBottom>
-              Please enter amount between 5 and 10 000
+              Please enter amount between 5 and 10 000 AROMA
             </Typography>
             <LoadingButton
               size="xlarge"
-              variant="contained"
+              variant="yellowContained"
               fullWidth
               onClick={handleExchange}
               loading={transactionInProgress}
