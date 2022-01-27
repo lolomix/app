@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 // material-ui
-import { Box, Card, CardContent, Typography, darken } from "@mui/material";
+import { Box, Card, CardContent, Typography, Stack } from "@mui/material";
 // custom
 import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
 import { theme } from "../../utils/theme";
@@ -24,30 +24,37 @@ function NftCard({ tokenAbi, tokenAddress, tokenID, lazyLoad = false }) {
   const image = nft?.metadata?.image ?? placeholder;
 
   return (
-    <Card elevation={2}>
+    <Card sx={{ boxShadow: theme.blurredShadows }}>
       <CardContent>
-        <Box
-          bgcolor={darken(theme.palette.tertiary.main, 0.06)}
-          minHeight="320px"
-          borderRadius={theme.shape.borderRadius + "px"}
-        >
-          <picture>
-            <source srcSet={image} />
-            <img
-              style={{ maxWidth: "100%" }}
-              src={image}
-              alt={"CHEF #" + tokenID + " image"}
-              {...(lazyLoad && { loading: "lazy" })}
-            />
-          </picture>
-        </Box>
-        {/* todo: Retrieve base chef name from smart contract */}
-        <Typography textAlign="center" variant="h5" mt={2}>
-          {lore}
-        </Typography>
-        <Typography textAlign="center" variant="h6" color="primary">
-          CHEF #{tokenID}
-        </Typography>
+        <Stack textAlign="center" spacing={1}>
+          <Typography variant="h3" color="secondary" fontWeight={500}>
+            {lore}
+          </Typography>
+          <Typography variant="h5">Season 1</Typography>
+
+          <Box
+            sx={{
+              background: "rgba(237,246,255, 0.33) 0% 0% no-repeat padding-box",
+              boxShadow: "inset 0px 6px 8px rgba(237,246,255, 1)",
+              padding: 1.5,
+            }}
+          >
+            <picture>
+              <source srcSet={image} />
+              <img
+                style={{ maxWidth: "100%" }}
+                src={image}
+                alt={"CHEF #" + tokenID + " image"}
+                {...(lazyLoad && { loading: "lazy" })}
+              />
+            </picture>
+            <Box sx={{ backgroundColor: "grey.200", borderRadius: "8px" }}>
+              <Typography variant="h4" p={2} fontWeight="bold">
+                CHEF #{tokenID}
+              </Typography>
+            </Box>
+          </Box>
+        </Stack>
       </CardContent>
     </Card>
   );

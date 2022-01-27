@@ -68,7 +68,7 @@ function MyChefs() {
                   <picture>
                     <source srcSet={BuyChef} />
                     <img
-                      style={{ minWidth: "80%", margin: 20 }}
+                      style={{ width: "86.5%", padding: 20 }}
                       src={BuyChef}
                       alt={"Buy CHEF"}
                     />
