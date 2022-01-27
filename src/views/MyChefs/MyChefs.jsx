@@ -5,7 +5,6 @@ import {
   Box,
   Container,
   Grid,
-  Skeleton,
   CardContent,
   Card,
   Typography,
@@ -17,14 +16,12 @@ import { useEthers } from "@usedapp/core";
 import ViewHeading from "../../components/layout/ViewHeading";
 import { Helmet } from "react-helmet";
 import NftCard from "../../components/web3/NftCard";
-import FAQ from "../../components/common/FAQ";
 import NoNftNotificationCard from "../../components/common/NoNftNotificationCard";
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
 import { useChefofOwner } from "../../hooks/useChefofOwner";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
-import ChefApronIcon from "../../components/icons/ChefApronIcon";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import { formatCurrency } from "../../utils/formatters";
 import BuyChef from "../../assets/Buy_CHEF.svg";
