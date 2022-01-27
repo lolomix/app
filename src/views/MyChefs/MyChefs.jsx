@@ -2,14 +2,8 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import {
-  Box,
   Container,
   Grid,
-  CardContent,
-  Card,
-  Typography,
-  Button,
-  Stack,
 } from "@mui/material";
 // custom
 import { useEthers } from "@usedapp/core";
@@ -22,10 +16,6 @@ import { useChefofOwner } from "../../hooks/useChefofOwner";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
-import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
-import { formatCurrency } from "../../utils/formatters";
-import BuyChef from "../../assets/Buy_CHEF.svg";
-import { theme } from "../../utils/theme.js";
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -50,41 +40,7 @@ function MyChefs() {
       ></ViewHeading>
       <Grid container item mt={5} spacing={3} justifyContent="center">
         <Grid item xs={12} md={6} lg={3}>
-          <Card sx={{ boxShadow: theme.blurredShadows }}>
-            <CardContent>
-              <Stack textAlign="center" spacing={1}>
-                <Typography variant="h3" color="secondary" fontWeight={500}>
-                  Buy a CHEF
-                </Typography>
-                <Typography variant="h5">Season 1</Typography>
-                <Box
-                  sx={{
-                    background:
-                      "rgba(237,246,255, 0.33) 0% 0% no-repeat padding-box",
-                    boxShadow: "inset 0px 6px 8px rgba(237,246,255, 1)",
-                    padding: 1.5,
-                  }}
-                >
-                  <picture>
-                    <source srcSet={BuyChef} />
-                    <img
-                      style={{ width: "86.5%", padding: 20 }}
-                      src={BuyChef}
-                      alt={"Buy CHEF"}
-                    />
-                  </picture>
-                  <Button
-                    variant="yellowContained"
-                    fullWidth
-                    size="xlarge"
-                    startIcon={<CurrencyAromaCartoonIcon />}
-                  >
-                    <Typography variant="h4">{formatCurrency(1000)}</Typography>
-                  </Button>
-                </Box>
-              </Stack>
-            </CardContent>
-          </Card>
+          <NftCard tokenAbi={[]} firstCard={true} />
         </Grid>
         {active ? (
           nfts ? (
@@ -103,6 +59,7 @@ function MyChefs() {
                     tokenAddress={tokenAddress}
                     tokenID={tokenID.toNumber()}
                     lazyLoad={index > 2}
+                    firstCard={false}
                   />
                 </a>
               </Grid>

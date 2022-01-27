@@ -1,11 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 // material-ui
-import { Box, Card, CardContent, Typography, Stack } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  Button,
+} from "@mui/material";
 // custom
 import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
 import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
+import BuyChef from "../../assets/Buy_CHEF.svg";
+import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
+import { formatCurrency } from "../../utils/formatters";
 
 /**
  * @param tokenAbi
@@ -15,9 +25,14 @@ import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
  * @returns {JSX.Element}
  * @constructor
  */
-function NftCard({ tokenAbi, tokenAddress, tokenID, lazyLoad = false }) {
+function NftCard({
+  tokenAbi,
+  tokenAddress,
+  tokenID,
+  lazyLoad = false,
+  firstCard,
+}) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
-
   const lore =
     nft?.metadata?.attributes?.find((attr) => attr.trait_type === "Lore")
       ?.value ?? "Unrevealed";
@@ -28,7 +43,7 @@ function NftCard({ tokenAbi, tokenAddress, tokenID, lazyLoad = false }) {
       <CardContent>
         <Stack textAlign="center" spacing={1}>
           <Typography variant="h3" color="secondary" fontWeight={500}>
-            {lore}
+            {firstCard ? "Buy a CHEF" : lore}
           </Typography>
           <Typography variant="h5">Season 1</Typography>
 
@@ -39,20 +54,43 @@ function NftCard({ tokenAbi, tokenAddress, tokenID, lazyLoad = false }) {
               padding: 1.5,
             }}
           >
-            <picture>
-              <source srcSet={image} />
-              <img
-                style={{ maxWidth: "100%" }}
-                src={image}
-                alt={"CHEF #" + tokenID + " image"}
-                {...(lazyLoad && { loading: "lazy" })}
-              />
-            </picture>
-            <Box sx={{ backgroundColor: "grey.200", borderRadius: "8px" }}>
-              <Typography variant="h4" p={2} fontWeight="bold">
-                CHEF #{tokenID}
-              </Typography>
-            </Box>
+            {firstCard ? (
+              <>
+                <picture>
+                  <source srcSet={BuyChef} />
+                  <img
+                    style={{ width: "87%", padding: 20 }}
+                    src={BuyChef}
+                    alt={"Buy CHEF"}
+                  />
+                </picture>
+                <Button
+                  variant="yellowContained"
+                  fullWidth
+                  size="xlarge"
+                  startIcon={<CurrencyAromaCartoonIcon />}
+                >
+                  <Typography variant="h4">{formatCurrency(1000)}</Typography>
+                </Button>
+              </>
+            ) : (
+              <>
+                <picture>
+                  <source srcSet={image} />
+                  <img
+                    style={{ maxWidth: "100%" }}
+                    src={image}
+                    alt={"CHEF #" + tokenID + " image"}
+                    {...(lazyLoad && { loading: "lazy" })}
+                  />
+                </picture>
+                <Box backgroundColor="grey.200" borderRadius={1}>
+                  <Typography variant="h4" p={2} fontWeight="bold">
+                    CHEF #{tokenID}
+                  </Typography>
+                </Box>
+              </>
+            )}
           </Box>
         </Stack>
       </CardContent>
