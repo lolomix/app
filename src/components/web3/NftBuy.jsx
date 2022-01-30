@@ -221,19 +221,19 @@ function NftBuy({ t }) {
           />
           <CustomBanner position="right">
             <Grid container justifyContent="center" alignItems="center" py={2}>
-              <Grid item xs={12} sm={3.5} lg={12}>
+              <Grid item xs={12} sm={3.5} lg={12} order={{xs: 2, lg: 1}}>
                 <Typography variant="h2" fontWeight={800}>
                   {remainingFormatted}
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={6} lg={12}>
-                <Typography variant="h3" fontWeight={800}>
+              <Grid item xs={12} sm={6} lg={12} order={{xs: 1, lg: 2}}>
+                <Typography variant="h3" fontWeight={800} >
                   Remaining
                 </Typography>
               </Grid>
             </Grid>
             <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
-              {soldFormatted} Sold
+              Sold {soldFormatted} 
             </Typography>
           </CustomBanner>
         </Container>
