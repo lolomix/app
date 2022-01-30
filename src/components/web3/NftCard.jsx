@@ -15,7 +15,6 @@ import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/Buy_CHEF.svg";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
-import { formatCurrency } from "../../utils/formatters";
 
 /**
  * @param tokenAbi
