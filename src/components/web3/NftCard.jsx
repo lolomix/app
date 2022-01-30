@@ -31,6 +31,10 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
+  remainingFormatted,
+  handleBuyDialog,
+  transactionInProgress,
+  priceFormatted,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
@@ -69,8 +73,11 @@ function NftCard({
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}
+                  disabled={!remainingFormatted}
+                  onClick={handleBuyDialog}
+                  loading={transactionInProgress}
                 >
-                  <Typography variant="h4">{formatCurrency(1000)}</Typography>
+                  <Typography variant="h4">{priceFormatted}</Typography>
                 </Button>
               </>
             ) : (
