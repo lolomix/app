@@ -7,30 +7,20 @@ import "./index.css";
 // other
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { DAppProvider, Polygon, Rinkeby } from "@usedapp/core";
-import { TARGET_CHAIN } from "./web3/constants";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { DAppProvider } from "@usedapp/core";
+import { DAPPCONFIG } from "./web3/constants";
 // components
 import AppLaunch from "./AppLaunch";
+
 const App = lazy(() => import("./App"));
 
-/**
- * @todo decouple configuration from the index file
- */
-const config = {
-  networks: [Rinkeby],
-};
-
-if (TARGET_CHAIN === "polygon") {
-  config.networks = [Polygon];
-}
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <BrowserRouter>
     <Suspense fallback={<AppLaunch />}>
-      <DAppProvider config={config}>
+      <DAppProvider config={DAPPCONFIG}>
         <QueryClientProvider client={queryClient}>
           <App />
         </QueryClientProvider>

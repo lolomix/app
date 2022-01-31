@@ -15,12 +15,12 @@
     "disconnect": "Disconnect",
     "copyToClipboard": "Copy to Clipboard",
     "navigation": "Navigation",
-    "connectedWith": "Connected with {{ connector }}",
+    "connectedWith": "Connected with {{ provider }}",
     "connect": "Connect",
     "connectToMyWallet": "Connect to My wallet",
     "connectWallet": "Connect Wallet",
     "connectWalletAndNetwork": "Please connect your wallet and select the Polygon network.",
-    "connectWith": "Connect with {{ connector }}",
+    "connectWith": "Connect with {{ provider }}",
     "openingSoon": "Opening Soon"
   },
   "main": {

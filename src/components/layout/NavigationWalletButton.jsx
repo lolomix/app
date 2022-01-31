@@ -7,7 +7,7 @@ import { Tooltip, Avatar } from "@mui/material";
 import { AccountBalanceWallet } from "@mui/icons-material";
 // custom
 import MyAccountPopover from "./MyAccountPopover";
-import ConnectorsPopover from "./ConnectorsPopover";
+import ProvidersPopover from "./ProvidersPopover";
 import NavigationButton from "./NavigationButton";
 import {
   usePopupState,
@@ -32,9 +32,9 @@ const popoverOriginProps = {
 function NavigationWalletButton({ t }) {
   const { active, account } = useEthers();
 
-  const connectorsPopoverState = usePopupState({
+  const providersPopoverState = usePopupState({
     variant: "popover",
-    popupId: "connectorsPopover",
+    popupId: "providersPopover",
   });
 
   const myAccountPopoverState = usePopupState({
@@ -67,7 +67,7 @@ function NavigationWalletButton({ t }) {
             {...popoverOriginProps}
             {...bindPopover(myAccountPopoverState)}
             closePopover={myAccountPopoverState.close}
-            openConnectorsPopover={connectorsPopoverState.open}
+            openProvidersPopover={providersPopoverState.open}
           />
         </>
       ) : (
@@ -75,14 +75,14 @@ function NavigationWalletButton({ t }) {
           <NavigationButton
             icon={<AccountBalanceWallet />}
             text={t("base.connectWallet")}
-            {...bindTrigger(connectorsPopoverState)}
+            {...bindTrigger(providersPopoverState)}
           />
         </Tooltip>
       )}
-      <ConnectorsPopover
+      <ProvidersPopover
         {...popoverOriginProps}
-        {...bindPopover(connectorsPopoverState)}
-        closePopover={connectorsPopoverState.close}
+        {...bindPopover(providersPopoverState)}
+        closePopover={providersPopoverState.close}
       />
     </>
   );
