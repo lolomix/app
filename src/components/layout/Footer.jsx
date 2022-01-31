@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Divider, Grid, Link, Typography } from "@mui/material";
+import { Box, Divider, Grid, Link } from "@mui/material";
 import Logo from "../icons/Logo";
 
 const Footer = () => {
@@ -60,16 +60,12 @@ const Footer = () => {
   ];
 
   return (
-    <Container
-      maxWidth={false}
+    <Box
       sx={{
         backgroundColor: "common.black",
-        height: "fit-content",
-        position: "absolute",
-        left: 0,
       }}
     >
-      <Grid container justifyContent="space-around" xs={12} pt={8} pb={6}>
+      <Grid container justifyContent="space-around" xs={12} pt={4.5} pb={1}>
         <Grid
           container
           item
@@ -165,7 +161,7 @@ const Footer = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

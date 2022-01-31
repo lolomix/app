@@ -1,14 +1,14 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
-import { Container, Grid, Button, Typography, Box } from "@mui/material";
-import ViewHeading from "../../components/layout/ViewHeading";
+import { Grid, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import PinkArrowIcon from "../../components/icons/PinkArrowIcon";
 import CardChefIcon from "../../components/icons/CardChefIcon";
 import AromaCoinSideIcon from "../../components/icons/AromaCoinSideIcon";
 import MarketIcon from "../../components/icons/MarketIcon";
+import Layout from "../../components/layout/Layout";
 
 const CustomButton = styled(Button)(({ theme }) => ({
   width: "280px",
@@ -58,15 +58,15 @@ function Market({ t }) {
   ];
 
   return (
-    <Container>
-      <ViewHeading
-        title={"Market"}
-        subTitle={
-          "A place where you can buy tokens and CHEF which will be used in kitchen"
-        }
-        icon={<MarketIcon sx={{ fontSize: 45, marginTop: 1 }} />}
-      />
-      <Grid container justifyContent="center" my={7}>
+    <Layout
+      helmetTitle="Market"
+      title={"Market"}
+      subTitle={
+        "A place where you can buy tokens and CHEF which will be used in kitchen"
+      }
+      icon={<MarketIcon sx={{ fontSize: 45, marginTop: 1 }} />}
+    >
+      <Grid container justifyContent="center">
         {buttonText.map((button) => (
           <Grid item mx="5vw" mb="3vh">
             <CustomButton
@@ -86,7 +86,7 @@ function Market({ t }) {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Layout>
   );
 }
 

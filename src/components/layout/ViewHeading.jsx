@@ -4,7 +4,7 @@ import { Typography, Stack, Box } from "@mui/material";
 
 function ViewHeading(props) {
   return (
-    <Stack alignItems="center" mt={6}>
+    <Stack alignItems="center" mb={2}>
       <Stack direction="row" spacing={2}>
         {props.icon}
         <Typography variant="h1">{props.title}</Typography>

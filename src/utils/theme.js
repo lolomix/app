@@ -6,7 +6,6 @@ import {
   createTheme,
   buttonClasses,
   stepLabelClasses,
-  listItemButtonClasses,
 } from "@mui/material";
 import YellowButtonBackground from "../assets/yellow-button-background.svg";
 
@@ -187,13 +186,6 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiDialogActions: {
-      styleOverrides: {
-        root: {
-          padding: theme.spacing(2),
-        },
-      },
-    },
     MuiAvatar: {
       variants: [
         {
@@ -210,36 +202,6 @@ theme = createTheme(theme, {
           props: { shape: "inherit" },
           style: {
             borderRadius: theme.shape.borderRadius,
-          },
-        },
-        {
-          props: { shape: "squarish" },
-          style: {
-            borderRadius: 5,
-          },
-        },
-        {
-          props: { size: "xsmall" },
-          style: {
-            padding: 0,
-            fontSize: "0.9rem",
-          },
-        },
-        {
-          props: { variant: "contained" },
-          style: {
-            backgroundColor: theme.palette.grey[300],
-            color: theme.palette.getContrastText(theme.palette.grey[300]),
-          },
-        },
-        {
-          props: { variant: "contained", color: "error" },
-          style: {
-            backgroundColor: theme.palette.error.main,
-            color: theme.palette.error.contrastText,
-            "&:hover": {
-              backgroundColor: theme.palette.error.dark,
-            },
           },
         },
       ],
@@ -344,51 +306,6 @@ theme = createTheme(theme, {
           color: theme.palette.secondary.main,
           [`&.${stepLabelClasses.active}`]: {
             color: theme.palette.secondary.main,
-          },
-        },
-      },
-    },
-    MuiChip: {
-      variants: [
-        {
-          props: { shape: "squarish" },
-          style: {
-            borderRadius: 5,
-          },
-        },
-      ],
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          // @todo seems like there is a bug as ListItemButton does not support `selected` slot
-          [`&.${listItemButtonClasses.selected}`]: {
-            backgroundColor: alpha(
-              theme.palette.primary.main,
-              theme.palette.action.selectedOpacity +
-                theme.palette.action.focusOpacity
-            ),
-            [`&.${listItemButtonClasses.focusVisible}`]: {
-              backgroundColor: alpha(
-                theme.palette.primary.main,
-                theme.palette.action.selectedOpacity +
-                  theme.palette.action.focusOpacity
-              ),
-            },
-          },
-          [`&.${listItemButtonClasses.selected}:hover`]: {
-            backgroundColor: alpha(
-              theme.palette.primary.main,
-              theme.palette.action.selectedOpacity +
-                theme.palette.action.hoverOpacity
-            ),
-            // Reset on touch devices, it doesn't add specificity
-            "@media (hover: none)": {
-              backgroundColor: alpha(
-                theme.palette.primary.main,
-                theme.palette.action.selectedOpacity
-              ),
-            },
           },
         },
       },
