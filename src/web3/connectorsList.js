@@ -1,5 +1,3 @@
-import { Web3Provider } from "@ethersproject/providers";
-
 const connectorsList = {
   injected: {
     soon: false,
@@ -7,7 +5,7 @@ const connectorsList = {
     description:
       "Use this for Browser Extensions such as Metamask, Brave Wallet and etc...",
     icon: "WalletMetaMaskIcon",
-    isActive: (provider) => provider instanceof Web3Provider
+    isActive: (provider) => provider?.provider?.isMetaMask
   },
   walletConnect: {
     soon: true,

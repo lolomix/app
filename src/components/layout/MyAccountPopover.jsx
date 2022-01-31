@@ -27,7 +27,7 @@ import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
 import { truncate } from "../../utils/formatters";
 
 function MyAccountPopover(props) {
-  const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props;
+  const { t, closePopover, openProvidersPopover, anchorEl, ...rest } = props;
   const { account, deactivate } = useEthers();
 
   return (
@@ -43,7 +43,7 @@ function MyAccountPopover(props) {
                 variant="outlined"
                 onClick={() => {
                   closePopover();
-                  openConnectorsPopover(anchorEl);
+                  openProvidersPopover(anchorEl);
                 }}
               >
                 <Settings />

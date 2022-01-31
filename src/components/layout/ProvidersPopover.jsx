@@ -13,62 +13,63 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Check, Close } from "@mui/icons-material";
 // custom
-import { useEagerConnect } from "../../web3/hooks";
-import connectorsList from "../../web3/connectorsList";
+import providersList from "../../web3/connectorsList";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
 import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
 import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
 import WalletLedgerIcon from "../icons/WalletLedgerIcon";
-import { useState } from "react";
-import { useEthers } from "@usedapp/core";
-import { UnsupportedChainIdError } from "@web3-react/core";
+import { useEffect, useState } from "react";
+import { useEthers, useNetwork } from "@usedapp/core";
 
 /**
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-function ConnectorsPopover(props) {
+function ProvidersPopover(props) {
   const { t, closePopover, ...rest } = props;
 
-  const { connector, activate, error, chainId } = useEthers();
-  const triedEager = useEagerConnect();
+  const { active, error, chainId, activateBrowserWallet } = useEthers();
 
-  const [activatingConnector, setActivatingConnector] = useState();
+  const {
+    network: { provider },
+  } = useNetwork();
+
+  const [activatingProvider, setActivatingProvider] = useState();
 
   /**
-   * Identifies the current connector by key
+   * Identifies the current provider by key
    *
-   * @param connectorkey
+   * @param providerKey
    * @returns {boolean}
    */
-  const isCurrentConnector = (connectorkey) =>
-    connectorsList[connectorkey]?.connector === connector;
+  const isCurrentProvider = (providerKey) =>
+    providersList[providerKey]?.isActive(provider);
 
   /**
    * @param error
    * @returns {boolean}
    */
-  const isUnsupportedNetwork = (error) =>
-    error instanceof UnsupportedChainIdError;
+  const isUnsupportedNetwork = (error) => error instanceof Error;
 
   /**
-   * Activates a new connector by its key
+   * Activates a new provider by its key
    *
-   * @param connectorkey
+   * @param providerKey
    */
-  const handleConnectorButtonClick = async (connectorkey) => {
-    const newConnector = connectorsList[connectorkey].connector;
-    setActivatingConnector(newConnector);
+  const handleProviderButtonClick = async (providerKey) => {
+    if (isCurrentProvider(providerKey)) {
+      return;
+    }
 
+    setActivatingProvider(providerKey);
     closePopover();
 
-    activate(newConnector).then(() => {
-      setActivatingConnector(undefined);
-    });
+    // hard code injected provider for the time being
+    activateBrowserWallet();
 
-    if (connectorkey === "injected") {
+    if (providerKey === "injected") {
       // only works for metamask
       if (chainId !== NETWORKS[TARGET_CHAIN].chainId) {
         try {
@@ -104,20 +105,29 @@ function ConnectorsPopover(props) {
   };
 
   /**
-   * @param connectorkey
-   * @returns {boolean}
+   * Clear activating provider if connection is active
    */
-  const handleConnectorButtonLoadingProp = (connectorkey) =>
-    connectorsList[connectorkey].connector === activatingConnector;
+  useEffect(() => {
+    setActivatingProvider((prevActivatingProvider) => {
+      if (prevActivatingProvider) {
+        return undefined;
+      }
+    });
+  }, [active]);
 
   /**
-   * @param connectorkey
+   * @param providerKey
    * @returns {boolean}
    */
-  const handleConnectorButtonDisabledProp = (connectorkey) => {
-    return (
-      !triedEager || !!activatingConnector || connectorsList[connectorkey].soon
-    );
+  const handleProviderButtonLoadingProp = (providerKey) =>
+    providerKey === activatingProvider;
+
+  /**
+   * @param providerKey
+   * @returns {boolean}
+   */
+  const handleProviderButtonDisabledProp = (providerKey) => {
+    return !!activatingProvider || providersList[providerKey].soon;
   };
 
   /**
@@ -125,13 +135,13 @@ function ConnectorsPopover(props) {
    * @returns {JSX.Element}
    * @constructor
    */
-  const ConnectorIcon = (props) => {
+  const ProviderIcon = (props) => {
     const icons = {
       WalletMetaMaskIcon: WalletMetaMaskIcon,
       WalletWalletConnectIcon: WalletWalletConnectIcon,
       WalletLedgerIcon: WalletLedgerIcon,
     };
-    const TheIcon = icons[connectorsList[props.connectorkey]?.icon];
+    const TheIcon = icons[providersList[props.providerKey]?.icon];
 
     // early return, if not valid function component
     if (typeof TheIcon !== "function") return null;
@@ -158,15 +168,15 @@ function ConnectorsPopover(props) {
         <Divider sx={{ mb: 3 }} />
 
         <Stack spacing={2}>
-          {Object.keys(connectorsList).map((key) => (
+          {Object.keys(providersList).map((key) => (
             <Tooltip
               key={key}
               title={t(
-                isCurrentConnector(key)
+                isCurrentProvider(key)
                   ? "base.connectedWith"
                   : "base.connectWith",
                 {
-                  connector: connectorsList[key].name,
+                  provider: providersList[key].name,
                 }
               )}
             >
@@ -174,27 +184,27 @@ function ConnectorsPopover(props) {
                 fullWidth
                 disableElevation
                 variant={
-                  isCurrentConnector(key) && !isUnsupportedNetwork(error)
+                  isCurrentProvider(key) && !isUnsupportedNetwork(error)
                     ? "contained"
                     : "outlined"
                 }
                 size="large"
-                color={isCurrentConnector(key) ? "success" : "primary"}
-                startIcon={<ConnectorIcon connectorkey={key} />}
+                color={isCurrentProvider(key) ? "success" : "primary"}
+                startIcon={<ProviderIcon providerKey={key} />}
                 alignedStartIcon
                 endIcon={
-                  isCurrentConnector(key) && !isUnsupportedNetwork(error) ? (
+                  isCurrentProvider(key) && !isUnsupportedNetwork(error) ? (
                     <Check />
                   ) : null
                 }
-                loading={handleConnectorButtonLoadingProp(key)}
-                disabled={handleConnectorButtonDisabledProp(key)}
-                onClick={() => handleConnectorButtonClick(key)}
+                loading={handleProviderButtonLoadingProp(key)}
+                disabled={handleProviderButtonDisabledProp(key)}
+                onClick={() => handleProviderButtonClick(key)}
               >
-                {isCurrentConnector(key) && isUnsupportedNetwork(error)
+                {isCurrentProvider(key) && isUnsupportedNetwork(error)
                   ? `Switch to ${NETWORKS[TARGET_CHAIN].name}`
-                  : connectorsList[key].name}
-                {connectorsList[key].soon && (
+                  : providersList[key].name}
+                {providersList[key].soon && (
                   <Typography
                     pl={0.5}
                     fontWeight="bold"
@@ -218,4 +228,4 @@ function ConnectorsPopover(props) {
   );
 }
 
-export default withTranslation()(ConnectorsPopover);
+export default withTranslation()(ProvidersPopover);
