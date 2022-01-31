@@ -1,4 +1,4 @@
-import { injected } from "./connectors";
+import { Web3Provider } from "@ethersproject/providers";
 
 const connectorsList = {
   injected: {
@@ -7,21 +7,21 @@ const connectorsList = {
     description:
       "Use this for Browser Extensions such as Metamask, Brave Wallet and etc...",
     icon: "WalletMetaMaskIcon",
-    connector: injected,
+    isActive: (provider) => provider instanceof Web3Provider
   },
   walletConnect: {
     soon: true,
     name: "WalletConnect",
     description: "Use this if your wallet uses WalletConnect",
     icon: "WalletWalletConnectIcon",
-    connector: {},
+    isActive: (provider) => false
   },
   ledger: {
     soon: true,
     name: "Ledger",
     description: "Use this if you use a Ledger Wallet.",
     icon: "WalletLedgerIcon",
-    connector: {},
+    isActive: (provider) => false
   },
 };
 
