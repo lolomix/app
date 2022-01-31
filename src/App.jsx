@@ -34,6 +34,7 @@ const KitchenRecipeCreate = lazy(() =>
 const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 const Internal = lazy(() => import("./views/Internal/Internal"));
 const MyChefs = lazy(() => import("./views/MyChefs/MyChefs"));
+const ChefSingle = lazy(() => import("./views/ChefSingle/ChefSingle"));
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
             />
             <Route path="/internal" element={<Internal />} />
             <Route path="/my-chefs" element={<MyChefs />} />
+            <Route path="/my-chefs/chef/:tokenId" element={<ChefSingle />} />
           </Routes>
         </Suspense>
         <Version />
