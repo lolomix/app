@@ -107,7 +107,7 @@ function NavigationMainMenuButton() {
               rowSpacing={5}
             >
               {views.map((item) => (
-                <Grid container item alignItems="center" columnSpacing={2}>
+                <Grid container item alignItems="center" columnSpacing={2} key={item.title}>
                   <Grid item>{item.icon}</Grid>
                   <Grid item>
                     <Link
@@ -133,7 +133,7 @@ function NavigationMainMenuButton() {
               rowSpacing={4}
             >
               {externalLinks.map((item) => (
-                <Grid item textAlign={["left", "left", "right"]}>
+                <Grid item textAlign={["left", "left", "right"]} key={item.title}>
                   <Link
                     variant="h4"
                     underline="hover"
