@@ -7,6 +7,7 @@ import AromaBagOfCoinsIcon from "../../components/icons/AromaBagOfCoinsIcon";
 import AromaPotOfCoinsIcon from "../../components/icons/AromPotOfCoinsIcon";
 import AromaCoinWithBackgroundIcon from "../../components/icons/AromaCoinWithBackgroundIcon";
 import { formatCurrency } from "../../utils/formatters";
+import Layout from "../../components/layout/Layout";
 
 const MarketAromaOffers = () => {
   const cardsContent = [
@@ -44,27 +45,18 @@ const MarketAromaOffers = () => {
     },
   ];
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
-      rowSpacing={6}
-      my={1}
-    >
-      <Grid item xs={12} textAlign="center">
-        <Typography variant="h1">AROMA</Typography>
-      </Grid>
+    <Layout helmetTitle="Aroma - Offers" title="Aroma">
       <Grid
         container
         item
         xs={12}
         sm={11}
-        spacing={3}
+        gap={2}
         justifyContent="center"
         alignItems="stretch"
       >
         {cardsContent.map((card) => (
-          <Grid item xs={10} sm={8} md={6} lg={4} columns={16}>
+          <Grid item xs={12} sm={8} md={6} lg={3.8} columns={16}>
             <Card fullheight="true" sx={{ padding: 2 }}>
               <Stack
                 sx={{
@@ -74,7 +66,8 @@ const MarketAromaOffers = () => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   borderRadius: "inherit",
-                  padding: 2,
+                  paddingX: 1,
+                  paddingY: 2,
                   textAlign: "center",
                 }}
               >
@@ -106,7 +99,7 @@ const MarketAromaOffers = () => {
           </Grid>
         ))}
       </Grid>
-    </Grid>
+    </Layout>
   );
 };
 export default MarketAromaOffers;

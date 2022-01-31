@@ -1,14 +1,12 @@
-import { Container } from "@mui/material";
 import React from "react";
 import CurrencyExchange from "../../components/web3/CurrencyExchange";
-import ViewHeading from "../../components/layout/ViewHeading";
+import Layout from "../../components/layout/Layout";
 
 const MarketAromaBuy = () => {
   return (
-    <Container maxWidth="xs">
-      <ViewHeading title="Aroma" />
+    <Layout helmetTitle="Aroma - Buy" title="Aroma">
       <CurrencyExchange />
-    </Container>
+    </Layout>
   );
 };
 export default MarketAromaBuy;

@@ -11,10 +11,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "./utils/theme";
 // shell
-import Navigation from "./components/layout/Navigation";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
-import { Container } from "@mui/material";
 import AnnouncementBar from "./components/layout/AnnouncementBar";
 import { Helmet } from "react-helmet";
 import Version from "./components/layout/Version";
@@ -45,32 +43,29 @@ function App() {
           <title>Create Crypto Recipes and Start Earning!</title>
         </Helmet>
         <CssBaseline />
-        <Container maxWidth="xl" disableGutters={true}>
-          <AnnouncementBar />
-          <Navigation />
-          <ServiceWorkerWrapper />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/tutorial" element={<Tutorial />} />
-              <Route path="/buffet" element={<Buffet />} />
-              <Route path="/market" element={<Market />} />
-              <Route
-                path="/market/aroma/offers"
-                element={<MarketAromaOffers />}
-              />
-              <Route path="/market/aroma/buy" element={<MarketAromaBuy />} />
-              <Route path="/kitchen" element={<Kitchen />} />
-              <Route
-                path="/kitchen/recipe/create"
-                element={<KitchenRecipeCreate />}
-              />
-              <Route path="/internal" element={<Internal />} />
-              <Route path="/my-chefs" element={<MyChefs />} />
-            </Routes>
-          </Suspense>
-          <Version />
-        </Container>
+        <AnnouncementBar />
+        <ServiceWorkerWrapper />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tutorial" element={<Tutorial />} />
+            <Route path="/buffet" element={<Buffet />} />
+            <Route path="/market" element={<Market />} />
+            <Route
+              path="/market/aroma/offers"
+              element={<MarketAromaOffers />}
+            />
+            <Route path="/market/aroma/buy" element={<MarketAromaBuy />} />
+            <Route path="/kitchen" element={<Kitchen />} />
+            <Route
+              path="/kitchen/recipe/create"
+              element={<KitchenRecipeCreate />}
+            />
+            <Route path="/internal" element={<Internal />} />
+            <Route path="/my-chefs" element={<MyChefs />} />
+          </Routes>
+        </Suspense>
+        <Version />
       </SnackbarProvider>
     </ThemeProvider>
   );

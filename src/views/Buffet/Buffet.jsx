@@ -2,11 +2,12 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import Grid from "@mui/material/Grid";
-import { Helmet } from "react-helmet";
 import { Box, Container } from "@mui/material";
 // custom
 import ViewHeading from "../../components/layout/ViewHeading";
 import OpeningSoon from "../../components/common/OpeningSoonCard";
+import Layout from "../../components/layout/Layout";
+import BuffetIcon from "../../components/icons/BuffetIcon";
 
 /**
  * @returns {JSX.Element}
@@ -14,10 +15,12 @@ import OpeningSoon from "../../components/common/OpeningSoonCard";
  */
 function Buffet() {
   return (
-    <>
-      <Helmet>
-        <title>Buffet</title>
-      </Helmet>
+    <Layout
+      helmetTitle="Buffet"
+      title="Buffet"
+      subTitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+      icon={<BuffetIcon sx={{ fontSize: 55, marginTop: 0.2 }} />}
+    >
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
           <ViewHeading>Buffet</ViewHeading>
@@ -28,7 +31,7 @@ function Buffet() {
           </Grid>
         </Container>
       </Box>
-    </>
+    </Layout>
   );
 }
 
