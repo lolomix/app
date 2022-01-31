@@ -148,7 +148,7 @@ theme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        html: {
+        body: {
           background:
             "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
         },
