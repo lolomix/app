@@ -7,11 +7,12 @@ import MarketIcon from "../../components/icons/MarketIcon";
 import KitchenIcon from "../../components/icons/KitchenIcon";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
+import Layout from "../../components/layout/Layout";
 
 function Home() {
   return (
-    <Stack alignItems="center" spacing={3} mb="5vw">
-      <RecipeOnPlateIcon sx={{ fontSize: 350 }} />
+    <Layout helmetTitle="Home">
+      <RecipeOnPlateIcon sx={{ fontSize: 290 }} />
       <Button
         elongatedWidth
         size="massive"
@@ -35,7 +36,7 @@ function Home() {
       <Stack
         direction="row"
         justifyContent="space-between"
-        width="90%"
+        minWidth="100%"
         spacing={0.5}
       >
         <Stack direction="row" spacing={0.5} alignItems="flex-end">
@@ -79,7 +80,7 @@ function Home() {
           </SquareButton>
         </Stack>
       </Stack>
-    </Stack>
+    </Layout>
   );
 }
 

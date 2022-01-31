@@ -184,7 +184,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           >
             {t("components.CurrencyExchange.title")}
           </Typography>
-          <Stack spacing={2.5} alignItems="center">
+          <Stack spacing={1.5} alignItems="center">
             <CurrencyInputField
               id="token-exchange-from"
               disabled

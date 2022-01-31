@@ -6,15 +6,14 @@ import {
   Grid,
   Button,
   Typography,
-  Container,
   Box,
 } from "@mui/material";
-import ViewHeading from "../../components/layout/ViewHeading";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import BuffetWithSignsIcon from "../../components/icons/BuffetWithSignsIcon";
 import MarketIcon from "../../components/icons/MarketIcon";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import KitchenIcon from "../../components/icons/KitchenIcon";
+import Layout from "../../components/layout/Layout";
 
 const Tutorial = () => {
   const steps = [
@@ -75,9 +74,8 @@ const Tutorial = () => {
   ];
 
   return (
-    <Container maxWidth="sm">
-      <ViewHeading title="Tutorial" />
-      <Card sx={{ marginY: 5 }}>
+    <Layout helmetTitle="Tutorial" title="Tutorial">
+      <Card sx={{ marginY: 5, maxWidth: "sm" }}>
         <Stack p={2} textAlign="center">
           <Typography variant="h4" color="secondary">
             How to Get Started
@@ -117,7 +115,7 @@ const Tutorial = () => {
           </Button>
         </Stack>
       </Card>
-    </Container>
+    </Layout>
   );
 };
 export default Tutorial;
