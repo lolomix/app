@@ -2084,7 +2084,7 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@pinata/ipfs-gateway-tools@^1.1.6":
+"@pinata/ipfs-gateway-tools@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@pinata/ipfs-gateway-tools/-/ipfs-gateway-tools-1.2.0.tgz#7c31401c7c106095242df6e2cd1a4f7f3b86a76d"
   integrity sha512-cC7c5BtqyU7UOejocEBoaMlQMlBDvWhriGF/aauHKORc/Yo8d97RY1QvtAe+/v+i4w04CPGOln87EViXk6AjtA==
@@ -8620,9 +8620,9 @@ multicodec@^3.0.1:
     varint "^6.0.0"
 
 multiformats@^9.4.2:
-  version "9.5.8"
-  resolved "https://registry.yarnpkg.com/multiformats/-/multiformats-9.5.8.tgz#b8b8fa80210b31a96bea2b59c26970b5815e5a5e"
-  integrity sha512-GY154q1yPPdHX4ArXHE8Z1Mm9BxZcJetzEqfwQg/ongo91qIJDHJEio3zboHIKGEvBLrhVqKwlRuDqwa7+xECQ==
+  version "9.6.2"
+  resolved "https://registry.yarnpkg.com/multiformats/-/multiformats-9.6.2.tgz#3dd8f696171a367fa826b7c432851da850eb115e"
+  integrity sha512-1dKng7RkBelbEZQQD2zvdzYKgUmtggpWl+GXQBYhnEGGkV6VIYfWgV3VSeyhcUFFEelI5q4D0etCJZ7fbuiamQ==
 
 multihashes@^4.0.1, multihashes@^4.0.2:
   version "4.0.3"
