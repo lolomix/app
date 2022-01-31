@@ -74,7 +74,9 @@ function NftCard({
                   startIcon={<CurrencyAromaCartoonIcon />}
                   disabled={!remainingFormatted}
                   onClick={handleBuyDialog}
-                  loading={transactionInProgress}
+                  loading={
+                    transactionInProgress ? transactionInProgress : undefined
+                  }
                 >
                   <Typography variant="h4">{priceFormatted}</Typography>
                 </Button>
@@ -103,15 +105,5 @@ function NftCard({
     </Card>
   );
 }
-
-/**
- * @type {{tokenAddress: Validator<NonNullable<string>>, tokenID: Validator<NonNullable<NonNullable<InferType<Requireable<string>|Requireable<number>>>>>, tokenAbi: Validator<NonNullable<any[]>>, lazyLoad: Requireable<boolean>}}
- */
-NftCard.propTypes = {
-  tokenAbi: PropTypes.array.isRequired,
-  tokenAddress: PropTypes.string.isRequired,
-  tokenID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  lazyLoad: PropTypes.bool,
-};
 
 export default NftCard;
