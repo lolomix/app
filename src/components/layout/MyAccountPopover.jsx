@@ -27,7 +27,8 @@ import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
 import { truncate } from "../../utils/formatters";
 
 function MyAccountPopover(props) {
-  const { t, closePopover, openConnectorsPopover, anchorEl, ...rest } = props;
+  const { t, tReady, closePopover, openConnectorsPopover, anchorEl, ...rest } =
+    props;
   const { account, deactivate } = useEthers();
 
   return (
