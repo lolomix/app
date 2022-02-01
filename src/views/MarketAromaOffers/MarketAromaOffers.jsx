@@ -90,6 +90,7 @@ const MarketAromaOffers = () => {
                   size="massive"
                   variant="yellowContained"
                   sx={{ marginTop: 3 }}
+                  href={card.price === null && "/market/aroma/buy"}
                   startIcon={card.price && <CurrencyMaticIcon />}
                 >
                   {card.price ? formatCurrency(card.price) : "Enter"}
