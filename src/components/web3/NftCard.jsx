@@ -29,9 +29,9 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
-  remainingFormatted = true,
+  remainingFormatted,
   handleBuyDialog,
-  transactionInProgress = false,
+  transactionInProgress,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
