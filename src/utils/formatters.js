@@ -1,3 +1,5 @@
+import { ethers } from "ethers";
+
 /**
  * @param num
  * @param locales
@@ -27,4 +29,26 @@ export function truncate(
   replacement = "..."
 ) {
   return `${string.slice(0, after)}${replacement}${string.slice(before)}`;
+}
+
+/**
+ * Formats raw recipe object to readable object
+ *
+ * @param recipe
+ * @returns {{name: string, chefId: *, coinPairs: *, stakedAroma: *, timestamp: *}}
+ */
+export function formatRecipe(recipe) {
+  if (!recipe) return;
+
+  return {
+    chefId: recipe.chefId?.toNumber(),
+    name: recipe.name && ethers.utils.parseBytes32String(recipe.name),
+    recipeId: recipe.recipeId,
+    coinPairs: recipe.coinPairs?.map((pair) => ({
+      id: pair?.id?.toNumber(),
+      percentage: pair?.percentage?.toNumber(),
+    })),
+    stakedAroma: recipe.stakedAroma?.toNumber(),
+    timestamp: recipe.timestamp?.toNumber(),
+  };
 }
