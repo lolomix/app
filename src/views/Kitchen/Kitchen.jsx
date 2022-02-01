@@ -2,11 +2,12 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
 import Grid from "@mui/material/Grid";
-import { Helmet } from "react-helmet";
 import { Box, Container } from "@mui/material";
 // custom
 import ViewHeading from "../../components/layout/ViewHeading";
 import OpeningSoon from "../../components/common/OpeningSoonCard";
+import Layout from "../../components/layout/Layout";
+import KitchenIcon from "../../components/icons/KitchenIcon";
 
 /**
  * @returns {JSX.Element}
@@ -14,10 +15,12 @@ import OpeningSoon from "../../components/common/OpeningSoonCard";
  */
 function Kitchen() {
   return (
-    <>
-      <Helmet>
-        <title>Kitchen</title>
-      </Helmet>
+    <Layout
+      helmetTitle="Kitchen"
+      title="Kitchen"
+      subTitle="Where all the magic starts"
+      icon={<KitchenIcon sx={{ fontSize: 48, marginTop: 0.5 }} />}
+    >
       <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
         <Container as="section">
           <ViewHeading>Kitchen</ViewHeading>
@@ -28,7 +31,7 @@ function Kitchen() {
           </Grid>
         </Container>
       </Box>
-    </>
+    </Layout>
   );
 }
 

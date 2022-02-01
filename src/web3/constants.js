@@ -1,3 +1,5 @@
+import { Polygon, Rinkeby } from "@usedapp/core";
+
 export const APP_NAME = process.env.REACT_APP_APP_NAME;
 export const APP_VERSION = process.env.REACT_APP_VERSION;
 export const TARGET_CHAIN = process.env.REACT_APP_CHAIN;
@@ -8,10 +10,22 @@ export const AROMA_DECIMALS = 1000000000000000000; // 18 decimals
 export const AROMA_DECIMALS_DIGIT = 18;
 export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
+export const DAPPCONFIG = {
+  readOnlyChainId:
+    TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId,
+  readOnlyUrls: {
+    [Rinkeby.chainId]: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
+    [Polygon.chainId]: "https://polygon-rpc.com/",
+  },
+  networks: [TARGET_CHAIN === "polygon" ? Polygon : Rinkeby],
+};
+
 /**
+ * DEPRECATED
+ *
  * @type {{polygon: {contractMaster: string, chainIdHex: string, faucet: string, blockExplorerUrls: string[], chainId: number, nativeCurrency: {symbol: string, decimals: number, name: string}, adminAccount: string, name: string, rpcUrls: string[], openSeaLink: string, testnet: boolean, contractAroma: string}, rinkeby: {contractMaster: string, chainIdHex: string, faucet: string, blockExplorerUrls: string[], chainId: number, nativeCurrency: {symbol: string, decimals: number, name: string}, adminAccount: string, name: string, rpcUrls: string[], openSeaLink: string, testnet: boolean, contractAroma: string}}}
  *
- * @todo refactor to make it work with usedapp config
+ * @todo refactor to make it work with usedapp config above
  */
 export const NETWORKS = {
   rinkeby: {

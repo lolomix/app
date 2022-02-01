@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 // material-ui
 import {
   Box,
@@ -15,7 +14,6 @@ import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/Buy_CHEF.svg";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
-import { formatCurrency } from "../../utils/formatters";
 
 /**
  * @param tokenAbi
@@ -31,6 +29,10 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
+  remainingFormatted,
+  handleBuyDialog,
+  transactionInProgress,
+  priceFormatted,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
@@ -69,8 +71,11 @@ function NftCard({
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}
+                  disabled={!remainingFormatted}
+                  onClick={handleBuyDialog}
+                  loading={transactionInProgress.toString()}
                 >
-                  <Typography variant="h4">{formatCurrency(1000)}</Typography>
+                  <Typography variant="h4">{priceFormatted}</Typography>
                 </Button>
               </>
             ) : (
@@ -97,15 +102,5 @@ function NftCard({
     </Card>
   );
 }
-
-/**
- * @type {{tokenAddress: Validator<NonNullable<string>>, tokenID: Validator<NonNullable<NonNullable<InferType<Requireable<string>|Requireable<number>>>>>, tokenAbi: Validator<NonNullable<any[]>>, lazyLoad: Requireable<boolean>}}
- */
-NftCard.propTypes = {
-  tokenAbi: PropTypes.array.isRequired,
-  tokenAddress: PropTypes.string.isRequired,
-  tokenID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  lazyLoad: PropTypes.bool,
-};
 
 export default NftCard;

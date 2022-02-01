@@ -9,13 +9,20 @@ import IPFSGatewayTools from "@pinata/ipfs-gateway-tools/dist/browser";
  */
 export function convertToDesiredIpfsURL(string) {
   const ipfsGatewayTools = new IPFSGatewayTools();
-  const { containsCid } = ipfsGatewayTools.containsCID(string);
+  const { containsCid, cid } = ipfsGatewayTools.containsCID(string);
 
-  if (containsCid) {
-    string = ipfsGatewayTools.convertToDesiredGateway(string, IPFS_GATEWAY);
+  if (!containsCid) {
+    return string;
   }
 
-  return string;
+  const parts = string.split(cid);
+
+  string = ipfsGatewayTools.convertToDesiredGateway(
+    parts[0] + cid,
+    IPFS_GATEWAY
+  );
+
+  return string + parts?.[1];
 }
 
 /**

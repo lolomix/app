@@ -1,5 +1,3 @@
-import { injected } from "./connectors";
-
 const connectorsList = {
   injected: {
     soon: false,
@@ -7,21 +5,21 @@ const connectorsList = {
     description:
       "Use this for Browser Extensions such as Metamask, Brave Wallet and etc...",
     icon: "WalletMetaMaskIcon",
-    connector: injected,
+    isActive: (provider) => provider?.provider?.isMetaMask
   },
   walletConnect: {
     soon: true,
     name: "WalletConnect",
     description: "Use this if your wallet uses WalletConnect",
     icon: "WalletWalletConnectIcon",
-    connector: {},
+    isActive: (provider) => false
   },
   ledger: {
     soon: true,
     name: "Ledger",
     description: "Use this if you use a Ledger Wallet.",
     icon: "WalletLedgerIcon",
-    connector: {},
+    isActive: (provider) => false
   },
 };
 
