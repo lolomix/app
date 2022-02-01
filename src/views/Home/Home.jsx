@@ -1,5 +1,5 @@
 import { withTranslation } from "react-i18next";
-import { Button, Stack, Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlateIcon";
 import SquareButton from "../../components/buttons/SquareButton";
 import WhiteFlameIcon from "../../components/icons/WhiteFlameIcon";
