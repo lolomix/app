@@ -29,10 +29,9 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
-  remainingFormatted,
+  remainingFormatted = true,
   handleBuyDialog,
-  transactionInProgress,
-  priceFormatted,
+  transactionInProgress = false,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
@@ -61,7 +60,7 @@ function NftCard({
                 <picture>
                   <source srcSet={BuyChef} />
                   <img
-                    style={{ width: "87%", padding: 20 }}
+                    style={{ width: "86.7%", padding: "5.6%" }}
                     src={BuyChef}
                     alt={"Buy CHEF"}
                   />
@@ -71,11 +70,11 @@ function NftCard({
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}
-                  disabled={!remainingFormatted}
                   onClick={handleBuyDialog}
+                  disabled={!remainingFormatted}
                   loading={transactionInProgress.toString()}
                 >
-                  <Typography variant="h4">{priceFormatted}</Typography>
+                  <Typography variant="h4">1000</Typography>
                 </Button>
               </>
             ) : (
