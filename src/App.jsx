@@ -27,6 +27,7 @@ const MarketAromaOffers = lazy(() =>
 const MarketAromaBuy = lazy(() =>
   import("./views/MarketAromaBuy/MarketAromaBuy")
 );
+const MarketChefBuy = lazy(() => import("./views/MarketChefBuy/MarketChefBuy"));
 const Kitchen = lazy(() => import("./views/Kitchen/Kitchen"));
 const KitchenRecipeCreate = lazy(() =>
   import("./views/KitchenRecipeCreate/KitchenRecipeCreate")
@@ -56,6 +57,7 @@ function App() {
               element={<MarketAromaOffers />}
             />
             <Route path="/market/aroma/buy" element={<MarketAromaBuy />} />
+              <Route path="/market/chef/buy" element={<MarketChefBuy />} />
             <Route path="/kitchen" element={<Kitchen />} />
             <Route
               path="/kitchen/recipe/create"

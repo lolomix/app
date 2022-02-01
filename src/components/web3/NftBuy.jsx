@@ -10,19 +10,15 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
-  Divider,
+  Box,
   Button,
-  Grid,
-  Paper,
+  Container,
   Typography,
-  lighten,
+  Grid,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
 // custom
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { getErrorMessage } from "../../web3/errors";
-import { theme } from "../../utils/theme";
 import { useChefPrice } from "../../hooks/useChefPrice";
 import { formatCurrency } from "../../utils/formatters";
 import { useChefSeasonRemaining } from "../../hooks/useChefSeasonRemaining";
@@ -30,6 +26,35 @@ import { useChefTotalSupply } from "../../hooks/useChefTotalSupply";
 import { useAromaApprove } from "../../hooks/useAromaApprove";
 import { useChefBuy } from "../../hooks/useChefBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
+import NftCard from "./NftCard";
+import styled from "@emotion/styled";
+
+const CustomBanner = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
+})(({ position, theme }) => ({
+  ...(position === "right" && {
+    width: "200px",
+    height: "180px",
+    position: "relative",
+    bottom: 350,
+    left: 450,
+    borderRadius: 40,
+    transform: "rotate(17deg)",
+    [theme.breakpoints.down("lg")]: {
+      width: "100%",
+      height: "auto",
+      position: "static",
+      borderRadius: 15,
+      transform: "none",
+      marginTop: 40,
+    },
+    background: "#4B6272 0% 0% no-repeat ",
+    color: theme.palette.common.white,
+    border: "7px solid #1111111A",
+    textAlign: "center",
+    paddingBottom: 12,
+  }),
+}));
 
 function NftBuy({ t }) {
   const { error, active } = useEthers();
@@ -184,150 +209,36 @@ function NftBuy({ t }) {
 
   return (
     <Fragment>
-      <Card fullheight="true" elevation={3}>
-        {active ? (
-          <CardContent>
-            <Typography variant="h4" component="h2" align="center" mb={4}>
-              {t("components.NftBuy.title")}
-            </Typography>
-            <Grid
-              container
-              spacing={4}
-              justifyContent="center"
-              alignItems="stretch"
-            >
-              <Grid item xs={12} md={6}>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  textAlign="center"
-                  mt={3}
-                  sx={{ textTransform: "uppercase" }}
-                >
-                  {t("components.NftBuy.remaining")}
-                </Typography>
-                <Typography
-                  gutterBottom
-                  variant="h1"
-                  component="div"
-                  textAlign="center"
-                  color="primary"
-                  sx={{ textTransform: "uppercase", fontWeight: "bold" }}
-                >
+      {active ? (
+        <Container maxWidth="xs" disableGutters sx={{ padding: 6 }}>
+          <NftCard
+            tokenAbi={[]}
+            firstCard={true}
+            remainingFormatted={remainingFormatted}
+            handleBuyDialog={handleBuyDialog}
+            transactionInProgress={transactionInProgress}
+            priceFormatted={formatCurrency(priceFormatted)}
+          />
+          <CustomBanner position="right">
+            <Grid container justifyContent="center" alignItems="center" py={2}>
+              <Grid item xs={12} sm={3} lg={12} order={{xs: 2, lg: 1}}>
+                <Typography variant="h2" fontWeight={800}>
                   {remainingFormatted}
                 </Typography>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  component="div"
-                  textAlign="center"
-                  mb={3}
-                  sx={{ textTransform: "uppercase" }}
-                >
-                  {soldFormatted} {t("components.NftBuy.sold")}
-                </Typography>
-
-                <Divider variant="middle" />
-
-                <Grid
-                  container
-                  alignContent="center"
-                  alignItems="center"
-                  mt={3}
-                  mb={6}
-                >
-                  <Grid item xs p={1}>
-                    <Typography
-                      textAlign="center"
-                      sx={{ textTransform: "uppercase" }}
-                    >
-                      {t("components.NftBuy.season")}
-                    </Typography>
-                    <Typography
-                      textAlign="center"
-                      color="primary"
-                      sx={{ textTransform: "uppercase", fontWeight: "bold" }}
-                    >
-                      ONE
-                    </Typography>
-                  </Grid>
-
-                  <Divider flexItem orientation="vertical" />
-
-                  <Grid item xs p={1}>
-                    <Typography
-                      variant="body2"
-                      textAlign="center"
-                      sx={{ textTransform: "uppercase" }}
-                    >
-                      {t("components.NftBuy.pricePerCHEF")}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      color="primary"
-                      textAlign="center"
-                      sx={{ fontWeight: "bold", textTransform: "uppercase" }}
-                    >
-                      {formatCurrency(priceFormatted)} AROMA
-                    </Typography>
-                  </Grid>
-                </Grid>
               </Grid>
-              <Grid
-                item
-                sm={12}
-                md={6}
-                spacing={4}
-                container
-                justifyContent="center"
-              >
-                <Grid item xs={12}>
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      backgroundColor: lighten(
-                        theme.palette.primary.main,
-                        0.91
-                      ),
-                    }}
-                  >
-                    <Grid
-                      container
-                      justifyContent="center"
-                      alignItems="center"
-                      minHeight="250px"
-                    >
-                      <Grid item xs={6}>
-                        <Card elevation={1}>
-                          <CardContent>
-                            <ChefSilhouetteIcon
-                              sx={{ width: "100%", height: "auto" }}
-                            />
-                          </CardContent>
-                        </Card>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12}>
-                  <LoadingButton
-                    disabled={!remainingFormatted}
-                    size="xlarge"
-                    variant="contained"
-                    fullWidth
-                    onClick={handleBuyDialog}
-                    loading={transactionInProgress}
-                  >
-                    {!!remainingFormatted
-                      ? t("components.NftBuy.buyButton")
-                      : t("components.NftBuy.soldOut")}
-                  </LoadingButton>
-                </Grid>
+              <Grid item xs={12} sm={6} lg={12} order={{xs: 1, lg: 2}}>
+                <Typography variant="h3" fontWeight={800} >
+                  Remaining
+                </Typography>
               </Grid>
             </Grid>
-          </CardContent>
-        ) : (
+            <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
+              Sold {soldFormatted} 
+            </Typography>
+          </CustomBanner>
+        </Container>
+      ) : (
+        <Card fullheight="true" elevation={3}>
           <CardContent>
             <Typography variant="body2" my={4}>
               {getErrorMessage(error)}
@@ -342,8 +253,8 @@ function NftBuy({ t }) {
               Learn more
             </Button>
           </CardContent>
-        )}
-      </Card>
+        </Card>
+      )}
       <Dialog
         onClose={handleBuyDialog}
         open={buyDialog}
