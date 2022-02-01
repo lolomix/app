@@ -14,6 +14,7 @@ import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/Buy_CHEF.svg";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
+import { formatCurrency } from "../../utils/formatters";
 
 /**
  * @param tokenAbi
@@ -29,9 +30,10 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
-  remainingFormatted,
+  remainingFormatted = true,
   handleBuyDialog,
   transactionInProgress,
+  priceFormatted,
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
@@ -74,7 +76,7 @@ function NftCard({
                   disabled={!remainingFormatted}
                   loading={transactionInProgress.toString()}
                 >
-                  <Typography variant="h4">1000</Typography>
+                  <Typography variant="h4">{priceFormatted}</Typography>
                 </Button>
               </>
             ) : (
