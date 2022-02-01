@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
 import { useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
@@ -10,56 +10,21 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
-  Box,
   Button,
-  Container,
   Typography,
-  Grid,
 } from "@mui/material";
 // custom
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
 import { useChefPrice } from "../../hooks/useChefPrice";
 import { formatCurrency } from "../../utils/formatters";
-import { useChefSeasonRemaining } from "../../hooks/useChefSeasonRemaining";
-import { useChefTotalSupply } from "../../hooks/useChefTotalSupply";
 import { useAromaApprove } from "../../hooks/useAromaApprove";
 import { useChefBuy } from "../../hooks/useChefBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import NftCard from "./NftCard";
-import styled from "@emotion/styled";
 
-const CustomBanner = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
-})(({ position, theme }) => ({
-  ...(position === "right" && {
-    width: "200px",
-    height: "180px",
-    position: "relative",
-    bottom: 350,
-    left: 450,
-    borderRadius: 40,
-    transform: "rotate(17deg)",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "auto",
-      position: "static",
-      borderRadius: 15,
-      transform: "none",
-      marginTop: 40,
-    },
-    background: "#4B6272 0% 0% no-repeat ",
-    color: theme.palette.common.white,
-    border: "7px solid #1111111A",
-    textAlign: "center",
-    paddingBottom: 12,
-  }),
-}));
-
-function NftBuy({ t }) {
+function NftBuy({ t, remainingFormatted }) {
   const { error, active } = useEthers();
-  const [, soldFormatted] = useChefTotalSupply();
-  const [, remainingFormatted] = useChefSeasonRemaining();
   const [price, priceFormatted] = useChefPrice();
 
   let transactionInProgressSnackBarKey = "transactionInProgress";
@@ -208,35 +173,16 @@ function NftBuy({ t }) {
   ]);
 
   return (
-    <Fragment>
+    <>
       {active ? (
-        <Container maxWidth="xs" disableGutters sx={{ padding: 6 }}>
-          <NftCard
-            tokenAbi={[]}
-            firstCard={true}
-            remainingFormatted={remainingFormatted}
-            handleBuyDialog={handleBuyDialog}
-            transactionInProgress={transactionInProgress}
-            priceFormatted={formatCurrency(priceFormatted)}
-          />
-          <CustomBanner position="right">
-            <Grid container justifyContent="center" alignItems="center" py={2}>
-              <Grid item xs={12} sm={3} lg={12} order={{xs: 2, lg: 1}}>
-                <Typography variant="h2" fontWeight={800}>
-                  {remainingFormatted}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={12} order={{xs: 1, lg: 2}}>
-                <Typography variant="h3" fontWeight={800} >
-                  Remaining
-                </Typography>
-              </Grid>
-            </Grid>
-            <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
-              Sold {soldFormatted} 
-            </Typography>
-          </CustomBanner>
-        </Container>
+        <NftCard
+          tokenAbi={[]}
+          firstCard={true}
+          remainingFormatted={remainingFormatted}
+          handleBuyDialog={handleBuyDialog}
+          transactionInProgress={transactionInProgress}
+          priceFormatted={formatCurrency(priceFormatted)}
+        />
       ) : (
         <Card fullheight="true" elevation={3}>
           <CardContent>
@@ -342,7 +288,7 @@ function NftBuy({ t }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   );
 }
 

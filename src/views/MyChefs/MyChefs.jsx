@@ -12,6 +12,7 @@ import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
+import NftBuy from "../../components/web3/NftBuy";
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -33,7 +34,7 @@ function MyChefs() {
     >
       <Grid container item gap={3} justifyContent="center">
         <Grid item xs={8.5} sm={6} md={5} lg={2.5}>
-          <NftCard tokenAbi={[]} firstCard={true} />
+          <NftBuy />
         </Grid>
         {active ? (
           nfts ? (

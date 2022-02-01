@@ -29,7 +29,7 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
-  remainingFormatted,
+  remainingFormatted = true,
   handleBuyDialog,
   transactionInProgress,
   priceFormatted,
@@ -61,7 +61,7 @@ function NftCard({
                 <picture>
                   <source srcSet={BuyChef} />
                   <img
-                    style={{ width: "87%", padding: 20 }}
+                    style={{ width: "86.7%", padding: "5.6%" }}
                     src={BuyChef}
                     alt={"Buy CHEF"}
                   />
