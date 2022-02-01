@@ -72,8 +72,8 @@ function NftCard({
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}
-                  onClick={handleBuyDialog}
                   disabled={!remainingFormatted}
+                  onClick={handleBuyDialog}
                   loading={transactionInProgress.toString()}
                 >
                   <Typography variant="h4">{priceFormatted}</Typography>
