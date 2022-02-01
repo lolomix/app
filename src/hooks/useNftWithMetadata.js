@@ -35,13 +35,15 @@ export function useNftWithMetadata(abi, address, id) {
   const [NFT, setNFT] = useState();
 
   const [tokenURI] = useContractCall(
-    address && {
-      abi: abiInterface,
-      address: address,
-      method: "tokenURI",
-      args: [id],
-    }
-  ) ?? [undefined];
+    abi &&
+      address &&
+      id && {
+        abi: abiInterface,
+        address: address,
+        method: "tokenURI",
+        args: [id]
+      }
+  ) ?? [];
 
   useEffect(() => {
     async function loadNFTMetadata() {
