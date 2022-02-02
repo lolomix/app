@@ -63,6 +63,7 @@ const Footer = () => {
     <Box
       sx={{
         backgroundColor: "common.black",
+        paddingBottom: 2,
       }}
     >
       <Grid container justifyContent="space-around" xs={12} pt={4.5} pb={1}>

@@ -4,12 +4,44 @@ import { SnackbarProvider as BaseSnackbarProvider } from "notistack";
 import SnackbarAction from "./SnackbarAction";
 // material-ui
 import { theme } from "../../utils/theme";
+import { makeStyles } from "@mui/styles";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import WarningIcon from "@mui/icons-material/Warning";
+import InfoIcon from "@mui/icons-material/Info";
 
 /**
  * @param children
  * @returns {JSX.Element}
  * @constructor
  */
+const useStyles = makeStyles({
+  overriddenError: {
+    color: `${theme.palette.error.main} !important`,
+    WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
+    background: theme.snackbar.background,
+    borderRadius: theme.snackbar.borderRadius,
+  },
+  overriddenSuccess: {
+    color: `${theme.palette.success.main} !important`,
+    WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
+    background: theme.snackbar.background,
+    borderRadius: theme.snackbar.borderRadius,
+  },
+  overriddenWarning: {
+    color: `${theme.palette.warning.main} !important`,
+    WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
+    background: theme.snackbar.background,
+    borderRadius: theme.snackbar.borderRadius,
+  },
+  overriddenInfo: {
+    color: `${theme.palette.info.main} !important`,
+    WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
+    background: theme.snackbar.background,
+    borderRadius: theme.snackbar.borderRadius,
+  },
+});
+
 function SnackbarProvider({ children }) {
   const snackbarRef = createRef();
 
@@ -19,9 +51,31 @@ function SnackbarProvider({ children }) {
    * @type {number}
    */
   const autoHideDuration = 5000;
-
+  const classes = useStyles();
   return (
     <BaseSnackbarProvider
+      iconVariant={{
+        error: (
+          <CancelIcon
+            sx={{ fontSize: "2rem", paddingRight: 1, paddingBottom: 0.5 }}
+          />
+        ),
+        success: (
+          <CheckCircleIcon
+            sx={{ fontSize: "2rem", paddingRight: 1, paddingBottom: 0.5 }}
+          />
+        ),
+        warning: (
+          <WarningIcon
+            sx={{ fontSize: "2rem", paddingRight: 1, paddingBottom: 0.5 }}
+          />
+        ),
+        info: (
+          <InfoIcon
+            sx={{ fontSize: "2rem", paddingRight: 1, paddingBottom: 0.5 }}
+          />
+        ),
+      }}
       ref={snackbarRef}
       maxSnack={3}
       preventDuplicate
@@ -31,18 +85,10 @@ function SnackbarProvider({ children }) {
         horizontal: "right",
       }}
       classes={{
-        variantSuccess: {
-          backgroundImage: theme.palette.success.main,
-        },
-        variantError: {
-          backgroundImage: theme.palette.error.main,
-        },
-        variantWarning: {
-          backgroundImage: theme.palette.warning.main,
-        },
-        variantInfo: {
-          backgroundImage: theme.palette.info.main,
-        },
+        variantError: classes.overriddenError,
+        variantSuccess: classes.overriddenSuccess,
+        variantWarning: classes.overriddenWarning,
+        variantInfo: classes.overriddenInfo,
       }}
       action={<SnackbarAction duration={autoHideDuration} />}
     >
