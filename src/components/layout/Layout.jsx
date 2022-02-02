@@ -13,7 +13,7 @@ const Layout = ({ helmetTitle, children, title, subTitle, icon }) => {
       </Helmet>
       <Container maxWidth={"xl"} disableGutters mt={2}>
         <Navigation />
-        <Stack mx={3} pt={6} pb={3} alignItems="center" spacing={2}>
+        <Stack mx={2} pt={6} pb={3} alignItems="center" spacing={2.5}>
           {title && (
             <ViewHeading title={title} subTitle={subTitle} icon={icon} />
           )}

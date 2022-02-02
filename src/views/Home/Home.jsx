@@ -1,5 +1,5 @@
 import { withTranslation } from "react-i18next";
-import { Button, Stack } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import RecipeOnPlateIcon from "../../components/icons/RecipeOnPlateIcon";
 import SquareButton from "../../components/buttons/SquareButton";
 import WhiteFlameIcon from "../../components/icons/WhiteFlameIcon";
@@ -33,53 +33,71 @@ function Home() {
       >
         Tutorial
       </Button>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        minWidth="100%"
-        spacing={0.5}
-      >
-        <Stack direction="row" spacing={0.5} alignItems="flex-end">
-          <SquareButton
-            size={"large"}
-            color={"light"}
-            image={<MarketIcon sx={{ fontSize: "550%" }} />}
-            title={"Market"}
-            href={"/market"}
-          >
-            Market
-          </SquareButton>
-          <SquareButton
-            size={"medium"}
-            color={"light"}
-            image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
-            title={"My Chefs"}
-            href={"/my-chefs"}
-          >
-            My Chefs
-          </SquareButton>
-        </Stack>
-        <Stack direction="row" spacing={0.5} alignItems="flex-end">
-          <SquareButton
-            size={"medium"}
-            color={"light"}
-            image={<KitchenIcon sx={{ fontSize: "50px" }} />}
-            title={"Kitchen"}
-            href={"/kitchen"}
-          >
-            Kitchen
-          </SquareButton>
-          <SquareButton
-            size={"large"}
-            color={"light"}
-            image={<BuffetIcon sx={{ fontSize: "550%" }} />}
-            title={"Buffet"}
-            href={"/buffet"}
-          >
-            Buffet
-          </SquareButton>
-        </Stack>
-      </Stack>
+      <Grid container xs={12} justifyContent="center" columnSpacing={0.5}>
+        <Grid
+          container
+          item
+          xs={6}
+          textAlign="left"
+          alignItems="flex-end"
+          spacing={1}
+        >
+          <Grid item>
+            <SquareButton
+              size="large"
+              color="light"
+              image={<MarketIcon sx={{ fontSize: "550%" }} />}
+              title="Market"
+              href="/market"
+            >
+              Market
+            </SquareButton>
+          </Grid>
+          <Grid item>
+            <SquareButton
+              size="medium"
+              color="light"
+              image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
+              title="My Chefs"
+              href="/my-chefs"
+            >
+              My Chefs
+            </SquareButton>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          item
+          xs={6}
+          textAlign="right"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+          spacing={1}
+        >
+          <Grid item>
+            <SquareButton
+              size="medium"
+              color="light"
+              image={<KitchenIcon sx={{ fontSize: "50px" }} />}
+              title="Kitchen"
+              href="/kitchen"
+            >
+              Kitchen
+            </SquareButton>
+          </Grid>
+          <Grid item>
+            <SquareButton
+              size="large"
+              color="light"
+              image={<BuffetIcon sx={{ fontSize: "550%" }} />}
+              title="Buffet"
+              href="/buffet"
+            >
+              Buffet
+            </SquareButton>
+          </Grid>
+        </Grid>
+      </Grid>
     </Layout>
   );
 }
