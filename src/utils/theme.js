@@ -15,8 +15,8 @@ import YellowButtonBackground from "../assets/yellow-button-background.svg";
 const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
 const darkCornflowerBlue = "rgba(40, 58, 143, 1)"; // 283A8F
 const paleCerulean = "rgba(152, 199, 229, 1)"; // 98C7E5
-const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
-const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
+//const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
+//const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
 const coffee = "rgba(109, 81, 63, 1)"; // 6D513F
 const bistre = "rgba(58, 39, 23, 1)"; // 3A2717
 const lightGreen = "rgba(157,230,169, 1)"; // 9DE6A9
