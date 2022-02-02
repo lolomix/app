@@ -44,22 +44,22 @@ function Home() {
         >
           <Grid item>
             <SquareButton
-              size={"large"}
-              color={"light"}
+              size="large"
+              color="light"
               image={<MarketIcon sx={{ fontSize: "550%" }} />}
-              title={"Market"}
-              href={"/market"}
+              title="Market"
+              href="/market"
             >
               Market
             </SquareButton>
           </Grid>
           <Grid item>
             <SquareButton
-              size={"medium"}
-              color={"light"}
+              size="medium"
+              color="light"
               image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
-              title={"My Chefs"}
-              href={"/my-chefs"}
+              title="My Chefs"
+              href="/my-chefs"
             >
               My Chefs
             </SquareButton>
@@ -76,22 +76,22 @@ function Home() {
         >
           <Grid item>
             <SquareButton
-              size={"medium"}
-              color={"light"}
+              size="medium"
+              color="light"
               image={<KitchenIcon sx={{ fontSize: "50px" }} />}
-              title={"Kitchen"}
-              href={"/kitchen"}
+              title="Kitchen"
+              href="/kitchen"
             >
               Kitchen
             </SquareButton>
           </Grid>
           <Grid item>
             <SquareButton
-              size={"large"}
-              color={"light"}
+              size="large"
+              color="light"
               image={<BuffetIcon sx={{ fontSize: "550%" }} />}
-              title={"Buffet"}
-              href={"/buffet"}
+              title="Buffet"
+              href="/buffet"
             >
               Buffet
             </SquareButton>
