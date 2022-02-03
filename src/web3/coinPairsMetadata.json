@@ -4,34 +4,34 @@
     "contractSymbol": "BTC/USDT",
     "symbol": "BTC",
     "address": "",
-    "icon": ""
+    "icon": null
   },
   {
     "name": "Ethereum",
     "contractSymbol": "ETH/USDT",
     "symbol": "ETH",
     "address": "",
-    "icon": "CurrencyEthIcon"
+    "icon": null
   },
   {
     "name": "Solana",
     "contractSymbol": "SOL/USDT",
     "symbol": "SOL",
     "address": "",
-    "icon": ""
+    "icon": null
   },
   {
     "name": "Link",
     "contractSymbol": "LINK/USDT",
     "symbol": "LINK",
     "address": "",
-    "icon": ""
+    "icon": null
   },
   {
     "name": "Binance Coin",
     "contractSymbol": "BNB/USDT",
     "symbol": "BNB",
     "address": "",
-    "icon": ""
+    "icon": null
   }
 ]
