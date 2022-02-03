@@ -23,9 +23,9 @@ function recipeCreatorReducer(state, [type, payload]) {
       return {
         ...state,
         tokens: [...state.tokens, payload.token].filter(
-          (currentToken, pos, arr) =>
+          (currentToken, index, arr) =>
             arr.findIndex((findToken) => currentToken.id === findToken.id) ===
-            pos
+            index
         ),
       };
     case REMOVE_TOKEN:
