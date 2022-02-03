@@ -9,8 +9,8 @@ const StyledButton = styled(Button, {
     width: "150px",
     height: "140px",
     [theme.breakpoints.down("md")]: {
-      width: "83px",
-      height: "78px",
+      width: "80px",
+      height: "75px",
       fontSize: "10px",
     },
   }),
@@ -18,8 +18,8 @@ const StyledButton = styled(Button, {
     width: "110px",
     height: "100px",
     [theme.breakpoints.down("md")]: {
-      width: "83px",
-      height: "78px",
+      width: "80px",
+      height: "75px",
       fontSize: "10px",
     },
   }),

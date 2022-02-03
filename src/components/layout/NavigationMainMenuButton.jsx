@@ -49,7 +49,7 @@ function NavigationMainMenuButton() {
     },
     {
       title: "My Chefs",
-      ref: "/collection",
+      ref: "/my-chefs",
       icon: <MyChefsIcon sx={{ fontSize: "4rem" }} />,
     },
     {
