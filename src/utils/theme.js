@@ -15,10 +15,14 @@ import YellowButtonBackground from "../assets/yellow-button-background.svg";
 const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
 const darkCornflowerBlue = "rgba(40, 58, 143, 1)"; // 283A8F
 const paleCerulean = "rgba(152, 199, 229, 1)"; // 98C7E5
-const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
-const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
+//const oceanGreen = "rgba(76, 189, 140)"; // 4BBD8C
+//const redSalsa = "rgba(253, 42, 68, 1)"; // FD2943
 const coffee = "rgba(109, 81, 63, 1)"; // 6D513F
 const bistre = "rgba(58, 39, 23, 1)"; // 3A2717
+const lightGreen = "rgba(157,230,169, 1)"; // 9DE6A9
+const redWarm = "rgba(241, 160, 170, 1)"; // F1A0AA
+const paleYellow = "rgba(241,218,158, 1)"; // F1DA9E
+const paleBlue = "rgba(156,188,238, 1)"; // 9CBCEE
 
 // generators
 const shadow = (px, color) => `0px ${px}px 0px 0px ${color}`;
@@ -39,10 +43,16 @@ export let theme = createTheme({
       contrastText: "white",
     },
     success: {
-      main: oceanGreen,
+      main: lightGreen,
     },
     error: {
-      main: redSalsa,
+      main: redWarm,
+    },
+    warning: {
+      main: paleYellow,
+    },
+    info: {
+      main: paleBlue,
     },
     background: {
       default: paleCerulean,
@@ -144,6 +154,11 @@ theme = createTheme(theme, {
       textTransform: "none",
       fontWeight: 600,
     },
+  },
+  snackbar: {
+    WebkitTextFillColor: theme.palette.common.white,
+    background: "#292C2D 0% 0% no-repeat padding-box !important",
+    borderRadius: "10px !important",
   },
   components: {
     MuiCssBaseline: {
