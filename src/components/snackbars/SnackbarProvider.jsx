@@ -17,13 +17,13 @@ import InfoIcon from "@mui/icons-material/Info";
  */
 const useStyles = makeStyles({
   overriddenError: {
-    color: `${theme.palette.snackbarError.main} !important`,
+    color: `${theme.palette.error.light} !important`,
     WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
     background: theme.snackbar.background,
     borderRadius: theme.snackbar.borderRadius,
   },
   overriddenSuccess: {
-    color: `${theme.palette.success.main} !important`,
+    color: `${theme.palette.success.light} !important`,
     WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
     background: theme.snackbar.background,
     borderRadius: theme.snackbar.borderRadius,
