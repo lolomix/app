@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Bitcoin",
+    "contractSymbol": "BTC/USDT",
+    "symbol": "BTC",
+    "address": "",
+    "icon": ""
+  },
+  {
+    "name": "Ethereum",
+    "contractSymbol": "ETH/USDT",
+    "symbol": "ETH",
+    "address": "",
+    "icon": "CurrencyEthIcon"
+  },
+  {
+    "name": "Solana",
+    "contractSymbol": "SOL/USDT",
+    "symbol": "SOL",
+    "address": "",
+    "icon": ""
+  },
+  {
+    "name": "Link",
+    "contractSymbol": "LINK/USDT",
+    "symbol": "LINK",
+    "address": "",
+    "icon": ""
+  },
+  {
+    "name": "Binance Coin",
+    "contractSymbol": "BNB/USDT",
+    "symbol": "BNB",
+    "address": "",
+    "icon": ""
+  }
+]
