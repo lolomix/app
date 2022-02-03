@@ -17,7 +17,7 @@ import InfoIcon from "@mui/icons-material/Info";
  */
 const useStyles = makeStyles({
   overriddenError: {
-    color: `${theme.palette.error.main} !important`,
+    color: `${theme.palette.snackbarError.main} !important`,
     WebkitTextFillColor: theme.snackbar.WebkitTextFillColor,
     background: theme.snackbar.background,
     borderRadius: theme.snackbar.borderRadius,
