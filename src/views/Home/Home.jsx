@@ -16,7 +16,7 @@ function Home() {
       <Button
         elongatedWidth
         size="massive"
-        variant="yellowContained"
+        variant="yellowContainedSmall"
         href="/kitchen/recipe/create"
         startIcon={<WhiteFlameIcon />}
       >
