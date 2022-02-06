@@ -6,6 +6,7 @@ import { Button, Typography, Stack, Card, CardContent } from "@mui/material";
 import Layout from "../../components/layout/Layout";
 import KitchenIcon from "../../components/icons/KitchenIcon";
 import KitchenMainImage from "../../components/icons/KitchenMainImage";
+import { theme } from "../../utils/theme";
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -29,7 +30,7 @@ function Kitchen() {
               <Typography
                 variant="h5"
                 textAlign="center"
-                sx={{ opacity: "0.6" }}
+                color={theme.palette.text.disabled}
               >
                 Make sure you have Minimum 200 AROMA
               </Typography>
