@@ -88,7 +88,7 @@ const MarketAromaOffers = () => {
                 <Button
                   fullWidth
                   size="massive"
-                  variant="yellowContained"
+                  variant="yellowContainedSmall"
                   sx={{ marginTop: 3 }}
                   href={card.price === null && "/market/aroma/buy"}
                   startIcon={card.price && <CurrencyMaticIcon />}
