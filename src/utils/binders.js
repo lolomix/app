@@ -16,14 +16,13 @@ export function bindDialogClick(dialogState) {
  * Binds all the required props using a dialog state to the Dialog component
  *
  * @param dialogState
- * @returns {{onClose: *, 'aria-labelledby', handleClose: *, id, open}}
+ * @returns {{onClose, 'aria-labelledby', id, open}}
  */
 export function bindDialog(dialogState) {
   return {
     id: dialogState.id,
     "aria-labelledby": dialogState.id,
     open: dialogState.open,
-    handleClose: dialogState.handleClose,
-    onClose: dialogState.handleClose,
+    onClose: dialogState.onClose
   };
 }

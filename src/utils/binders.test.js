@@ -52,6 +52,7 @@ describe("bindDialog() function", () => {
     dialogStateMock = {
       id: "someKindOfId",
       open: true,
+      onClose: () => true,
       handleOpen: () => true,
       handleClose: () => true,
     };
@@ -71,19 +72,14 @@ describe("bindDialog() function", () => {
     expect(bindDialogResult.open).toBe(dialogStateMock.open);
   });
 
-  it("`handleClose` should match dialog state `handleClose` function", () => {
-    expect(bindDialogResult.handleClose).toBe(dialogStateMock.handleClose);
-  });
-
-  it("`onClose` should match dialog state `handleClose` function", () => {
-    expect(bindDialogResult.onClose).toBe(dialogStateMock.handleClose);
+  it("`onClose` should match dialog state `onClose` function", () => {
+    expect(bindDialogResult.onClose).toBe(dialogStateMock.onClose);
   });
 
   test.each([
     [undefined, "id"],
     [undefined, "aria-labelledby"],
     [undefined, "open"],
-    [undefined, "handleClose"],
     [undefined, "onClose"],
   ])(
     "should return `%s` if `%s` attribute is not defined)",

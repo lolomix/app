@@ -2,7 +2,7 @@ import { useState } from "react";
 
 /**
  * @param options
- * @returns {{handleOpen: handleOpen, handleClose: handleClose, id: string, open: boolean}}
+ * @returns {{onClose: undefined|onClose, handleOpen: handleOpen, handleClose: handleClose, id: string, open: boolean}}
  */
 export function useDialogState(options) {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,8 @@ export function useDialogState(options) {
 
   return {
     id: options?.dialogId,
-    open: open,
+    open,
+    onClose: options?.onClose ?? handleClose,
     handleOpen,
     handleClose,
   };
