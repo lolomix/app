@@ -8,7 +8,8 @@ import {
   stepLabelClasses,
   listItemButtonClasses,
 } from "@mui/material";
-import YellowButtonBackground from "../assets/yellow-button-background.svg";
+import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
+import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
 
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
@@ -328,9 +329,23 @@ theme = createTheme(theme, {
         {
           props: { variant: "yellowContained" },
           style: {
-            background: `transparent url(${YellowButtonBackground}) no-repeat center`,
+            background: `transparent url(${YellowButtonBackgroundLarge}) no-repeat center`,
             backgroundSize: "cover",
-            borderBottom: "2.5px solid #3A2717",
+            borderBottom: "3.5px solid #3A2717",
+            boxShadow: "none",
+            borderRadius: "9px",
+            "&:hover": {
+              transform: "translateY(2px)",
+              backgroundColor: theme.palette.hover.default,
+            },
+          },
+        },
+        {
+          props: { variant: "yellowContainedSmall" },
+          style: {
+            background: `transparent url(${YellowButtonBackgroundSmall}) no-repeat center`,
+            backgroundSize: "cover",
+            borderBottom: "3px solid #3A2717",
             boxShadow: "none",
             borderRadius: "9px",
             "&:hover": {

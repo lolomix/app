@@ -67,7 +67,7 @@ function NftCard({
                   />
                 </picture>
                 <Button
-                  variant="yellowContained"
+                  variant="yellowContainedSmall"
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}

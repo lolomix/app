@@ -1,14 +1,12 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
-import Grid from "@mui/material/Grid";
-import { Box, Container } from "@mui/material";
+import { Button, Typography, Stack, Card, CardContent } from "@mui/material";
 // custom
-import ViewHeading from "../../components/layout/ViewHeading";
-import OpeningSoon from "../../components/common/OpeningSoonCard";
 import Layout from "../../components/layout/Layout";
 import KitchenIcon from "../../components/icons/KitchenIcon";
-
+import KitchenMainImage from "../../components/icons/KitchenMainImage";
+import { theme } from "../../utils/theme";
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -21,16 +19,33 @@ function Kitchen() {
       subTitle="Where all the magic starts"
       icon={<KitchenIcon sx={{ fontSize: 48, marginTop: 0.5 }} />}
     >
-      <Box pb={10} pt={1} sx={{ backgroundColor: "sunGlow.main" }}>
-        <Container as="section">
-          <ViewHeading>Kitchen</ViewHeading>
-          <Grid container justifyContent="center" alignItems="stretch">
-            <Grid item md={6} mb={21}>
-              <OpeningSoon />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+      <Card>
+        <CardContent>
+          <Stack justifyContent="center" alignItems="center" spacing={1} pt={1}>
+            <Typography variant="h4" color="secondary">
+              Create and Compete
+            </Typography>
+            <KitchenMainImage sx={{ fontSize: 250 }} />
+            <Stack spacing={1.5}>
+              <Typography
+                variant="h5"
+                textAlign="center"
+                color={theme.palette.text.disabled}
+              >
+                Make sure you have Minimum 200 AROMA
+              </Typography>
+              <Button
+                fullWidth
+                size="massive"
+                variant="yellowContained"
+                href="/kitchen/recipe/create"
+              >
+                Cook A Recipe
+              </Button>
+            </Stack>
+          </Stack>
+        </CardContent>
+      </Card>
     </Layout>
   );
 }

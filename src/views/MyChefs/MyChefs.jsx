@@ -33,7 +33,7 @@ function MyChefs() {
       icon={<MyChefsIcon sx={{ fontSize: 70, paddingBottom: 2 }} />}
     >
       <Grid container item gap={3} justifyContent="center">
-        <Grid item xs={8.5} sm={6} md={5} lg={2.5}>
+        <Grid item xs={12} sm={6} md={5} lg={2.5}>
           <NftBuy />
         </Grid>
         {active ? (
@@ -42,7 +42,7 @@ function MyChefs() {
               <Grid
                 key={tokenID.toString()}
                 item
-                xs={8.5}
+                xs={12}
                 sm={6}
                 md={5}
                 lg={2.5}
