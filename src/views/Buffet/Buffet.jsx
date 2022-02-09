@@ -26,6 +26,7 @@ import YellowStar from "../../assets/stars/yellow-star.svg";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
 import Image3 from "../../assets/nfts/3.png";
+import { TramRounded } from "@mui/icons-material";
 
 // Date from Sunday to Sunday
 
@@ -165,12 +166,15 @@ function Buffet() {
   ];
 
   const [recipesToShow, setRecipesToShow] = useState(allRecipes);
+  const [myRecipesOn, setMyRecipesOn] = useState(false);
 
   const handleClickMyRecipes = () => {
+    setMyRecipesOn(true);
     setRecipesToShow(myRecipes);
   };
 
   const handleClickAllRecipes = () => {
+    setMyRecipesOn(false);
     setRecipesToShow(allRecipes);
   };
 
@@ -331,6 +335,7 @@ function Buffet() {
                   <TabPanelUnstyled value={2}></TabPanelUnstyled>
                 </>
               ))}
+              {myRecipesOn && <Button variant="yellowContained"  size="massive" elongatedWidth href="/kitchen/recipe/create" sx={{marginTop: 2.5}}>Create a Recipe</Button>}
             </CardContent>
           </TabsUnstyled>
         </Card>
