@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { withTranslation } from "react-i18next";
 // material-ui
 import {
   Box,
@@ -26,23 +25,19 @@ import GreyStar from "../../assets/stars/grey-star.svg";
 import YellowStar from "../../assets/stars/yellow-star.svg";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
-import Image2 from "../../assets/nfts/2.png";
 import Image3 from "../../assets/nfts/3.png";
-import Image4 from "../../assets/nfts/4.png";
-import Image5 from "../../assets/nfts/5.png";
 
-// Date
+// Date from Sunday to Sunday
 
 let today = new Date();
-let todayMonth = today.toLocaleString("default", { month: "short" });
-let todayDay = today.getDate();
-let lastWeek = new Date(
+let lastWeekMonth = new Date(
   today.getFullYear(),
-  today.getMonth(),
-  today.getDate() - 7
-);
-let lastWeekMonth = lastWeek.toLocaleString("default", { month: "short" });
-let lastWeekDay = lastWeek.getDate();
+  today.getMonth() + 1,
+  0
+).toLocaleString("default", { month: "short" });
+let lastWeekDay = today.getDate() - today.getDay();
+let nextWeekDay = lastWeekDay + 7;
+let nextWeekMonth = today.toLocaleString("default", { month: "short" });
 
 // Custom styles
 
@@ -56,7 +51,6 @@ const CustomContainer = styled(Box, {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    textAlign: "center",
     gap: 15,
     marginBottom: -127,
     [theme.breakpoints.down("lg")]: {
@@ -69,6 +63,7 @@ const CustomContainer = styled(Box, {
 }));
 
 const Tab = styled(TabUnstyled)`
+  width: 100%;
   color: white;
   cursor: pointer;
   font-size: 0.9rem;
@@ -88,7 +83,7 @@ const Tab = styled(TabUnstyled)`
     background-color: #805ac6;
   }
   &.${tabUnstyledClasses.disabled} {
-    opacity: 0.5;
+    opacity: 0.7;
   }
   &.${tabUnstyledClasses.disabled}:hover {
     background-color: #55378d;
@@ -100,9 +95,6 @@ const TabsList = styled(TabsListUnstyled)`
   background-color: #55378d;
   border-radius: 12px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: space-between;
 `;
 
 // component
@@ -115,20 +107,18 @@ function Buffet() {
       chefImage: Image1,
       recipeName: "Vanilla Icecream with Hot fudge Brownie",
       recipePerformance: 13.55,
-      diffFromYesterday: +1.61,
       ranking: 1,
     },
     {
       id: 2,
-      chefImage: Image2,
+      chefImage: Image3,
       recipeName: "Marshmallow",
       recipePerformance: 11.31,
-      diffFromYesterday: -1.14,
       ranking: 2,
     },
     {
       id: 3,
-      chefImage: Image3,
+      chefImage: Image1,
       recipeName: "Peanut Butter",
       recipePerformance: 10.26,
       diffFromYesterday: -3.154,
@@ -136,18 +126,16 @@ function Buffet() {
     },
     {
       id: 4,
-      chefImage: Image4,
+      chefImage: Image3,
       recipeName: "Chocolate Donut",
       recipePerformance: 9.05,
-      diffFromYesterday: +0.08,
       ranking: 4,
     },
     {
       id: 5,
-      chefImage: Image5,
+      chefImage: Image1,
       recipeName: "Springroll",
       recipePerformance: 8.35,
-      diffFromYesterday: -2.1454,
       ranking: 5,
     },
   ];
@@ -155,42 +143,34 @@ function Buffet() {
   const myRecipes = [
     {
       id: 3,
-      chefImage: Image3,
+      chefImage: Image1,
       recipeName: "Peanut Butter",
       recipePerformance: 10.26,
-      diffFromYesterday: -3.154,
       ranking: 3,
     },
     {
       id: 4,
-      chefImage: Image4,
+      chefImage: Image3,
       recipeName: "Chocolate Donut",
       recipePerformance: 9.05,
-      diffFromYesterday: +0.08,
       ranking: 4,
     },
     {
       id: 5,
-      chefImage: Image5,
+      chefImage: Image1,
       recipeName: "Springroll",
       recipePerformance: 8.35,
-      diffFromYesterday: -2.14,
       ranking: 5,
     },
   ];
 
-  // on click handlers
-
   const [recipesToShow, setRecipesToShow] = useState(allRecipes);
-  const [myRecipesState, setMyRecipesState] = useState(false);
 
   const handleClickMyRecipes = () => {
-    setMyRecipesState(true);
     setRecipesToShow(myRecipes);
   };
 
   const handleClickAllRecipes = () => {
-    setMyRecipesState(false);
     setRecipesToShow(allRecipes);
   };
 
@@ -201,7 +181,7 @@ function Buffet() {
       subTitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
       icon={<BuffetIcon sx={{ fontSize: 55, marginTop: 0.2 }} />}
     >
-      <Box >
+      <Box>
         <CustomContainer>
           <Button
             variant="contained"
@@ -224,7 +204,7 @@ function Buffet() {
             My Recipes
           </Button>
         </CustomContainer>
-        <Card sx={{ textAlign: "center"}}>
+        <Card sx={{ textAlign: "center" }}>
           <TabsUnstyled defaultValue={1}>
             <CardActions>
               <TabsList>
@@ -244,68 +224,81 @@ function Buffet() {
             </CardActions>
             <CardContent>
               <Typography variant="h5" color="grey.500">
-                {`${lastWeekDay} ${lastWeekMonth} - ${todayDay} ${todayMonth}`}
+                {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
               </Typography>
-              {recipesToShow.map(() => (
-                <TabPanelUnstyled value={0}></TabPanelUnstyled>
-              ))}
-              {recipesToShow.map((recipe, index) => (
-                <TabPanelUnstyled value={1}>
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    px="0.2vw"
-                    spacing="2vw"
-                  >
+              {recipesToShow.map((recipe) => (
+                <>
+                  <TabPanelUnstyled value={0}></TabPanelUnstyled>
+                  <TabPanelUnstyled value={1}>
                     <Stack
-                      py={2.5}
                       direction="row"
+                      justifyContent="space-between"
                       alignItems="center"
-                      spacing="0.9vw"
+                      px="0.2vw"
+                      spacing="1.5vw"
                     >
-                      <Typography
-                        variant="h5"
-                        color="common.black"
-                        sx={{
-                          background: `transparent url(${
-                            recipe.ranking === 1
-                              ? PurpleStar
-                              : recipe.ranking === 2
-                              ? GreyStar
-                              : recipe.ranking === 3
-                              ? PinkStar
-                              : YellowStar
-                          }) no-repeat center`,
-                          backgroundSize: "contain",
-                          padding: 2.5,
-                          paddingTop: 3
-                        }}
+                      <Stack
+                        py={2.5}
+                        direction="row"
+                        alignItems="center"
+                        spacing="1vw"
                       >
-                        {recipe.ranking}
-                      </Typography>
-                      <Box
-                        sx={{
-                          maxWidth: "80px",
-                          width: "80px",
-                          minWidth: "80px",
-                          border: "2px solid #E8E8E8",
-                          borderRadius: "12px",
-                          paddingX: 2,
-                          paddingY: 1,
-                        }}
-                      >
-                        <img
-                          src={recipe.chefImage}
-                          width="100%"
-                          height="auto"
-                        />
-                      </Box>
-                      <Typography variant="h5" color="common.black">
-                        {recipe.recipeName}
-                      </Typography>
-                    </Stack>
-                    {myRecipesState ? (
+                        <Typography
+                          variant="h5"
+                          color="common.black"
+                          sx={{
+                            background: `transparent url(${
+                              recipe.ranking === 1
+                                ? PurpleStar
+                                : recipe.ranking === 2
+                                ? GreyStar
+                                : recipe.ranking === 3
+                                ? PinkStar
+                                : YellowStar
+                            }) no-repeat center`,
+                            backgroundSize: "contain",
+                            padding: 2.5,
+                            paddingTop: 3,
+                          }}
+                        >
+                          {recipe.ranking}
+                        </Typography>
+                        <Box
+                          sx={{
+                            maxWidth: "75px",
+                            width: "75px",
+                            minWidth: "75px",
+                            border: `2px solid ${
+                              recipe.ranking === 1
+                                ? "#E600FF"
+                                : recipe.ranking === 2
+                                ? "#C7C7C7"
+                                : recipe.ranking === 3
+                                ? "#DB4888"
+                                : "#E8E8E8"
+                            }`,
+                            borderRadius: "12px",
+                            paddingX: 2,
+                            paddingY: 1,
+                          }}
+                        >
+                          <img
+                            src={recipe.chefImage}
+                            width="100%"
+                            height="auto"
+                            alt="recipeChef"
+                          />
+                        </Box>
+                        <Typography
+                          variant="h5"
+                          color="common.black"
+                          sx={{ padding: 1 }}
+                        >
+                          {recipe.recipeName}
+                        </Typography>
+                      </Stack>
+                      {/*
+                      myRecipesState ? (
                       <Typography
                         variant="h5"
                         color={
@@ -319,23 +312,24 @@ function Buffet() {
                           : `${recipe.diffFromYesterday}%`}
                       </Typography>
                     ) : (
+                      */}
                       <Typography
                         variant="h5"
                         color={
-                          index === 0 || index === 1 || index === 2
+                          recipe.ranking === 1 ||
+                          recipe.ranking === 2 ||
+                          recipe.ranking === 3
                             ? "success.main"
                             : "secondary"
                         }
                       >
-                        {`${recipe.recipePerformance}`}%
+                        {recipe.recipePerformance}%
                       </Typography>
-                    )}
-                  </Stack>
-                  <Divider />
-                </TabPanelUnstyled>
-              ))}
-              {recipesToShow.map(() => (
-                <TabPanelUnstyled value={2}></TabPanelUnstyled>
+                    </Stack>
+                    <Divider />
+                  </TabPanelUnstyled>
+                  <TabPanelUnstyled value={2}></TabPanelUnstyled>
+                </>
               ))}
             </CardContent>
           </TabsUnstyled>
@@ -345,4 +339,4 @@ function Buffet() {
   );
 }
 
-export default withTranslation()(Buffet);
+export default Buffet;
