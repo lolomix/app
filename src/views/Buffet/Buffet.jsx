@@ -335,7 +335,7 @@ function Buffet() {
                   <TabPanelUnstyled value={2}></TabPanelUnstyled>
                 </>
               ))}
-              {myRecipesOn && <Button variant="yellowContained"  size="massive" elongatedWidth href="/kitchen/recipe/create" sx={{marginTop: 2.5}}>Create a Recipe</Button>}
+              {myRecipesOn && <Button variant="yellowContainedSmall"  size="massive" elongatedWidth href="/kitchen/recipe/create" sx={{marginTop: 2.5}}>Create a Recipe</Button>}
             </CardContent>
           </TabsUnstyled>
         </Card>
