@@ -283,6 +283,16 @@ theme = createTheme(theme, {
             },
           },
         },
+        {
+          props: { variant: "contained", color: "success", inverseColor: true },
+          style: {
+            backgroundColor: theme.palette.common.white,
+            color: theme.palette.success.main,
+            "&:hover": {
+              backgroundColor: theme.palette.common.white,
+            },
+          },
+        },
       ],
     },
     MuiToggleButton: {
