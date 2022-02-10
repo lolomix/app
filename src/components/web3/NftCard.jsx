@@ -1,5 +1,3 @@
-import React from "react";
-// material-ui
 import {
   Box,
   Card,
@@ -8,7 +6,6 @@ import {
   Stack,
   Button,
 } from "@mui/material";
-// custom
 import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
 import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
@@ -20,6 +17,12 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
  * @param tokenAddress
  * @param tokenID
  * @param lazyLoad
+ * @param firstCard
+ * @param remainingFormatted
+ * @param handleBuyDialog
+ * @param transactionInProgress
+ * @param priceFormatted
+ * @param variant
  * @returns {JSX.Element}
  * @constructor
  */
@@ -33,6 +36,7 @@ function NftCard({
   handleBuyDialog,
   transactionInProgress,
   priceFormatted,
+  variant = "elevation",
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
   const lore =
@@ -41,7 +45,10 @@ function NftCard({
   const image = nft?.metadata?.image ?? placeholder;
 
   return (
-    <Card sx={{ boxShadow: theme.blurredShadows }}>
+    <Card
+      variant={variant}
+      sx={variant === "elevation" && { boxShadow: theme.blurredShadows }}
+    >
       <CardContent>
         <Stack textAlign="center" spacing={1}>
           <Typography variant="h3" color="secondary" fontWeight={500}>
