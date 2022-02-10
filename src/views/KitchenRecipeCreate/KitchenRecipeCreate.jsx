@@ -1,12 +1,11 @@
 // material-ui
 import Grid from "@mui/material/Grid";
 import { Box, Card, Container } from "@mui/material";
-// custom
 import RecipeCreateStepper from "../../components/common/RecipeCreateStepper";
 import TokenSelectorDialog from "../../components/dialogs/TokenSelectorDialog";
 import { useDialogState } from "../../hooks/useDialogState";
 import { bindDialog } from "../../utils/binders";
-import RecipeSelectTokensStep from "../../components/common/RecipeSelectTokensStep";
+import RecipeCreateSelectTokensStep from "../../components/common/RecipeCreateSelectTokensStep";
 import { RecipeCreatorProvider } from "../../contexts/recipeCreatorContext";
 import Layout from "../../components/layout/Layout";
 
@@ -34,12 +33,13 @@ function KitchenRecipeCreate() {
             </Grid>
           </Grid>
           {/* @todo: add the rest of the steps */}
-          <RecipeSelectTokensStep
+          <RecipeCreateSelectTokensStep
             tokenSelectorDialogState={tokenSelectorDialogState}
           />
           <TokenSelectorDialog
             fullWidth
             maxWidth="xs"
+            handleClose={tokenSelectorDialogState.handleClose}
             {...bindDialog(tokenSelectorDialogState)}
           />
         </RecipeCreatorProvider>

@@ -25,7 +25,7 @@ const RECIPE_CREATOR_STEP = 0;
  * @returns {JSX.Element|null}
  * @constructor
  */
-function RecipeSelectTokensStep({ tokenSelectorDialogState }) {
+function RecipeCreateSelectTokensStep({ tokenSelectorDialogState }) {
   const [{ activeStep }] = useRecipeCreator();
 
   if (activeStep !== RECIPE_CREATOR_STEP) return null;
@@ -60,4 +60,4 @@ function RecipeSelectTokensStep({ tokenSelectorDialogState }) {
   );
 }
 
-export default RecipeSelectTokensStep;
+export default RecipeCreateSelectTokensStep;
