@@ -17,6 +17,7 @@ import AnnouncementBar from "./components/layout/AnnouncementBar";
 import { Helmet } from "react-helmet";
 import Version from "./components/layout/Version";
 import SnackbarProvider from "./components/snackbars/SnackbarProvider";
+import RecipeSingle from './views/RecipeSingle/RecipeSingle'
 // pages (lazy loading)
 const Home = lazy(() => import("./views/Home/Home"));
 const Tutorial = lazy(() => import("./views/Tutorial/Tutorial"));
@@ -67,6 +68,7 @@ function App() {
             <Route path="/internal" element={<Internal />} />
             <Route path="/my-chefs" element={<MyChefs />} />
             <Route path="/my-chefs/chef/:tokenId" element={<ChefSingle />} />
+            <Route path="/buffet/recipe/:recipeId" element={<RecipeSingle />} />
           </Routes>
         </Suspense>
         <Version />
