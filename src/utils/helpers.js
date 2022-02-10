@@ -21,7 +21,7 @@ export function coinPairExplode(coinPair) {
  * @returns {undefined|string}
  */
 export function coinPairImplode(coinPairChunks) {
-  if (coinPairChunks.length !== 2) {
+  if (coinPairChunks.length !== 2 || coinPairChunks.some((symbol) => !symbol)) {
     return;
   }
 
