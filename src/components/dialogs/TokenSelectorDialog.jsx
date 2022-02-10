@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// material-ui
 import {
   Button,
   Dialog,
@@ -8,27 +7,13 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-// custom
 import SearchInputField from "../form/SearchInputField";
 import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
 import { useSnackbar } from "notistack";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
 import SearchResultList from "../form/SearchResultList";
 import HorizontalChipList from "../form/HorizontalChipList";
-
-// @todo replace this with blockchain call
-const supportedTokens = [
-  { id: 1, symbol: "REEF", name: "Reef" },
-  { id: 2, symbol: "SHIB", name: "ShibaInu" },
-  { id: 3, symbol: "CVC", name: "Civic" },
-  { id: 4, symbol: "ETH", name: "Ethereum" },
-  { id: 5, symbol: "BNB", name: "Binance Coin" },
-  { id: 6, symbol: "MATIC", name: "Matic" },
-  { id: 7, symbol: "BTC", name: "Bitcoin" },
-  { id: 8, symbol: "LUNA", name: "Terra" },
-  { id: 9, symbol: "QBIT", name: "Quantum Works" },
-  { id: 10, symbol: "MINA", name: "Mina Protocol" },
-];
+import { useRecipeCoinPairs } from "../../hooks/useRecipeCoinPairs";
 
 /**
  * @param props
@@ -37,85 +22,82 @@ const supportedTokens = [
  */
 function TokenSelectorDialog(props) {
   const { handleClose, ...rest } = props;
-
   const { enqueueSnackbar } = useSnackbar();
-  const [recipeCreatorState, addToken, removeToken] = useRecipeCreator();
+  const [
+    recipeCreatorState,
+    { addToken, removeToken, nextStep, confirmTokenSelection },
+  ] = useRecipeCreator();
+  const [, supportedTokens] = useRecipeCoinPairs();
+
+  const handleConfirm = () => {
+    try {
+      confirmTokenSelection();
+      if (recipeCreatorState.activeStep === 0) nextStep();
+      handleClose();
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    }
+  };
 
   /**
-   * Contains the list of prepared tokens (tokens with additional props/functions)
+   * @param token
+   *
+   * @todo remove hard-coded token percentage
    */
-  const [preparedTokens, setPreparedTokens] = useState([]);
+  const handleTokenSelectionClick = (token) => {
+    try {
+      addToken({ ...token, percentage: 5 });
+      if (recipeCreatorState.activeStep !== 0) handleClose();
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    }
+  };
 
   /**
-   * Prepare supported tokens with additional props/functions
-   * @todo this should be refactored and supported tokens should be provided with these additional props/functions
+   * @param token
    */
-  useEffect(() => {
-    let tokens = supportedTokens.map((token) => {
-      return {
-        ...token,
-        selected: recipeCreatorState.tokens.some(
-          (currentToken) => currentToken.id === token.id
-        ),
-        onAddClick: () => {
-          try {
-            addToken(token);
-          } catch (error) {
-            enqueueSnackbar(error.message, {
-              variant: "error",
-            });
-          }
-        },
-        onRemovalClick: () => {
-          removeToken(token);
-        },
-      };
-    });
-
-    setPreparedTokens(tokens);
-    // @todo fix depth exceed error when addToken is added to dependency list
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recipeCreatorState, enqueueSnackbar]);
+  const handleTokenRemovalClick = (token) => {
+    removeToken(token);
+  };
 
   /**
-   * Contains the search input value
+   * @param token
    */
+  const handleIsTokenSelected = (token) => {
+    return recipeCreatorState.tokens.some(
+      (currentToken) => currentToken.id === token.id
+    );
+  };
+
   const [tokenSearchFieldValue, setTokenSearchFieldValue] = useState("");
 
   /**
-   * Set our controlled search input value
-   *
    * @param event
    */
   const handleSearchUserInput = (event) => {
     setTokenSearchFieldValue(event.target.value);
   };
 
-  /**
-   * Contains then list of tokens filtered by the search input value
-   */
   const [filteredTokens, setFilteredTokens] = useState();
 
-  /**
-   * Filter the prepared tokens width the search input value
-   */
   useEffect(() => {
-    let tokens = preparedTokens;
-
-    if (tokenSearchFieldValue) {
-      tokens = preparedTokens.filter((currentToken) => {
+    setFilteredTokens(
+      supportedTokens?.filter((currentToken) => {
         return (
           currentToken.symbol
-            .toLowerCase()
+            ?.toLowerCase()
             .includes(tokenSearchFieldValue?.toLowerCase()) ||
           currentToken.name
-            .toLowerCase()
+            ?.toLowerCase()
             .includes(tokenSearchFieldValue?.toLowerCase())
         );
-      });
-    }
-    setFilteredTokens(tokens);
-  }, [tokenSearchFieldValue, preparedTokens]);
+      })
+    );
+  }, [tokenSearchFieldValue, supportedTokens]);
 
   return (
     <Dialog {...rest}>
@@ -137,20 +119,29 @@ function TokenSelectorDialog(props) {
           list={filteredTokens}
           primaryText="symbol"
           secondaryText="name"
-          height={200}
+          height={220}
+          isItemSelected={handleIsTokenSelected}
+          onListItemButtonClick={handleTokenSelectionClick}
         />
-        <Typography variant="h5">Selected Tokens*</Typography>
-        <HorizontalChipList list={preparedTokens} />
-        <Typography variant="caption">
-          * The minimum number of tokens to select is 3
-        </Typography>
+        {recipeCreatorState.activeStep === 0 && (
+          <>
+            <Typography variant="h5">Selected tokens*</Typography>
+            <HorizontalChipList
+              list={recipeCreatorState.tokens}
+              onRemoveIconButtonClick={handleTokenRemovalClick}
+            />
+            <Typography variant="caption">
+              {`* A recipe may contain a minimum of ${recipeCreatorState.minSelection} and a maximum of ${recipeCreatorState.maxSelection} tokens.`}
+            </Typography>
+          </>
+        )}
       </DialogContent>
       <DialogActions>
         <Button
           fullWidth
           variant="yellowContained"
           size="massive"
-          onClick={handleClose}
+          onClick={handleConfirm}
         >
           Confirm
         </Button>

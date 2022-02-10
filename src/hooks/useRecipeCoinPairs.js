@@ -4,7 +4,8 @@ import { ethers, utils } from "ethers";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
 import { useRecipeCoinPairIds } from "./useRecipeCoinPairIds";
-import coinPairsMetadata from "../web3/coinPairsMetadata.json";
+import tokenMetadata from "../web3/tokenMetadata.json";
+import { coinPairExplode } from "../utils/helpers";
 
 /**
  * Returns the available coin pair id-s in the contract merged with
@@ -44,11 +45,13 @@ export function useRecipeCoinPairs() {
   useEffect(() => {
     setPairsFormatted(
       coinPairIdsFormatted?.map((value, index) => {
+        let tokenSymbol =
+          symbolsFormatted[index] &&
+          coinPairExplode(symbolsFormatted[index])?.[0];
         return {
           id: value,
-          ...coinPairsMetadata.find(
-            (item) => item.contractSymbol === symbolsFormatted[index]
-          ),
+          symbol: tokenSymbol,
+          ...tokenMetadata[tokenSymbol],
         };
       })
     );
