@@ -472,8 +472,7 @@ theme = createTheme(theme, {
           },
           // @todo seems like there is a bug as FilledInput does not support `disabled` slot
           [`&.${filledInputClasses.disabled}`]: {
-            backgroundColor: theme.palette.grey.A200,
-            opacity: "0.6",
+            backgroundColor: theme.palette.grey.A100,
           },
         },
         input: {
