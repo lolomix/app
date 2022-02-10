@@ -59,7 +59,7 @@ function ChefSingle() {
               lg={8}
               order={{ xs: 3, md: 2 }}
             >
-              <Card sx={{ boxShadow: theme.blurredShadows, padding: 1 }}>
+              <Card sx={{ boxShadow: theme.blurredShadows, padding: 2 }}>
                 <CardContent>
                   <Grid
                     container
@@ -76,7 +76,7 @@ function ChefSingle() {
                         Rarity Level
                       </Typography>
                     </Grid>
-                    <Grid item sm={6} textAlign="right" mt={2}>
+                    <Grid item xs={12} sm={6} textAlign="right" mt={2}>
                       <Link
                         color="grey.600"
                         underline="hover"
