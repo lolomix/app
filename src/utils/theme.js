@@ -7,6 +7,7 @@ import {
   buttonClasses,
   stepLabelClasses,
   listItemButtonClasses,
+  filledInputClasses,
 } from "@mui/material";
 import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
 import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
@@ -151,6 +152,10 @@ theme = createTheme(theme, {
       fontWeight: 600,
       color: theme.palette.text.disabled,
     },
+    subtitle2: {
+      fontSize: "0.77rem",
+      color: theme.palette.text.secondary,
+    },
     button: {
       textTransform: "none",
       fontWeight: 600,
@@ -256,6 +261,42 @@ theme = createTheme(theme, {
             "&:hover": {
               backgroundColor: theme.palette.error.dark,
             },
+          },
+        },
+        {
+          props: { variant: "contained", color: "error", inverseColor: true },
+          style: {
+            backgroundColor: theme.palette.error.contrastText,
+            color: theme.palette.error.main,
+            "&:hover": {
+              backgroundColor: theme.palette.error.contrastText,
+            },
+          },
+        },
+        {
+          props: { variant: "contained", color: "success" },
+          style: {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.common.white,
+            "&:hover": {
+              backgroundColor: theme.palette.success.dark,
+            },
+          },
+        },
+      ],
+    },
+    MuiToggleButton: {
+      variants: [
+        {
+          props: { shape: "squarish" },
+          style: {
+            borderRadius: 5,
+          },
+        },
+        {
+          props: { size: "xsmall" },
+          style: {
+            padding: 4,
           },
         },
       ],
@@ -419,6 +460,25 @@ theme = createTheme(theme, {
                 theme.palette.action.selectedOpacity
               ),
             },
+          },
+        },
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          [`&:not(.${filledInputClasses.underline})`]: {
+            borderRadius: 5,
+          },
+          // @todo seems like there is a bug as FilledInput does not support `disabled` slot
+          [`&.${filledInputClasses.disabled}`]: {
+            backgroundColor: theme.palette.grey.A100,
+          },
+        },
+        input: {
+          [`&.${filledInputClasses.disabled}`]: {
+            color: theme.palette.text.secondary,
+            WebkitTextFillColor: theme.palette.text.secondary, // Fix core override
           },
         },
       },

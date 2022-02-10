@@ -30,6 +30,8 @@ const BlurBottom = styled(Box)({
  * @param primaryText
  * @param secondaryText
  * @param height
+ * @param isItemSelected
+ * @param onListItemButtonClick
  * @param blurBottom
  * @returns {JSX.Element}
  * @constructor
@@ -39,6 +41,8 @@ function SearchResultList({
   primaryText,
   secondaryText,
   height,
+  isItemSelected,
+  onListItemButtonClick,
   blurBottom = true,
 }) {
   return (
@@ -54,7 +58,12 @@ function SearchResultList({
       >
         {list.map((item) => (
           <ListItem key={`item-${item.symbol}`} disablePadding>
-            <ListItemButton selected={item.selected} onClick={item.onAddClick}>
+            <ListItemButton
+              selected={isItemSelected && isItemSelected(item)}
+              onClick={() =>
+                onListItemButtonClick && onListItemButtonClick(item)
+              }
+            >
               <ListItemIcon>
                 {item.icon ?? <HelpOutlineIcon fontSize="large" />}
               </ListItemIcon>

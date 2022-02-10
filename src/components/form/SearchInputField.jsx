@@ -7,6 +7,7 @@ function SearchInputField(props) {
     <TextField
       fullWidth
       variant="outlined"
+      inputProps={{ inputMode: "search" }}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
