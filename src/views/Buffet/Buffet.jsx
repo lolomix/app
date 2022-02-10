@@ -14,6 +14,7 @@ import {
   Typography,
   Stack,
   Divider,
+  Grid,
 } from "@mui/material";
 // custom
 import Layout from "../../components/layout/Layout";
@@ -233,108 +234,108 @@ function Buffet() {
                 <>
                   <TabPanelUnstyled value={0}></TabPanelUnstyled>
                   <TabPanelUnstyled value={1}>
-                    <Stack
-                      direction="row"
+                    <Grid
+                      container
                       justifyContent="space-between"
                       alignItems="center"
                       px="0.2vw"
-                      spacing="1.5vw"
                     >
-                      <Stack
+                      <Grid
+                        container
+                        item
+                        xs={10}
+                        md={10.5}
                         py={2.5}
-                        direction="row"
                         alignItems="center"
-                        spacing="1vw"
                       >
+                        <Grid item xs={2} md={1.7}>
+                          <Typography
+                            variant="h5"
+                            color="common.black"
+                            minWidth="40px"
+                            minHeight="40px"
+                            sx={{
+                              background: `transparent url(${
+                                recipe.ranking === 1
+                                  ? PurpleStar
+                                  : recipe.ranking === 2
+                                  ? GreyStar
+                                  : recipe.ranking === 3
+                                  ? PinkStar
+                                  : YellowStar
+                              }) no-repeat center`,
+                              backgroundSize: "contain",
+                              padding: 2,
+                              paddingTop: 2.5,
+                            }}
+                          >
+                            {recipe.ranking}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={3.5} md={2.1}>
+                          <Box
+                            sx={{
+                              width: "75px",
+                              minWidth: "75px",
+                              border: `2px solid ${
+                                recipe.ranking === 1
+                                  ? "#E600FF"
+                                  : recipe.ranking === 2
+                                  ? "#C7C7C7"
+                                  : recipe.ranking === 3
+                                  ? "#DB4888"
+                                  : "#E8E8E8"
+                              }`,
+                              borderRadius: "12px",
+                              paddingX: 2,
+                              paddingY: 1,
+                            }}
+                          >
+                            <img
+                              src={recipe.chefImage}
+                              width="100%"
+                              height="auto"
+                              alt="recipeChef"
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={6.5} md={8.2} textAlign="left">
+                          <Typography
+                            variant="h5"
+                            color="common.black"
+                            sx={{ padding: 1 }}
+                          >
+                            {recipe.recipeName}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={2} md={1.5}>
                         <Typography
                           variant="h5"
-                          color="common.black"
-                          sx={{
-                            background: `transparent url(${
-                              recipe.ranking === 1
-                                ? PurpleStar
-                                : recipe.ranking === 2
-                                ? GreyStar
-                                : recipe.ranking === 3
-                                ? PinkStar
-                                : YellowStar
-                            }) no-repeat center`,
-                            backgroundSize: "contain",
-                            padding: 2.5,
-                            paddingTop: 3,
-                          }}
+                          color={
+                            recipe.ranking <= 3 ? "success.main" : "secondary"
+                          }
                         >
-                          {recipe.ranking}
+                          {recipe.recipePerformance}%
                         </Typography>
-                        <Box
-                          sx={{
-                            maxWidth: "75px",
-                            width: "75px",
-                            minWidth: "75px",
-                            border: `2px solid ${
-                              recipe.ranking === 1
-                                ? "#E600FF"
-                                : recipe.ranking === 2
-                                ? "#C7C7C7"
-                                : recipe.ranking === 3
-                                ? "#DB4888"
-                                : "#E8E8E8"
-                            }`,
-                            borderRadius: "12px",
-                            paddingX: 2,
-                            paddingY: 1,
-                          }}
-                        >
-                          <img
-                            src={recipe.chefImage}
-                            width="100%"
-                            height="auto"
-                            alt="recipeChef"
-                          />
-                        </Box>
-                        <Typography
-                          variant="h5"
-                          color="common.black"
-                          sx={{ padding: 1 }}
-                        >
-                          {recipe.recipeName}
-                        </Typography>
-                      </Stack>
-                      {/*
-                      myRecipesState ? (
-                      <Typography
-                        variant="h5"
-                        color={
-                          recipe.diffFromYesterday > 0
-                            ? "success.main"
-                            : "error"
-                        }
-                      >
-                        {recipe.diffFromYesterday > 0
-                          ? `+${recipe.diffFromYesterday}%`
-                          : `${recipe.diffFromYesterday}%`}
-                      </Typography>
-                    ) : (
-                      */}
-                      <Typography
-                        variant="h5"
-                        color={
-                          recipe.ranking === 1 ||
-                          recipe.ranking === 2 ||
-                          recipe.ranking === 3
-                            ? "success.main"
-                            : "secondary"
-                        }
-                      >
-                        {recipe.recipePerformance}%
-                      </Typography>
-                    </Stack>
+                      </Grid>
+                    </Grid>
                     <Divider />
                   </TabPanelUnstyled>
                   <TabPanelUnstyled value={2}></TabPanelUnstyled>
                 </>
               ))}
-              {myRecipesOn && <Button variant="yellowContainedSmall"  size="massive" elongatedWidth href="/kitchen/recipe/create" sx={{marginTop: 2.5}}>Create a Recipe</Button>}
+              {myRecipesOn && (
+                <Button
+                  variant="yellowContainedSmall"
+                  size="massive"
+                  elongatedWidth
+                  href="/kitchen/recipe/create"
+                  sx={{ marginTop: 2.5 }}
+                >
+                  Create a Recipe
+                </Button>
+              )}
             </CardContent>
           </TabsUnstyled>
         </Card>
