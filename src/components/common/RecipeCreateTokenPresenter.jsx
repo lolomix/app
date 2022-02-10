@@ -8,6 +8,19 @@ import TokenPerformanceSvgChart from "../charts/TokenPerformanceSvgChart";
  * @constructor
  */
 function RecipeCreateTokenPresenter({ token }) {
+  /**
+   * @type {string}
+   *
+   * @todo dynamically set preferred quote currency depending on user's choice
+   */
+  // const preferredQuoteCurrency = "USDT";
+
+  // @todo fix cors header in backend app
+  //
+  // const { status, data, error, isFetching } = useCoinPairPrice(
+  //   coinPairImplode([token.symbol, preferredQuoteCurrency])
+  // );
+
   return (
     <Paper variant="outlined" sx={{ py: 1.5, px: 3 }}>
       <Grid container alignItems="center">
@@ -27,7 +40,12 @@ function RecipeCreateTokenPresenter({ token }) {
             >
               $33.46
             </Typography>
-            <Grid container justifyContent="flex-end" alignItems="center" spacing={1}>
+            <Grid
+              container
+              justifyContent="flex-end"
+              alignItems="center"
+              spacing={1}
+            >
               <Grid item xs="auto">
                 {/* @todo provide performance of token */}
                 <TokenPerformanceSvgChart
