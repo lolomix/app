@@ -21,19 +21,12 @@ import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
 import Layout from "../../components/layout/Layout";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-/**
- * @returns {JSX.Element}
- * @constructor
- *
- * @todo fix error handling
- */
 function ChefSingle() {
   const { tokenId } = useParams();
   const { active, error } = useEthers();
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenId);
   const attributes = nft?.metadata?.attributes;
-  console.log(attributes);
 
   return (
     <Layout>
@@ -73,9 +66,8 @@ function ChefSingle() {
                     item
                     alignItems="center"
                     justifyContent="center"
-                    xs={12}
                   >
-                    <Grid item xs={12} sm={6}>
+                    <Grid item sm={6}>
                       <Typography
                         variant="h3"
                         color="secondary"
@@ -84,7 +76,7 @@ function ChefSingle() {
                         Rarity Level
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6} textAlign="right" mt={2}>
+                    <Grid item sm={6} textAlign="right" mt={2}>
                       <Link
                         color="grey.600"
                         underline="hover"
@@ -108,7 +100,6 @@ function ChefSingle() {
                           <Grid
                             container
                             item
-                            xs={12}
                             md={6}
                             justifyContent="flex-start"
                             alignItems="center"
