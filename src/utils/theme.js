@@ -152,6 +152,10 @@ theme = createTheme(theme, {
       fontWeight: 600,
       color: theme.palette.text.disabled,
     },
+    subtitle2: {
+      fontSize: "0.77rem",
+      color: theme.palette.text.secondary,
+    },
     button: {
       textTransform: "none",
       fontWeight: 600,
@@ -469,6 +473,7 @@ theme = createTheme(theme, {
           // @todo seems like there is a bug as FilledInput does not support `disabled` slot
           [`&.${filledInputClasses.disabled}`]: {
             backgroundColor: theme.palette.grey.A200,
+            opacity: "0.6",
           },
         },
         input: {
