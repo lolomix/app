@@ -1,5 +1,4 @@
-// material-ui
-import { Chip, Grid, IconButton, Skeleton, styled } from "@mui/material";
+import { Chip, Grid, IconButton, Skeleton } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
