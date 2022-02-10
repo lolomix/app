@@ -48,11 +48,8 @@ function MyChefs() {
                 lg={2.5}
               >
                 <a
-                  target="_blank"
                   rel="noreferrer nofollow"
-                  href={`${NETWORKS[TARGET_CHAIN].openSeaLink}/${
-                    NETWORKS[TARGET_CHAIN].contractMaster
-                  }/${tokenID.toString()}`}
+                  href={`/my-chefs/chef/${tokenID}`}
                   style={{ textDecoration: "none" }}
                 >
                   <NftCard
