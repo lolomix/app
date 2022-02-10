@@ -40,7 +40,7 @@ const RECIPE_CREATOR_STEP = 2;
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const [{ activeStep, nextStep, tokens }] = useRecipeCreator();
+  const [{ activeStep, tokens }, { nextStep }] = useRecipeCreator();
 
   const chefSelectorDialogState = useDialogState({
     dialogId: "chefSelectorDialog",
