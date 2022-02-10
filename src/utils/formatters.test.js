@@ -117,4 +117,20 @@ describe("formatRecipe() formatter", () => {
 
     expect(result.timestamp).toBe(2222222);
   });
+
+  it("should return 'date' if 'timestamp' present", () => {
+    const result = formatRecipe({
+      timestamp: BigNumber.from(1644510308),
+    });
+
+    expect(result.date).toBe("10/02/2022, 16:25:08");
+  });
+
+  it("should return 'undefined' if 'timestamp' not present", () => {
+    const result = formatRecipe({
+      stakedAroma: BigNumber.from(333),
+    });
+
+    expect(result.date).toBe(undefined);
+  });
 });

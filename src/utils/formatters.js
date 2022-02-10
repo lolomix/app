@@ -35,7 +35,7 @@ export function truncate(
  * Formats raw recipe object to readable object
  *
  * @param recipe
- * @returns {{name: string, chefId: *, coinPairs: *, stakedAroma: *, timestamp: *}}
+ * @returns {{name: string, chefId: *, coinPairs: *, stakedAroma: *, timestamp: *, date: *}}
  */
 export function formatRecipe(recipe) {
   if (!recipe) return;
@@ -50,5 +50,6 @@ export function formatRecipe(recipe) {
     })),
     stakedAroma: recipe.stakedAroma?.toNumber(),
     timestamp: recipe.timestamp?.toNumber(),
+    date: recipe.timestamp && new Date(recipe.timestamp?.toNumber() * 1000).toLocaleString(),
   };
 }
