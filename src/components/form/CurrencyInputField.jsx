@@ -1,16 +1,34 @@
-import React from "react";
-import { withTranslation } from "react-i18next";
-// material-ui
 import {
+  FilledInput,
   FormControl,
   InputAdornment,
-  OutlinedInput,
   Typography,
 } from "@mui/material";
 import CurrencyAromaIcon from "../icons/CurrencyAromaIcon";
 import CurrencyMaticIcon from "../icons/CurrencyMaticIcon";
 import CurrencyEthIcon from "../icons/CurrencyEthIcon";
 
+/**
+ * @type object {{}}
+ *
+ * @todo move this to a common location
+ */
+const currencyIconComponents = {
+  MATIC: CurrencyMaticIcon,
+  AROMA: CurrencyAromaIcon,
+  ETH: CurrencyEthIcon,
+};
+
+/**
+ * @param id
+ * @param label
+ * @param currency
+ * @param onUserInput
+ * @param value
+ * @param disabled
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function CurrencyInputField({
   id,
   label,
@@ -19,33 +37,19 @@ function CurrencyInputField({
   value,
   disabled,
 }) {
-  const currencyIconComponents = {
-    MATIC: CurrencyMaticIcon,
-    AROMA: CurrencyAromaIcon,
-    ETH: CurrencyEthIcon,
-    "TEST ETHER": CurrencyEthIcon,
-  };
-
-  // dynamically reference the icon component
   const CurrencyIcon = currencyIconComponents[currency];
 
   return (
     <FormControl variant="outlined" fullWidth>
-      <Typography
-        variant="overline"
-        sx={{
-          textTransform: "none",
-        }}
-      >
+      <Typography variant="subtitle2" mb={1}>
         {label}
       </Typography>
-      <OutlinedInput
+      <FilledInput
+        disableUnderline
+        hiddenLabel
         id={id}
         value={value}
         onChange={onUserInput}
-        sx={{
-          backgroundColor: "#fff",
-        }}
         inputProps={{
           inputMode: "numeric",
           pattern: "[0-9]*",
@@ -58,7 +62,7 @@ function CurrencyInputField({
             <CurrencyIcon
               fontSize="large"
               sx={{
-                border: "2px solid #f1f1f1",
+                border: "1px solid #fff",
                 borderRadius: "100%",
               }}
             />
@@ -70,4 +74,4 @@ function CurrencyInputField({
   );
 }
 
-export default withTranslation()(CurrencyInputField);
+export default CurrencyInputField;
