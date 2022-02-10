@@ -1,0 +1,247 @@
+{
+  "BTC": {
+    "name": "Bitcoin",
+    "address": "",
+    "icon": null
+  },
+  "ETH": {
+    "name": "Ethereum",
+    "address": "",
+    "icon": null
+  },
+  "BNB": {
+    "name": "Binance Coin",
+    "address": "",
+    "icon": null
+  },
+  "ADA": {
+    "name": "Cardano",
+    "address": "",
+    "icon": null
+  },
+  "DOGE": {
+    "name": "Dogecoin",
+    "address": "",
+    "icon": null
+  },
+  "XRP": {
+    "name": "XRP",
+    "address": "",
+    "icon": null
+  },
+  "DOT": {
+    "name": "Polkadot",
+    "address": "",
+    "icon": null
+  },
+  "UNI": {
+    "name": "Uniswap",
+    "address": "",
+    "icon": null
+  },
+  "ICP": {
+    "name": "Internet-Computer",
+    "address": "",
+    "icon": null
+  },
+  "LINK": {
+    "name": "Chainlink",
+    "address": "",
+    "icon": null
+  },
+  "BCH": {
+    "name": "Bitcoin Cash",
+    "address": "",
+    "icon": null
+  },
+  "LTC": {
+    "name": "Litecoin",
+    "address": "",
+    "icon": null
+  },
+  "MATIC": {
+    "name": "Polygon",
+    "address": "",
+    "icon": null
+  },
+  "XLM": {
+    "name": "Stellar",
+    "address": "",
+    "icon": null
+  },
+  "SOL": {
+    "name": "Solana",
+    "address": "",
+    "icon": null
+  },
+  "VET": {
+    "name": "VeChain",
+    "address": "",
+    "icon": null
+  },
+  "ETC": {
+    "name": "Ethereum Classic",
+    "address": "",
+    "icon": null
+  },
+  "THETA": {
+    "name": "Theta Network",
+    "address": "",
+    "icon": null
+  },
+  "EOS": {
+    "name": "EOS",
+    "address": "",
+    "icon": null
+  },
+  "TRX": {
+    "name": "TRON",
+    "address": "",
+    "icon": null
+  },
+  "FIL": {
+    "name": "Filecoin",
+    "address": "",
+    "icon": null
+  },
+  "AAVE": {
+    "name": "Aave",
+    "address": "",
+    "icon": null
+  },
+  "XMR": {
+    "name": "Monero",
+    "address": "",
+    "icon": null
+  },
+  "CAKE": {
+    "name": "PancakeSwap",
+    "address": "",
+    "icon": null
+  },
+  "NEO": {
+    "name": "NEO",
+    "address": "",
+    "icon": null
+  },
+  "MKR": {
+    "name": "Maker",
+    "address": "",
+    "icon": null
+  },
+  "MIOTA": {
+    "name": "IOTA",
+    "address": "",
+    "icon": null
+  },
+  "KLAY": {
+    "name": "Klaytn",
+    "address": "",
+    "icon": null
+  },
+  "XTZ": {
+    "name": "Tezos",
+    "address": "",
+    "icon": null
+  },
+  "KSM": {
+    "name": "Kusama",
+    "address": "",
+    "icon": null
+  },
+  "MIOTA": {
+    "name": "IOTA",
+    "address": "",
+    "icon": null
+  },
+  "ATOM": {
+    "name": "Cosmos",
+    "address": "",
+    "icon": null
+  },
+  "HT": {
+    "name": "Huobi Token",
+    "address": "",
+    "icon": null
+  },
+  "LUNA": {
+    "name": "Terra",
+    "address": "",
+    "icon": null
+  },
+  "ALGO": {
+    "name": "Algorand",
+    "address": "",
+    "icon": null
+  },
+  "RUNE": {
+    "name": "THORChain",
+    "address": "",
+    "icon": null
+  },
+  "COMP": {
+    "name": "Compound",
+    "address": "",
+    "icon": null
+  },
+  "DCR": {
+    "name": "Decred",
+    "address": "",
+    "icon": null
+  },
+  "DASH": {
+    "name": "Dash",
+    "address": "",
+    "icon": null
+  },
+  "HBAR": {
+    "name": "Hedera",
+    "address": "",
+    "icon": null
+  },
+  "ZCASH": {
+    "name": "Zcash",
+    "address": "",
+    "icon": null
+  },
+  "MIOTA": {
+    "name": "IOTA",
+    "address": "",
+    "icon": null
+  },
+  "CHZ": {
+    "name": "Chilliz",
+    "address": "",
+    "icon": null
+  },
+  "SUSHI": {
+    "name": "SushiSwap",
+    "address": "",
+    "icon": null
+  },
+  "HOT": {
+    "name": "Holo",
+    "address": "",
+    "icon": null
+  },
+  "MANA": {
+    "name": "Decentraland",
+    "address": "",
+    "icon": null
+  },
+  "ENJ": {
+    "name": "Enjin Coin",
+    "address": "",
+    "icon": null
+  },
+  "HNT": {
+    "name": "Helium",
+    "address": "",
+    "icon": null
+  },
+  "QTUM": {
+    "name": "Qtum",
+    "address": "",
+    "icon": null
+  }
+}
