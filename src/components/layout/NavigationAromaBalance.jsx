@@ -32,7 +32,7 @@ function NavigationAromaBalance() {
           backgroundColor={alpha(theme.palette.common.black, 0.5)}
         >
           <Typography color="white" variant="button" as="span">
-            <AromaBalance />
+            <AromaBalance placeholder="---"/>
           </Typography>
           {/* @todo href should not be hard-coded */}
           <IconButton
