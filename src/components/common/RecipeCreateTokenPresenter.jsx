@@ -1,6 +1,9 @@
-import { Grid, Paper, Stack, Typography } from "@mui/material";
+import { Grid, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import TokenPerformanceSvgChart from "../charts/TokenPerformanceSvgChart";
+import useCoinPairPrice from "../../hooks/pricefeed/useCoinPairPrice";
+import { coinPairImplode } from "../../utils/helpers";
+import { formatCurrency } from "../../utils/formatters";
 
 /**
  * @param token
@@ -13,13 +16,12 @@ function RecipeCreateTokenPresenter({ token }) {
    *
    * @todo dynamically set preferred quote currency depending on user's choice
    */
-  // const preferredQuoteCurrency = "USDT";
+  const preferredQuoteCurrency = "USDT";
+  const preferredQuoteSymbol = "$";
 
-  // @todo fix cors header in backend app
-  //
-  // const { status, data, error, isFetching } = useCoinPairPrice(
-  //   coinPairImplode([token.symbol, preferredQuoteCurrency])
-  // );
+  const { data } = useCoinPairPrice(
+    coinPairImplode([token.symbol, preferredQuoteCurrency])
+  );
 
   return (
     <Paper variant="outlined" sx={{ py: 1.5, px: 3 }}>
@@ -27,18 +29,21 @@ function RecipeCreateTokenPresenter({ token }) {
         <Grid item xs="auto">
           <HelpOutlineIcon />
           <Typography variant="subtitle2" color="grey.A400">
-            {token.symbol}
+            {token.symbol ?? <Skeleton />}
           </Typography>
         </Grid>
         <Grid item xs>
           <Stack>
-            {/* @todo remove hard coded price */}
             <Typography
               textAlign="right"
               fontWeight="medium"
               color="text.secondary"
             >
-              $33.46
+              {data?.price ? (
+                `${preferredQuoteSymbol}${formatCurrency(data.price)}`
+              ) : (
+                <Skeleton width="55%" sx={{ display: "inline-block" }} />
+              )}
             </Typography>
             <Grid
               container
