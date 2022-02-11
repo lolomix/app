@@ -12,12 +12,13 @@ export function useTokensOfOwner(abi, address) {
 
   const [tokens] =
     useContractCall(
-      address && {
-        abi: abiInterface,
-        address: address,
-        method: "tokensOfOwner",
-        args: [account],
-      }
+      address &&
+        account && {
+          abi: abiInterface,
+          address: address,
+          method: "tokensOfOwner",
+          args: [account],
+        }
     ) ?? [];
 
   return tokens;
