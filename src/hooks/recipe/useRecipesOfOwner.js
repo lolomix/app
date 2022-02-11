@@ -1,4 +1,4 @@
-import { useChefIdsOfOwner } from "./useChefIdsOfOwner";
+import { useChefIdsOfOwner } from "../useChefIdsOfOwner";
 import { useRecipesOfChefs } from "./useRecipesOfChefs";
 
 /**

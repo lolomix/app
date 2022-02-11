@@ -1,9 +1,9 @@
 import { useContractCalls } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
 import { useEffect, useState } from "react";
-import { formatRecipe } from "../utils/formatters";
+import { formatRecipe } from "../../utils/formatters";
 
 /**
  * Returns the recipes by ids
@@ -36,7 +36,7 @@ export function useRecipesByIds(recipeIds) {
         return call?.[0] && { ...call[0], id: recipeIds[i] };
       })
     );
-  }, [calls]);
+  }, [calls, recipeIds]);
 
   useEffect(() => {
     setRecipesFormatted(recipes?.map((recipe) => formatRecipe(recipe)));

@@ -1,11 +1,11 @@
 import { useContractCalls } from "@usedapp/core";
 import { useEffect, useState } from "react";
 import { ethers, utils } from "ethers";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { useRecipeCoinPairIds } from "./useRecipeCoinPairIds";
-import tokenMetadata from "../web3/tokenMetadata.json";
-import { coinPairExplode } from "../utils/helpers";
+import tokenMetadata from "../../web3/tokenMetadata.json";
+import { coinPairExplode } from "../../utils/helpers";
 
 /**
  * Returns the available coin pair id-s in the contract merged with

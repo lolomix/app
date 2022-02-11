@@ -13,7 +13,7 @@ import { useSnackbar } from "notistack";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
 import SearchResultList from "../form/SearchResultList";
 import HorizontalChipList from "../form/HorizontalChipList";
-import { useRecipeCoinPairs } from "../../hooks/useRecipeCoinPairs";
+import { useRecipeCoinPairs } from "../../hooks/recipe/useRecipeCoinPairs";
 
 /**
  * @param props

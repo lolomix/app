@@ -1,6 +1,6 @@
 import { useContractFunction } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { Contract } from "@ethersproject/contracts";
 
 /**
