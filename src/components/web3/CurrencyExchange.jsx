@@ -24,8 +24,8 @@ import CurrencyInputField from "../form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
 import { getErrorMessage } from "../../web3/errors";
-import { useAromaPrice } from "../../hooks/useAromaPrice";
-import { useAromaBuy } from "../../hooks/useAromaBuy";
+import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
+import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
 
 /**

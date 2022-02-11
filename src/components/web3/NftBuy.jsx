@@ -18,7 +18,7 @@ import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
 import { useChefPrice } from "../../hooks/useChefPrice";
 import { formatCurrency } from "../../utils/formatters";
-import { useAromaApprove } from "../../hooks/useAromaApprove";
+import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
 import { useChefBuy } from "../../hooks/useChefBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import NftCard from "./NftCard";

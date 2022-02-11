@@ -1,7 +1,7 @@
 import React from "react";
 // custom
 import { formatCurrency } from "../../utils/formatters";
-import { useAromaBalanceOf } from "../../hooks/useAromaBalanceOf";
+import { useAromaBalanceOf } from "../../hooks/aroma/useAromaBalanceOf";
 // material-ui
 import Skeleton from "@mui/material/Skeleton";
 import { useEthers } from "@usedapp/core";

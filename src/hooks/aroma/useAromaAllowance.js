@@ -2,7 +2,7 @@ import {
   AROMA_DECIMALS_DIGIT,
   NETWORKS,
   TARGET_CHAIN,
-} from "../web3/constants";
+} from "../../web3/constants";
 import { useEthers, useTokenAllowance } from "@usedapp/core";
 import { formatUnits } from "@ethersproject/units";
 import { useEffect, useState } from "react";
