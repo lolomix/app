@@ -10,6 +10,7 @@ import { theme } from "../../utils/theme";
  * @param adjustment
  * @param maxValue
  * @param minValue
+ * @param hideSteppers
  * @returns {JSX.Element}
  * @constructor
  */
@@ -20,6 +21,7 @@ function GradualStepperInputField({
   adjustment = 1,
   maxValue = 100,
   minValue = 0,
+  hideSteppers = false,
 }) {
   /**
    * @returns {boolean}
@@ -56,36 +58,40 @@ function GradualStepperInputField({
         sx: {
           padding: `${theme.spacing(0.1)} ${theme.spacing(0.35)}`,
         },
-        startAdornment: (
-          <InputAdornment position="start">
-            <IconButton
-              disabled={!canDecrement()}
-              variant="contained"
-              shape="squarish"
-              size="xsmall"
-              color="success"
-              aria-label="close"
-              onClick={decrement}
-            >
-              <RemoveIcon fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              disabled={!canIncrement()}
-              variant="contained"
-              shape="squarish"
-              size="xsmall"
-              color="success"
-              aria-label="close"
-              onClick={increment}
-            >
-              <AddIcon fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        ),
+        ...(hideSteppers ?? {
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton
+                disabled={!canDecrement()}
+                variant="contained"
+                shape="squarish"
+                size="xsmall"
+                color="success"
+                aria-label="close"
+                onClick={decrement}
+              >
+                <RemoveIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }),
+        ...(hideSteppers ?? {
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                disabled={!canIncrement()}
+                variant="contained"
+                shape="squarish"
+                size="xsmall"
+                color="success"
+                aria-label="close"
+                onClick={increment}
+              >
+                <AddIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }),
       }}
     />
   );
