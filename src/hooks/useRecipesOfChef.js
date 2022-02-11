@@ -1,4 +1,4 @@
-import { useRecipeIdsOfChef } from "./useRecipeIdsOfChef";
+import { useRecipeIdsOfChefs } from "./useRecipeIdsOfChefs";
 import { useRecipesByIds } from "./useRecipesByIds";
 
 /**
@@ -8,6 +8,6 @@ import { useRecipesByIds } from "./useRecipesByIds";
  * @returns {*[]|string[]}
  */
 export function useRecipesOfChef(chefId) {
-  const recipeIds = useRecipeIdsOfChef(chefId);
+  const recipeIds = useRecipeIdsOfChefs([chefId], true);
   return useRecipesByIds(recipeIds);
 }
