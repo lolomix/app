@@ -17,7 +17,7 @@ export function useRecipesByIds(recipeIds) {
   const [recipesFormatted, setRecipesFormatted] = useState();
   const [recipes, setRecipes] = useState();
 
-  const results = useContractCalls(
+  const calls = useContractCalls(
     recipeIds?.map((recipeId) => ({
       abi: abiInterface,
       address: address,
@@ -27,12 +27,16 @@ export function useRecipesByIds(recipeIds) {
   );
 
   useEffect(() => {
+    if (!calls || !calls.length || calls.some((call) => !call)) {
+      return;
+    }
+
     setRecipes(
-      results?.map((result, i) => {
-        return result?.[0] && { ...result[0], recipeId: recipeIds[i] };
+      calls.map((call, i) => {
+        return call?.[0] && { ...call[0], id: recipeIds[i] };
       })
     );
-  }, [results]);
+  }, [calls]);
 
   useEffect(() => {
     setRecipesFormatted(recipes?.map((recipe) => formatRecipe(recipe)));

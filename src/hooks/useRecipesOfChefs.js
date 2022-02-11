@@ -1,5 +1,6 @@
 import { useRecipeIdsOfChefs } from "./useRecipeIdsOfChefs";
 import { useRecipesByIds } from "./useRecipesByIds";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the recipes of CHEFs
@@ -10,16 +11,24 @@ import { useRecipesByIds } from "./useRecipesByIds";
  */
 export function useRecipesOfChefs(chefIds, flatten = false) {
   const recipeIdsOfChefs = useRecipeIdsOfChefs(chefIds);
-
   const [, recipesFormatted] = useRecipesByIds(recipeIdsOfChefs?.flat());
+  const [recipes, setRecipes] = useState();
 
-  if (flatten) {
-    return recipesFormatted;
-  }
+  useEffect(() => {
+    if (!recipesFormatted || !recipeIdsOfChefs) {
+      return;
+    }
 
-  return recipeIdsOfChefs.map((recipeIds) => {
-    return recipeIds.map((recipeId) =>
-      recipesFormatted.find((recipe) => recipe.recipeId === recipeId)
+    setRecipes(
+      flatten
+        ? recipesFormatted
+        : recipeIdsOfChefs?.map((recipeIds) => {
+            return recipeIds.map((recipeId) =>
+              recipesFormatted.find((recipe) => recipe?.id === recipeId)
+            );
+          })
     );
-  });
+  }, [recipesFormatted, flatten]);
+
+  return recipes;
 }
