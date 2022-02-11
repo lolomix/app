@@ -102,17 +102,27 @@ describe("formatRecipe() formatter", () => {
     expect(result.coinPairs[2].percentage).toBe(50);
   });
 
-  it("should format 'stakedAroma' from BigNumber", () => {
-    const result = formatRecipe({
-      stakedAroma: BigNumber.from(333),
-    });
+  test.each([
+    ["200000000000000000000", 200],
+    ["200000000000000000001", 200],
+    ["200000000000005000000", 200],
+    ["200000031241445324234", 200],
+    ["202000030000005000000", 202],
+    ["1002000030000005000000", 1002],
+  ])(
+    "should format 'stakedAroma' from BigNumber `%s` to `%s`",
+    (from, expected) => {
+      const result = formatRecipe({
+        stakedAroma: BigNumber.from(from),
+      });
 
-    expect(result.stakedAroma).toBe(333);
-  });
+      expect(result.stakedAroma).toBe(expected);
+    }
+  );
 
   it("should format 'timestamp' from BigNumber", () => {
     const result = formatRecipe({
-      timestamp: BigNumber.from(2222222),
+      timestamp: BigNumber.from("2222222"),
     });
 
     expect(result.timestamp).toBe(2222222);

@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import { formatUnits } from "@ethersproject/units";
 
 /**
  * @param num
@@ -48,8 +49,11 @@ export function formatRecipe(recipe) {
       id: pair?.id?.toNumber(),
       percentage: pair?.percentage?.toNumber(),
     })),
-    stakedAroma: recipe.stakedAroma?.toNumber(),
+    stakedAroma:
+      recipe.stakedAroma && Math.trunc(formatUnits(recipe.stakedAroma)),
     timestamp: recipe.timestamp?.toNumber(),
-    date: recipe.timestamp && new Date(recipe.timestamp?.toNumber() * 1000).toLocaleString(),
+    date:
+      recipe.timestamp &&
+      new Date(recipe.timestamp?.toNumber() * 1000).toLocaleString(),
   };
 }
