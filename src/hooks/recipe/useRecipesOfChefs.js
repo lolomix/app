@@ -28,7 +28,7 @@ export function useRecipesOfChefs(chefIds, flatten = false) {
             );
           })
     );
-  }, [recipesFormatted, flatten]);
+  }, [recipesFormatted, recipeIdsOfChefs, flatten]);
 
   return recipes;
 }
