@@ -85,7 +85,7 @@ describe("formatRecipe() formatter", () => {
     expect(result.name).toBe("Awesome Recipe");
   });
 
-  it("should format 'coinPairs' object vaules from BigNumber", () => {
+  it("should format 'coinPairs' object values from BigNumber", () => {
     const result = formatRecipe({
       coinPairs: [
         { id: BigNumber.from(1), percentage: BigNumber.from(25) },
@@ -142,5 +142,13 @@ describe("formatRecipe() formatter", () => {
     });
 
     expect(result.date).toBe(undefined);
+  });
+
+  it("should return 'id' if 'id' is present", () => {
+    const result = formatRecipe({
+      id: 924309,
+    });
+
+    expect(result.id).toBe(924309);
   });
 });

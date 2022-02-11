@@ -36,7 +36,7 @@ export function truncate(
  * Formats raw recipe object to readable object
  *
  * @param recipe
- * @returns {{name: string, chefId: *, coinPairs: *, stakedAroma: *, timestamp: *, date: *}}
+ * @returns {{name: string, chefId: *, id: *, coinPairs: *, stakedAroma: *, timestamp: *, date: *}|undefined}
  */
 export function formatRecipe(recipe) {
   if (!recipe) return;
@@ -44,7 +44,7 @@ export function formatRecipe(recipe) {
   return {
     chefId: recipe.chefId?.toNumber(),
     name: recipe.name && ethers.utils.parseBytes32String(recipe.name),
-    recipeId: recipe.recipeId,
+    id: recipe.id,
     coinPairs: recipe.coinPairs?.map((pair) => ({
       id: pair?.id?.toNumber(),
       percentage: pair?.percentage?.toNumber(),
