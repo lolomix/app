@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
-import { useChefofOwner } from "../../hooks/useChefofOwner";
+import { useChefIdsOfOwner } from "../../hooks/useChefIdsOfOwner";
 import React from "react";
 import { theme } from "../../utils/theme";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
@@ -21,7 +21,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 function ChefSelectorDialog(props) {
   const { handleClose, handleSelect, ...rest } = props;
 
-  const nfts = useChefofOwner();
+  const nfts = useChefIdsOfOwner();
 
   return (
     <Dialog {...rest}>
@@ -31,7 +31,7 @@ function ChefSelectorDialog(props) {
       <DialogContent>
         <Grid container spacing={2} mt={0.1}>
           {nfts ? (
-            nfts.map((tokenID, index) => (
+            nfts.map((tokenID) => (
               <Grid key={tokenID.toString()} item xs={12} sm={6}>
                 <Box
                   position="relative"
