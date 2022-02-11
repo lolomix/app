@@ -47,7 +47,9 @@ function NftCard({
   return (
     <Card
       variant={variant}
-      sx={variant === "elevation" && { boxShadow: theme.blurredShadows }}
+      sx={{
+        ...(variant === "elevation" && { boxShadow: theme.blurredShadows }),
+      }}
     >
       <CardContent>
         <Stack textAlign="center" spacing={1}>
