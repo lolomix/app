@@ -2,6 +2,7 @@ import { useContractCalls } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
 import abi from "../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
+import { useEffect, useState } from "react";
 
 /**
  * Returns the recipe ids of multiple CHEFs
@@ -13,8 +14,9 @@ import { utils } from "ethers";
 export function useRecipeIdsOfChefs(chefIds, flatten = false) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const [recipeIds, setRecipeIds] = useState();
 
-  let recipeIds = useContractCalls(
+  const calls = useContractCalls(
     chefIds?.map((chefId) => ({
       abi: abiInterface,
       address: address,
@@ -23,9 +25,15 @@ export function useRecipeIdsOfChefs(chefIds, flatten = false) {
     })) ?? []
   );
 
-  if (flatten) {
-    recipeIds = recipeIds?.flat();
-  }
+  useEffect(() => {
+    if (!calls || calls.some((call) => !call)) {
+      return;
+    }
 
-  return recipeIds?.filter((recipeId) => recipeId);
+    let ids = calls?.map((call) => call?.[0]);
+
+    setRecipeIds(flatten ? ids.flat() : ids);
+  }, [calls, flatten]);
+
+  return recipeIds;
 }
