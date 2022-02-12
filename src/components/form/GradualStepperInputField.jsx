@@ -58,7 +58,7 @@ function GradualStepperInputField({
         sx: {
           padding: `${theme.spacing(0.1)} ${theme.spacing(0.35)}`,
         },
-        ...(hideSteppers ?? {
+        ...(hideSteppers || {
           startAdornment: (
             <InputAdornment position="start">
               <IconButton
@@ -75,7 +75,7 @@ function GradualStepperInputField({
             </InputAdornment>
           ),
         }),
-        ...(hideSteppers ?? {
+        ...(hideSteppers || {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton

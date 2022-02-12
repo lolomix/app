@@ -1,4 +1,3 @@
-// material-ui
 import {
   Card,
   CardActions,
@@ -8,17 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
-// custom
 import RecipeOnPlateIcon from "../icons/RecipeOnPlateIcon";
 import { bindDialogClick } from "../../utils/binders";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
-
-/**
- * Define the Recipe Creator Step of the Component
- *
- * @type {number}
- */
-const RECIPE_CREATOR_STEP = 0;
 
 /**
  * @param tokenSelectorDialogState
@@ -26,10 +16,6 @@ const RECIPE_CREATOR_STEP = 0;
  * @constructor
  */
 function RecipeCreateSelectTokensStep({ tokenSelectorDialogState }) {
-  const [{ activeStep }] = useRecipeCreator();
-
-  if (activeStep !== RECIPE_CREATOR_STEP) return null;
-
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item xs sm={6} md={4} textAlign="center">

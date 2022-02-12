@@ -36,7 +36,7 @@ function recipeCreatorReducer(state, [type, payload]) {
     let percentageToAimFor = state.totalPercentage;
     let minimalCorrectionPerToken = state.adjustmentPercentage;
 
-    let minPercentageAmountPerToken = state.minTokenPercentage
+    let minPercentageAmountPerToken = state.minTokenPercentage;
     let maxPercentageAmountPerToken =
       percentageToAimFor -
       (numberOfTokens * minPercentageAmountPerToken -
@@ -291,6 +291,10 @@ function useRecipeCreator() {
 
   const [state, dispatch] = context;
 
+  const tokenDefaults = {
+    percentage: state.minTokenPercentage,
+  };
+
   const validationConditions = {
     ifLessThanMaxTokensSelected: [
       () => state.tokens.length < state.maxSelection,
@@ -327,7 +331,7 @@ function useRecipeCreator() {
   const addToken = (token) => {
     validateConditions("ifLessThanMaxTokensSelected");
 
-    dispatch([ADD_TOKEN, { token }]);
+    dispatch([ADD_TOKEN, { token: { ...tokenDefaults, ...token } }]);
   };
 
   /**

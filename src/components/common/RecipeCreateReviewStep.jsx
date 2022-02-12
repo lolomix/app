@@ -19,23 +19,14 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
 
 /**
- * Define the Recipe Creator Step of the Component
- *
- * @type {number}
- */
-const RECIPE_CREATOR_STEP = 1;
-
-/**
  * @returns {JSX.Element|null}
  * @constructor
  */
 function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
-  const [{ activeStep, tokens, maxSelection }, { nextStep, removeToken }] =
+  const [{ tokens, maxSelection }, { nextStep, removeToken }] =
     useRecipeCreator();
 
   const { enqueueSnackbar } = useSnackbar();
-
-  if (activeStep !== RECIPE_CREATOR_STEP) return null;
 
   return (
     <Grid container justifyContent="center" alignItems="center">

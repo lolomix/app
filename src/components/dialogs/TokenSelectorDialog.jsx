@@ -43,13 +43,13 @@ function TokenSelectorDialog(props) {
 
   /**
    * @param token
-   *
-   * @todo remove hard-coded token percentage
    */
   const handleTokenSelectionClick = (token) => {
     try {
-      addToken({ ...token, percentage: 5 });
-      if (recipeCreatorState.activeStep !== 0) handleClose();
+      addToken(token);
+      if (recipeCreatorState.activeStep !== 0) {
+        handleClose();
+      }
     } catch (error) {
       enqueueSnackbar(error.message, {
         variant: "error",
@@ -61,7 +61,13 @@ function TokenSelectorDialog(props) {
    * @param token
    */
   const handleTokenRemovalClick = (token) => {
-    removeToken(token);
+    try {
+      removeToken(token);
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    }
   };
 
   /**

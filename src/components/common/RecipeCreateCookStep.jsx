@@ -21,7 +21,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useDialogState } from "../../hooks/useDialogState";
 import ChefSelectorDialog from "../dialogs/ChefSelectorDialog";
 import { bindDialog, bindDialogClick } from "../../utils/binders";
-import { useRecipeCreate } from "../../hooks/useRecipeCreate";
+import { useRecipeCreate } from "../../hooks/recipe/useRecipeCreate";
 import { useSnackbar } from "notistack";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import { ethers } from "ethers";
@@ -29,25 +29,18 @@ import { parseUnits } from "@ethersproject/units";
 import { AROMA_DECIMALS_DIGIT } from "../../web3/constants";
 
 /**
- * Define the Recipe Creator Step of the Component
- *
- * @type {number}
- */
-const RECIPE_CREATOR_STEP = 2;
-
-/**
  * @returns {JSX.Element|null}
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const [{ activeStep, tokens }, { nextStep }] = useRecipeCreator();
+  const [{ tokens }] = useRecipeCreator();
 
   const chefSelectorDialogState = useDialogState({
     dialogId: "chefSelectorDialog",
   });
 
   const [stakeAroma, setStakeAroma] = useState(200);
-  const [recipeName, setRecipeName] = useState();
+  const [recipeName, setRecipeName] = useState("");
   const [chefId, setChefId] = useState();
 
   const handleRecipeNameUserInput = (e) => {
@@ -109,9 +102,8 @@ function RecipeCreateCookStep() {
       enqueueSnackbar("Success", {
         variant: "success",
       });
-      nextStep();
     }
-  }, [state, closeSnackbar, enqueueSnackbar, nextStep]);
+  }, [state, closeSnackbar, enqueueSnackbar]);
 
   /**
    * Definition of the transaction in progress state
@@ -162,8 +154,6 @@ function RecipeCreateCookStep() {
       });
     }
   };
-
-  if (activeStep !== RECIPE_CREATOR_STEP) return null;
 
   return (
     <Grid container justifyContent="center" alignItems="center">
