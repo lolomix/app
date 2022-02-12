@@ -9,7 +9,7 @@ import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { useRecipeCoinPairs } from "../../hooks/recipe/useRecipeCoinPairs";
 import { Box, Card, CardContent, Skeleton, Typography } from "@mui/material";
 import RecipePerformanceChart from "../../components/charts/RecipePerformanceChart";
-import RecipeCreateTokenPresenter from "../../components/common/RecipeCreateTokenPresenter";
+import RecipeCreateCoinPairPresenter from "../../components/common/RecipeCreateCoinPairPresenter";
 import GradualStepperInputField from "../../components/form/GradualStepperInputField";
 import Layout from "../../components/layout/Layout";
 
@@ -137,7 +137,7 @@ function RecipeSingle() {
                     >
                       <Grid item xs={7} sm={12}>
                         <Box position="relative">
-                          <RecipeCreateTokenPresenter token={token} />
+                          <RecipeCreateCoinPairPresenter token={token} />
                         </Box>
                       </Grid>
                       <Grid item xs={3} sm={5} md={6} lg={4}>

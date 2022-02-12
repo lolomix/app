@@ -9,7 +9,7 @@ import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
  * @returns {JSX.Element|null}
  * @constructor
  */
-function RecipeCreateTokenController({ token }) {
+function RecipeCreateCoinPairController({ token }) {
   const [
     { maxTokenPercentage, minTokenPercentage, adjustmentPercentage },
     { replaceToken, switchTokenLock },
@@ -60,4 +60,4 @@ function RecipeCreateTokenController({ token }) {
   );
 }
 
-export default RecipeCreateTokenController;
+export default RecipeCreateCoinPairController;

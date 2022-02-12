@@ -10,7 +10,7 @@ import { formatCurrency } from "../../utils/formatters";
  * @returns {JSX.Element}
  * @constructor
  */
-function RecipeCreateTokenPresenter({ token }) {
+function RecipeCreateCoinPairPresenter({ token }) {
   /**
    * @type {string}
    *
@@ -75,4 +75,4 @@ function RecipeCreateTokenPresenter({ token }) {
   );
 }
 
-export default RecipeCreateTokenPresenter;
+export default RecipeCreateCoinPairPresenter;

@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
 import { bindDialogClick } from "../../utils/binders";
 import { useSnackbar } from "notistack";
-import RecipeCreateTokenController from "./RecipeCreateTokenController";
+import RecipeCreateCoinPairController from "./RecipeCreateCoinPairController";
 import RecipePerformanceChart from "../charts/RecipePerformanceChart";
-import RecipeCreateTokenPresenter from "./RecipeCreateTokenPresenter";
+import RecipeCreateCoinPairPresenter from "./RecipeCreateCoinPairPresenter";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
 
@@ -62,7 +62,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                 >
                   <Grid item xs={7} sm={12}>
                     <Box position="relative">
-                      <RecipeCreateTokenPresenter token={token} />
+                      <RecipeCreateCoinPairPresenter token={token} />
                       <IconButton
                         onClick={() => {
                           try {
@@ -88,7 +88,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                     </Box>
                   </Grid>
                   <Grid item xs={5} sm={8.5} md={10} lg={8}>
-                    <RecipeCreateTokenController token={token} />
+                    <RecipeCreateCoinPairController token={token} />
                   </Grid>
                 </Grid>
               ))}
