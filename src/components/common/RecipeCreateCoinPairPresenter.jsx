@@ -51,7 +51,7 @@ function RecipeCreateCoinPairPresenter({ token }) {
               {data?.lastPrice ? (
                 `${preferredQuoteSymbol}${formatCurrency(data.lastPrice)}`
               ) : (
-                <Skeleton width="55%" sx={{ display: "inline-block" }} />
+                <Skeleton width="80px" sx={{ display: "inline-block" }} />
               )}
             </Typography>
             <Grid
@@ -75,7 +75,7 @@ function RecipeCreateCoinPairPresenter({ token }) {
                   {data?.priceChangePercent ? (
                     `${data.priceChangePercent?.toFixed(2)}%`
                   ) : (
-                    <Skeleton width="55%" sx={{ display: "inline-block" }} />
+                    <Skeleton width="25px" />
                   )}
                 </Typography>
               </Grid>
