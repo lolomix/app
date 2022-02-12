@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
  *
  * @todo abstract url from the hook
  */
-const getCoinPairOneDayChangeStatisticsbySymbol = async (symbol) => {
+const getCoinPairOneDayChangeStatisticsBySymbol = async (symbol) => {
   const response = await fetch(
     `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/current/oneDayChangeStatistics?symbol=${symbol}`
   );
@@ -23,7 +23,7 @@ const getCoinPairOneDayChangeStatisticsbySymbol = async (symbol) => {
 export default function useCoinPairOneDayChangeStatistics(symbol) {
   return useQuery(
     ["coinPairOneDayChangeStatistics", symbol],
-    () => getCoinPairOneDayChangeStatisticsbySymbol(symbol),
+    () => getCoinPairOneDayChangeStatisticsBySymbol(symbol),
     {
       enabled: !!symbol,
       refetchInterval: 3600000, // only refetch after an hour
