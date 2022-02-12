@@ -6,7 +6,7 @@ import {
   Stack,
   Button,
 } from "@mui/material";
-import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
+import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
 import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/Buy_CHEF.svg";

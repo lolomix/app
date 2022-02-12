@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import WhiteFlameIcon from "../../components/icons/WhiteFlameIcon";
 import { theme } from "../../utils/theme";
-import { useNftWithMetadata } from "../../hooks/useNftWithMetadata";
+import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
 import Layout from "../../components/layout/Layout";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
@@ -116,7 +116,7 @@ function ChefSingle() {
                                   border: "3px solid #98C6E5",
                                   borderRadius: "12px",
                                 }}
-                              ></Box>
+                              />
                             </Grid>
                             <Grid container item flexDirection="column" xs={7}>
                               <Grid item>
