@@ -16,10 +16,10 @@ import {
 // custom
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
-import { useChefPrice } from "../../hooks/useChefPrice";
+import { useChefPrice } from "../../hooks/chef/useChefPrice";
 import { formatCurrency } from "../../utils/formatters";
 import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
-import { useChefBuy } from "../../hooks/useChefBuy";
+import { useChefBuy } from "../../hooks/chef/useChefBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import NftCard from "./NftCard";
 

@@ -7,7 +7,7 @@ import { useEthers } from "@usedapp/core";
 import NftCard from "../../components/web3/NftCard";
 import NoNftNotificationCard from "../../components/common/NoNftNotificationCard";
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
-import { useChefIdsOfOwner } from "../../hooks/useChefIdsOfOwner";
+import { useChefIdsOfOwner } from "../../hooks/chef/useChefIdsOfOwner";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";

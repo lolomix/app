@@ -4,7 +4,7 @@ import { Alert, darken, Link } from "@mui/material";
 import { TARGET_CHAIN, NETWORKS } from "../../web3/constants";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";
-import { useChefSeasonRemaining } from "../../hooks/useChefSeasonRemaining";
+import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining";
 
 /**
  * @returns {JSX.Element|null}

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
-import { useChefIdsOfOwner } from "../../hooks/useChefIdsOfOwner";
+import { useChefIdsOfOwner } from "../../hooks/chef/useChefIdsOfOwner";
 import React from "react";
 import { theme } from "../../utils/theme";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";

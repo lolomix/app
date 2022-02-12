@@ -2,8 +2,8 @@ import {
   AROMA_DECIMALS_DIGIT,
   NETWORKS,
   TARGET_CHAIN,
-} from "../web3/constants";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+} from "../../web3/constants";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { formatUnits } from "@ethersproject/units";
 import { useContractCall } from "@usedapp/core";
 import { utils } from "ethers";

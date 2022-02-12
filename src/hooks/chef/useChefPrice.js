@@ -3,8 +3,8 @@ import {
   AROMA_DECIMALS_DIGIT,
   NETWORKS,
   TARGET_CHAIN,
-} from "../web3/constants";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+} from "../../web3/constants";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
 import { formatUnits } from "@ethersproject/units";
 import { useEffect, useState } from "react";

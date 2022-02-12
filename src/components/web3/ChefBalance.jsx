@@ -1,7 +1,7 @@
 import React from "react";
 // utils
 import { formatCurrency } from "../../utils/formatters";
-import { useChefBalanceOf } from "../../hooks/useChefBalanceOf";
+import { useChefBalanceOf } from "../../hooks/chef/useChefBalanceOf";
 import { useEthers } from "@usedapp/core";
 // material-ui
 import Skeleton from "@mui/material/Skeleton";

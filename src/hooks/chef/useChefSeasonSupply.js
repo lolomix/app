@@ -1,7 +1,7 @@
 import { useContractCall } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../web3/constants";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { utils } from "ethers";
-import abi from "../web3/abi/CryptoChefsERC721Facet.json";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { useEffect, useState } from "react";
 
 /**

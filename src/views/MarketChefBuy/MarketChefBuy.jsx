@@ -3,8 +3,8 @@ import { Box, Typography, Grid } from "@mui/material";
 import NftBuy from "../../components/web3/NftBuy";
 import Layout from "../../components/layout/Layout";
 import styled from "@emotion/styled";
-import { useChefSeasonRemaining } from "../../hooks/useChefSeasonRemaining";
-import { useChefTotalSupply } from "../../hooks/useChefTotalSupply";
+import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining";
+import { useChefTotalSupply } from "../../hooks/chef/useChefTotalSupply";
 
 const CustomBanner = styled(Box, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
