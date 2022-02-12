@@ -22,7 +22,7 @@ const getCoinPairPriceBySymbol = async (symbol) => {
  */
 export default function useCoinPairPrice(symbol) {
   return useQuery(
-    ["coinPair", symbol],
+    ["coinPairPrice", symbol],
     () => getCoinPairPriceBySymbol(symbol),
     {
       enabled: !!symbol,
