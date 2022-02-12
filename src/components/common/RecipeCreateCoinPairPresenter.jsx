@@ -1,9 +1,8 @@
 import { Grid, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import TokenPerformanceSvgChart from "../charts/TokenPerformanceSvgChart";
-import useCoinPairPrice from "../../hooks/pricefeed/useCoinPairPrice";
 import { coinPairImplode } from "../../utils/helpers";
 import { formatCurrency } from "../../utils/formatters";
+import useCoinPairOneDayChangeStatistics from "../../hooks/pricefeed/useCoinPairOneDayChangeStatistics";
 
 /**
  * @param token
@@ -17,11 +16,21 @@ function RecipeCreateCoinPairPresenter({ token }) {
    * @todo dynamically set preferred quote currency depending on user's choice
    */
   const preferredQuoteCurrency = "USDT";
+
+  /**
+   * @type {string}
+   */
   const preferredQuoteSymbol = "$";
 
-  const { data } = useCoinPairPrice(
-    coinPairImplode([token.symbol, preferredQuoteCurrency])
-  );
+  /**
+   * @type {string|undefined}
+   */
+  const coinPairSymbol = coinPairImplode([
+    token.symbol,
+    preferredQuoteCurrency,
+  ]);
+
+  const { data } = useCoinPairOneDayChangeStatistics(coinPairSymbol);
 
   return (
     <Paper variant="outlined" sx={{ py: 1.5, px: 3 }}>
@@ -39,8 +48,8 @@ function RecipeCreateCoinPairPresenter({ token }) {
               fontWeight="medium"
               color="text.secondary"
             >
-              {data?.price ? (
-                `${preferredQuoteSymbol}${formatCurrency(data.price)}`
+              {data?.lastPrice ? (
+                `${preferredQuoteSymbol}${formatCurrency(data.lastPrice)}`
               ) : (
                 <Skeleton width="55%" sx={{ display: "inline-block" }} />
               )}
@@ -51,20 +60,23 @@ function RecipeCreateCoinPairPresenter({ token }) {
               alignItems="center"
               spacing={1}
             >
+              {/*<Grid item xs="auto">*/}
+              {/*  /!* @todo provide performance of token *!/*/}
+              {/*  <TokenPerformanceSvgChart*/}
+              {/*    fontSize="large"*/}
+              {/*    sx={{*/}
+              {/*      display: "block",*/}
+              {/*      color: "error.main",*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</Grid>*/}
               <Grid item xs="auto">
-                {/* @todo provide performance of token */}
-                <TokenPerformanceSvgChart
-                  fontSize="large"
-                  sx={{
-                    display: "block",
-                    color: "error.main",
-                  }}
-                />
-              </Grid>
-              <Grid item xs="auto">
-                {/* @todo remove hard coded performance */}
                 <Typography color="error" variant="caption" fontWeight="medium">
-                  -12.5%
+                  {data?.priceChangePercent ? (
+                    `${data.priceChangePercent?.toFixed(2)}%`
+                  ) : (
+                    <Skeleton width="55%" sx={{ display: "inline-block" }} />
+                  )}
                 </Typography>
               </Grid>
             </Grid>

@@ -10,7 +10,7 @@ function TokenPerformanceSvgChart(props) {
   let width = 120;
   let height = 60;
 
-  let hourlyPrices = [
+  let hourlyPrices = [  
     3.4, 3.67, 3.98, 3.67, 3.56, 3.02, 3.23, 3.12, 3.0, 2.98, 2.78, 2.67,
   ];
   let minPrice = hourlyPrices.reduce((p, v) => (p < v ? p : v));
