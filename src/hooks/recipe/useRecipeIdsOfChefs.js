@@ -1,39 +1,38 @@
-import { useContractCalls } from "@usedapp/core";
+import { useCalls } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
-import { useEffect, useState } from "react";
+import { Contract } from "@ethersproject/contracts";
+import { logUseCalls } from "../../utils/loggers";
 
 /**
  * Returns the recipe ids of multiple CHEFs
  *
- * @param chefIds
- * @param flatten
- * @returns {*[]|string[]}
+ * @param {array|undefined} chefIds
+ * @param {boolean} flatten
+ * @returns {*[]|FlatArray<*[], 1>[]|*[]}
  */
 export function useRecipeIdsOfChefs(chefIds, flatten = false) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
-  const [recipeIds, setRecipeIds] = useState();
+  const defaultResults = [];
 
-  const calls = useContractCalls(
+  const calls =
     chefIds?.map((chefId) => ({
-      abi: abiInterface,
-      address: address,
+      contract: new Contract(address, abiInterface),
       method: "getRecipesOfChef",
       args: [chefId],
-    })) ?? []
-  );
+    })) ?? [];
 
-  useEffect(() => {
-    if (!calls || calls.some((call) => !call)) {
-      return;
-    }
+  let results = useCalls(calls) ?? defaultResults;
 
-    let ids = calls?.map((call) => call?.[0]);
+  logUseCalls(results, calls);
 
-    setRecipeIds(flatten ? ids.flat() : ids);
-  }, [calls, flatten]);
+  if (results.some((result) => !result || result.error)) {
+    return defaultResults;
+  }
 
-  return recipeIds;
+  results = results.map((result) => result?.value?.[0]);
+
+  return flatten ? results.flat() : results;
 }

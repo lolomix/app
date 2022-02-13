@@ -20,7 +20,7 @@ import Layout from "../../components/layout/Layout";
 function RecipeSingle() {
   const [, coinParsFormatted] = useRecipeCoinPairs();
   const { recipeId } = useParams();
-  const [, recipeFormatted] = useRecipeById(recipeId);
+  const recipeFormatted = useRecipeById(recipeId);
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const [coinPairs, setCoinPairs] = useState();
 
