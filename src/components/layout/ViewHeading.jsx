@@ -70,7 +70,6 @@ function ViewHeading(props) {
           <Box
             as="span"
             textAlign="center"
-            maxWidth="394px"
             color="text.secondary"
             mt={1}
           >
