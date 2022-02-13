@@ -1,5 +1,3 @@
-import * as React from "react";
-// material-ui
 import { Alert, darken, Link } from "@mui/material";
 import { TARGET_CHAIN, NETWORKS } from "../../web3/constants";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
@@ -14,7 +12,7 @@ import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining"
  */
 function AnnouncementBar() {
   const testnet = NETWORKS[TARGET_CHAIN].testnet === true;
-  const [, chefSeasonRemainingFormatted] = useChefSeasonRemaining();
+  const chefSeasonRemaining = useChefSeasonRemaining();
 
   // only show warning on testnet
   if (testnet) {
@@ -29,7 +27,7 @@ function AnnouncementBar() {
     );
   }
 
-  if (chefSeasonRemainingFormatted === 0) {
+  if (chefSeasonRemaining === 0) {
     return (
       <Alert
         icon={<ChefSilhouetteIcon fontSize="inherit" />}
