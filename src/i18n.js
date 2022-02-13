@@ -24,7 +24,6 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    whitelist: ["en", "de", "fr", "it"],
     fallbackLng: "en",
     cleanCode: true,
     lowerCaseLng: true,
