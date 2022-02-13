@@ -10,7 +10,7 @@ function MyChefsIcon(props) {
           <g
             fill="#ffa41f"
             stroke="#070707"
-            stroke-width="8"
+            strokeWidth="8"
             data-name="Rectangle 705"
             transform="rotate(-30 264.86 70.97)"
           >
@@ -39,7 +39,7 @@ function MyChefsIcon(props) {
           <g
             fill="#ffa41f"
             stroke="#070707"
-            stroke-width="8"
+            strokeWidth="8"
             data-name="Rectangle 705"
             transform="rotate(-9 364.94 -857.36)"
           >
@@ -68,7 +68,7 @@ function MyChefsIcon(props) {
           <g
             fill="#ffa41f"
             stroke="#070707"
-            stroke-width="8"
+            strokeWidth="8"
             data-name="Rectangle 705"
             transform="rotate(20 154.13 874.1)"
           >
