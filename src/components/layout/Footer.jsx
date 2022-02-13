@@ -136,7 +136,7 @@ const Footer = () => {
           xs={11}
           alignItems="center"
           justifyContent="space-between"
-          texAlign="center"
+          textAlign="center"
         >
           <Grid
             item
