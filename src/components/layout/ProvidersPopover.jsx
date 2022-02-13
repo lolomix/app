@@ -27,8 +27,27 @@ import { useEthers, useNetwork } from "@usedapp/core";
  * @returns {JSX.Element}
  * @constructor
  */
+const ProviderIcon = ({ providerKey, ...rest }) => {
+  const icons = {
+    WalletMetaMaskIcon: WalletMetaMaskIcon,
+    WalletWalletConnectIcon: WalletWalletConnectIcon,
+    WalletLedgerIcon: WalletLedgerIcon,
+  };
+  const TheIcon = icons[providersList[providerKey]?.icon];
+
+  // early return, if not valid function component
+  if (typeof TheIcon !== "function") return null;
+
+  return <TheIcon {...rest} />;
+};
+
+/**
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function ProvidersPopover(props) {
-  const { t, closePopover, ...rest } = props;
+  const { t, tReady, closePopover, ...rest } = props;
 
   const { active, error, chainId, activateBrowserWallet } = useEthers();
 
@@ -130,25 +149,6 @@ function ProvidersPopover(props) {
     return !!activatingProvider || providersList[providerKey].soon;
   };
 
-  /**
-   * @param props
-   * @returns {JSX.Element}
-   * @constructor
-   */
-  const ProviderIcon = (props) => {
-    const icons = {
-      WalletMetaMaskIcon: WalletMetaMaskIcon,
-      WalletWalletConnectIcon: WalletWalletConnectIcon,
-      WalletLedgerIcon: WalletLedgerIcon,
-    };
-    const TheIcon = icons[providersList[props.providerKey]?.icon];
-
-    // early return, if not valid function component
-    if (typeof TheIcon !== "function") return null;
-
-    return <TheIcon {...props} />;
-  };
-
   return (
     <Popover {...rest}>
       <Box pt={2} pb={3} px={3} width="350px">
@@ -180,40 +180,43 @@ function ProvidersPopover(props) {
                 }
               )}
             >
-              <LoadingButton
-                fullWidth
-                disableElevation
-                variant={
-                  isCurrentProvider(key) && !isUnsupportedNetwork(error)
-                    ? "contained"
-                    : "outlined"
-                }
-                size="large"
-                color={isCurrentProvider(key) ? "success" : "primary"}
-                startIcon={<ProviderIcon providerKey={key} />}
-                alignedStartIcon
-                endIcon={
-                  isCurrentProvider(key) && !isUnsupportedNetwork(error) ? (
-                    <Check />
-                  ) : null
-                }
-                loading={handleProviderButtonLoadingProp(key)}
-                disabled={handleProviderButtonDisabledProp(key)}
-                onClick={() => handleProviderButtonClick(key)}
-              >
-                {isCurrentProvider(key) && isUnsupportedNetwork(error)
-                  ? `Switch to ${NETWORKS[TARGET_CHAIN].name}`
-                  : providersList[key].name}
-                {providersList[key].soon && (
-                  <Typography
-                    pl={0.5}
-                    fontWeight="bold"
-                    sx={{ fontSize: "0.65rem" }}
-                  >
-                    SOON
-                  </Typography>
-                )}
-              </LoadingButton>
+              {/* the fragment is added due to Tooltip complaining when button is disabled */}
+              <>
+                <LoadingButton
+                  fullWidth
+                  disableElevation
+                  variant={
+                    isCurrentProvider(key) && !isUnsupportedNetwork(error)
+                      ? "contained"
+                      : "outlined"
+                  }
+                  size="large"
+                  color={isCurrentProvider(key) ? "success" : "primary"}
+                  startIcon={<ProviderIcon providerKey={key} />}
+                  alignedStartIcon
+                  endIcon={
+                    isCurrentProvider(key) && !isUnsupportedNetwork(error) ? (
+                      <Check />
+                    ) : null
+                  }
+                  loading={handleProviderButtonLoadingProp(key)}
+                  disabled={handleProviderButtonDisabledProp(key)}
+                  onClick={() => handleProviderButtonClick(key)}
+                >
+                  {isCurrentProvider(key) && isUnsupportedNetwork(error)
+                    ? `Switch to ${NETWORKS[TARGET_CHAIN].name}`
+                    : providersList[key].name}
+                  {providersList[key].soon && (
+                    <Typography
+                      pl={0.5}
+                      fontWeight="bold"
+                      sx={{ fontSize: "0.65rem" }}
+                    >
+                      SOON
+                    </Typography>
+                  )}
+                </LoadingButton>
+              </>
             </Tooltip>
           ))}
 
