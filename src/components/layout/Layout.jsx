@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import ViewHeading from "./ViewHeading";
-import { Stack, Container, Box } from "@mui/material";
+import { Stack, Container } from "@mui/material";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 
