@@ -1,13 +1,7 @@
 import i18n from "i18next";
-// import Backend from 'i18next-xhr-backend';
-//import LanguageDetector from "i18next-browser-languagedetector";
 import { format, formatDistance } from "date-fns";
-// other date functions: { formatDistance, formatRelative, subDays } from 'date-fns';
 import { de, enUS, fr, it } from "date-fns/locale";
 import transEn from "./i18n/en/translation";
-//import transDe from "./i18n/de/translation";
-//import transFr from "./i18n/fr/translation";
-//import transIt from "./i18n/it/translation";
 import { initReactI18next } from "react-i18next";
 
 const dateLang = {
@@ -89,11 +83,6 @@ i18n
     },
     resources: {
       en: { translation: transEn },
-      /*
-      de: { translation: transDe },
-      fr: { translation: transFr },
-      it: { translation: transIt },
-      */
     },
   });
 
