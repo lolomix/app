@@ -127,6 +127,7 @@ function ChefSingle() {
                                     height: "5.5vw",
                                     border: "3px solid #98C6E5",
                                     borderRadius: "12px",
+                                    opacity: "0.5"
                                   }}
                                 />
                               </Grid>
