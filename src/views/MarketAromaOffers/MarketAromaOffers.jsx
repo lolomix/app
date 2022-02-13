@@ -16,21 +16,21 @@ const MarketAromaOffers = () => {
       amount: 1000,
       freeAmount: null,
       icon: <AromaCoinsIcon style={{ fontSize: "170px" }} />,
-      price: 1000,
+      price: "Coming Soon",
     },
     {
       title: "Pile of AROMA",
       amount: 3000,
       freeAmount: 500,
       icon: <AromaBagOfCoinsIcon style={{ fontSize: "170px" }} />,
-      price: 3000,
+      price: "Coming Soon",
     },
     {
       title: "Sack of AROMA",
       amount: 10000,
       freeAmount: 2000,
       icon: <AromaPotOfCoinsIcon style={{ fontSize: "170px" }} />,
-      price: 6000,
+      price: "Coming Soon",
     },
     {
       title: "Custom",
@@ -91,9 +91,11 @@ const MarketAromaOffers = () => {
                   variant="yellowContainedSmall"
                   sx={{ marginTop: 3 }}
                   href={card.price === null && "/market/aroma/buy"}
-                  startIcon={card.price && <CurrencyMaticIcon />}
+                  /*startIcon={card.price && <CurrencyMaticIcon />}*/
+                  disabled={card.price !== null}
+
                 >
-                  {card.price ? formatCurrency(card.price) : "Enter"}
+                  {card.price ? /*formatCurrency(*/card.price : "Enter"}
                 </Button>
               </Stack>
             </Card>
