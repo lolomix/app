@@ -66,7 +66,7 @@ const Footer = () => {
         paddingBottom: 2,
       }}
     >
-      <Grid container justifyContent="space-around" xs={12} pt={4.5} pb={1}>
+      <Grid container justifyContent="space-around" pt={4.5} pb={1}>
         <Grid
           container
           item
@@ -87,7 +87,13 @@ const Footer = () => {
             justifyContent="space-around"
           >
             {externalLinks.map((item) => (
-              <Grid item lg={2.4} py={1} textAlign="center">
+              <Grid
+                item
+                lg={2.4}
+                py={1}
+                textAlign="center"
+                key={"external" + item.title}
+              >
                 <Link
                   underline="hover"
                   target="_blank"
@@ -101,7 +107,14 @@ const Footer = () => {
           </Grid>
           <Grid container item lg={4} xl={3.5} order={{ xs: 2, lg: 3 }} py={3}>
             {views.map((item) => (
-              <Grid item xs={12} lg={2.4} py={1} textAlign="center">
+              <Grid
+                item
+                xs={12}
+                lg={2.4}
+                py={1}
+                textAlign="center"
+                key={item.title}
+              >
                 <Link underline="hover" href={item.ref} color="common.white">
                   {item.title}
                 </Link>
@@ -147,7 +160,7 @@ const Footer = () => {
             justifyContent="center"
           >
             {privacyPolicyAndCookies.map((item) => (
-              <Grid item px={2}>
+              <Grid item px={2} key={item.title}>
                 <Link
                   underline="hover"
                   target="_blank"
