@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// material-ui
+import { useState, Fragment } from "react";
 import {
   Box,
   Button,
@@ -15,7 +14,6 @@ import {
   Divider,
   Grid,
 } from "@mui/material";
-// custom
 import Layout from "../../components/layout/Layout";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
@@ -76,15 +74,19 @@ const Tab = styled(TabUnstyled)`
   display: flex;
   justify-content: center;
   letter-spacing: 0.21px;
+
   &:hover {
     background-color: #805ac6;
   }
+
   &.${tabUnstyledClasses.selected} {
     background-color: #805ac6;
   }
+
   &.${tabUnstyledClasses.disabled} {
     opacity: 0.7;
   }
+
   &.${tabUnstyledClasses.disabled}:hover {
     background-color: #55378d;
   }
@@ -189,14 +191,6 @@ function Buffet() {
           <Button
             variant="contained"
             size="xlarge"
-            sx={{ backgroundColor: "common.white", boxShadow: "none" }}
-            onClick={handleClickAllRecipes}
-          >
-            All Recipes
-          </Button>
-          <Button
-            variant="contained"
-            size="xlarge"
             sx={{
               backgroundColor: "#4B6272",
               color: "common.white",
@@ -205,6 +199,15 @@ function Buffet() {
             onClick={handleClickMyRecipes}
           >
             My Recipes
+          </Button>
+          <Button
+            variant="contained"
+            size="xlarge"
+            sx={{ backgroundColor: "common.white", boxShadow: "none" }}
+            onClick={handleClickAllRecipes}
+            disabled
+          >
+            All Recipes
           </Button>
         </CustomContainer>
         <Card sx={{ textAlign: "center" }}>
@@ -230,8 +233,8 @@ function Buffet() {
                 {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
               </Typography>
               {recipesToShow.map((recipe) => (
-                <>
-                  <TabPanelUnstyled value={0}></TabPanelUnstyled>
+                <Fragment key={recipe.id}>
+                  <TabPanelUnstyled value={0} />
                   <TabPanelUnstyled value={1}>
                     <Grid
                       container
@@ -322,7 +325,7 @@ function Buffet() {
                     <Divider />
                   </TabPanelUnstyled>
                   <TabPanelUnstyled value={2}></TabPanelUnstyled>
-                </>
+                </Fragment>
               ))}
               {myRecipesOn && (
                 <Button
