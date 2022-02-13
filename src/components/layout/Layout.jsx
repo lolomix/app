@@ -21,29 +21,14 @@ const Layout = ({
         </Helmet>
         <Container maxWidth={"xl"} disableGutters mt={2}>
           <Navigation />
-          <Stack mx={2} pt={6} pb={3} alignItems="center" spacing={5}>
+          <Stack mx={1} pt={6} pb={3} alignItems="center" spacing={5}>
             <ViewHeading
               title={title}
               subTitle={subTitle}
               icon={icon}
               buttonType={buttonType}
             />
-            {!title &&
-            helmetTitle !== "Home" &&
-            helmetTitle !== "Kitchen - Create Recipe" ? (
-              <Box
-                sx={{
-                  position: "relative",
-                  top: -120,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                {children}
-              </Box>
-            ) : (
-              children
-            )}
+            {children}
           </Stack>
         </Container>
       </Stack>

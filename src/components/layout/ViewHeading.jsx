@@ -39,7 +39,7 @@ function ViewHeading(props) {
 
   return (
     <Grid container justifyContent="center" zIndex="999">
-      <Grid item xs={0.5}>
+      <Grid item xs={0.1}>
         <StyledButton
           variant="yellowContained"
           type={props.buttonType}
@@ -53,7 +53,7 @@ function ViewHeading(props) {
       <Grid
         container
         item
-        xs={11.5}
+        xs={11.9}
         flexDirection="column"
         alignItems="center"
         mb={1}
@@ -62,7 +62,7 @@ function ViewHeading(props) {
           <Grid item pr={1}>
             {props.icon}
           </Grid>
-          <Grid item xs={6} sm={4} md={3.2} lg={2.5} xl={2} textAlign="center">
+          <Grid item>
             <Typography variant="h1">{props.title}</Typography>
           </Grid>
         </Grid>
