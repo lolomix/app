@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 
 const MarketAromaBuy = () => {
   return (
-    <Layout helmetTitle="Aroma - Buy" title="Aroma">
+    <Layout helmetTitle="Aroma - Buy" title="Aroma" buttonType="back">
       <CurrencyExchange />
     </Layout>
   );

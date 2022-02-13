@@ -80,7 +80,7 @@ function RecipeCreatorContainer() {
  */
 function KitchenRecipeCreate() {
   return (
-    <Layout helmetTitle="Kitchen - Create Recipe">
+    <Layout helmetTitle="Kitchen - Create Recipe" buttonType="back">
       <Container as="section">
         <RecipeCreatorProvider>
           <RecipeCreatorContainer />

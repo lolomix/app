@@ -1,11 +1,18 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import ViewHeading from "./ViewHeading";
-import { Stack, Container } from "@mui/material";
+import { Stack, Container, Box } from "@mui/material";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 
-const Layout = ({ helmetTitle, children, title, subTitle, icon }) => {
+const Layout = ({
+  helmetTitle,
+  children,
+  title,
+  subTitle,
+  icon,
+  buttonType,
+}) => {
   return (
     <>
       <Stack justifyContent="space-between" sx={{ minHeight: "100vh" }}>
@@ -15,10 +22,28 @@ const Layout = ({ helmetTitle, children, title, subTitle, icon }) => {
         <Container maxWidth={"xl"} disableGutters mt={2}>
           <Navigation />
           <Stack mx={2} pt={6} pb={3} alignItems="center" spacing={5}>
-            {title && (
-              <ViewHeading title={title} subTitle={subTitle} icon={icon} />
+            <ViewHeading
+              title={title}
+              subTitle={subTitle}
+              icon={icon}
+              buttonType={buttonType}
+            />
+            {!title &&
+            helmetTitle !== "Home" &&
+            helmetTitle !== "Kitchen - Create Recipe" ? (
+              <Box
+                sx={{
+                  position: "relative",
+                  top: -120,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {children}
+              </Box>
+            ) : (
+              children
             )}
-            {children}
           </Stack>
         </Container>
       </Stack>

@@ -45,9 +45,9 @@ function RecipeSingle() {
   }, [coinParsFormatted, recipeFormatted]);
 
   return (
-    <Layout>
+    <Layout buttonType="back">
       <Grid container item mt={4} justifyContent="center">
-        <Grid item xs={12} sm={11} md={9} lg={7}>
+        <Grid item xs={12} sm={10} md={9} lg={7}>
           <Card sx={{ boxShadow: theme.blurredShadows }}>
             <CardContent>
               <Typography

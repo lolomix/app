@@ -45,7 +45,7 @@ const MarketAromaOffers = () => {
     },
   ];
   return (
-    <Layout helmetTitle="Aroma - Offers" title="Aroma">
+    <Layout helmetTitle="Aroma - Offers" title="Aroma" buttonType="back">
       <Grid
         container
         item

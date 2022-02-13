@@ -29,10 +29,10 @@ function ChefSingle() {
   const attributes = nft?.metadata?.attributes;
 
   return (
-    <Layout>
-      <Grid container item mt={4} justifyContent="center">
+    <Layout buttonType="back">
+      <Grid container xs={12} mt={4} justifyContent="center">
         {active ? (
-          <Grid container item xs={10} md={12} spacing={3}>
+          <Grid container item xs={12} md={10} spacing={3}>
             <Grid item xs={12} md={4.5} lg={4}>
               <NftCard
                 tokenAbi={tokenAbi}
