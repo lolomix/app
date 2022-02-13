@@ -1,31 +1,22 @@
-// react
-import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-// style
 import "./index.css";
-// other
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DAppProvider } from "@usedapp/core";
 import { DAPPCONFIG } from "./web3/constants";
-// components
-import AppLaunch from "./AppLaunch";
-
-const App = lazy(() => import("./App"));
+import App from "./App";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
   <BrowserRouter>
-    <Suspense fallback={<AppLaunch />}>
-      <DAppProvider config={DAPPCONFIG}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </DAppProvider>
-    </Suspense>
+    <DAppProvider config={DAPPCONFIG}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </DAppProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );
