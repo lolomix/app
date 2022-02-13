@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Card, Typography, Button, Stack } from "@mui/material";
 import AromaCoinsIcon from "../../components/icons/AromaCoinsIcon";
-import CurrencyMaticIcon from "../../components/icons/CurrencyMaticIcon";
+//import CurrencyMaticIcon from "../../components/icons/CurrencyMaticIcon";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import AromaBagOfCoinsIcon from "../../components/icons/AromaBagOfCoinsIcon";
 import AromaPotOfCoinsIcon from "../../components/icons/AromPotOfCoinsIcon";
