@@ -22,10 +22,11 @@ import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
 import { useChefBuy } from "../../hooks/chef/useChefBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import NftCard from "./NftCard";
+import { parseUnits } from '@ethersproject/units'
 
 function NftBuy({ t, remainingFormatted }) {
   const { error, active } = useEthers();
-  const [price, priceFormatted] = useChefPrice();
+  const priceFormatted = useChefPrice();
 
   let transactionInProgressSnackBarKey = "transactionInProgress";
   let walletInteractionSnackBarKey = "walletInteraction";
@@ -87,7 +88,7 @@ function NftBuy({ t, remainingFormatted }) {
     });
 
     try {
-      await sendAromaApproval(contractAddressChef, price);
+      await sendAromaApproval(contractAddressChef, parseUnits(priceFormatted));
     } catch (error) {
       enqueueSnackbar("Error", {
         variant: "error",
