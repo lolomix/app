@@ -27,6 +27,7 @@ import { getErrorMessage } from "../../web3/errors";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
+import { parseUnits } from '@ethersproject/units'
 
 /**
  * @param t
@@ -37,7 +38,7 @@ import SnackbarAction from "../snackbars/SnackbarAction";
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const { error, active } = useEthers();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [price, priceFormatted] = useAromaPrice();
+  const price = useAromaPrice();
 
   let transactionInProgressSnackBarKey = "transactionInProgress";
   let walletInteractionSnackBarKey = "walletInteraction";
@@ -154,7 +155,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     });
 
     try {
-      await sendAromaBuy(currencyToAmount, { value: currencyToAmount * price });
+      await sendAromaBuy(currencyToAmount, { value: currencyToAmount * parseUnits(price) });
     } catch (error) {
       enqueueSnackbar("Something must have gone wrong", {
         variant: "error",
@@ -168,7 +169,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
    */
   const handleCurrencyToUserInput = (event) => {
     setCurrencyToAmount(event.target.value);
-    setCurrencyFromAmount(event.target.value * priceFormatted);
+    setCurrencyFromAmount(event.target.value * price);
   };
 
   return (
@@ -231,7 +232,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
                 "For 1 " +
                 NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
                 " you get " +
-                formatCurrency(1 / priceFormatted) +
+                formatCurrency(1 / price) +
                 " AROMA tokens."
               }
               sx={{ margin: "8px 0" }}
@@ -268,18 +269,18 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You acquired some AROMA tokens. Check the balance in your account
-            (top right)
+            You've acquired some AROMA tokens, you can see your balance in the top left corner.
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Now go on and get your CryptoChefs NFT!
+            Get yourself some CHEFs or cook a recipe!
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button
             disableElevation
+            elongatedWidth
             onClick={() => setSuccessDialog(false)}
-            variant="contained"
+            variant="yellowContainedSmall"
             color="primary"
           >
             {t("base.close")}
