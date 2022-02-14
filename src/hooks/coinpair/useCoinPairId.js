@@ -13,7 +13,7 @@ import { logUseCall } from "../../utils/loggers";
  *
  * @todo handle retries exhausted error if incorrect coin pair symbol supplied
  */
-export function useRecipeCoinPairId(symbol) {
+export function useCoinPairId(symbol) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
   const defaultResult = undefined;
