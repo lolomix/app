@@ -5,11 +5,11 @@ import { formatCurrency } from "../../utils/formatters";
 import useCoinPairOneDayChangeStatistics from "../../hooks/pricefeed/useCoinPairOneDayChangeStatistics";
 
 /**
- * @param token
+ * @param {object} coinPair
  * @returns {JSX.Element}
  * @constructor
  */
-function RecipeCreateCoinPairPresenter({ token }) {
+function RecipeCreateCoinPairPresenter({ coinPair }) {
   /**
    * @type {string}
    *
@@ -26,7 +26,7 @@ function RecipeCreateCoinPairPresenter({ token }) {
    * @type {string|undefined}
    */
   const coinPairSymbol = coinPairImplode([
-    token.symbol,
+    coinPair.symbol,
     preferredQuoteCurrency,
   ]);
 
@@ -38,7 +38,7 @@ function RecipeCreateCoinPairPresenter({ token }) {
         <Grid item xs="auto">
           <HelpOutlineIcon />
           <Typography variant="subtitle2" color="grey.A400">
-            {token.symbol ?? <Skeleton />}
+            {coinPair.symbol ?? <Skeleton />}
           </Typography>
         </Grid>
         <Grid item xs>

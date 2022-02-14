@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
-import { useContractCall } from "@usedapp/core";
+import { useCall } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
+import { Contract } from "@ethersproject/contracts";
+import { logUseCall } from "../../utils/loggers";
 
 /**
  * Returns the available coin pair id-s in the contract
  *
- * @returns {any[]}
- *
- * @todo move formatted value to the first place in return array
+ * @returns {*[]|*}
  */
 export function useRecipeCoinPairIds() {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const defaultResult = [];
 
-  const [coinPairsFormatted, setCoinPairsFormatted] = useState();
+  const call = {
+    contract: new Contract(address, abiInterface),
+    method: "getAllCoinPairs",
+    args: [],
+  };
 
-  const [coinPairIds] =
-    useContractCall({
-      abi: abiInterface,
-      address: address,
-      method: "getAllCoinPairs",
-      args: [],
-    }) ?? [];
+  const result = useCall(call) ?? defaultResult;
 
-  useEffect(() => {
-    setCoinPairsFormatted(coinPairIds?.map((pair) => pair.toNumber()));
-  }, [coinPairIds]);
+  logUseCall(result, call);
 
-  return [coinPairIds, coinPairsFormatted];
+  if (!result?.value) {
+    return defaultResult;
+  }
+
+  return result?.value?.[0]?.map((pair) => pair.toNumber());
 }
