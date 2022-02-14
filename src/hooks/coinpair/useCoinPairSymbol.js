@@ -1,37 +1,36 @@
-import { useEffect, useState } from "react";
-import { useContractCall } from "@usedapp/core";
+import { useCall } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { ethers, utils } from "ethers";
+import { Contract } from "@ethersproject/contracts";
+import { logUseCall } from "../../utils/loggers";
 
 /**
+ * Returns the coin pair symbol of an id
  *
- * Returns the coin pair symbol by an id
- *
- *
- * @param id
- * @returns {(any)[]}
+ * @param {number|undefined} id
+ * @returns {string|undefined}
  */
-export function useRecipeCoinPairSymbol(id) {
+export function useCoinPairSymbol(id) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
-  const [coinPairSymbolFormatted, setCoinPairSymbolFormatted] = useState();
+  const defaultResult = undefined;
 
-  const [coinPairSymbol] =
-    useContractCall(
-      id && {
-        abi: abiInterface,
-        address: address,
-        method: "getCoinPairSymbol",
-        args: [id],
-      }
-    ) ?? [];
+  const call = id && {
+    contract: new Contract(address, abiInterface),
+    method: "getCoinPairSymbol",
+    args: [id],
+  };
 
-  useEffect(() => {
-    setCoinPairSymbolFormatted(
-      coinPairSymbol && ethers.utils.parseBytes32String(coinPairSymbol)
-    );
-  }, [coinPairSymbol]);
+  const result = useCall(call) ?? defaultResult;
 
-  return [coinPairSymbol, coinPairSymbolFormatted];
+  logUseCall(result, call);
+
+  if (!result?.value) {
+    return defaultResult;
+  }
+
+  return (
+    result?.value?.[0] && ethers.utils.parseBytes32String(result?.value?.[0])
+  );
 }
