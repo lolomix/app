@@ -74,7 +74,28 @@ const Tutorial = () => {
   ];
 
   return (
-    <Layout helmetTitle="Tutorial" title="Tutorial">
+    <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="home">
+      <Stack direction="row" spacing={4}>
+        <Button
+          variant="yellowContainedSmall"
+          elongatedWidth
+          href="https://discord.com/invite/JufpFYBdKG/"
+          target="_blank"
+          rel="nofollow noindex"
+        >
+          Join Discord
+        </Button>
+        <Button
+          variant="contained"
+          elongatedWidth
+          sx={{ backgroundColor: "common.white" }}
+          href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
+          target="_blank"
+          rel="nofollow noindex"
+        >
+          White Pepper
+        </Button>
+      </Stack>
       <Card sx={{ marginY: 5, maxWidth: "sm" }}>
         <Stack p={2} textAlign="center">
           <Typography variant="h4" color="secondary">
