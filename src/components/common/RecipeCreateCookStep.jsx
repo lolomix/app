@@ -12,7 +12,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
-import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";
@@ -26,14 +25,17 @@ import { useSnackbar } from "notistack";
 import SnackbarAction from "../snackbars/SnackbarAction";
 import { ethers } from "ethers";
 import { parseUnits } from "@ethersproject/units";
-import { AROMA_DECIMALS_DIGIT } from "../../web3/constants";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
+import { LoadingButton } from "@mui/lab";
 
 /**
  * @returns {JSX.Element|null}
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const [{ tokens }] = useRecipeCreator();
+  const contractAddressChef = NETWORKS[TARGET_CHAIN].contractMaster;
+  const [{ tokens }, { nextStep }] = useRecipeCreator();
 
   const chefSelectorDialogState = useDialogState({
     dialogId: "chefSelectorDialog",
@@ -56,54 +58,10 @@ function RecipeCreateCookStep() {
     chefSelectorDialogState.handleClose();
   };
 
-  const { send, state, events } = useRecipeCreate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   let transactionInProgressSnackBarKey = "transactionInProgress";
   let walletInteractionSnackBarKey = "walletInteraction";
-
-  useEffect(() => {
-    console.log(state);
-    console.log(events);
-  }, [state, events]);
-
-  useEffect(() => {
-    if (state.status === "None") {
-      setTransactionInProgress(false);
-    }
-
-    if (state.status === "Exception") {
-      setTransactionInProgress(false);
-
-      let message;
-      switch (state.errorMessage) {
-        case "execution reverted: total coin percentage is not 100":
-          message = "Total coin percentage must be 100%.";
-          break;
-        case "execution reverted: this recipe is taken":
-          message = "This recipe is taken. Please try another combination.";
-          break;
-        default:
-          message = "Something must have gone wrong";
-          break;
-      }
-
-      enqueueSnackbar(message, {
-        variant: "error",
-      });
-    }
-
-    if (state.status === "Mining") {
-      setTransactionInProgress(true);
-    }
-
-    if (state.status === "Success") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success",
-      });
-    }
-  }, [state, closeSnackbar, enqueueSnackbar]);
 
   /**
    * Definition of the transaction in progress state
@@ -113,6 +71,7 @@ function RecipeCreateCookStep() {
   useEffect(() => {
     if (transactionInProgress === false) {
       closeSnackbar(transactionInProgressSnackBarKey);
+      closeSnackbar(walletInteractionSnackBarKey);
       return;
     }
     closeSnackbar(walletInteractionSnackBarKey);
@@ -130,7 +89,111 @@ function RecipeCreateCookStep() {
     walletInteractionSnackBarKey,
   ]);
 
-  const handleCreate = async () => {
+  /**
+   * Defines Aroma Approval State
+   *
+   * @todo: refactors due to duplication
+   */
+  const [sendAromaApproval, aromaApprovalState] = useAromaApprove();
+
+  React.useEffect(() => {
+    if (aromaApprovalState.status === "None") {
+      setTransactionInProgress(false);
+    }
+
+    if (aromaApprovalState.status === "Exception") {
+      setTransactionInProgress(false);
+      enqueueSnackbar("Something must have gone wrong", {
+        variant: "error",
+      });
+    }
+
+    if (aromaApprovalState.status === "Mining") {
+      setTransactionInProgress(true);
+    }
+
+    if (aromaApprovalState.status === "Success") {
+      setTransactionInProgress(false);
+      enqueueSnackbar("Success", {
+        variant: "success",
+      });
+    }
+  }, [aromaApprovalState, closeSnackbar, enqueueSnackbar]);
+
+  /**
+   * Handles Aroma Approval a blockchain transaction
+   */
+  const handleApprove = async () => {
+    enqueueSnackbar("Waiting for interaction in Wallet", {
+      key: walletInteractionSnackBarKey,
+      variant: "warning",
+      persist: true,
+      action: <SnackbarAction />,
+    });
+
+    try {
+      await sendAromaApproval(
+        contractAddressChef,
+        parseUnits(stakeAroma.toString())
+      );
+    } catch (error) {
+      setTransactionInProgress(false);
+      enqueueSnackbar("Error", {
+        variant: "error",
+      });
+    }
+  };
+
+  /**
+   * Defines Recipe Create State
+   *
+   * @todo: refactors due to duplication
+   */
+  const [sendRecipeCreate, recipeCreateState] = useRecipeCreate();
+
+  useEffect(() => {
+    if (recipeCreateState.status === "None") {
+      setTransactionInProgress(false);
+    }
+
+    if (recipeCreateState.status === "Exception") {
+      setTransactionInProgress(false);
+
+      let message;
+      switch (recipeCreateState.errorMessage) {
+        case "execution reverted: total coin percentage is not 100":
+          message = "Total coin percentage must be 100%.";
+          break;
+        case "execution reverted: this recipe is taken":
+          message = "This recipe is taken. Please try another combination.";
+          break;
+        default:
+          message = "Something must have gone wrong";
+          break;
+      }
+
+      enqueueSnackbar(message, {
+        variant: "error",
+      });
+    }
+
+    if (recipeCreateState.status === "Mining") {
+      setTransactionInProgress(true);
+    }
+
+    if (recipeCreateState.status === "Success") {
+      setTransactionInProgress(false);
+      enqueueSnackbar("Success", {
+        variant: "success",
+      });
+      nextStep();
+    }
+  }, [recipeCreateState, closeSnackbar, enqueueSnackbar, nextStep]);
+
+  /**
+   * Handles Recipe Create blockchain transaction
+   */
+  const handleRecipeCreate = async () => {
     enqueueSnackbar("Waiting for interaction in Wallet", {
       key: walletInteractionSnackBarKey,
       variant: "warning",
@@ -142,17 +205,26 @@ function RecipeCreateCookStep() {
       const payload = [
         chefId ?? 0,
         recipeName && ethers.utils.formatBytes32String(recipeName),
-        stakeAroma && parseUnits(stakeAroma.toString(), AROMA_DECIMALS_DIGIT),
+        stakeAroma && parseUnits(stakeAroma.toString()),
         tokens.map((t) => {
           return { id: t.id, percentage: t.percentage };
         }),
       ];
-      await send(...payload);
+      await sendRecipeCreate(...payload);
     } catch (error) {
+      setTransactionInProgress(false);
       enqueueSnackbar("Error", {
         variant: "error",
       });
     }
+  };
+
+  /**
+   * Handles AROMA Approval and Recipe Create blockchain transaction
+   */
+  const handleApproveAndCreate = async () => {
+    await handleApprove();
+    await handleRecipeCreate();
   };
 
   return (
@@ -193,6 +265,7 @@ function RecipeCreateCookStep() {
                     <AddCircleIcon fontSize="small" />
                   </IconButton>
                   <ChefSelectorDialog
+                    maxWidth="xs"
                     handleClose={chefSelectorDialogState.handleClose}
                     handleSelect={handleChefSelect}
                     {...bindDialog(chefSelectorDialogState)}
@@ -230,14 +303,15 @@ function RecipeCreateCookStep() {
             </Stack>
           </CardContent>
           <CardActions>
-            <Button
+            <LoadingButton
               fullWidth
               variant="yellowContainedSmall"
               size="large"
-              onClick={handleCreate}
+              loading={transactionInProgress}
+              onClick={handleApproveAndCreate}
             >
-              Cook
-            </Button>
+              Approve & Cook
+            </LoadingButton>
           </CardActions>
         </Card>
       </Grid>

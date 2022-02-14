@@ -245,7 +245,7 @@ function RecipeCreatorProvider({ children }) {
     maxSelection: 20,
     minSelection: 3,
     adjustmentPercentage: 5,
-    steps: ["Choose ingredients", "Review", "Cook recipe"],
+    steps: ["Choose Ingredients", "Review & Adjust", "Cook Recipe", "Tasting"],
     startStep: 0,
     tokens: [],
     error: {},
