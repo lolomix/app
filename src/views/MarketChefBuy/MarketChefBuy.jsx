@@ -12,7 +12,7 @@ const CustomBanner = styled(Box, {
   ...{
     width: "200px",
     height: "180px",
-    position: "fixed",
+    position: "absolute",
     bottom: 300,
     top: 350,
     left: "70vw",
