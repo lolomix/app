@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Stack } from "@mui/material";
 import styled from "@emotion/styled";
+import SquareButtonsBackground from "../../assets/square-buttons-background.svg";
 import { Link as RouterLink } from "react-router-dom";
 
 const StyledButton = styled(Button, {
@@ -8,7 +9,7 @@ const StyledButton = styled(Button, {
 })(({ color, size, theme }) => ({
   ...(size === "large" && {
     width: "150px",
-    height: "140px",
+    height: "135px",
     [theme.breakpoints.down("md")]: {
       width: "80px",
       height: "75px",
@@ -25,7 +26,8 @@ const StyledButton = styled(Button, {
     },
   }),
   ...(color === "light" && {
-    backgroundColor: theme.palette.common.white,
+    background: `transparent url(${SquareButtonsBackground}) no-repeat center`,
+    backgroundSize: "cover",
     color: theme.palette.common.black,
     border: `3px solid ${theme.palette.common.black}`,
     boxShadow: "none",
@@ -38,6 +40,7 @@ const StyledButton = styled(Button, {
   }),
   textAlign: "center",
   borderTop: "none",
+  borderRadius: "20px",
 }));
 
 const SquareButton = (props) => {
