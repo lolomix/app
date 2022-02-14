@@ -103,7 +103,9 @@ function TokenSelectorDialog(props) {
         );
       })
     );
-  }, [tokenSearchFieldValue, supportedTokens]);
+    // @todo resolve providing an array dependency causing an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenSearchFieldValue, JSON.stringify(supportedTokens)]);
 
   return (
     <Dialog {...rest}>

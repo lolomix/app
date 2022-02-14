@@ -56,7 +56,7 @@ function SearchResultList({
           }
         }
       >
-        {list.map((item) => (
+        {list?.map((item) => (
           <ListItem key={`item-${item.symbol}`} disablePadding>
             <ListItemButton
               selected={isItemSelected && isItemSelected(item)}
