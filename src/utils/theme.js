@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
 import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
-
+import pattern from "../assets/pattern.png";
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
 const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
@@ -170,8 +170,8 @@ theme = createTheme(theme, {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background:
-            "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
+          background: `transparent url(${pattern}) repeat center`,
+          backgroundSize: "25%",
         },
       },
     },

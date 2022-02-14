@@ -13,6 +13,7 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     [theme.breakpoints.down("md")]: {
       width: "40px",
       height: "42px",
+      marginLeft: "5px",
     },
   }),
   ...(type === "back" && {
@@ -32,6 +33,7 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
   minWidth: "43px",
   width: "65px",
   height: "62px",
+  marginLeft: "20px",
 }));
 
 function ViewHeading(props) {
@@ -67,12 +69,7 @@ function ViewHeading(props) {
           </Grid>
         </Grid>
         {props.subTitle && (
-          <Box
-            as="span"
-            textAlign="center"
-            color="text.secondary"
-            mt={1}
-          >
+          <Box as="span" textAlign="center" color="text.secondary" mt={1}>
             <Typography variant="h5">{props.subTitle}</Typography>
           </Box>
         )}

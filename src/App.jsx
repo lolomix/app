@@ -8,7 +8,7 @@ import "@fontsource/rubik/600.css";
 import "@fontsource/luckiest-guy/400.css";
 // material-ui
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import { CssBaseline, Container } from "@mui/material";
 import { theme } from "./utils/theme";
 // shell
 import LoadingSpinner from "./components/common/LoadingSpinner";
@@ -17,7 +17,7 @@ import AnnouncementBar from "./components/layout/AnnouncementBar";
 import { Helmet } from "react-helmet";
 import Version from "./components/layout/Version";
 import SnackbarProvider from "./components/snackbars/SnackbarProvider";
-import RecipeSingle from './views/RecipeSingle/RecipeSingle'
+import RecipeSingle from "./views/RecipeSingle/RecipeSingle";
 // pages (lazy loading)
 const Home = lazy(() => import("./views/Home/Home"));
 const Tutorial = lazy(() => import("./views/Tutorial/Tutorial"));
@@ -46,32 +46,44 @@ function App() {
           <title>Create Crypto Recipes and Start Earning!</title>
         </Helmet>
         <CssBaseline />
-        <AnnouncementBar />
-        <ServiceWorkerWrapper />
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tutorial" element={<Tutorial />} />
-            <Route path="/buffet" element={<Buffet />} />
-            <Route path="/market" element={<Market />} />
-            <Route
-              path="/market/aroma/offers"
-              element={<MarketAromaOffers />}
-            />
-            <Route path="/market/aroma/buy" element={<MarketAromaBuy />} />
+        <Container
+          maxWidth="xl"
+          disableGutters={true}
+          sx={{
+            background:
+              "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
+          }}
+        >
+          <AnnouncementBar />
+          <ServiceWorkerWrapper />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tutorial" element={<Tutorial />} />
+              <Route path="/buffet" element={<Buffet />} />
+              <Route path="/market" element={<Market />} />
+              <Route
+                path="/market/aroma/offers"
+                element={<MarketAromaOffers />}
+              />
+              <Route path="/market/aroma/buy" element={<MarketAromaBuy />} />
               <Route path="/market/chef/buy" element={<MarketChefBuy />} />
-            <Route path="/kitchen" element={<Kitchen />} />
-            <Route
-              path="/kitchen/recipe/create"
-              element={<KitchenRecipeCreate />}
-            />
-            <Route path="/internal" element={<Internal />} />
-            <Route path="/my-chefs" element={<MyChefs />} />
-            <Route path="/my-chefs/chef/:tokenId" element={<ChefSingle />} />
-            <Route path="/buffet/recipe/:recipeId" element={<RecipeSingle />} />
-          </Routes>
-        </Suspense>
-        <Version />
+              <Route path="/kitchen" element={<Kitchen />} />
+              <Route
+                path="/kitchen/recipe/create"
+                element={<KitchenRecipeCreate />}
+              />
+              <Route path="/internal" element={<Internal />} />
+              <Route path="/my-chefs" element={<MyChefs />} />
+              <Route path="/my-chefs/chef/:tokenId" element={<ChefSingle />} />
+              <Route
+                path="/buffet/recipe/:recipeId"
+                element={<RecipeSingle />}
+              />
+            </Routes>
+          </Suspense>
+          <Version />
+        </Container>
       </SnackbarProvider>
     </ThemeProvider>
   );
