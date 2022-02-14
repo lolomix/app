@@ -27,7 +27,7 @@ function TokenSelectorDialog(props) {
     recipeCreatorState,
     { addToken, removeToken, nextStep, confirmTokenSelection },
   ] = useRecipeCreator();
-  const [, supportedTokens] = useRecipeCoinPairs();
+  const supportedTokens = useRecipeCoinPairs();
 
   const handleConfirm = () => {
     try {
@@ -103,7 +103,9 @@ function TokenSelectorDialog(props) {
         );
       })
     );
-  }, [tokenSearchFieldValue, supportedTokens]);
+    // @todo resolve providing an array dependency causing an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenSearchFieldValue, JSON.stringify(supportedTokens)]);
 
   return (
     <Dialog {...rest}>

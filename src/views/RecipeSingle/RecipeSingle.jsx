@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { theme } from "../../utils/theme";
 import { useParams } from "react-router-dom";
@@ -18,36 +17,16 @@ import Layout from "../../components/layout/Layout";
  * @constructor
  */
 function RecipeSingle() {
-  const [, coinParsFormatted] = useRecipeCoinPairs();
   const { recipeId } = useParams();
-  const [, recipeFormatted] = useRecipeById(recipeId);
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
-  const [coinPairs, setCoinPairs] = useState();
-
-  /**
-   * Add symbols to bare coin pairs
-   */
-  useEffect(() => {
-    if (!coinParsFormatted || !recipeFormatted?.coinPairs) {
-      return;
-    }
-
-    setCoinPairs(
-      recipeFormatted.coinPairs?.map((recipeCoinPair) => {
-        return {
-          ...recipeCoinPair,
-          symbol: coinParsFormatted.find(
-            (coinPair) => coinPair.id === recipeCoinPair.id
-          )?.symbol,
-        };
-      })
-    );
-  }, [coinParsFormatted, recipeFormatted]);
+  const recipeFormatted = useRecipeById(recipeId);
+  // @todo refactor the name of the hook as it's ambiguous
+  const availableCoinPairs = useRecipeCoinPairs();
 
   return (
-    <Layout>
+    <Layout buttonType="back">
       <Grid container item mt={4} justifyContent="center">
-        <Grid item xs={12} sm={11} md={9} lg={7}>
+        <Grid item xs={12} sm={10} md={9} lg={7}>
           <Card sx={{ boxShadow: theme.blurredShadows }}>
             <CardContent>
               <Typography
@@ -122,10 +101,10 @@ function RecipeSingle() {
                 Selected Tokens
               </Typography>
               <Grid container spacing={3}>
-                {coinPairs?.length > 0 ? (
-                  coinPairs?.map((token) => (
+                {recipeFormatted?.coinPairs?.length > 0 ? (
+                  recipeFormatted?.coinPairs?.map((coinPair) => (
                     <Grid
-                      key={token.id}
+                      key={coinPair.id}
                       item
                       container
                       xs={12}
@@ -137,12 +116,20 @@ function RecipeSingle() {
                     >
                       <Grid item xs={7} sm={12}>
                         <Box position="relative">
-                          <RecipeCreateCoinPairPresenter token={token} />
+                          <RecipeCreateCoinPairPresenter
+                            coinPair={{
+                              ...coinPair,
+                              symbol: availableCoinPairs.find(
+                                (availableCoinPair) =>
+                                  availableCoinPair.id === coinPair.id
+                              )?.symbol,
+                            }}
+                          />
                         </Box>
                       </Grid>
                       <Grid item xs={3} sm={5} md={6} lg={4}>
                         <GradualStepperInputField
-                          value={token.percentage}
+                          value={coinPair.percentage}
                           valueSuffix="%"
                           hideSteppers
                         />

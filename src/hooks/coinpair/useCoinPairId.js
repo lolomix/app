@@ -1,25 +1,27 @@
 import { useCall } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { ethers, utils } from "ethers";
+import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { Contract } from "@ethersproject/contracts";
 import { logUseCall } from "../../utils/loggers";
 
 /**
- * Returns the coin pair symbol of an id
+ * Returns the coin pair id by a symbol
  *
- * @param {number|undefined} id
- * @returns {string|undefined}
+ * @param {string|undefined} symbol
+ * @returns {number|undefined}
+ *
+ * @todo handle retries exhausted error if incorrect coin pair symbol supplied
  */
-export function useCoinPairSymbol(id) {
+export function useCoinPairId(symbol) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
   const defaultResult = undefined;
 
-  const call = id && {
+  const call = symbol && {
     contract: new Contract(address, abiInterface),
-    method: "getCoinPairSymbol",
-    args: [id],
+    method: "getCoinPairId",
+    args: [ethers.utils.formatBytes32String(symbol)],
   };
 
   const result = useCall(call) ?? defaultResult;
@@ -30,7 +32,5 @@ export function useCoinPairSymbol(id) {
     return defaultResult;
   }
 
-  return (
-    result?.value?.[0] && ethers.utils.parseBytes32String(result?.value?.[0])
-  );
+  return result?.value?.[0]?.toNumber();
 }

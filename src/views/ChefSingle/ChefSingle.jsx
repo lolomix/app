@@ -27,12 +27,13 @@ function ChefSingle() {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenId);
   const attributes = nft?.metadata?.attributes;
+  const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;
 
   return (
-    <Layout>
-      <Grid container item mt={4} justifyContent="center">
+    <Layout buttonType="back">
+      <Grid container xs={12} mt={4} justifyContent="center">
         {active ? (
-          <Grid container item xs={10} md={12} spacing={3}>
+          <Grid container item xs={12} md={10} spacing={3}>
             <Grid item xs={12} md={4.5} lg={4}>
               <NftCard
                 tokenAbi={tokenAbi}
@@ -59,7 +60,13 @@ function ChefSingle() {
               lg={8}
               order={{ xs: 3, md: 2 }}
             >
-              <Card sx={{ boxShadow: theme.blurredShadows, padding: 2 }}>
+              <Card
+                sx={{
+                  boxShadow: theme.blurredShadows,
+                  padding: 2,
+                  width: "100%",
+                }}
+              >
                 <CardContent>
                   <Grid
                     container
@@ -93,45 +100,61 @@ function ChefSingle() {
                   </Grid>
                   <Divider sx={{ marginY: 3.5 }} light />
                   <Grid container item rowSpacing={5}>
-                    {attributes?.map(
-                      (attr, index) =>
-                        index > 0 &&
-                        index < 7 && (
-                          <Grid
-                            container
-                            item
-                            md={6}
-                            justifyContent="flex-start"
-                            alignItems="center"
-                            spacing={2}
-                          >
-                            <Grid item>
-                              <Box
-                                sx={{
-                                  backgroundColor: "#C6E2F4",
-                                  minWidth: "75px",
-                                  width: "5.5vw",
-                                  minHeight: "75px",
-                                  height: "5.5vw",
-                                  border: "3px solid #98C6E5",
-                                  borderRadius: "12px",
-                                }}
-                              />
-                            </Grid>
-                            <Grid container item flexDirection="column" xs={7}>
+                    {lore ? (
+                      attributes?.map(
+                        (attr, index) =>
+                          index > 0 &&
+                          index < 7 && (
+                            <Grid
+                              container
+                              item
+                              md={6}
+                              justifyContent="flex-start"
+                              alignItems="center"
+                              spacing={2}
+                            >
                               <Grid item>
-                                <Typography variant="h5" color="grey.700">
-                                  {attr.value}
-                                </Typography>
+                                <Box
+                                  sx={{
+                                    backgroundColor:
+                                      "#" +
+                                      Math.floor(
+                                        Math.random() * 16777215
+                                      ).toString(16),
+                                    minWidth: "75px",
+                                    width: "5.5vw",
+                                    minHeight: "75px",
+                                    height: "5.5vw",
+                                    border: "3px solid #98C6E5",
+                                    borderRadius: "12px",
+                                    opacity: "0.5"
+                                  }}
+                                />
                               </Grid>
-                              <Grid item>
-                                <Typography variant="h5" color="grey.500">
-                                  {attr.trait_type}
-                                </Typography>
+                              <Grid
+                                container
+                                item
+                                flexDirection="column"
+                                xs={7}
+                              >
+                                <Grid item>
+                                  <Typography variant="h5" color="grey.700">
+                                    {attr.value}
+                                  </Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography variant="h5" color="grey.500">
+                                    {attr.trait_type}
+                                  </Typography>
+                                </Grid>
                               </Grid>
                             </Grid>
-                          </Grid>
-                        )
+                          )
+                      )
+                    ) : (
+                      <Typography variant="h5" textAlign="center" mt={5}>
+                        Find out about treats after the reveal
+                      </Typography>
                     )}
                   </Grid>
                 </CardContent>

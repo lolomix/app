@@ -170,14 +170,7 @@ theme = createTheme(theme, {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background:
-            "transparent radial-gradient(closest-side at 50% 50%, #C6E2F4 0%, #98C6E5 100%) 0% 0% no-repeat padding-box",
-          width: "1750px",
-        },
-        html: {
-          display: "flex",
-          justifyContent: "center",
-          background: `transparent url(${pattern}) repeat right`,
+          background: `transparent url(${pattern}) repeat center`,
           backgroundSize: "25%",
         },
       },

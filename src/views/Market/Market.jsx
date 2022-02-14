@@ -60,11 +60,12 @@ function Market({ t }) {
   return (
     <Layout
       helmetTitle="Market"
-      title={"Market"}
+      title="Market"
       subTitle={
         "A place where you can buy tokens and CHEF which will be used in kitchen"
       }
       icon={<MarketIcon sx={{ fontSize: 45, marginTop: 1 }} />}
+      buttonType="home"
     >
       <Grid container justifyContent="center">
         {buttonText.map((button) => (
