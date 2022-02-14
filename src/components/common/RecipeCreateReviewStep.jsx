@@ -43,14 +43,14 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             <Typography variant="h6" textAlign="left" gutterBottom>
               The past month's performance of this recipe
             </Typography>
-            <RecipePerformanceChart />
+            <RecipePerformanceChart tokens={tokens} />
             <Typography mt={4} variant="h6" textAlign="left" gutterBottom>
               Selected Tokens
             </Typography>
             <Grid container spacing={3}>
-              {tokens.map((token) => (
+              {tokens.map((coinPair) => (
                 <Grid
-                  key={token.id}
+                  key={coinPair.id}
                   item
                   container
                   xs={12}
@@ -62,11 +62,11 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                 >
                   <Grid item xs={7} sm={12}>
                     <Box position="relative">
-                      <RecipeCreateCoinPairPresenter token={token} />
+                      <RecipeCreateCoinPairPresenter coinPair={coinPair} />
                       <IconButton
                         onClick={() => {
                           try {
-                            removeToken(token);
+                            removeToken(coinPair);
                           } catch (error) {
                             enqueueSnackbar(error.message, {
                               variant: "error",
@@ -88,7 +88,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                     </Box>
                   </Grid>
                   <Grid item xs={5} sm={8.5} md={10} lg={8}>
-                    <RecipeCreateCoinPairController token={token} />
+                    <RecipeCreateCoinPairController token={coinPair} />
                   </Grid>
                 </Grid>
               ))}
