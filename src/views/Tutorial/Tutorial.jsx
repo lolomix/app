@@ -14,6 +14,7 @@ import MarketIcon from "../../components/icons/MarketIcon";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import KitchenIcon from "../../components/icons/KitchenIcon";
 import Layout from "../../components/layout/Layout";
+import { CustomContainer } from "../Buffet/Buffet";
 
 const Tutorial = () => {
   const steps = [
@@ -74,47 +75,75 @@ const Tutorial = () => {
   ];
 
   return (
-    <Layout helmetTitle="Tutorial" title="Tutorial">
-      <Card sx={{ marginY: 5, maxWidth: "sm" }}>
-        <Stack p={2} textAlign="center">
-          <Typography variant="h4" color="secondary">
-            How to Get Started
-          </Typography>
-          {steps.map((step) => (
-            <>
-              <Grid container justifyContent="center" alignItems="center" p={2}>
-                <Grid item sm={12} order={{ xs: 1 }}>
-                  <Typography
-                    variant="h5"
-                    color="text.primary"
-                    textAlign="left"
-                  >
-                    {step.title}
-                  </Typography>
-                </Grid>
-                <Grid item sm={7} order={{ sm: 2, xs: 3 }}>
-                  <Typography variant="h5" textAlign="justify">
-                    {step.description}
-                  </Typography>
-                </Grid>
-                <Grid item sm={5} xs={12} order={{ sm: 3, xs: 2 }}>
-                  {step.icon}
-                </Grid>
-              </Grid>
-              <Divider flexItem />
-            </>
-          ))}
+    <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="home">
+      <Box>
+        <CustomContainer>
           <Button
-            variant="yellowContained"
-            size="massive"
-            href="/market"
-            startIcon={<MarketIcon />}
-            sx={{ marginTop: 2 }}
+            variant="yellowContainedSmall"
+            elongatedWidth
+            href="https://discord.com/invite/JufpFYBdKG/"
+            target="_blank"
+            rel="nofollow noindex"
           >
-            Go to Market
+            Join Discord
           </Button>
-        </Stack>
-      </Card>
+          <Button
+            variant="contained"
+            elongatedWidth
+            sx={{ backgroundColor: "common.white" }}
+            href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
+            target="_blank"
+            rel="nofollow noindex"
+          >
+            White Pepper
+          </Button>
+        </CustomContainer>
+        <Card sx={{ marginY: 5, maxWidth: "sm" }}>
+          <Stack p={2} textAlign="center">
+            <Typography variant="h4" color="secondary">
+              How to Get Started
+            </Typography>
+            {steps.map((step) => (
+              <>
+                <Grid
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  p={2}
+                >
+                  <Grid item sm={12} order={{ xs: 1 }}>
+                    <Typography
+                      variant="h5"
+                      color="text.primary"
+                      textAlign="left"
+                    >
+                      {step.title}
+                    </Typography>
+                  </Grid>
+                  <Grid item sm={7} order={{ sm: 2, xs: 3 }}>
+                    <Typography variant="h5" textAlign="justify">
+                      {step.description}
+                    </Typography>
+                  </Grid>
+                  <Grid item sm={5} xs={12} order={{ sm: 3, xs: 2 }}>
+                    {step.icon}
+                  </Grid>
+                </Grid>
+                <Divider flexItem />
+              </>
+            ))}
+            <Button
+              variant="yellowContained"
+              size="massive"
+              href="/market"
+              startIcon={<MarketIcon />}
+              sx={{ marginTop: 2 }}
+            >
+              Go to Market
+            </Button>
+          </Stack>
+        </Card>
+      </Box>
     </Layout>
   );
 };

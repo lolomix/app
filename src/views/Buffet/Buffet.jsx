@@ -39,7 +39,7 @@ let nextWeekMonth = today.toLocaleString("default", { month: "short" });
 
 // Custom styles
 
-const CustomContainer = styled(Box, {
+export const CustomContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
 })(({ theme }) => ({
   ...{
