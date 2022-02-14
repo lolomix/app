@@ -12,7 +12,7 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
       width: "30px",
-      height: "38px",
+      height: "40px",
       marginLeft: 0,
     },
   }),
@@ -21,7 +21,7 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
       width: "30px",
-      height: "38px",
+      height: "40px",
       marginLeft: 0,
     },
   }),
