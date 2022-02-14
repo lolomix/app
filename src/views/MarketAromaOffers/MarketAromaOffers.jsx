@@ -8,6 +8,7 @@ import AromaPotOfCoinsIcon from "../../components/icons/AromPotOfCoinsIcon";
 import AromaCoinWithBackgroundIcon from "../../components/icons/AromaCoinWithBackgroundIcon";
 import { formatCurrency } from "../../utils/formatters";
 import Layout from "../../components/layout/Layout";
+import { Link as RouterLink } from "react-router-dom";
 
 const MarketAromaOffers = () => {
   const cardsContent = [
@@ -90,12 +91,12 @@ const MarketAromaOffers = () => {
                   size="massive"
                   variant="yellowContainedSmall"
                   sx={{ marginTop: 3 }}
-                  href={card.price === null && "/market/aroma/buy"}
+                  to={card.price === null && "/market/aroma/buy"}
+                  component={RouterLink}
                   /*startIcon={card.price && <CurrencyMaticIcon />}*/
                   disabled={card.price !== null}
-
                 >
-                  {card.price ? /*formatCurrency(*/card.price : "Enter"}
+                  {card.price ? /*formatCurrency(*/ card.price : "Enter"}
                 </Button>
               </Stack>
             </Card>

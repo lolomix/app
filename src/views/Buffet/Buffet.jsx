@@ -24,6 +24,7 @@ import YellowStar from "../../assets/stars/yellow-star.svg";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
 import Image3 from "../../assets/nfts/3.png";
+import { Link as RouterLink } from "react-router-dom";
 
 // Date from Sunday to Sunday
 
@@ -333,7 +334,8 @@ function Buffet() {
                   variant="yellowContainedSmall"
                   size="massive"
                   elongatedWidth
-                  href="/kitchen/recipe/create"
+                  to="/kitchen/recipe/create/"
+                  component={RouterLink}
                   sx={{ marginTop: 2.5 }}
                 >
                   Create a Recipe

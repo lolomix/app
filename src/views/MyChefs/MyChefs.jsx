@@ -1,7 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 // material-ui
-import { Grid } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 // custom
 import { useEthers } from "@usedapp/core";
 import NftCard from "../../components/web3/NftCard";
@@ -13,6 +13,7 @@ import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
 import NftBuy from "../../components/web3/NftBuy";
+import { Link as RouterLink } from "react-router-dom";
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -48,9 +49,10 @@ function MyChefs() {
                 md={5}
                 lg={2.5}
               >
-                <a
+                <Link
                   rel="noreferrer nofollow"
-                  href={`/my-chefs/chef/${tokenID}`}
+                  to={`/my-chefs/chef/${tokenID}`}
+                  component={RouterLink}
                   style={{ textDecoration: "none" }}
                 >
                   <NftCard
@@ -59,7 +61,7 @@ function MyChefs() {
                     tokenID={tokenID.toNumber()}
                     lazyLoad={index > 2}
                   />
-                </a>
+                </Link>
               </Grid>
             ))
           ) : (

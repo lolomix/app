@@ -15,6 +15,7 @@ import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import KitchenIcon from "../../components/icons/KitchenIcon";
 import Layout from "../../components/layout/Layout";
 import { CustomContainer } from "../Buffet/Buffet";
+import { Link as RouterLink } from "react-router-dom";
 
 const Tutorial = () => {
   const steps = [
@@ -135,7 +136,8 @@ const Tutorial = () => {
             <Button
               variant="yellowContained"
               size="massive"
-              href="/market"
+              to="/market"
+              component={RouterLink}
               startIcon={<MarketIcon />}
               sx={{ marginTop: 2 }}
             >
