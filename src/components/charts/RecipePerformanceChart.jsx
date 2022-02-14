@@ -2,7 +2,10 @@ import { createChart } from "lightweight-charts";
 import { useEffect, useRef, useState } from "react";
 import useCoinPairsPriceHistorical from "../../hooks/pricefeed/useCoinPairsPriceHistorical";
 import { coinPairImplode } from "../../utils/helpers";
-import { calculatePerformanceOfCoinPairs } from "../../utils/calculators";
+import {
+  calculateAggregatedPerformanceOfCoinPairs,
+  calculatePerformanceOfCoinPairs,
+} from "../../utils/calculators";
 
 /**
  * @returns {JSX.Element|null}
@@ -10,9 +13,12 @@ import { calculatePerformanceOfCoinPairs } from "../../utils/calculators";
  */
 function RecipePerformanceChart({ tokens }) {
   const chartContainerRef = useRef();
+
   const symbols =
     tokens?.map((token) => coinPairImplode([token.symbol, "USDT"])) ?? [];
+
   const coinPairsPriceHistorical = useCoinPairsPriceHistorical(symbols);
+
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
@@ -28,20 +34,30 @@ function RecipePerformanceChart({ tokens }) {
       coinPairsPriceHistorical?.map(({ data }) => data)
     );
 
+    let aggregatedPerformance = calculateAggregatedPerformanceOfCoinPairs(
+      performances,
+      tokens?.map(({ percentage }) => percentage)
+    );
+
     setChartData(
-      performances?.[0].map(({ closeDate, performance }) => ({
+      performances?.[0].map(({ closeDate }, index) => ({
         // @todo refactor to parse date properly as this is horrible
         time: closeDate
           .substring(0, closeDate.indexOf(" "))
           .split("/")
           .reverse()
           .join("-"), //yyyy-mm-dd,
-        value: performance,
+        value: aggregatedPerformance?.[index],
       }))
     );
     // @todo resolve providing an array dependency causing an infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(coinPairsPriceHistorical)]);
+  }, [
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(coinPairsPriceHistorical),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(tokens?.map(({ percentage }) => percentage)),
+  ]);
 
   useEffect(() => {
     const handleResize = () => {
