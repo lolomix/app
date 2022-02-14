@@ -8,6 +8,7 @@ import KitchenIcon from "../../components/icons/KitchenIcon";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
+import { Link as RouterLink } from "react-router-dom";
 
 function Home() {
   return (
@@ -17,7 +18,8 @@ function Home() {
         elongatedWidth
         size="massive"
         variant="yellowContainedSmall"
-        href="/kitchen/recipe/create"
+        to="/kitchen/recipe/create"
+        component={RouterLink}
         startIcon={<WhiteFlameIcon />}
       >
         Cook A Recipe
@@ -29,7 +31,8 @@ function Home() {
         sx={{
           backgroundColor: "common.white",
         }}
-        href="/tutorial"
+        to="/tutorial"
+        component={RouterLink}
       >
         Tutorial
       </Button>

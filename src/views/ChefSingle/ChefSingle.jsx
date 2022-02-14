@@ -20,6 +20,7 @@ import { theme } from "../../utils/theme";
 import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
 import Layout from "../../components/layout/Layout";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { Link as RouterLink } from "react-router-dom";
 
 function ChefSingle() {
   const { tokenId } = useParams();
@@ -46,7 +47,8 @@ function ChefSingle() {
                 fullWidth
                 size="massive"
                 variant="yellowContained"
-                href="/kitchen/recipe/create/"
+                to="/kitchen/recipe/create/"
+                component={RouterLink}
                 startIcon={<WhiteFlameIcon />}
               >
                 Cook A Recipe
@@ -88,8 +90,9 @@ function ChefSingle() {
                         color="grey.600"
                         underline="hover"
                         fontWeight="300"
-                        target="_blank"
                         href={`https://opensea.io/assets/matic/${tokenAddress}/${tokenId}`}
+                        target="_blank"
+                        rel="nofollow noindex"
                       >
                         Show it on Opensea{" "}
                         <OpenInNewIcon
@@ -127,7 +130,7 @@ function ChefSingle() {
                                     height: "5.5vw",
                                     border: "3px solid #98C6E5",
                                     borderRadius: "12px",
-                                    opacity: "0.5"
+                                    opacity: "0.5",
                                   }}
                                 />
                               </Grid>

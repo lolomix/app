@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import SquareButtonsBackground from "../../assets/square-buttons-background.svg";
+import { Link as RouterLink } from "react-router-dom";
 
 const StyledButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
@@ -48,7 +49,8 @@ const SquareButton = (props) => {
   return (
     <StyledButton
       variant="contained"
-      href={props.href}
+      to={props.href}
+      component={RouterLink}
       color={props.color}
       size={props.size}
     >

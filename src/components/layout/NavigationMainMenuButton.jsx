@@ -9,6 +9,7 @@ import MarketIcon from "../icons/MarketIcon";
 import KitchenIcon from "../icons/KitchenIcon";
 import MyChefsIcon from "../icons/MyChefsIcon";
 import BuffetIcon from "../icons/BuffetIcon";
+import { Link as RouterLink } from "react-router-dom";
 
 function NavigationMainMenuButton() {
   const [open, setOpen] = useState(false);
@@ -107,13 +108,20 @@ function NavigationMainMenuButton() {
               rowSpacing={5}
             >
               {views.map((item) => (
-                <Grid container item alignItems="center" columnSpacing={2} key={item.title}>
+                <Grid
+                  container
+                  item
+                  alignItems="center"
+                  columnSpacing={2}
+                  key={item.title}
+                >
                   <Grid item>{item.icon}</Grid>
                   <Grid item>
                     <Link
                       variant="h2"
                       underline="hover"
-                      href={item.ref}
+                      to={item.ref}
+                      component={RouterLink}
                       color="common.white"
                       fontWeight={500}
                     >
@@ -133,12 +141,17 @@ function NavigationMainMenuButton() {
               rowSpacing={4}
             >
               {externalLinks.map((item) => (
-                <Grid item textAlign={["left", "left", "right"]} key={item.title}>
+                <Grid
+                  item
+                  textAlign={["left", "left", "right"]}
+                  key={item.title}
+                >
                   <Link
                     variant="h4"
                     underline="hover"
-                    target="_blank"
                     href={item.ref}
+                    target="_blank"
+                    rel="nofollow noindex"
                     color="grey.500"
                   >
                     {item.title}
