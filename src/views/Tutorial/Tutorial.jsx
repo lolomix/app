@@ -74,7 +74,7 @@ const Tutorial = () => {
   ];
 
   return (
-    <Layout helmetTitle="Tutorial" title="Tutorial">
+    <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="home">
       <Card sx={{ marginY: 5, maxWidth: "sm" }}>
         <Stack p={2} textAlign="center">
           <Typography variant="h4" color="secondary">
