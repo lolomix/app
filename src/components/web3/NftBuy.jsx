@@ -1,8 +1,7 @@
-import React from "react";
+import { useCallback, useEffect, useState } from 'react'
 import { withTranslation } from "react-i18next";
 import { useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
-// material-ui
 import {
   Card,
   CardContent,
@@ -13,7 +12,6 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-// custom
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
 import { useChefPrice } from "../../hooks/chef/useChefPrice";
@@ -30,19 +28,20 @@ function NftBuy({ t, remainingFormatted }) {
   let transactionInProgressSnackBarKey = "transactionInProgress";
   let walletInteractionSnackBarKey = "walletInteraction";
 
-  const [buyDialog, setBuyDialog] = React.useState(false);
-  const [successDialog, setSuccessDialog] = React.useState(false);
+  const [buyDialog, setBuyDialog] = useState(false);
+  const [successDialog, setSuccessDialog] = useState(false);
 
   const contractAddressChef = NETWORKS[TARGET_CHAIN].contractMaster;
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const handleBuyDialog = () => {
-    setBuyDialog(!buyDialog);
-  };
-  const handleSuccessDialog = () => {
-    setSuccessDialog(!successDialog);
-  };
+  const handleBuyDialog = useCallback(() => {
+    setBuyDialog((prev) => !prev);
+  }, []);
+
+  const handleSuccessDialog = useCallback(() => {
+    setSuccessDialog((prev) => !prev);
+  }, []);
 
   /**
    * Defines Aroma Approval State
@@ -51,7 +50,7 @@ function NftBuy({ t, remainingFormatted }) {
    */
   const [sendAromaApproval, aromaApprovalState] = useAromaApprove();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (aromaApprovalState.status === "None") {
       setTransactionInProgress(false);
     }
@@ -76,7 +75,7 @@ function NftBuy({ t, remainingFormatted }) {
   }, [aromaApprovalState, closeSnackbar, enqueueSnackbar]);
 
   /**
-   * Handles Aroma Approval a blockchain transaction
+   * Handles AROMA Approval a blockchain transaction
    */
   const handleApprove = async () => {
     enqueueSnackbar("Waiting for interaction in Wallet", {
@@ -89,6 +88,7 @@ function NftBuy({ t, remainingFormatted }) {
     try {
       await sendAromaApproval(contractAddressChef, price);
     } catch (error) {
+      closeSnackbar(walletInteractionSnackBarKey);
       enqueueSnackbar("Error", {
         variant: "error",
       });
@@ -102,7 +102,7 @@ function NftBuy({ t, remainingFormatted }) {
    */
   const [sendChefBuy, chefBuyState] = useChefBuy();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (chefBuyState.status === "None") {
       setTransactionInProgress(false);
     }
@@ -123,11 +123,19 @@ function NftBuy({ t, remainingFormatted }) {
       enqueueSnackbar("Success", {
         variant: "success",
       });
+      handleBuyDialog();
+      handleSuccessDialog();
     }
-  }, [chefBuyState, closeSnackbar, enqueueSnackbar]);
+  }, [
+    chefBuyState,
+    closeSnackbar,
+    enqueueSnackbar,
+    handleBuyDialog,
+    handleSuccessDialog,
+  ]);
 
   /**
-   * Handles Chef Buy blockchain transaction
+   * Handles CHEF Buy blockchain transaction
    */
   const handleBuy = async () => {
     enqueueSnackbar("Waiting for interaction in Wallet", {
@@ -140,6 +148,7 @@ function NftBuy({ t, remainingFormatted }) {
     try {
       await sendChefBuy();
     } catch (error) {
+      closeSnackbar(walletInteractionSnackBarKey);
       enqueueSnackbar("Error", {
         variant: "error",
       });
@@ -147,12 +156,19 @@ function NftBuy({ t, remainingFormatted }) {
   };
 
   /**
+   * Handles AROMA Approval and CHEF Buy blockchain transaction
+   */
+  const handleApproveAndBuy = async () => {
+    await handleApprove();
+    await handleBuy();
+  };
+
+  /**
    * Definition of the transaction in progress state
    */
-  const [transactionInProgress, setTransactionInProgress] =
-    React.useState(false);
+  const [transactionInProgress, setTransactionInProgress] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (transactionInProgress === false) {
       closeSnackbar(transactionInProgressSnackBarKey);
       return;
@@ -210,43 +226,39 @@ function NftBuy({ t, remainingFormatted }) {
         <DialogTitle>Buy a CHEF</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You can only buy a CHEF NFT with AROMA.
+            You can only buy a CHEF NFT with AROMA. You'll be prompted with{" "}
+            <strong>two transactions</strong>, one after other.
           </Typography>
           <Typography p={1} variant="body2" gutterBottom>
-            1. Approve AROMA token which gives our app permission.
+            1. The approval of AROMA tokens* which gives our app permission to
+            spend it on a CHEF.
             <br />
-            2. Buy the CHEF NFT with AROMA Token.
+            2. The purchase of the CHEF NFT with your approved AROMA Token.
           </Typography>
           <Typography variant="caption" gutterBottom>
-            (We only approve {formatCurrency(priceFormatted)} AROMA per approval
-            transaction. You can increase in your wallet before confirming the
-            transaction)
+            *We only approve {formatCurrency(priceFormatted)} AROMA per
+            transaction. You can increase this from the popup window of your
+            wallet before confirming the transaction.
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button
             disableElevation
+            elongatedWidth
             onClick={handleBuyDialog}
-            variant="contained"
+            variant="yellowContainedSmall"
             color="primary"
           >
             {t("base.close")}
           </Button>
           <Button
             disableElevation
-            onClick={handleApprove}
-            variant="contained"
+            elongatedWidth
+            onClick={handleApproveAndBuy}
+            variant="yellowContainedSmall"
             disabled={transactionInProgress}
           >
-            Approve AROMA
-          </Button>
-          <Button
-            disableElevation
-            onClick={handleBuy}
-            variant="contained"
-            disabled={transactionInProgress}
-          >
-            Buy CHEF NFT
+            Approve & Buy CHEF
           </Button>
         </DialogActions>
       </Dialog>
@@ -259,18 +271,19 @@ function NftBuy({ t, remainingFormatted }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You bought a CryptoChefs NFT. Click on my account (top right) to see
-            the ID of your CHEF.
+            You bought a CHEF (a CryptoChefs NFT). Click on my account (top
+            right) to see the ID of your CHEF.
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Please check our Discord server to learn when the NFTs will be
-            revealed.
+            Please check our Discord server to learn more about your NFTs and
+            the Recipes you can cook.
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button
             disableElevation
-            variant="contained"
+            elongatedWidth
+            variant="yellowContainedSmall"
             component="a"
             href="https://discord.gg/JufpFYBdKG"
             target="_blank"
@@ -280,8 +293,9 @@ function NftBuy({ t, remainingFormatted }) {
           </Button>
           <Button
             disableElevation
+            elongatedWidth
             onClick={handleSuccessDialog}
-            variant="contained"
+            variant="yellowContainedSmall"
             color="primary"
           >
             {t("base.close")}
