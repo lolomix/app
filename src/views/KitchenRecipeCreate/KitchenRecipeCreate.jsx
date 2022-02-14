@@ -54,7 +54,7 @@ function RecipeCreatorContainer() {
   return (
     <>
       <Grid mb={4} container justifyContent="center" alignItems="center">
-        <Grid item xs sm={8} md={6} textAlign="center">
+        <Grid item xs sm={10} md={8} textAlign="center">
           <Card>
             {/* Box used as CardContent adds an annoying padding  */}
             <Box p={2}>
