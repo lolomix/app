@@ -11,7 +11,7 @@ import Layout from "../../components/layout/Layout";
 
 function Home() {
   return (
-    <Layout helmetTitle="Home">
+    <Layout helmetTitle="Home" buttonType="none">
       <RecipeOnPlateIcon sx={{ fontSize: 290 }} />
       <Button
         elongatedWidth

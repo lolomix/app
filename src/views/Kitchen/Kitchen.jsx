@@ -18,6 +18,7 @@ function Kitchen() {
       title="Kitchen"
       subTitle="Where all the magic starts"
       icon={<KitchenIcon sx={{ fontSize: 48, marginTop: 0.5 }} />}
+      buttonType="home"
     >
       <Card>
         <CardContent>

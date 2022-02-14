@@ -39,7 +39,7 @@ const MarketChefBuy = () => {
   const remaining = useChefSeasonRemaining();
 
   return (
-    <Layout helmetTitle="Buy a CHEF" title="Chef">
+    <Layout helmetTitle="Buy a CHEF" title="Chef" buttonType="back">
       <Box maxWidth={330}>
         <NftBuy remainingFormatted={remaining} />
         <CustomBanner>

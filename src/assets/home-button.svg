@@ -1,0 +1,27 @@
+<svg id="Component_96_3" data-name="Component 96 – 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44.232" height="47" viewBox="0 0 44.232 47">
+  <defs>
+    <filter id="Path_365" x="0" y="0" width="44.232" height="47" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur result="blur"/>
+      <feFlood flood-color="#374753"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_95" data-name="Group 95" transform="translate(0)">
+    <g id="Group_570" data-name="Group 570" transform="translate(0)">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_365)">
+        <path id="Path_365-2" data-name="Path 365" d="M7.413,0H36.819c4.094,0,7.413,3.582,7.413,8V37c0,4.418-3.319,8-7.413,8H7.413C3.319,45,0,41.418,0,37V8C0,3.582,3.319,0,7.413,0Z" fill="#fff"/>
+      </g>
+      <g id="Icon_ionic-ios-menu" data-name="Icon ionic-ios-menu" transform="translate(8.616 14.625)" opacity="0">
+        <path id="Path_5796" data-name="Path 5796" d="M30.375,12.375H5.625A1.128,1.128,0,0,1,4.5,11.25h0a1.128,1.128,0,0,1,1.125-1.125h24.75A1.128,1.128,0,0,1,31.5,11.25h0A1.128,1.128,0,0,1,30.375,12.375Z" transform="translate(-4.5 -10.125)" fill="#fff"/>
+        <path id="Path_5797" data-name="Path 5797" d="M30.375,19.125H5.625A1.128,1.128,0,0,1,4.5,18h0a1.128,1.128,0,0,1,1.125-1.125h24.75A1.128,1.128,0,0,1,31.5,18h0A1.128,1.128,0,0,1,30.375,19.125Z" transform="translate(-4.5 -10.125)" fill="#fff"/>
+        <path id="Path_5798" data-name="Path 5798" d="M30.375,25.875H5.625A1.128,1.128,0,0,1,4.5,24.75h0a1.128,1.128,0,0,1,1.125-1.125h24.75A1.128,1.128,0,0,1,31.5,24.75h0A1.128,1.128,0,0,1,30.375,25.875Z" transform="translate(-4.5 -10.125)" fill="#fff"/>
+      </g>
+      <g id="Icon_ionic-ios-home" data-name="Icon ionic-ios-home" transform="translate(9.067 9.455)">
+        <path id="Path_309" data-name="Path 309" d="M16.942,7.313a.246.246,0,0,0-.314,0L6.844,15.14a.263.263,0,0,0-.094.194V29.76a.126.126,0,0,0,.125.125h6.774a.126.126,0,0,0,.125-.125V20.979a.126.126,0,0,1,.125-.125h5.77a.126.126,0,0,1,.125.125V29.76a.126.126,0,0,0,.125.125h6.774a.126.126,0,0,0,.125-.125V15.334a.253.253,0,0,0-.094-.194Z" transform="translate(-3.738 -3.794)" fill="#374753"/>
+        <path id="Path_310" data-name="Path 310" d="M29.133,13.172,17.28,3.676a1.377,1.377,0,0,0-1.718,0L10.4,7.872V5.225a.126.126,0,0,0-.125-.125H6.511a.126.126,0,0,0-.125.125v5.783l-2.678,2.2a.878.878,0,0,0-.075,1.311.873.873,0,0,0,.621.257.884.884,0,0,0,.552-.194L16.339,5.3a.112.112,0,0,1,.082-.025A.152.152,0,0,1,16.5,5.3l11.534,9.245a.884.884,0,0,0,.552.194.89.89,0,0,0,.884-.928A.891.891,0,0,0,29.133,13.172Z" transform="translate(-3.374 -3.375)" fill="#374753"/>
+      </g>
+    </g>
+  </g>
+</svg>
