@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import { Box, Card, Container } from "@mui/material";
 import RecipeCreateStepper from "../../components/common/RecipeCreateStepper";
 import TokenSelectorDialog from "../../components/dialogs/TokenSelectorDialog";
-import { useDialogState } from "../../hooks/useDialogState";
+import { useDialogState } from "../../hooks/state/useDialogState";
 import { bindDialog } from "../../utils/binders";
 import RecipeCreateSelectTokensStep from "../../components/common/RecipeCreateSelectTokensStep";
 import {

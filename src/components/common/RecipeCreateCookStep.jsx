@@ -17,7 +17,7 @@ import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";
 import CurrencyInputField from "../form/CurrencyInputField";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useDialogState } from "../../hooks/useDialogState";
+import { useDialogState } from "../../hooks/state/useDialogState";
 import ChefSelectorDialog from "../dialogs/ChefSelectorDialog";
 import { bindDialog, bindDialogClick } from "../../utils/binders";
 import { useRecipeCreate } from "../../hooks/recipe/useRecipeCreate";
