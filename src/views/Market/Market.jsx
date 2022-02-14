@@ -9,6 +9,7 @@ import CardChefIcon from "../../components/icons/CardChefIcon";
 import AromaCoinSideIcon from "../../components/icons/AromaCoinSideIcon";
 import MarketIcon from "../../components/icons/MarketIcon";
 import Layout from "../../components/layout/Layout";
+import { Link as RouterLink } from "react-router-dom";
 
 const CustomButton = styled(Button)(({ theme }) => ({
   width: "280px",
@@ -73,7 +74,8 @@ function Market({ t }) {
             <CustomButton
               variant="contained"
               shape="roundish"
-              href={button.href}
+              to={button.href}
+              component={RouterLink}
             >
               {button.mainImage}
               {button.extraImg}

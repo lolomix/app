@@ -7,6 +7,8 @@ import Layout from "../../components/layout/Layout";
 import KitchenIcon from "../../components/icons/KitchenIcon";
 import KitchenMainImage from "../../components/icons/KitchenMainImage";
 import { theme } from "../../utils/theme";
+import { Link as RouterLink } from "react-router-dom";
+
 /**
  * @returns {JSX.Element}
  * @constructor
@@ -39,7 +41,8 @@ function Kitchen() {
                 fullWidth
                 size="massive"
                 variant="yellowContained"
-                href="/kitchen/recipe/create"
+                to="/kitchen/recipe/create"
+                component={RouterLink}
               >
                 Cook A Recipe
               </Button>
