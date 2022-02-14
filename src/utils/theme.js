@@ -324,6 +324,12 @@ theme = createTheme(theme, {
             backgroundColor: alpha(theme.palette.tertiary.main, 0.04),
             color: alpha(theme.palette.tertiary.main, 0.5),
           },
+          [`&:hover`]: {
+            transform: "translateY(1.5px)",
+            boxShadow: "0 0 1em #3A2717",
+            backgroundColor: theme.palette.common.white,
+            color: "initial",
+          },
         },
       },
       variants: [
@@ -386,8 +392,8 @@ theme = createTheme(theme, {
             boxShadow: "none",
             borderRadius: "9px",
             "&:hover": {
-              transform: "translateY(2px)",
-              backgroundColor: theme.palette.hover.default,
+              transform: "translateY(1.5px)",
+              boxShadow: "0 0 0.5em #3A2717",
             },
           },
         },
@@ -400,8 +406,8 @@ theme = createTheme(theme, {
             boxShadow: "none",
             borderRadius: "9px",
             "&:hover": {
-              transform: "translateY(2px)",
-              backgroundColor: theme.palette.hover.default,
+              transform: "translateY(1.5px)",
+              boxShadow: "0 0 0.5em #3A2717",
             },
           },
         },

@@ -13,18 +13,19 @@ import {
   Typography,
   Divider,
   Grid,
+  Link,
 } from "@mui/material";
 import Layout from "../../components/layout/Layout";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
-import PinkStar from "../../assets/stars/pink-star.svg";
-import PurpleStar from "../../assets/stars/purple-star.svg";
-import GreyStar from "../../assets/stars/grey-star.svg";
-import YellowStar from "../../assets/stars/yellow-star.svg";
+//import PinkStar from "../../assets/stars/pink-star.svg";
+//import PurpleStar from "../../assets/stars/purple-star.svg";
+//import GreyStar from "../../assets/stars/grey-star.svg";
+//import YellowStar from "../../assets/stars/yellow-star.svg";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
 import Image3 from "../../assets/nfts/3.png";
-
+import { Link as RouterLink } from "react-router-dom";
 // Date from Sunday to Sunday
 
 let today = new Date();
@@ -166,8 +167,8 @@ function Buffet() {
     },
   ];
 
-  const [recipesToShow, setRecipesToShow] = useState(allRecipes);
-  const [myRecipesOn, setMyRecipesOn] = useState(false);
+  const [recipesToShow, setRecipesToShow] = useState(myRecipes);
+  const [myRecipesOn, setMyRecipesOn] = useState(true);
 
   const handleClickMyRecipes = () => {
     setMyRecipesOn(true);
@@ -196,6 +197,9 @@ function Buffet() {
               backgroundColor: "#4B6272",
               color: "common.white",
               boxShadow: "none",
+              "&:hover": {
+                backgroundColor: "grey.600",
+              },
             }}
             onClick={handleClickMyRecipes}
           >
@@ -237,21 +241,38 @@ function Buffet() {
                 <Fragment key={recipe.id}>
                   <TabPanelUnstyled value={0} />
                   <TabPanelUnstyled value={1}>
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                      px="0.2vw"
+                    <Link
+                      rel="noreferrer nofollow"
+                      href={`/buffet/recipe/${recipe.id}`}
+                      style={{
+                        textDecoration: "none",
+                      }}
                     >
                       <Grid
                         container
-                        item
-                        xs={10}
-                        md={10.5}
-                        py={2.5}
+                        justifyContent="space-between"
                         alignItems="center"
                       >
-                        <Grid item xs={2} md={1.7}>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            margin: "0.3vw",
+
+                            "&:hover": {
+                              backgroundColor: "grey.200",
+                              borderRadius: "12px",
+                            },
+                          }}
+                        >
+                          <Grid
+                            container
+                            item
+                            xs={10}
+                            md={10.5}
+                            py={2.5}
+                            alignItems="center"
+                          >
+                            {/*<Grid item xs={2} md={1.7}>
                           <Typography
                             variant="h5"
                             color="common.black"
@@ -274,45 +295,37 @@ function Buffet() {
                           >
                             {recipe.ranking}
                           </Typography>
-                        </Grid>
-                        <Grid item xs={3.5} md={2.1}>
-                          <Box
-                            sx={{
-                              width: "75px",
-                              minWidth: "75px",
-                              border: `2px solid ${
-                                recipe.ranking === 1
-                                  ? "#E600FF"
-                                  : recipe.ranking === 2
-                                  ? "#C7C7C7"
-                                  : recipe.ranking === 3
-                                  ? "#DB4888"
-                                  : "#E8E8E8"
-                              }`,
-                              borderRadius: "12px",
-                              paddingX: 2,
-                              paddingY: 1,
-                            }}
-                          >
-                            <img
-                              src={recipe.chefImage}
-                              width="100%"
-                              height="auto"
-                              alt="recipeChef"
-                            />
-                          </Box>
-                        </Grid>
-                        <Grid item xs={6.5} md={8.2} textAlign="left">
-                          <Typography
-                            variant="h5"
-                            color="common.black"
-                            sx={{ padding: 1 }}
-                          >
-                            {recipe.recipeName}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                      <Grid item xs={2} md={1.5}>
+                        </Grid>*/}
+                            <Grid item xs={3.5} md={2.1}>
+                              <Box
+                                sx={{
+                                  width: "75px",
+                                  minWidth: "75px",
+                                  border: "2px solid #E8E8E8",
+                                  borderRadius: "12px",
+                                  paddingX: 2,
+                                  paddingY: 1,
+                                }}
+                              >
+                                <img
+                                  src={recipe.chefImage}
+                                  width="100%"
+                                  height="auto"
+                                  alt="recipeChef"
+                                />
+                              </Box>
+                            </Grid>
+                            <Grid item xs={6.5} md={8.2} textAlign="left">
+                              <Typography
+                                variant="h5"
+                                color="common.black"
+                                sx={{ padding: 1 }}
+                              >
+                                {recipe.recipeName}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          {/*<Grid item xs={2} md={1.5}>
                         <Typography
                           variant="h5"
                           color={
@@ -321,8 +334,10 @@ function Buffet() {
                         >
                           {recipe.recipePerformance}%
                         </Typography>
+                      </Grid>*/}
+                        </Box>
                       </Grid>
-                    </Grid>
+                    </Link>
                     <Divider />
                   </TabPanelUnstyled>
                   <TabPanelUnstyled value={2}></TabPanelUnstyled>
