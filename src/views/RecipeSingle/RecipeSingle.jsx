@@ -96,7 +96,14 @@ function RecipeSingle() {
               <Typography variant="h6" textAlign="left" mt={3} gutterBottom>
                 The overall performance of your recipe
               </Typography>
-              <RecipePerformanceChart />
+              <RecipePerformanceChart
+                tokens={recipeFormatted?.coinPairs?.map((coinPair) => ({
+                  ...coinPair,
+                  symbol: availableCoinPairs.find(
+                    (availableCoinPair) => availableCoinPair.id === coinPair.id
+                  )?.symbol,
+                }))}
+              />
               <Typography variant="h6" textAlign="left" mt={3} gutterBottom>
                 Selected Tokens
               </Typography>
