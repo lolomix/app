@@ -11,18 +11,18 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     background: `transparent url(${homeButton}) no-repeat center`,
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
-      width: "40px",
-      height: "42px",
-      marginLeft: "5px",
+      width: "30px",
+      height: "38px",
+      marginLeft: 0,
     },
   }),
   ...(type === "back" && {
     background: `transparent url(${backButton}) no-repeat center`,
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
-      width: "40px",
-      height: "42px",
-      marginLeft: "5px",
+      width: "30px",
+      height: "38px",
+      marginLeft: 0,
     },
   }),
   ...(type === "none" && {
@@ -31,8 +31,8 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
   textAlign: "center",
   borderTop: "none",
   minWidth: "43px",
-  width: "65px",
-  height: "62px",
+  width: "50px",
+  height: "50px",
   marginLeft: "20px",
 }));
 
