@@ -8,8 +8,8 @@ import { logUseCall } from "../../utils/loggers";
 /**
  * Returns the coin pair id by a symbol
  *
- * @param {undefined|string} symbol
- * @returns {undefined|*}
+ * @param {string|undefined} symbol
+ * @returns {number|undefined}
  *
  * @todo handle retries exhausted error if incorrect coin pair symbol supplied
  */
