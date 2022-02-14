@@ -27,7 +27,7 @@ function TokenSelectorDialog(props) {
     recipeCreatorState,
     { addToken, removeToken, nextStep, confirmTokenSelection },
   ] = useRecipeCreator();
-  const [, supportedTokens] = useRecipeCoinPairs();
+  const supportedTokens = useRecipeCoinPairs();
 
   const handleConfirm = () => {
     try {
