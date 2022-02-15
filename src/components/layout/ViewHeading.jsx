@@ -36,19 +36,19 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
   marginLeft: "20px",
 }));
 
-function ViewHeading(props) {
+function ViewHeading({ buttonType, title, icon, subTitle }) {
   const navigate = useNavigate();
+
+  if (buttonType === "none") return null;
 
   return (
     <Grid container justifyContent="center" zIndex="999">
       <Grid item xs={0.1}>
         <StyledButton
           bg="yellowContained"
-          type={props.buttonType}
+          type={buttonType}
           onClick={
-            props.buttonType === "home"
-              ? () => navigate("/")
-              : () => navigate(-1)
+            buttonType === "home" ? () => navigate("/") : () => navigate(-1)
           }
         ></StyledButton>
       </Grid>
@@ -62,15 +62,15 @@ function ViewHeading(props) {
       >
         <Grid container item justifyContent="center">
           <Grid item pr={1}>
-            {props.icon}
+            {icon}
           </Grid>
           <Grid item>
-            <Typography variant="h1">{props.title}</Typography>
+            <Typography variant="h1">{title}</Typography>
           </Grid>
         </Grid>
-        {props.subTitle && (
+        {subTitle && (
           <Box as="span" textAlign="center" color="text.secondary" mt={1}>
-            <Typography variant="h5">{props.subTitle}</Typography>
+            <Typography variant="h5">{subTitle}</Typography>
           </Box>
         )}
       </Grid>
