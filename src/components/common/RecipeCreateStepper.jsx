@@ -1,4 +1,3 @@
-// material-ui
 import { Step, StepLabel, Stepper } from "@mui/material";
 import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
 
@@ -10,7 +9,7 @@ function RecipeCreateStepper() {
   const [{ steps, activeStep }] = useRecipeCreator();
 
   return (
-    <Stepper activeStep={activeStep}>
+    <Stepper alternativeLabel activeStep={activeStep}>
       {steps.map((label) => {
         return (
           <Step key={label}>
