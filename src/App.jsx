@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 // fonts
@@ -10,16 +10,15 @@ import "@fontsource/luckiest-guy/400.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, Container } from "@mui/material";
 import { theme } from "./utils/theme";
-// shell
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ServiceWorkerWrapper from "./components/ServiceWorkerWrapper";
 import AnnouncementBar from "./components/layout/AnnouncementBar";
 import { Helmet } from "react-helmet";
 import Version from "./components/layout/Version";
 import SnackbarProvider from "./components/snackbars/SnackbarProvider";
-import RecipeSingle from "./views/RecipeSingle/RecipeSingle";
-// pages (lazy loading)
-const Home = lazy(() => import("./views/Home/Home"));
+// pages
+import Home from "./views/Home/Home";
+// (lazy loading)
 const Tutorial = lazy(() => import("./views/Tutorial/Tutorial"));
 const Market = lazy(() => import("./views/Market/Market"));
 const MarketAromaOffers = lazy(() =>
@@ -37,6 +36,7 @@ const Buffet = lazy(() => import("./views/Buffet/Buffet"));
 const Internal = lazy(() => import("./views/Internal/Internal"));
 const MyChefs = lazy(() => import("./views/MyChefs/MyChefs"));
 const ChefSingle = lazy(() => import("./views/ChefSingle/ChefSingle"));
+const RecipeSingle = lazy(() => import("./views/RecipeSingle/RecipeSingle"));
 
 function App() {
   return (
