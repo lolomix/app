@@ -199,7 +199,7 @@ function Buffet() {
               color: "common.white",
               boxShadow: "none",
               "&:hover": {
-                backgroundColor: "grey.600",
+                color: "common.black",
               },
             }}
             onClick={handleClickMyRecipes}
