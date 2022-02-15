@@ -15,9 +15,9 @@ function Home() {
     <Layout helmetTitle="Home" buttonType="none">
       <RecipeOnPlateIcon sx={{ fontSize: 290 }} />
       <Button
-        elongatedWidth
+        elongatedwidth="30"
         size="massive"
-        variant="yellowContainedSmall"
+        bg="yellowContainedSmall"
         to="/kitchen/recipe/create"
         component={RouterLink}
         startIcon={<WhiteFlameIcon />}
@@ -25,7 +25,7 @@ function Home() {
         Cook A Recipe
       </Button>
       <Button
-        elongatedWidth
+        elongatedwidth="30"
         variant="contained"
         shape="roundish"
         sx={{
@@ -36,7 +36,7 @@ function Home() {
       >
         Tutorial
       </Button>
-      <Grid container xs={12} justifyContent="center" columnSpacing={0.5}>
+      <Grid container justifyContent="center" columnSpacing={0.5}>
         <Grid
           container
           item

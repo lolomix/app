@@ -1,5 +1,4 @@
 import React from "react";
-import { withTranslation } from "react-i18next";
 // material-ui
 import { Grid, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -22,7 +21,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
 }));
 
-function Market({ t }) {
+function Market() {
   const buttonText = [
     {
       text: "Buy Aroma",
@@ -70,7 +69,7 @@ function Market({ t }) {
     >
       <Grid container justifyContent="center">
         {buttonText.map((button) => (
-          <Grid item mx="5vw" mb="3vh">
+          <Grid item mx="5vw" mb="3vh" key={`button:${button.href}`}>
             <CustomButton
               variant="contained"
               shape="roundish"
@@ -93,4 +92,4 @@ function Market({ t }) {
   );
 }
 
-export default withTranslation()(Market);
+export default Market;

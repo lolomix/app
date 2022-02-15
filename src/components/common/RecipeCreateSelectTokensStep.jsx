@@ -33,7 +33,7 @@ function RecipeCreateSelectTokensStep({ tokenSelectorDialogState }) {
           <CardActions>
             <Button
               fullWidth
-              variant="yellowContained"
+              bg="yellowContained"
               size="massive"
               {...bindDialogClick(tokenSelectorDialogState)}
             >

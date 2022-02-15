@@ -147,7 +147,7 @@ function TokenSelectorDialog(props) {
       <DialogActions>
         <Button
           fullWidth
-          variant="yellowContained"
+          bg="yellowContained"
           size="massive"
           onClick={handleConfirm}
         >

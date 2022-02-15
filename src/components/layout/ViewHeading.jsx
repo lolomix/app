@@ -43,7 +43,7 @@ function ViewHeading(props) {
     <Grid container justifyContent="center" zIndex="999">
       <Grid item xs={0.1}>
         <StyledButton
-          variant="yellowContained"
+          bg="yellowContained"
           type={props.buttonType}
           onClick={
             props.buttonType === "home"

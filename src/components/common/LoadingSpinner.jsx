@@ -6,7 +6,7 @@ class LoadingSpinner extends Component {
   render() {
     return (
       <Stack height="100vh" alignItems="center" justifyContent="center">
-        <CircularProgress disableShrink thickness="5" />
+        <CircularProgress disableShrink thickness={5} />
       </Stack>
     );
   }
