@@ -1,7 +1,4 @@
-import * as React from "react";
-// material-ui
 import { Typography } from "@mui/material";
-// custom
 import { APP_VERSION } from "../../web3/constants";
 
 /**
@@ -13,7 +10,7 @@ function Version() {
     <Typography
       marginLeft={1}
       marginTop="-1.6rem"
-      color="tertiary.main"
+      color="grey.400"
       variant="body2"
     >
       {APP_VERSION}
