@@ -1,8 +1,4 @@
-import {
-  AROMA_DECIMALS_DIGIT,
-  NETWORKS,
-  TARGET_CHAIN,
-} from "../../web3/constants";
+import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { useEthers, useTokenAllowance } from "@usedapp/core";
 import { formatUnits } from "@ethersproject/units";
 import { useEffect, useState } from "react";
@@ -30,8 +26,7 @@ export function useAromaAllowance(
   const [balanceFormatted, setBalanceFormatted] = useState();
 
   useEffect(() => {
-    allowance &&
-      setBalanceFormatted(formatUnits(allowance, AROMA_DECIMALS_DIGIT));
+    allowance && setBalanceFormatted(formatUnits(allowance));
   }, [allowance]);
 
   return [allowance, balanceFormatted];
