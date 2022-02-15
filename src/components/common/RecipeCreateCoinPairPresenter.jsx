@@ -71,7 +71,15 @@ function RecipeCreateCoinPairPresenter({ coinPair }) {
               {/*  />*/}
               {/*</Grid>*/}
               <Grid item xs="auto">
-                <Typography color="error" variant="caption" fontWeight="medium">
+                <Typography
+                  color={
+                    data?.priceChangePercent >= 0
+                      ? "success.main"
+                      : "error.main"
+                  }
+                  variant="caption"
+                  fontWeight="medium"
+                >
                   {data?.priceChangePercent ? (
                     `${data.priceChangePercent?.toFixed(2)}%`
                   ) : (
