@@ -1,8 +1,9 @@
 import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 import { format, formatDistance } from "date-fns";
 import { de, enUS, fr, it } from "date-fns/locale";
-import transEn from "./i18n/en/translation";
-import { initReactI18next } from "react-i18next";
+import enTranslation from "./i18n/en/translation";
+import enContract from "./i18n/en/contract";
 
 const dateLang = {
   en: enUS,
@@ -12,26 +13,26 @@ const dateLang = {
 };
 
 i18n
-  // load translation using xhr -> see /public/locales
-  // learn more: https://github.com/i18next/i18nextdate-xhr-backend
-  //.use(Backend)
-  // detect user language
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
-  //.use(LanguageDetector)
-  // pass the i18n instance to the react-i18next components.
-  // Alternative use the I18nextProvider: https://react.i18next.com/components/i18nextprovider
   .use(initReactI18next)
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
+    lng: "en",
     fallbackLng: "en",
+    resources: {
+      en: {
+        translation: enTranslation,
+        contract: enContract,
+      },
+    },
     cleanCode: true,
     lowerCaseLng: true,
     debug: false,
     interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
+      escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+      // @todo abstract this mess below and make sure the app uses it
       format: function (value, formatting, lng) {
-        var makedate = (value) => {
+        let makedate = (value) => {
           if (value instanceof Date) {
             return value;
           } else {
@@ -40,7 +41,7 @@ i18n
             return d;
           }
         };
-        var now = new Date();
+        let now = new Date();
         switch (formatting) {
           case "distance":
             switch (lng) {
@@ -75,13 +76,6 @@ i18n
             else return value;
         }
       },
-    },
-    keySeparator: ".",
-    react: {
-      wait: true,
-    },
-    resources: {
-      en: { translation: transEn },
     },
   });
 
