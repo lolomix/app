@@ -74,7 +74,7 @@ function NavigationWalletButton({ t }) {
         <Tooltip title={t("base.connectToMyWallet")}>
           <NavigationButton
             icon={<AccountBalanceWallet />}
-            text={t("base.connectWallet")}
+            text={"Connect"}
             {...bindTrigger(providersPopoverState)}
           />
         </Tooltip>
