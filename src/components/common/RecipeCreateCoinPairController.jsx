@@ -3,7 +3,7 @@ import GradualStepperInputField from "../form/GradualStepperInputField";
 import { theme } from "../../utils/theme";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 
 /**
  * @returns {JSX.Element|null}

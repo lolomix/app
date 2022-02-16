@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import SearchInputField from "../form/SearchInputField";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
-import { useSnackbar } from "notistack";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
 import SearchResultList from "../form/SearchResultList";
 import HorizontalChipList from "../form/HorizontalChipList";
@@ -22,7 +21,6 @@ import { useRecipeCoinPairs } from "../../hooks/recipe/useRecipeCoinPairs";
  */
 function TokenSelectorDialog(props) {
   const { handleClose, ...rest } = props;
-  const { enqueueSnackbar } = useSnackbar();
   const [
     recipeCreatorState,
     { addToken, removeToken, nextStep, confirmTokenSelection },
@@ -30,45 +28,25 @@ function TokenSelectorDialog(props) {
   const supportedTokens = useRecipeCoinPairs();
 
   const handleConfirm = () => {
-    try {
-      confirmTokenSelection();
-      if (recipeCreatorState.activeStep === 0) nextStep();
-      handleClose();
-    } catch (error) {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
-    }
+    if (!confirmTokenSelection()) return;
+    if (recipeCreatorState.activeStep === 0) nextStep();
+    handleClose();
   };
 
   /**
    * @param token
    */
   const handleTokenSelectionClick = (token) => {
-    try {
-      addToken(token);
-      if (recipeCreatorState.activeStep !== 0) {
-        handleClose();
-      }
-    } catch (error) {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
+    addToken(token);
+    if (recipeCreatorState.activeStep !== 0) {
+      handleClose();
     }
   };
 
   /**
    * @param token
    */
-  const handleTokenRemovalClick = (token) => {
-    try {
-      removeToken(token);
-    } catch (error) {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
-    }
-  };
+  const handleTokenRemovalClick = (token) => removeToken(token);
 
   /**
    * @param token
