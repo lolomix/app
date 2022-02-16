@@ -14,6 +14,7 @@ export const DAPPCONFIG = {
     [Polygon.chainId]: "https://polygon-rpc.com/",
   },
   networks: [TARGET_CHAIN === "polygon" ? Polygon : Rinkeby],
+  multicallVersion: 2
 };
 
 /**
