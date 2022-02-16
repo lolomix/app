@@ -1,10 +1,13 @@
 import {
   ADD_TOKEN,
   NEXT_STEP,
-  PREV_STEP, REMOVE_TOKEN, REPLACE_TOKEN,
+  PREV_STEP,
+  REMOVE_TOKEN,
+  REPORT_ERRORS,
+  REPLACE_TOKEN,
   RESET,
   SWITCH_TOKEN_LOCK,
-} from './recipeCreatorContext'
+} from "./recipeCreatorContext";
 
 /**
  * @param state
@@ -119,7 +122,7 @@ export function recipeCreatorReducer(state, [type, payload]) {
       );
 
       console.log("percentage left to correct: ", percentageToCorrect);
-      if (iteration > numberOfTokens * minimalCorrectionPerToken) {
+      if (iteration > numberOfTokens * (minimalCorrectionPerToken * 2)) {
         throw Error("Careful with this");
       }
     }
@@ -218,6 +221,12 @@ export function recipeCreatorReducer(state, [type, payload]) {
         ...state,
         tokens: [],
         activeStep: state.startStep,
+      };
+    case REPORT_ERRORS:
+      // @todo this might cause some errors since once we return the errors persist?
+      return {
+        ...state,
+        errors: payload.errors,
       };
     default: {
       throw new Error(`Unsupported action type: ${type}`);

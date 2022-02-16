@@ -7,6 +7,7 @@ export const REPLACE_TOKEN = "recipe/REPLACE_TOKEN";
 export const NEXT_STEP = "recipe/NEXT_STEP";
 export const PREV_STEP = "recipe/PREV_STEP";
 export const RESET = "recipe/RESET";
+export const REPORT_ERRORS = "errors/REPORT_ERRORS";
 
 /**
  * @type {React.Context<unknown>}
@@ -48,38 +49,43 @@ function useRecipeCreator() {
 
   /**
    * @param conditions
-   * @throws Error
    */
   const validateConditions = (...conditions) => {
+    let errors = [];
+
     conditions.forEach((condition) => {
       const [validate, message] = validationConditions[condition];
 
       if (!validate()) {
-        throw new Error(message);
+        errors.push(message);
       }
     });
+
+    dispatch([REPORT_ERRORS, { errors: errors }]);
+
+    return !errors.length;
   };
 
   /**
    * @param token
-   * @throws Error
    */
   const addToken = (token) => {
-    validateConditions("ifLessThanMaxTokensSelected");
+    if (!validateConditions("ifLessThanMaxTokensSelected")) return;
 
     dispatch([ADD_TOKEN, { token: { ...tokenDefaults, ...token } }]);
   };
 
   /**
    * @param token
-   * @throws Error
    *
    * @todo remove hard-coded activeStep id
    */
   const removeToken = (token) => {
-    if (state.activeStep !== 0) {
-      validateConditions("ifMoreThanMinTokensSelected");
-    }
+    if (
+      state.activeStep !== 0 &&
+      !validateConditions("ifMoreThanMinTokensSelected")
+    )
+      return;
 
     dispatch([REMOVE_TOKEN, { token }]);
   };
@@ -100,17 +106,18 @@ function useRecipeCreator() {
   };
 
   /**
-   * @throws Error
+   * @todo is it a good practice returning anything from here
+   *
+   * @returns {boolean}
    */
   const confirmTokenSelection = () => {
-    validateConditions("ifMinTokensSelected");
+    if (!validateConditions("ifMinTokensSelected")) return;
+
+    return true;
   };
 
-  /**
-   * @throws Error
-   */
   const nextStep = () => {
-    validateConditions("ifMinTokensSelected");
+    if (!validateConditions("ifMinTokensSelected")) return;
 
     dispatch([NEXT_STEP]);
   };

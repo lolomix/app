@@ -6,12 +6,12 @@ import {
   CardHeader,
   Grid,
   IconButton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import { bindDialogClick } from "../../utils/binders";
-import { useSnackbar } from "notistack";
 import RecipeCreateCoinPairController from "./RecipeCreateCoinPairController";
 import RecipePerformanceChart from "../charts/RecipePerformanceChart";
 import RecipeCreateCoinPairPresenter from "./RecipeCreateCoinPairPresenter";
@@ -25,8 +25,6 @@ import { theme } from "../../utils/theme";
 function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
   const [{ tokens, maxSelection }, { nextStep, removeToken }] =
     useRecipeCreator();
-
-  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -63,28 +61,22 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                   <Grid item xs={7} sm={12}>
                     <Box position="relative">
                       <RecipeCreateCoinPairPresenter coinPair={coinPair} />
-                      <IconButton
-                        onClick={() => {
-                          try {
-                            removeToken(coinPair);
-                          } catch (error) {
-                            enqueueSnackbar(error.message, {
-                              variant: "error",
-                            });
-                          }
-                        }}
-                        size="xsmall"
-                        variant="contained"
-                        color="error"
-                        inverseColor
-                        sx={{
-                          position: "absolute",
-                          right: theme.spacing(-0.7),
-                          top: theme.spacing(-0.7),
-                        }}
-                      >
-                        <RemoveCircleIcon fontSize="small" />
-                      </IconButton>
+                      <Tooltip title="Remove Token">
+                        <IconButton
+                          onClick={() => removeToken(coinPair)}
+                          size="xsmall"
+                          variant="contained"
+                          color="error"
+                          inverseColor
+                          sx={{
+                            position: "absolute",
+                            right: theme.spacing(-0.7),
+                            top: theme.spacing(-0.7),
+                          }}
+                        >
+                          <RemoveCircleIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
                     </Box>
                   </Grid>
                   <Grid item xs={5} sm={8.5} md={10} lg={8}>

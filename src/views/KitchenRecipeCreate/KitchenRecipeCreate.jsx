@@ -10,7 +10,9 @@ import Layout from "../../components/layout/Layout";
 import RecipeCreateReviewStep from "../../components/common/RecipeCreateReviewStep";
 import RecipeCreateFinishStep from "../../components/common/RecipeCreateFinishStep";
 import RecipeCreateCookStep from "../../components/common/RecipeCreateCookStep";
-import { RecipeCreatorProvider } from '../../contexts/recipeCreator/recipeCreatorProvider'
+import { RecipeCreatorProvider } from "../../contexts/recipeCreator/recipeCreatorProvider";
+import { useEffect } from "react";
+import { useSnackbar } from "notistack";
 
 /**
  * @returns {JSX.Element}
@@ -21,7 +23,16 @@ function RecipeCreatorContainer() {
     dialogId: "tokenSelectorDialog",
   });
 
-  const [{ activeStep }] = useRecipeCreator();
+  const { enqueueSnackbar } = useSnackbar();
+  const [{ activeStep, errors }] = useRecipeCreator();
+
+  useEffect(() => {
+    errors?.forEach((error) => {
+      enqueueSnackbar(error, {
+        variant: "error",
+      });
+    });
+  }, [errors, enqueueSnackbar]);
 
   let recipeStepContainer;
 
