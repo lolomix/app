@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import SearchInputField from "../form/SearchInputField";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import { useSnackbar } from "notistack";
 import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
 import SearchResultList from "../form/SearchResultList";

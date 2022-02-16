@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import { bindDialogClick } from "../../utils/binders";
 import { useSnackbar } from "notistack";
 import RecipeCreateCoinPairController from "./RecipeCreateCoinPairController";

@@ -11,7 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import React, { useEffect, useState } from "react";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";

@@ -1,5 +1,5 @@
 import { Step, StepLabel, Stepper } from "@mui/material";
-import { useRecipeCreator } from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 
 /**
  * @returns {JSX.Element}

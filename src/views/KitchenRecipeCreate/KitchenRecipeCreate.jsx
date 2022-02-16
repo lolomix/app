@@ -5,14 +5,12 @@ import TokenSelectorDialog from "../../components/dialogs/TokenSelectorDialog";
 import { useDialogState } from "../../hooks/state/useDialogState";
 import { bindDialog } from "../../utils/binders";
 import RecipeCreateSelectTokensStep from "../../components/common/RecipeCreateSelectTokensStep";
-import {
-  RecipeCreatorProvider,
-  useRecipeCreator,
-} from "../../contexts/recipeCreatorContext";
+import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import Layout from "../../components/layout/Layout";
 import RecipeCreateReviewStep from "../../components/common/RecipeCreateReviewStep";
 import RecipeCreateFinishStep from "../../components/common/RecipeCreateFinishStep";
 import RecipeCreateCookStep from "../../components/common/RecipeCreateCookStep";
+import { RecipeCreatorProvider } from '../../contexts/recipeCreator/recipeCreatorProvider'
 
 /**
  * @returns {JSX.Element}
