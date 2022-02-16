@@ -45,7 +45,7 @@ function Navigation({ t }) {
             alignItems="center"
           >
             <Grid item>
-              <Stack spacing={1} direction="row" mr={4}>
+              <Stack spacing={1} direction="row">
                 {notifications.length > 0 && (
                   <NavigationButton icon={<NotificationsIcon />} />
                 )}
