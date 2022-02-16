@@ -45,7 +45,7 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
     <Grid container justifyContent="center" zIndex="999">
       <Grid item xs={0.1}>
         <StyledButton
-          variant="yellowContained"
+          bg="yellowContained"
           type={buttonType}
           onClick={
             buttonType === "home" ? () => navigate("/") : () => navigate(-1)

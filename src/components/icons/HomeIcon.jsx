@@ -17,7 +17,7 @@ function HomeIcon(props) {
           transform="translate(0.476 -1.3)"
           fill="#5e5e5e"
           stroke="#070707"
-          stroke-width="1"
+          strokeWidth="1"
         />
         <rect
           id="Rectangle_453"
@@ -28,7 +28,7 @@ function HomeIcon(props) {
           transform="translate(23.723 18.703)"
           fill="#fff"
           stroke="#474747"
-          stroke-width="1"
+          strokeWidth="1"
         />
         <path
           id="Path_5840"
@@ -37,7 +37,7 @@ function HomeIcon(props) {
           transform="translate(-0.499 -1.625)"
           fill="#ffcd5f"
           stroke="#070707"
-          stroke-width="1"
+          strokeWidth="1"
         />
         <path
           id="Path_5841"
@@ -46,7 +46,7 @@ function HomeIcon(props) {
           transform="translate(3.29 5.383)"
           fill="#ffcd5f"
           stroke="#070707"
-          stroke-width="1"
+          strokeWidth="1"
         />
       </g>
     </SvgIcon>

@@ -80,8 +80,8 @@ const Tutorial = () => {
       <Box>
         <CustomContainer>
           <Button
-            variant="yellowContainedSmall"
-            elongatedWidth
+            bg="yellowContainedSmall"
+            elongatedwidth="30"
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
@@ -90,7 +90,7 @@ const Tutorial = () => {
           </Button>
           <Button
             variant="contained"
-            elongatedWidth
+            elongatedwidth="30"
             sx={{ backgroundColor: "common.white" }}
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
@@ -105,7 +105,7 @@ const Tutorial = () => {
               How to Get Started
             </Typography>
             {steps.map((step) => (
-              <>
+              <Box key={ `step:${step.title}`}>
                 <Grid
                   container
                   justifyContent="center"
@@ -131,10 +131,10 @@ const Tutorial = () => {
                   </Grid>
                 </Grid>
                 <Divider flexItem />
-              </>
+              </Box>
             ))}
             <Button
-              variant="yellowContained"
+              bg="yellowContained"
               size="massive"
               to="/market"
               component={RouterLink}

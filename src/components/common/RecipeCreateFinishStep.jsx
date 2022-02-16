@@ -37,8 +37,8 @@ function RecipeCreateFinishStep() {
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
-              elongatedWidth
-              variant="yellowContainedSmall"
+              elongatedwidth="30"
+              bg="yellowContainedSmall"
               size="large"
               to="/kitchen/recipe/create"
               component={RouterLink}
@@ -46,8 +46,8 @@ function RecipeCreateFinishStep() {
               Create Another
             </Button>
             <Button
-              elongatedWidth
-              variant="yellowContainedSmall"
+              elongatedwidth="30"
+              bg="yellowContainedSmall"
               size="large"
               to="/buffet"
               component={RouterLink}

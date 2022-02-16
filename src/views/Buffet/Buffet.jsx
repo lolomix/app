@@ -346,9 +346,9 @@ function Buffet() {
               ))}
               {myRecipesOn && (
                 <Button
-                  variant="yellowContainedSmall"
+                  bg="yellowContainedSmall"
                   size="massive"
-                  elongatedWidth
+                  elongatedwidth="30"
                   to="/kitchen/recipe/create/"
                   component={RouterLink}
                   sx={{ marginTop: 2.5 }}

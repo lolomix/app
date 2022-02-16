@@ -32,9 +32,9 @@ function ChefSingle() {
 
   return (
     <Layout buttonType="back">
-      <Grid container xs={12} mt={4} justifyContent="center">
+      <Grid container mt={4} justifyContent="center">
         {active ? (
-          <Grid container item xs={12} md={10} spacing={3}>
+          <Grid container item xs={10} spacing={3}>
             <Grid item xs={12} md={4.5} lg={4}>
               <NftCard
                 tokenAbi={tokenAbi}
@@ -46,7 +46,7 @@ function ChefSingle() {
               <Button
                 fullWidth
                 size="massive"
-                variant="yellowContained"
+                bg="yellowContained"
                 to="/kitchen/recipe/create/"
                 component={RouterLink}
                 startIcon={<WhiteFlameIcon />}
@@ -115,6 +115,7 @@ function ChefSingle() {
                               justifyContent="flex-start"
                               alignItems="center"
                               spacing={2}
+                              key={`attr:${attr.value}${lore}`}
                             >
                               <Grid item>
                                 <Box

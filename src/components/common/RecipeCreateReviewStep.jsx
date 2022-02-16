@@ -96,17 +96,17 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
-              elongatedWidth
+              elongatedwidth="30"
               disabled={tokens.length === maxSelection}
-              variant="yellowContainedSmall"
+              bg="yellowContainedSmall"
               size="large"
               {...bindDialogClick(tokenSelectorDialogState)}
             >
               Add Tokens
             </Button>
             <Button
-              elongatedWidth
-              variant="yellowContainedSmall"
+              elongatedwidth="30"
+              bg="yellowContainedSmall"
               size="large"
               onClick={nextStep}
             >

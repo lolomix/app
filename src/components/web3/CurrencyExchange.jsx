@@ -27,7 +27,7 @@ import { getErrorMessage } from "../../web3/errors";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
 import SnackbarAction from "../snackbars/SnackbarAction";
-import { parseUnits } from '@ethersproject/units'
+import { parseUnits } from "@ethersproject/units";
 
 /**
  * @param t
@@ -155,7 +155,9 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     });
 
     try {
-      await sendAromaBuy(currencyToAmount, { value: currencyToAmount * parseUnits(price) });
+      await sendAromaBuy(currencyToAmount, {
+        value: currencyToAmount * parseUnits(price),
+      });
     } catch (error) {
       enqueueSnackbar("Something must have gone wrong", {
         variant: "error",
@@ -220,7 +222,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             </Typography>
             <LoadingButton
               size="xlarge"
-              variant="yellowContained"
+              bg="yellowContained"
               fullWidth
               onClick={handleExchange}
               loading={transactionInProgress}
@@ -269,7 +271,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
         <DialogTitle>Congratulations</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            You've acquired some AROMA tokens, you can see your balance in the top left corner.
+            You've acquired some AROMA tokens, you can see your balance in the
+            top left corner.
           </Typography>
           <Typography variant="body1" gutterBottom>
             Get yourself some CHEFs or cook a recipe!
@@ -278,9 +281,9 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
         <DialogActions>
           <Button
             disableElevation
-            elongatedWidth
+            elongatedwidth="30"
             onClick={() => setSuccessDialog(false)}
-            variant="yellowContainedSmall"
+            bg="yellowContainedSmall"
             color="primary"
           >
             {t("base.close")}

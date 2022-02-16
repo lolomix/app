@@ -40,7 +40,7 @@ function Kitchen() {
               <Button
                 fullWidth
                 size="massive"
-                variant="yellowContained"
+                bg="yellowContained"
                 to="/kitchen/recipe/create"
                 component={RouterLink}
               >

@@ -330,6 +330,7 @@ theme = createTheme(theme, {
             backgroundColor: theme.palette.common.white
           },
         },
+        
       },
       variants: [
         {
@@ -354,7 +355,7 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { elongatedWidth: true },
+          props: { elongatedwidth: "30" },
           style: {
             paddingLeft: "30px",
             paddingRight: "30px",
@@ -373,7 +374,7 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { alignedStartIcon: true },
+          props: { alignedstarticon: "align" },
           style: {
             [`.${buttonClasses.startIcon}`]: {
               position: "absolute",
@@ -383,13 +384,14 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { variant: "yellowContained" },
+          props: { bg: "yellowContained" },
           style: {
             background: `transparent url(${YellowButtonBackgroundLarge}) no-repeat center`,
             backgroundSize: "cover",
             borderBottom: "3.5px solid #3A2717",
             boxShadow: "none",
             borderRadius: "9px",
+            color: theme.palette.common.black,
             "&:hover": {
               transform: "translateY(1.5px)",
               boxShadow: "0 0 0.5em #3A2717",
@@ -397,13 +399,14 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { variant: "yellowContainedSmall" },
+          props: { bg: "yellowContainedSmall" },
           style: {
             background: `transparent url(${YellowButtonBackgroundSmall}) no-repeat center`,
             backgroundSize: "cover",
             borderBottom: "3px solid #3A2717",
             boxShadow: "none",
             borderRadius: "9px",
+            color: theme.palette.common.black,
             "&:hover": {
               transform: "translateY(1.5px)",
               boxShadow: "0 0 0.5em #3A2717",

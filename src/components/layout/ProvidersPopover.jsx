@@ -193,7 +193,7 @@ function ProvidersPopover(props) {
                   size="large"
                   color={isCurrentProvider(key) ? "success" : "primary"}
                   startIcon={<ProviderIcon providerKey={key} />}
-                  alignedStartIcon
+                  alignedstarticon="align"
                   endIcon={
                     isCurrentProvider(key) && !isUnsupportedNetwork(error) ? (
                       <Check />

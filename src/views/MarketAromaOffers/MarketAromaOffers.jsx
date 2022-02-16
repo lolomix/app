@@ -57,7 +57,7 @@ const MarketAromaOffers = () => {
         alignItems="stretch"
       >
         {cardsContent.map((card) => (
-          <Grid item xs={12} sm={8} md={6} lg={3.8} columns={16}>
+          <Grid item xs={12} sm={8} md={6} lg={3.8} columns={16} key={`card:${card.title}`}>
             <Card fullheight="true" sx={{ padding: 2 }}>
               <Stack
                 sx={{
@@ -89,7 +89,7 @@ const MarketAromaOffers = () => {
                 <Button
                   fullWidth
                   size="massive"
-                  variant="yellowContainedSmall"
+                  bg="yellowContainedSmall"
                   sx={{ marginTop: 3 }}
                   to={card.price === null && "/market/aroma/buy"}
                   component={RouterLink}

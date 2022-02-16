@@ -9,7 +9,7 @@ function CardChefIcon(props) {
         <g
           fill="#ffa41f"
           stroke="#070707"
-          stroke-width="8"
+          strokeWidth="8"
           data-name="Rectangle 705"
         >
           <rect width="257" height="355" stroke="none" rx="45" />
