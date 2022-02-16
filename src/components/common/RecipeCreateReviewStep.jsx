@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Card,
   CardActions,
@@ -17,6 +18,7 @@ import RecipePerformanceChart from "../charts/RecipePerformanceChart";
 import RecipeCreateCoinPairPresenter from "./RecipeCreateCoinPairPresenter";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
+import { useRecipeCalculateId } from "../../hooks/recipe/useRecipeCalculateId";
 
 /**
  * @returns {JSX.Element|null}
@@ -25,6 +27,9 @@ import { theme } from "../../utils/theme";
 function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
   const [{ tokens, maxSelection }, { nextStep, removeToken }] =
     useRecipeCreator();
+
+  const [recipeCalculateId, recipeCalculateIdError] =
+    useRecipeCalculateId(tokens);
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -86,10 +91,22 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
               ))}
             </Grid>
           </CardContent>
+          {recipeCalculateIdError && (
+            <CardContent>
+              <Alert
+                severity="error"
+                sx={{
+                  justifyContent: "center",
+                }}
+              >
+                {recipeCalculateIdError}
+              </Alert>
+            </CardContent>
+          )}
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
-              elongatedwidth="30"
               disabled={tokens.length === maxSelection}
+              elongatedwidth="30"
               bg="yellowContainedSmall"
               size="large"
               {...bindDialogClick(tokenSelectorDialogState)}
@@ -97,6 +114,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
               Add Tokens
             </Button>
             <Button
+              disabled={!recipeCalculateId}
               elongatedwidth="30"
               bg="yellowContainedSmall"
               size="large"
