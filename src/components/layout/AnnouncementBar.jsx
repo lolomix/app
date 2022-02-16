@@ -22,7 +22,7 @@ function AnnouncementBar() {
         severity="error"
         sx={{ borderRadius: 0, justifyContent: "center" }}
       >
-        TESTNET ALERT - Connected to {NETWORKS[TARGET_CHAIN].name}
+        {NETWORKS[TARGET_CHAIN].name} Environment
       </Alert>
     );
   }
