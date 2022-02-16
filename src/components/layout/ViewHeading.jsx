@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 // material-ui
 import styled from "@emotion/styled";
-import { Typography, Box, Button, Grid } from "@mui/material";
+import { Typography, Box, Button, Grid, Tooltip } from "@mui/material";
 import homeButton from "../../assets/home-button.svg";
 import backButton from "../../assets/back-button.svg";
 
@@ -44,13 +44,15 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
   return (
     <Grid container justifyContent="center" zIndex="999">
       <Grid item xs={0.1}>
-        <StyledButton
-          bg="yellowContained"
-          type={buttonType}
-          onClick={
-            buttonType === "home" ? () => navigate("/") : () => navigate(-1)
-          }
-        ></StyledButton>
+        <Tooltip title={buttonType === "home" ? "Home" : "Back"}>
+          <StyledButton
+            bg="yellowContained"
+            type={buttonType}
+            onClick={
+              buttonType === "home" ? () => navigate("/") : () => navigate(-1)
+            }
+          ></StyledButton>
+        </Tooltip>
       </Grid>
       <Grid
         container

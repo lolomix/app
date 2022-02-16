@@ -1,5 +1,5 @@
 // material-ui
-import { alpha, Box, IconButton, Typography } from "@mui/material";
+import { alpha, Box, IconButton, Typography, Tooltip } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 // custom
 import AromaBalance from "../web3/AromaBalance";
@@ -32,24 +32,26 @@ function NavigationAromaBalance() {
           backgroundColor={alpha(theme.palette.common.black, 0.5)}
         >
           <Typography color="white" variant="button" as="span">
-            <AromaBalance placeholder="---"/>
+            <AromaBalance placeholder="---" />
           </Typography>
           {/* @todo href should not be hard-coded */}
-          <IconButton
-            href="/market/aroma/buy"
-            sx={{
-              padding: 0,
-              backgroundColor: "common.white",
-              color: "success.main",
-              position: "absolute",
-              right: "-0.75rem",
-              "&:hover": {
+          <Tooltip title="Add AROMA">
+            <IconButton
+              href="/market/aroma/buy"
+              sx={{
+                padding: 0,
                 backgroundColor: "common.white",
-              },
-            }}
-          >
-            <AddCircleIcon />
-          </IconButton>
+                color: "success.main",
+                position: "absolute",
+                right: "-0.75rem",
+                "&:hover": {
+                  backgroundColor: "common.white",
+                },
+              }}
+            >
+              <AddCircleIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Box>
     </Box>
