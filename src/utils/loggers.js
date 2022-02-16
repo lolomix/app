@@ -10,7 +10,7 @@ export function logUseCalls(results, calls) {
     if (!result?.error) {
       return;
     }
-    console.error(
+    console.debug(
       `Error encountered calling '${calls?.[idx]?.method}' on ${calls?.[idx]?.contract.address}: ${result.error.message}`
     );
   });
