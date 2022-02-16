@@ -325,7 +325,6 @@ theme = createTheme(theme, {
             color: alpha(theme.palette.tertiary.main, 0.5),
           },
           [`&.MuiButton-containedPrimary:hover`]: {
-            transform: "translateY(1.5px)",
             boxShadow: "0 0 1em #3A2717",
             backgroundColor: theme.palette.common.white
           },
@@ -393,7 +392,6 @@ theme = createTheme(theme, {
             borderRadius: "9px",
             color: theme.palette.common.black,
             "&:hover": {
-              transform: "translateY(1.5px)",
               boxShadow: "0 0 0.5em #3A2717",
             },
           },
@@ -408,7 +406,6 @@ theme = createTheme(theme, {
             borderRadius: "9px",
             color: theme.palette.common.black,
             "&:hover": {
-              transform: "translateY(1.5px)",
               boxShadow: "0 0 0.5em #3A2717",
             },
           },
