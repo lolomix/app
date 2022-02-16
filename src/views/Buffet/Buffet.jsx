@@ -45,15 +45,13 @@ export const CustomContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
 })(({ theme }) => ({
   ...{
-    width: "30%",
+    width: "fit-content",
     position: "relative",
-    right: 250,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     gap: 15,
-    marginBottom: -127,
-    [theme.breakpoints.down("lg")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100%",
       position: "static",
       flexDirection: "row",
@@ -69,18 +67,17 @@ const Tab = styled(TabUnstyled)`
   font-size: 0.9rem;
   font-weight: bold;
   background-color: #55378d;
-  padding: 15px 3vw;
+  padding-top: 15px;
+  padding-bottom: 15px;
   margin: 4px 4px;
   border: none;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   letter-spacing: 0.21px;
-
   &:hover {
     background-color: #805ac6;
   }
-
   &.${tabUnstyledClasses.selected} {
     background-color: #805ac6;
   }
@@ -189,7 +186,14 @@ function Buffet() {
       icon={<BuffetIcon sx={{ fontSize: 55, marginTop: 0.2 }} />}
       buttonType="home"
     >
-      <Box>
+      <Grid
+        container
+        md={10}
+        lg={8}
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        columnGap={5}
+      >
         <CustomContainer>
           <Button
             variant="contained"
@@ -216,64 +220,53 @@ function Buffet() {
             All Recipes
           </Button>
         </CustomContainer>
-        <Card sx={{ textAlign: "center" }}>
-          <TabsUnstyled defaultValue={1}>
-            <CardActions>
-              <TabsList>
-                <Tab disabled>
-                  <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
-                  Daily
-                </Tab>
-                <Tab>
-                  <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
-                  Weekly
-                </Tab>
-                <Tab disabled>
-                  <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
-                  Monthly
-                </Tab>
-              </TabsList>
-            </CardActions>
-            <CardContent>
-              <Typography variant="h5" color="grey.500">
-                {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
-              </Typography>
-              {recipesToShow.map((recipe) => (
-                <Fragment key={recipe.id}>
-                  <TabPanelUnstyled value={0} />
-                  <TabPanelUnstyled value={1}>
-                    <Link
-                      rel="noreferrer nofollow"
-                      href={`/buffet/recipe/${recipe.id}`}
-                      style={{
-                        textDecoration: "none",
-                      }}
-                    >
-                      <Grid
-                        container
-                        justifyContent="space-between"
-                        alignItems="center"
+        <Grid item xs={12} md={8}>
+          <Card sx={{ textAlign: "center" }}>
+            <TabsUnstyled defaultValue={1}>
+              <CardActions>
+                <TabsList>
+                  <Tab disabled>
+                    <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
+                    Daily
+                  </Tab>
+                  <Tab>
+                    <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
+                    Weekly
+                  </Tab>
+                  <Tab disabled>
+                    <ChessQueenIcon sx={{ fontSize: 15, marginRight: 0.6 }} />
+                    Monthly
+                  </Tab>
+                </TabsList>
+              </CardActions>
+              <CardContent>
+                <Typography variant="h5" color="grey.500">
+                  {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
+                </Typography>
+                {recipesToShow.map((recipe) => (
+                  <Fragment key={recipe.id}>
+                    <TabPanelUnstyled value={0} />
+                    <TabPanelUnstyled value={1}>
+                      <Link
+                        rel="noreferrer nofollow"
+                        href={`/buffet/recipe/${recipe.id}`}
+                        style={{
+                          textDecoration: "none",
+                        }}
                       >
-                        <Box
+                        <Grid
+                          container
+                          py={2.5}
+                          alignItems="center"
                           sx={{
-                            width: "100%",
                             margin: "0.3vw",
-
                             "&:hover": {
                               backgroundColor: "grey.200",
                               borderRadius: "12px",
                             },
                           }}
                         >
-                          <Grid
-                            container
-                            item
-                            xs={10}
-                            md={10.5}
-                            py={2.5}
-                            alignItems="center"
-                          >
-                            {/*<Grid item xs={2} md={1.7}>
+                          {/*<Grid item xs={2} md={1.7}>
                           <Typography
                             variant="h5"
                             color="common.black"
@@ -296,35 +289,34 @@ function Buffet() {
                           >
                             {recipe.ranking}
                           </Typography>
-                        </Grid>*/}
-                            <Grid item xs={3.5} md={2.1}>
-                              <Box
-                                sx={{
-                                  width: "75px",
-                                  minWidth: "75px",
-                                  border: "2px solid #E8E8E8",
-                                  borderRadius: "12px",
-                                  paddingX: 2,
-                                  paddingY: 1,
-                                }}
-                              >
-                                <img
-                                  src={recipe.chefImage}
-                                  width="100%"
-                                  height="auto"
-                                  alt="recipeChef"
-                                />
-                              </Box>
-                            </Grid>
-                            <Grid item xs={6.5} md={8.2} textAlign="left">
-                              <Typography
-                                variant="h5"
-                                color="common.black"
-                                sx={{ padding: 1 }}
-                              >
-                                {recipe.recipeName}
-                              </Typography>
-                            </Grid>
+                         </Grid>*/}
+                          <Grid item mr={2}>
+                            <Box
+                              sx={{
+                                width: "75px",
+                                minWidth: "75px",
+                                border: "2px solid #E8E8E8",
+                                borderRadius: "12px",
+                                paddingX: 2,
+                                paddingY: 1,
+                              }}
+                            >
+                              <img
+                                src={recipe.chefImage}
+                                width="100%"
+                                height="auto"
+                                alt="recipeChef"
+                              />
+                            </Box>
+                          </Grid>
+                          <Grid item xs={6} md={8.2} xl={10} textAlign="left">
+                            <Typography
+                              variant="h5"
+                              color="common.black"
+                              sx={{ padding: 1 }}
+                            >
+                              {recipe.recipeName}
+                            </Typography>
                           </Grid>
                           {/*<Grid item xs={2} md={1.5}>
                         <Typography
@@ -336,30 +328,30 @@ function Buffet() {
                           {recipe.recipePerformance}%
                         </Typography>
                       </Grid>*/}
-                        </Box>
-                      </Grid>
-                    </Link>
-                    <Divider />
-                  </TabPanelUnstyled>
-                  <TabPanelUnstyled value={2}></TabPanelUnstyled>
-                </Fragment>
-              ))}
-              {myRecipesOn && (
-                <Button
-                  bg="yellowContainedSmall"
-                  size="massive"
-                  elongatedwidth="30"
-                  to="/kitchen/recipe/create/"
-                  component={RouterLink}
-                  sx={{ marginTop: 2.5 }}
-                >
-                  Create a Recipe
-                </Button>
-              )}
-            </CardContent>
-          </TabsUnstyled>
-        </Card>
-      </Box>
+                        </Grid>
+                      </Link>
+                      <Divider />
+                    </TabPanelUnstyled>
+                    <TabPanelUnstyled value={2}></TabPanelUnstyled>
+                  </Fragment>
+                ))}
+                {myRecipesOn && (
+                  <Button
+                    bg="yellowContainedSmall"
+                    size="massive"
+                    elongatedwidth="30"
+                    to="/kitchen/recipe/create/"
+                    component={RouterLink}
+                    sx={{ marginTop: 2.5 }}
+                  >
+                    Create a Recipe
+                  </Button>
+                )}
+              </CardContent>
+            </TabsUnstyled>
+          </Card>
+        </Grid>
+      </Grid>
     </Layout>
   );
 }
