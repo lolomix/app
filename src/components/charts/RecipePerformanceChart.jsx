@@ -6,6 +6,8 @@ import {
   calculateAggregatedPerformanceOfCoinPairs,
   calculatePerformanceOfCoinPairs,
 } from "../../utils/calculators";
+import { theme } from "../../utils/theme";
+import { alpha } from "@mui/material";
 
 /**
  * @returns {JSX.Element|null}
@@ -67,10 +69,51 @@ function RecipePerformanceChart({ tokens }) {
     const chart = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
       height: 300,
+      handleScroll: false,
+      handleScale: false,
+      timeScale: {
+        borderVisible: false,
+      },
+      grid: {
+        vertLines: {
+          color: theme.palette.grey.A200,
+        },
+        horzLines: {
+          color: theme.palette.grey.A200,
+        },
+      },
+      rightPriceScale: {
+        borderVisible: false,
+        // @todo play around with this as we might not have to calculate % but instead just give the price
+        // mode: PriceScaleMode.Percentage
+      },
+      layout: {
+        fontFamily: theme.typography.fontFamily,
+      },
+      watermark: {
+        visible: true,
+        text: "CryptoChefs",
+        color: "rgba(0,0,0,0.04)",
+        fontFamily: theme.typography.fontFamily,
+      },
     });
     chart.timeScale().fitContent();
 
-    const newSeries = chart.addAreaSeries();
+    if (chartData?.[10]) {
+      chartData[10].color = "blue";
+    }
+
+    console.debug("chartData", chartData);
+    const newSeries = chart.addBaselineSeries({
+      topLineColor: theme.palette.success.main,
+      topFillColor1: alpha(theme.palette.success.main, 0.28),
+      topFillColor2: alpha(theme.palette.success.main, 0.05),
+      bottomFillColor1: alpha(theme.palette.error.main, 0.05),
+      bottomFillColor2: alpha(theme.palette.error.main, 0.28),
+      bottomLineColor: theme.palette.error.main,
+      priceFormat: { type: "percent", precision: 2, minMove: 0.01 },
+      baseValue: { type: "percent", price: 0.0 },
+    });
     newSeries.setData(chartData);
 
     window.addEventListener("resize", handleResize);
