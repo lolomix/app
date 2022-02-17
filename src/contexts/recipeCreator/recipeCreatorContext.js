@@ -7,6 +7,9 @@ export const REPLACE_TOKEN = "recipe/REPLACE_TOKEN";
 export const NEXT_STEP = "recipe/NEXT_STEP";
 export const PREV_STEP = "recipe/PREV_STEP";
 export const RESET = "recipe/RESET";
+export const SET_CHEF = "recipe/SET_CHEF";
+export const SET_STAKE = "recipe/SET_STAKE";
+export const SET_NAME = "recipe/SET_NAME";
 export const REPORT_ERRORS = "errors/REPORT_ERRORS";
 
 /**
