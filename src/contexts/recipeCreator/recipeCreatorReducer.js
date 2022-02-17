@@ -38,15 +38,15 @@ export function recipeCreatorReducer(state, [type, payload]) {
       (numberOfTokens * minPercentageAmountPerToken -
         minPercentageAmountPerToken);
 
-    console.log("maxPercentageAmountPerToken: " + maxPercentageAmountPerToken);
-    console.log("minPercentageAmountPerToken: " + minPercentageAmountPerToken);
+    console.debug("maxPercentageAmountPerToken: " + maxPercentageAmountPerToken);
+    console.debug("minPercentageAmountPerToken: " + minPercentageAmountPerToken);
 
-    console.log(
+    console.debug(
       "before correction of min/max percentages: ",
       JSON.parse(JSON.stringify(suppliedTokens))
     );
     let tokens = suppliedTokens.map((suppliedToken) => {
-      console.log(
+      console.debug(
         "percentage less than " + minPercentageAmountPerToken,
         suppliedToken.percentage < minPercentageAmountPerToken
       );
@@ -60,7 +60,7 @@ export function recipeCreatorReducer(state, [type, payload]) {
 
       return suppliedToken;
     });
-    console.log(
+    console.debug(
       "after correction of min/max percentages: ",
       JSON.parse(JSON.stringify(tokens))
     );
@@ -68,23 +68,23 @@ export function recipeCreatorReducer(state, [type, payload]) {
     let summedPercentages = tokens.reduce((prev, token) => {
       return prev + token.percentage;
     }, 0);
-    console.log("summedPercentages: ", summedPercentages);
+    console.debug("summedPercentages: ", summedPercentages);
 
     if (summedPercentages === 100) {
       return tokens;
     }
 
     let percentageToCorrect = 100 - summedPercentages;
-    console.log("percentageToCorrect: ", percentageToCorrect);
+    console.debug("percentageToCorrect: ", percentageToCorrect);
 
     let isSubtraction = percentageToCorrect < 0;
-    console.log("isSubtraction: ", isSubtraction);
+    console.debug("isSubtraction: ", isSubtraction);
 
     let correctableTokens = tokens.filter(
       (token) => !token.locked && !token.current
     );
 
-    console.log(
+    console.debug(
       "before main correction: ",
       JSON.parse(JSON.stringify(correctableTokens))
     );
@@ -116,26 +116,26 @@ export function recipeCreatorReducer(state, [type, payload]) {
       index++;
       iteration++;
 
-      console.log(
+      console.debug(
         "during main correction: ",
         JSON.parse(JSON.stringify(correctableTokens))
       );
 
-      console.log("percentage left to correct: ", percentageToCorrect);
+      console.debug("percentage left to correct: ", percentageToCorrect);
       if (iteration > numberOfTokens * (minimalCorrectionPerToken * 2)) {
         throw Error("Careful with this");
       }
     }
 
-    console.log(
+    console.debug(
       "after main correction: ",
       JSON.parse(JSON.stringify(correctableTokens))
     );
 
     if (percentageToCorrect !== 0) {
-      console.log("current token must be corrected to have 100");
+      console.debug("current token must be corrected to have 100");
       let currentToken = tokens.find((token) => token.current);
-      console.log(currentToken);
+      console.debug(currentToken);
       currentToken &&
         correctedTokens.push({
           ...currentToken,
