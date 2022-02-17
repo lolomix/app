@@ -32,7 +32,7 @@
     "date-fns": "^2.24.0",
     "ethers": "^5.5.2",
     "i18next": "^21.6.11",
-    "lightweight-charts": "^3.7.0",
+    "lightweight-charts": "^3.8.0",
     "material-ui-popup-state": "^2.0.0",
     "notistack": "^2.0.2",
     "prop-types": "^15.7.2",
