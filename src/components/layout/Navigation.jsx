@@ -9,7 +9,8 @@ import LanguageSelector from "./LanguageSelector";
 // import NavigationButton from "./NavigationButton";
 import NavigationMenuButton from "./NavigationMainMenuButton";
 import NavigationAromaBalance from "./NavigationAromaBalance";
-import { StyledButton } from "./ViewHeading";
+import { Home } from "@mui/icons-material";
+import NavigationButton from "./NavigationButton";
 /**
  * @param t
  * @returns {JSX.Element}
@@ -59,11 +60,10 @@ function Navigation({ t }) {
                 )*/}
               <Grid item>
                 <Tooltip title="Home">
-                  <StyledButton
-                    bg="yellowContained"
-                    type="home"
+                  <NavigationButton
+                    icon={<Home sx={{ fontSize: 26 }} />}
                     onClick={() => navigate("/")}
-                  ></StyledButton>
+                  />
                 </Tooltip>
               </Grid>
               <Grid item>
@@ -73,9 +73,9 @@ function Navigation({ t }) {
                 <NavigationMenuButton />
               </Grid>
             </Grid>
-           <Grid item>
-               {/*@todo: remove this but keep the language selected*/}
-                <LanguageSelector />
+            <Grid item>
+              {/*@todo: remove this but keep the language selected*/}
+              <LanguageSelector />
             </Grid>
           </Grid>
         </Grid>
