@@ -111,11 +111,12 @@ function useRecipeCreator() {
    * @returns {boolean}
    */
   const confirmTokenSelection = () => {
-    if (!validateConditions("ifMinTokensSelected")) return;
-
-    return true;
+    return validateConditions("ifMinTokensSelected");
   };
 
+  /**
+   * @todo we should check for recipeId availability
+   */
   const nextStep = () => {
     if (!validateConditions("ifMinTokensSelected")) return;
 

@@ -1,22 +1,33 @@
-import { useContractFunction } from "@usedapp/core";
+import { useCall } from "@usedapp/core";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { Contract } from "@ethersproject/contracts";
+import { utils } from "ethers";
+import { logUseCall } from "../../utils/loggers";
+import { useTranslation } from "react-i18next";
 
 /**
- * @returns {(((...args: any[]) => Promise<void>)|TransactionStatus|LogDescription[]|(() => void))[]}
+ * @param {array|undefined} tokens
+ * @returns {(string|undefined)[]}
  */
-export function useRecipeCalculateId() {
+export function useRecipeCalculateId(tokens) {
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
-  const contract = new Contract(address, abi);
+  const abiInterface = new utils.Interface(abi);
+  const { t } = useTranslation("contract", { keyPrefix: "exceptions" });
 
-  const { send, state, events, resetState } = useContractFunction(
-    contract,
-    "calculateRecipeId",
-    {
-      transactionName: "Calculate Recipe ID",
-    }
-  );
+  const call = tokens && {
+    contract: new Contract(address, abiInterface),
+    method: "calculateRecipeId",
+    args: [tokens],
+  };
 
-  return [send, state, events, resetState];
+  const result = useCall(call);
+
+  logUseCall(result, call);
+
+  // @todo decouple translation from blockchain hook
+  const translatedErrorMessage =
+    result?.error?.message && t(result.error.message);
+
+  return [result?.value?.[0], translatedErrorMessage];
 }
