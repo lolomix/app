@@ -5,7 +5,7 @@
   "homepage": "https://app.cryptochefs.io/",
   "engines": {
     "npm": "please-use-yarn",
-    "node": "16.13",
+    "node": "16.14",
     "yarn": ">= 1.19.1"
   },
   "jest": {
