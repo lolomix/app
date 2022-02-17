@@ -76,7 +76,7 @@ const Tutorial = () => {
   ];
 
   return (
-    <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="home">
+    <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="back">
       <Box>
         <CustomContainer>
           <Button

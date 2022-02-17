@@ -6,13 +6,13 @@ import { Typography, Box, Button, Grid, Tooltip } from "@mui/material";
 import homeButton from "../../assets/home-button.svg";
 import backButton from "../../assets/back-button.svg";
 
-const StyledButton = styled(Button)(({ type, theme }) => ({
+export const StyledButton = styled(Button)(({ type, theme }) => ({
   ...(type === "home" && {
     background: `transparent url(${homeButton}) no-repeat center`,
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
-      width: "30px",
-      height: "40px",
+      width: "42px",
+      height: "45px",
       marginLeft: 0,
     },
   }),
@@ -20,8 +20,8 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     background: `transparent url(${backButton}) no-repeat center`,
     backgroundSize: "cover",
     [theme.breakpoints.down("md")]: {
-      width: "30px",
-      height: "40px",
+      width: "40px",
+      height: "42px",
       marginLeft: 0,
     },
   }),
@@ -30,10 +30,9 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
   }),
   textAlign: "center",
   borderTop: "none",
-  minWidth: "43px",
-  width: "50px",
-  height: "50px",
-  marginLeft: "20px",
+  minWidth: "42px",
+  width: "43px",
+  height: "45px",
 }));
 
 function ViewHeading({ buttonType, title, icon, subTitle }) {
@@ -42,7 +41,7 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
   if (buttonType === "none") return null;
 
   return (
-    <Grid container justifyContent="center" zIndex="999">
+    <Grid container justifyContent="center" zIndex="999" ml={0.5}>
       <Grid item xs={0.1}>
         <Tooltip title={buttonType === "home" ? "Home" : "Back"}>
           <StyledButton
@@ -62,11 +61,11 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
         alignItems="center"
         mb={1}
       >
-        <Grid container item justifyContent="center">
+        <Grid container item justifyContent="center" px={5}>
           <Grid item pr={1}>
             {icon}
           </Grid>
-          <Grid item>
+          <Grid item textAlign="center">
             <Typography variant="h1">{title}</Typography>
           </Grid>
         </Grid>

@@ -151,7 +151,7 @@ function ProvidersPopover(props) {
 
   return (
     <Popover {...rest}>
-      <Box pt={2} pb={3} px={3} width="350px">
+      <Box pt={2} pb={3} px={3} maxWidth="350px">
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
             <Typography variant="h5">{t("base.connectToMyWallet")}</Typography>
@@ -164,9 +164,7 @@ function ProvidersPopover(props) {
             </Tooltip>
           </Grid>
         </Grid>
-
         <Divider sx={{ mb: 3 }} />
-
         <Stack spacing={2}>
           {Object.keys(providersList).map((key) => (
             <Tooltip
@@ -191,6 +189,7 @@ function ProvidersPopover(props) {
                       : "outlined"
                   }
                   size="large"
+                  sx={{ paddingX: 8 }}
                   color={isCurrentProvider(key) ? "success" : "primary"}
                   startIcon={<ProviderIcon providerKey={key} />}
                   alignedstarticon="align"
