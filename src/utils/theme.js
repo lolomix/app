@@ -12,6 +12,7 @@ import {
 import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
 import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
 import pattern from "../assets/pattern.png";
+import toggleButtonClasses from "@mui/material/ToggleButton/toggleButtonClasses";
 // colors
 // https://coolors.co/ffcc3b-283a8f-98c7e5-4bbd8c-fd2943-6d513f-3a2717
 const sunGlow = "rgba(255, 204, 59, 1)"; // FFCC3B
@@ -307,6 +308,21 @@ theme = createTheme(theme, {
           props: { size: "xsmall" },
           style: {
             padding: 4,
+          },
+        },
+        {
+          props: { variant: "outlined", size: "xsmall" },
+          style: {
+            border: `2px solid ${theme.palette.grey.A100}`,
+            padding: 3,
+          },
+        },
+        {
+          props: { color: "info" },
+          style: {
+            [`&.${toggleButtonClasses.selected}`]: {
+              color: theme.palette.info.dark,
+            },
           },
         },
       ],

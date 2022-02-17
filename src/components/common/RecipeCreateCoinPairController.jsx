@@ -1,12 +1,13 @@
-import { Grid, ToggleButton } from "@mui/material";
+import { Grid, ToggleButton, Tooltip } from "@mui/material";
 import GradualStepperInputField from "../form/GradualStepperInputField";
-import { theme } from "../../utils/theme";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 
 /**
- * @returns {JSX.Element|null}
+ *
+ * @param token
+ * @returns {JSX.Element}
  * @constructor
  */
 function RecipeCreateCoinPairController({ token }) {
@@ -37,23 +38,25 @@ function RecipeCreateCoinPairController({ token }) {
       </Grid>
       <Grid item xs="auto">
         <ToggleButton
+          variant="outlined"
           size="xsmall"
           shape="squarish"
+          color="info"
           value=""
           selected={token.locked}
           onChange={() => {
             switchTokenLock(token);
           }}
-          sx={{
-            border: `${theme.spacing(0.25)} solid ${theme.palette.grey.A200}`,
-            backgroundColor: theme.palette.grey.A100,
-          }}
         >
-          {token.locked ? (
-            <LockIcon fontSize="xsmall" />
-          ) : (
-            <LockOpenIcon fontSize="xsmall" />
-          )}
+          <Tooltip
+            title={`${token.locked ? "Unlock" : "Lock"} token percentage`}
+          >
+            {token.locked ? (
+              <LockIcon fontSize="xsmall" />
+            ) : (
+              <LockOpenIcon fontSize="xsmall" />
+            )}
+          </Tooltip>
         </ToggleButton>
       </Grid>
     </Grid>
