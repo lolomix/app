@@ -1,4 +1,3 @@
-import { useState } from "react";
 // material-ui
 import { Tooltip, Grid, Link, Popover } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -10,19 +9,28 @@ import KitchenIcon from "../icons/KitchenIcon";
 import MyChefsIcon from "../icons/MyChefsIcon";
 import BuffetIcon from "../icons/BuffetIcon";
 import { Link as RouterLink } from "react-router-dom";
+import {
+  usePopupState,
+  bindTrigger,
+  bindPopover,
+} from "material-ui-popup-state/hooks";
 
 function NavigationMainMenuButton() {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const mainMenuPopoverState = usePopupState({
+    variant: "popover",
+    popupId: "mainMenuPopover",
+  });
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const popoverOriginProps = {
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "right",
+    },
+    transformOrigin: {
+      vertical: "top",
+      horizontal: "right",
+    },
   };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
 
   const views = [
     {
@@ -58,21 +66,13 @@ function NavigationMainMenuButton() {
         <NavigationButton
           icon={<MenuIcon />}
           variant="contained"
-          onClick={handleClick}
+          {...bindTrigger(mainMenuPopoverState)}
         />
       </Tooltip>
       <Popover
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        onClose={handleClose}
+        {...popoverOriginProps}
+        {...bindPopover(mainMenuPopoverState)}
+        closePopover={mainMenuPopoverState.close}
         PaperProps={{
           sx: {
             backgroundColor: "common.black",
@@ -85,7 +85,7 @@ function NavigationMainMenuButton() {
             <NavigationButton
               icon={<MenuIcon />}
               variant="contained"
-              onClick={handleClose}
+              onClick={mainMenuPopoverState.close}
             />
           </Grid>
           <Grid container item xs={12} flexDirection="column" rowSpacing={3}>
