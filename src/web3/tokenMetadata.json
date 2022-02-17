@@ -1,4 +1,14 @@
 {
+  "USDC": {
+    "name": "USD Coin",
+    "address": "",
+    "icon": null
+  },
+  "USDT": {
+    "name": "Tether",
+    "address": "",
+    "icon": null
+  },
   "BTC": {
     "name": "Bitcoin",
     "address": "",
