@@ -12,7 +12,7 @@ import { RecipeCreatorContext } from './recipeCreatorContext'
 export function RecipeCreatorProvider({ children }) {
   let initialState = {
     totalPercentage: 100,
-    maxSelection: 4,
+    maxSelection: 20,
     minSelection: 3,
     adjustmentPercentage: 5,
     steps: ["Choose Ingredients", "Review & Adjust", "Cook Recipe", "Tasting"],
