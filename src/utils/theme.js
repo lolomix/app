@@ -309,6 +309,21 @@ theme = createTheme(theme, {
             padding: 4,
           },
         },
+        {
+          props: { variant: "outlined", size: "xsmall" },
+          style: {
+            border: `2px solid ${theme.palette.grey.A100}`,
+            padding: 3,
+          },
+        },
+        {
+          props: { color: "info" },
+          style: {
+            [`&.${toggleButtonClasses.selected}`]: {
+              color: theme.palette.info.dark,
+            },
+          },
+        },
       ],
     },
     MuiButton: {
