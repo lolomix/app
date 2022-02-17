@@ -7,6 +7,8 @@ import {
   CardHeader,
   Grid,
   IconButton,
+  ToggleButton,
+  ToggleButtonGroup,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -43,9 +45,32 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             }
           />
           <CardContent>
-            <Typography variant="h6" textAlign="left" gutterBottom>
-              The past month's performance of this recipe
-            </Typography>
+            <Grid container alignItems="center" mb={3}>
+              <Grid item xs={12} md>
+                <Typography variant="h6">
+                  The weekly performance of this recipe
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md="auto">
+                <ToggleButtonGroup size="small">
+                  <ToggleButton disabled value="daily" key="left">
+                    <Tooltip title="Show daily performance">
+                      <span>Daily</span>
+                    </Tooltip>
+                  </ToggleButton>
+                  <ToggleButton selected value="weekly" key="center">
+                    <Tooltip title="Show weekly performance">
+                      <span>Weekly</span>
+                    </Tooltip>
+                  </ToggleButton>
+                  <ToggleButton disabled value="monthly" key="right">
+                    <Tooltip title="Show monthly performance">
+                      <span>Monthly</span>
+                    </Tooltip>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </Grid>
+            </Grid>
             <RecipePerformanceChart tokens={tokens} />
             <Typography mt={4} variant="h6" textAlign="left" gutterBottom>
               Selected Tokens
@@ -66,22 +91,22 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                   <Grid item xs={7} sm={12}>
                     <Box position="relative">
                       <RecipeCreateCoinPairPresenter coinPair={coinPair} />
-                      <Tooltip title="Remove Token">
-                        <IconButton
-                          onClick={() => removeToken(coinPair)}
-                          size="xsmall"
-                          variant="contained"
-                          color="error"
-                          inverseColor
-                          sx={{
-                            position: "absolute",
-                            right: theme.spacing(-0.7),
-                            top: theme.spacing(-0.7),
-                          }}
-                        >
+                      <IconButton
+                        onClick={() => removeToken(coinPair)}
+                        size="xsmall"
+                        variant="contained"
+                        color="error"
+                        inverseColor
+                        sx={{
+                          position: "absolute",
+                          right: theme.spacing(-0.7),
+                          top: theme.spacing(-0.7),
+                        }}
+                      >
+                        <Tooltip title="Remove Token">
                           <RemoveCircleIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
+                        </Tooltip>
+                      </IconButton>
                     </Box>
                   </Grid>
                   <Grid item xs={5} sm={8.5} md={10} lg={8}>
