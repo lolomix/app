@@ -27,12 +27,13 @@ import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
 import { truncate } from "../../utils/formatters";
 
 function MyAccountPopover(props) {
-  const { t, tReady, closePopover, openProvidersPopover, anchorEl, ...rest } = props;
+  const { t, tReady, closePopover, openProvidersPopover, anchorEl, ...rest } =
+    props;
   const { account, deactivate } = useEthers();
 
   return (
     <Popover {...rest} anchorEl={anchorEl}>
-      <Box pt={2} pb={3} px={3} width="350px">
+      <Box pt={2} pb={3} px={3} maxWidth="350px">
         <Grid container alignItems="center" mb={1}>
           <Grid item xs>
             <Typography variant="h5">{t("base.myAccount")}</Typography>

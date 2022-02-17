@@ -184,7 +184,7 @@ function Buffet() {
       title="Buffet"
       subTitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
       icon={<BuffetIcon sx={{ fontSize: 55, marginTop: 0.2 }} />}
-      buttonType="home"
+      buttonType="back"
     >
       <Grid
         container

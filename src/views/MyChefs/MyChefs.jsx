@@ -31,8 +31,8 @@ function MyChefs() {
       helmetTitle="My Chefs"
       title="My Chefs"
       subTitle={`You Own : ${nfts ? nfts.length : 0}`}
-      icon={<MyChefsIcon sx={{ fontSize: 70, paddingBottom: 2 }} />}
-      buttonType="home"
+      icon={<MyChefsIcon sx={{ fontSize: 55 }} />}
+      buttonType="back"
     >
       <Grid container item gap={3} justifyContent="center">
         <Grid item xs={12} sm={6} md={5} lg={2.5}>
