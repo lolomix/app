@@ -66,7 +66,7 @@ function GradualStepperInputField({
                 variant="contained"
                 shape="squarish"
                 size="xsmall"
-                color="success"
+                color="info"
                 aria-label="close"
                 onClick={decrement}
               >
@@ -85,7 +85,7 @@ function GradualStepperInputField({
                 variant="contained"
                 shape="squarish"
                 size="xsmall"
-                color="success"
+                color="info"
                 aria-label="close"
                 onClick={increment}
               >
