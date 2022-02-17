@@ -18,10 +18,6 @@ import {
 import Layout from "../../components/layout/Layout";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
-//import PinkStar from "../../assets/stars/pink-star.svg";
-//import PurpleStar from "../../assets/stars/purple-star.svg";
-//import GreyStar from "../../assets/stars/grey-star.svg";
-//import YellowStar from "../../assets/stars/yellow-star.svg";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
 import Image3 from "../../assets/nfts/3.png";
@@ -266,30 +262,6 @@ function Buffet() {
                             },
                           }}
                         >
-                          {/*<Grid item xs={2} md={1.7}>
-                          <Typography
-                            variant="h5"
-                            color="common.black"
-                            minWidth="40px"
-                            minHeight="40px"
-                            sx={{
-                              background: `transparent url(${
-                                recipe.ranking === 1
-                                  ? PurpleStar
-                                  : recipe.ranking === 2
-                                  ? GreyStar
-                                  : recipe.ranking === 3
-                                  ? PinkStar
-                                  : YellowStar
-                              }) no-repeat center`,
-                              backgroundSize: "contain",
-                              padding: 2,
-                              paddingTop: 2.5,
-                            }}
-                          >
-                            {recipe.ranking}
-                          </Typography>
-                         </Grid>*/}
                           <Grid item mr={2}>
                             <Box
                               sx={{
@@ -318,16 +290,6 @@ function Buffet() {
                               {recipe.recipeName}
                             </Typography>
                           </Grid>
-                          {/*<Grid item xs={2} md={1.5}>
-                        <Typography
-                          variant="h5"
-                          color={
-                            recipe.ranking <= 3 ? "success.main" : "secondary"
-                          }
-                        >
-                          {recipe.recipePerformance}%
-                        </Typography>
-                      </Grid>*/}
                         </Grid>
                       </Link>
                       <Divider />
