@@ -2,14 +2,14 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 // material-ui
 import { Toolbar, AppBar, Grid, Tooltip } from "@mui/material";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 // custom
 import NavigationWalletButton from "./NavigationWalletButton";
-import LanguageSelector from "./LanguageSelector";
-// import NavigationButton from "./NavigationButton";
+import NavigationButton from "./NavigationButton";
 import NavigationMenuButton from "./NavigationMainMenuButton";
 import NavigationAromaBalance from "./NavigationAromaBalance";
-import { StyledButton } from "./ViewHeading";
+import { Home } from "@mui/icons-material";
+
 /**
  * @param t
  * @returns {JSX.Element}
@@ -21,7 +21,7 @@ function Navigation({ t }) {
    *
    * @todo create a hook that gathers all related notifications
    */
-  // const notifications = [];
+  const notifications = [];
 
   const navigate = useNavigate();
 
@@ -54,16 +54,15 @@ function Navigation({ t }) {
               justifyContent="flex-end"
               mt={-0.5}
             >
-              {/*notifications.length > 0 && (
-                  <NavigationButton icon={<NotificationsIcon />} />
-                )*/}
+              {notifications.length > 0 && (
+                <NavigationButton icon={<NotificationsIcon />} />
+              )}
               <Grid item>
                 <Tooltip title="Home">
-                  <StyledButton
-                    bg="yellowContained"
-                    type="home"
+                  <NavigationButton
+                    icon={<Home sx={{ fontSize: 26 }} />}
                     onClick={() => navigate("/")}
-                  ></StyledButton>
+                  />
                 </Tooltip>
               </Grid>
               <Grid item>
@@ -72,10 +71,6 @@ function Navigation({ t }) {
               <Grid item>
                 <NavigationMenuButton />
               </Grid>
-            </Grid>
-           <Grid item>
-               {/*@todo: remove this but keep the language selected*/}
-                <LanguageSelector />
             </Grid>
           </Grid>
         </Grid>

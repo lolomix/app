@@ -3,19 +3,9 @@ import { useNavigate } from "react-router-dom";
 // material-ui
 import styled from "@emotion/styled";
 import { Typography, Box, Button, Grid, Tooltip } from "@mui/material";
-import homeButton from "../../assets/home-button.svg";
 import backButton from "../../assets/back-button.svg";
 
-export const StyledButton = styled(Button)(({ type, theme }) => ({
-  ...(type === "home" && {
-    background: `transparent url(${homeButton}) no-repeat center`,
-    backgroundSize: "cover",
-    [theme.breakpoints.down("md")]: {
-      width: "42px",
-      height: "45px",
-      marginLeft: 0,
-    },
-  }),
+const StyledButton = styled(Button)(({ type, theme }) => ({
   ...(type === "back" && {
     background: `transparent url(${backButton}) no-repeat center`,
     backgroundSize: "cover",
@@ -43,13 +33,11 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
   return (
     <Grid container justifyContent="center" zIndex="999" ml={0.5}>
       <Grid item xs={0.1}>
-        <Tooltip title={buttonType === "home" ? "Home" : "Back"}>
+        <Tooltip title={buttonType === "back" && "Back"}>
           <StyledButton
             bg="yellowContained"
             type={buttonType}
-            onClick={
-              buttonType === "home" ? () => navigate("/") : () => navigate(-1)
-            }
+            onClick={() => navigate(-1)}
           ></StyledButton>
         </Tooltip>
       </Grid>
