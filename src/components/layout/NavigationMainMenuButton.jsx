@@ -24,29 +24,6 @@ function NavigationMainMenuButton() {
 
   const open = Boolean(anchorEl);
 
-  /*const externalLinks = [
-    {
-      title: "OpenSea",
-      ref: "https://opensea.io/collection/cryptochefs-io",
-    },
-    {
-      title: "Twitter",
-      ref: "https://twitter.com/cryptochefs_io/",
-    },
-    {
-      title: "Instagram",
-      ref: "https://www.instagram.com/cryptochefs.io/",
-    },
-    {
-      title: "Medium",
-      ref: "https://cryptochefs.medium.com/",
-    },
-    {
-      title: "Discord",
-      ref: "https://discord.com/invite/JufpFYBdKG/",
-    },
-  ];*/
-
   const views = [
     {
       title: "Home",
@@ -136,34 +113,6 @@ function NavigationMainMenuButton() {
               </Grid>
             ))}
           </Grid>
-          {/*<Grid
-              container
-              item
-              mt={10}
-              xs={12}
-              md={6}
-              flexDirection="column"
-              rowSpacing={4}
-            >
-              {externalLinks.map((item) => (
-                <Grid
-                  item
-                  textAlign={["left", "left", "right"]}
-                  key={item.title}
-                >
-                  <Link
-                    variant="h4"
-                    underline="hover"
-                    href={item.ref}
-                    target="_blank"
-                    rel="nofollow noindex"
-                    color="grey.500"
-                  >
-                    {item.title}
-                  </Link>
-                </Grid>
-              ))}
-              </Grid>*/}
         </Grid>
       </Popover>
     </>
