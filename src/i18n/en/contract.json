@@ -1,0 +1,15 @@
+{
+  "exceptions": {
+    "this recipe is taken": "Oh snap! This recipe is already taken. Try with other ingredients.",
+    "total coin percentage is not 100": "The total percentage of the selected coin pairs must be 100%. Amend the percentages accordingly.",
+    "percentage of a coin incremental of 5": "The percentages must be divisible by 5. Amend the percentages accordingly.",
+    "coin is not supported": "One of the coin pairs is not supported. Please ask for support from the site owner."
+  },
+  "functions" : {
+    "theFunctionName": {
+      "exceptions": {
+        "example": "READ THIS! This is the format to use if a function requires special treatment"
+      }
+    }
+  }
+}

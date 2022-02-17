@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { DAppProvider } from "@usedapp/core";
 import { DAPPCONFIG } from "./web3/constants";
 import App from "./App";
+import "./i18n";
 
 const queryClient = new QueryClient();
 
