@@ -24,8 +24,7 @@ function NavigationMainMenuButton() {
 
   const open = Boolean(anchorEl);
 
-  {
-    /*const externalLinks = [
+  /*const externalLinks = [
     {
       title: "OpenSea",
       ref: "https://opensea.io/collection/cryptochefs-io",
@@ -47,7 +46,6 @@ function NavigationMainMenuButton() {
       ref: "https://discord.com/invite/JufpFYBdKG/",
     },
   ];*/
-  }
 
   const views = [
     {
