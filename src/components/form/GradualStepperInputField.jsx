@@ -1,6 +1,6 @@
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import { theme } from "../../utils/theme";
 
 /**
@@ -70,7 +70,9 @@ function GradualStepperInputField({
                 aria-label="close"
                 onClick={decrement}
               >
-                <RemoveIcon fontSize="small" />
+                <Tooltip title="Decrease">
+                  <RemoveIcon fontSize="small" />
+                </Tooltip>
               </IconButton>
             </InputAdornment>
           ),
@@ -87,7 +89,9 @@ function GradualStepperInputField({
                 aria-label="close"
                 onClick={increment}
               >
-                <AddIcon fontSize="small" />
+                <Tooltip title="Increase">
+                  <AddIcon fontSize="small" />
+                </Tooltip>
               </IconButton>
             </InputAdornment>
           ),
