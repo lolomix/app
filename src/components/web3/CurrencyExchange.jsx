@@ -179,7 +179,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           ) : (
             // @todo is this the right place to handle such things?
             <Button size="xlarge" variant="contained" fullWidth disabled>
-              Wallet Connect Wallet
+              Please Connect Wallet
             </Button>
           )}
           <Chip
