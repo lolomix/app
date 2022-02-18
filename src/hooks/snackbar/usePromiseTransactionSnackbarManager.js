@@ -6,11 +6,22 @@ import { useTranslation } from "react-i18next";
 export const TRANSACTION_IN_PROGRESS_KEY = "transactionInProgress";
 export const PENDING_SIGNATURE_KEY = "pendingSignature";
 
+export const MINING = "Mining";
+export const PENDING_SIGNATURE = "PendingSignature";
+export const FAIL = "Fail";
+export const EXCEPTION = "Exception";
+export const SUCCESS = "Success";
+export const NONE = "None";
+
 /**
  * @param {object} state
+ * @param {function(string)} callback
  * @returns {(boolean|((value: (((prevState: boolean) => boolean) | boolean)) => void))[][]}
  */
-export function usePromiseTransactionSnackbarManager(state) {
+export function usePromiseTransactionSnackbarManager(
+  state,
+  callback = () => {}
+) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { t } = useTranslation("contract", { keyPrefix: "exceptions" });
 
@@ -24,42 +35,37 @@ export function usePromiseTransactionSnackbarManager(state) {
     console.debug(state);
 
     switch (state.status) {
-      case "Mining":
+      case MINING:
         setInProgress(true);
         setPendingSignature(false);
         break;
-      case "PendingSignature":
+      case PENDING_SIGNATURE:
         setInProgress(false);
         setPendingSignature(true);
         break;
-      case "Fail":
+      case FAIL:
+      case EXCEPTION:
         setInProgress(false);
         setPendingSignature(false);
         enqueueSnackbar(t(state.errorMessage), {
           variant: "error",
         });
         break;
-      case "Exception":
-        setInProgress(false);
-        setPendingSignature(false);
-        enqueueSnackbar(t(state.errorMessage), {
-          variant: "error",
-        });
-        break;
-      case "Success":
+      case SUCCESS:
         setInProgress(false);
         setPendingSignature(false);
         enqueueSnackbar("Transaction was successful", {
           variant: "success",
         });
         break;
-      case "None":
+      case NONE:
       default:
         setInProgress(false);
         setPendingSignature(false);
         break;
     }
-  }, [state, enqueueSnackbar]);
+    callback(state.status);
+  }, [state, enqueueSnackbar, callback, t]);
 
   /**
    * Handle transaction in progress snackbar
