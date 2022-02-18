@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import { useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
-// material-ui
 import { LoadingButton } from "@mui/lab";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
 import {
@@ -19,15 +17,16 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-// custom
 import CurrencyInputField from "../form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
-import { getErrorMessage } from "../../web3/errors";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
-import SnackbarAction from "../snackbars/SnackbarAction";
 import { parseUnits } from "@ethersproject/units";
+import {
+  SUCCESS,
+  usePromiseTransactionSnackbarManager,
+} from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
 
 /**
  * @param t
@@ -36,17 +35,14 @@ import { parseUnits } from "@ethersproject/units";
  * @constructor
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
-  const { error, active } = useEthers();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { account } = useEthers();
+  const { enqueueSnackbar } = useSnackbar();
   const price = useAromaPrice();
-
-  let transactionInProgressSnackBarKey = "transactionInProgress";
-  let walletInteractionSnackBarKey = "walletInteraction";
 
   /**
    * Definition of the success dialog state
    */
-  const [successDialog, setSuccessDialog] = React.useState(false);
+  const [successDialog, setSuccessDialog] = useState(false);
 
   /**
    * Definition of the currency input field amounts/values
@@ -60,7 +56,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const [currencyFrom, setCurrencyFrom] = useState("MATIC");
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol);
   }, []);
 
@@ -78,60 +74,17 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
    * Definition of the aroma buy state
    */
   const [sendAromaBuy, aromaBuyState] = useAromaBuy();
-
-  React.useEffect(() => {
-    if (aromaBuyState.status === "None") {
-      setTransactionInProgress(false);
-    }
-
-    if (aromaBuyState.status === "Exception") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-      });
-    }
-
-    if (aromaBuyState.status === "Mining") {
-      setTransactionInProgress(true);
-    }
-
-    if (aromaBuyState.status === "Success") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Transaction was successful", {
-        variant: "success",
-      });
-      setSuccessDialog(true);
-    }
-  }, [aromaBuyState, closeSnackbar, enqueueSnackbar]);
-
-  /**
-   * Definition of the transaction in progress state
-   */
-  const [transactionInProgress, setTransactionInProgress] =
-    React.useState(false);
-
-  React.useEffect(() => {
-    if (transactionInProgress === false) {
-      closeSnackbar(transactionInProgressSnackBarKey);
-      return;
-    }
-    closeSnackbar(walletInteractionSnackBarKey);
-    enqueueSnackbar("Transaction in progress", {
-      key: transactionInProgressSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
-    });
-  }, [
-    transactionInProgress,
-    enqueueSnackbar,
-    closeSnackbar,
-    walletInteractionSnackBarKey,
-    transactionInProgressSnackBarKey,
-  ]);
+  const [[transactionInProgress]] = usePromiseTransactionSnackbarManager(
+    aromaBuyState,
+    useCallback((status) => {
+      if (status === SUCCESS) setSuccessDialog(true);
+    }, [])
+  );
 
   /**
    * Handles the actual exchange by triggering a blockchain transaction
+   *
+   * @todo: maybe we should decouple validation
    */
   const handleExchange = async () => {
     if (
@@ -140,33 +93,26 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
       currencyToAmount < 5 ||
       currencyToAmount > 10000
     ) {
-      enqueueSnackbar("Invalid input amount", {
+      const message = t(
+        "exceptions.execution reverted: token count is out of the allowd range",
+        {
+          ns: "contract",
+        }
+      );
+      enqueueSnackbar(message, {
         variant: "error",
       });
-
       return;
     }
 
-    enqueueSnackbar("Waiting for interaction in Wallet", {
-      key: walletInteractionSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
+    await sendAromaBuy(currencyToAmount, {
+      value: currencyToAmount * parseUnits(price),
     });
-
-    try {
-      await sendAromaBuy(currencyToAmount, {
-        value: currencyToAmount * parseUnits(price),
-      });
-    } catch (error) {
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-      });
-    }
   };
 
   /**
    * Handles the user input field (to and from conversion)
+   *
    * todo: connect to web3
    */
   const handleCurrencyToUserInput = (event) => {
@@ -176,93 +122,83 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
 
   return (
     <Card elevation={3}>
-      {active ? (
-        <CardContent>
-          <Typography
-            variant="h4"
-            component="h2"
-            color="secondary"
-            align="center"
-            mb={4}
-          >
-            {t("components.CurrencyExchange.title")}
+      <CardContent>
+        <Typography
+          variant="h4"
+          component="h2"
+          color="secondary"
+          align="center"
+          mb={4}
+        >
+          {t("components.CurrencyExchange.title")}
+        </Typography>
+        <Stack spacing={1.5} alignItems="center">
+          <CurrencyInputField
+            id="token-exchange-from"
+            disabled
+            required
+            currency={currencyFrom}
+            label="You Pay"
+            type="sell"
+            value={currencyFromAmount}
+          />
+          <Divider flexItem>
+            <Chip
+              size="small"
+              sx={{
+                "> .MuiChip-label": {
+                  padding: "0 4px",
+                },
+              }}
+              icon={<KeyboardArrowDown />}
+            />
+          </Divider>
+          <CurrencyInputField
+            id="token-exchange-to"
+            currency={currencyTo}
+            label="You Get"
+            type="buy"
+            onUserInput={(e) => handleCurrencyToUserInput(e)}
+            value={currencyToAmount}
+            required
+          />
+          <Typography variant="body2" gutterBottom>
+            Please enter amount between 5 and 10 000 AROMA
           </Typography>
-          <Stack spacing={1.5} alignItems="center">
-            <CurrencyInputField
-              id="token-exchange-from"
-              disabled
-              required
-              currency={currencyFrom}
-              label="You Pay"
-              type="sell"
-              value={currencyFromAmount}
-            />
-            <Divider flexItem>
-              <Chip
-                size="small"
-                sx={{
-                  "> .MuiChip-label": {
-                    padding: "0 4px",
-                  },
-                }}
-                icon={<KeyboardArrowDown />}
-              />
-            </Divider>
-            <CurrencyInputField
-              id="token-exchange-to"
-              currency={currencyTo}
-              label="You Get"
-              type="buy"
-              onUserInput={(e) => handleCurrencyToUserInput(e)}
-              value={currencyToAmount}
-              required
-            />
-            <Typography variant="body2" gutterBottom>
-              Please enter amount between 5 and 10 000 AROMA
-            </Typography>
+          {account ? (
             <LoadingButton
               size="xlarge"
               bg="yellowContained"
               fullWidth
+              disabled
               onClick={handleExchange}
               loading={transactionInProgress}
             >
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
-            <Chip
-              label={
-                "For 1 " +
-                NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
-                " you get " +
-                formatCurrency(1 / price) +
-                " AROMA tokens."
-              }
-              sx={{ margin: "8px 0" }}
-              size="small"
-              icon={
-                (enableCurrencySwitch && (
-                  <ShowChart onClick={switchCurrencies} />
-                )) || <ShowChart />
-              }
-            />
-          </Stack>
-        </CardContent>
-      ) : (
-        <CardContent>
-          <Typography variant="body2" my={4}>
-            {getErrorMessage(error)}
-          </Typography>
-          <Button
-            variant="contained"
-            component="a"
-            href="https://cryptochefs.medium.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            Learn more
-          </Button>
-        </CardContent>
-      )}
+          ) : (
+            // @todo is this the right place to handle such things?
+            <Button size="xlarge" variant="contained" fullWidth disabled>
+              Wallet Connect Wallet
+            </Button>
+          )}
+          <Chip
+            label={
+              "For 1 " +
+              NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
+              " you get " +
+              formatCurrency(1 / price) +
+              " AROMA tokens."
+            }
+            size="small"
+            icon={
+              (enableCurrencySwitch && (
+                <ShowChart onClick={switchCurrencies} />
+              )) || <ShowChart />
+            }
+          />
+        </Stack>
+      </CardContent>
       <Dialog
         maxWidth="md"
         onClose={() => setSuccessDialog(false)}
@@ -293,12 +229,5 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     </Card>
   );
 }
-
-/**
- * @type {{enableCurrencySwitch: Requireable<boolean>}}
- */
-CurrencyExchange.propTypes = {
-  enableCurrencySwitch: PropTypes.bool,
-};
 
 export default withTranslation()(CurrencyExchange);

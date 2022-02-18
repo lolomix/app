@@ -19,6 +19,7 @@ i18n
   .init({
     lng: "en",
     fallbackLng: "en",
+    nsSeparator: false, // allow ':' characters in translations
     resources: {
       en: {
         translation: enTranslation,

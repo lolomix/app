@@ -1,14 +1,20 @@
 {
   "exceptions": {
+    "MetaMask Tx Signature: User denied transaction signature.": "You have denied transaction signature.",
+    "unknown account #0": "Please make sure that your wallet is connected.",
+    "execution reverted: token count is out of the allowd range": "You can only purchase between 5 and 10000 AROMAs at once.",
+    "execution reverted: sent MATIC below the price": "Price has changed since submitting the transaction. Please try again.",
+    "execution reverted: Sale is paused": "The sale is currently paused. Please try again later.",
+    "execution reverted: tranfering AROMA failed": "Something must have gone wrong during the transfer. Please ask our support,",
     "this recipe is taken": "Oh snap! This recipe is already taken. Try with other ingredients.",
     "total coin percentage is not 100": "The total percentage of the selected coin pairs must be 100%. Amend the percentages accordingly.",
     "percentage of a coin incremental of 5": "The percentages must be divisible by 5. Amend the percentages accordingly.",
-    "coin is not supported": "One of the coin pairs is not supported. Please ask for support from the site owner."
+    "coin is not supported": "One of the coin pairs is not supported. Please ask our support."
   },
-  "functions" : {
+  "functions": {
     "theFunctionName": {
       "exceptions": {
-        "example": "READ THIS! This is the format to use if a function requires special treatment"
+        "example": "READ THIS! This is the format to use if a function requires special treatment. Otherwise, just paste it above"
       }
     }
   }
