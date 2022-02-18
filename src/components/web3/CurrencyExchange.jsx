@@ -170,7 +170,6 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
               size="xlarge"
               bg="yellowContained"
               fullWidth
-              disabled
               onClick={handleExchange}
               loading={transactionInProgress}
             >
