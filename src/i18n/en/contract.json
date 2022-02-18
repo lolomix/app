@@ -1,6 +1,7 @@
 {
   "exceptions": {
     "MetaMask Tx Signature: User denied transaction signature.": "You have denied transaction signature.",
+    "unknown account #0": "Please make sure that your wallet is connected.",
     "execution reverted: token count is out of the allowd range": "You can only purchase between 5 and 10000 AROMAs at once.",
     "execution reverted: sent MATIC below the price": "Price has changed since submitting the transaction. Please try again.",
     "execution reverted: Sale is paused": "The sale is currently paused. Please try again later.",
