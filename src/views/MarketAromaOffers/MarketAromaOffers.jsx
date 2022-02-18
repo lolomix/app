@@ -22,14 +22,14 @@ const MarketAromaOffers = () => {
     {
       title: "Pile of AROMA",
       amount: 3000,
-      freeAmount: 500,
+      freeAmount: null,
       icon: <AromaBagOfCoinsIcon style={{ fontSize: "170px" }} />,
       price: "Coming Soon",
     },
     {
       title: "Sack of AROMA",
       amount: 10000,
-      freeAmount: 2000,
+      freeAmount: null,
       icon: <AromaPotOfCoinsIcon style={{ fontSize: "170px" }} />,
       price: "Coming Soon",
     },
