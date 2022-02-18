@@ -45,13 +45,20 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             }
           />
           <CardContent>
-            <Grid container alignItems="center" mb={3}>
-              <Grid item xs={12} md>
+            <Grid
+              container
+              justifyContent={{ xs: "center", md: "space-between" }}
+              flexDirection={{ xs: "column", md: "row" }}
+              alignItems="center"
+              spacing={1}
+              mb={3}
+            >
+              <Grid item order={{ xs: 2, md: 1 }}>
                 <Typography variant="h6">
                   The weekly performance of this recipe
                 </Typography>
               </Grid>
-              <Grid item xs={12} md="auto">
+              <Grid item order={{ xs: 1, md: 2 }}>
                 <ToggleButtonGroup size="small">
                   <ToggleButton disabled value="daily" key="left">
                     <Tooltip title="Show daily performance">
