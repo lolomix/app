@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
@@ -20,11 +20,13 @@ import {
 import CurrencyInputField from "../form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
-import { getErrorMessage } from "../../web3/errors";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
 import { parseUnits } from "@ethersproject/units";
-import { usePromiseTransactionSnackbarManager } from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
+import {
+  SUCCESS,
+  usePromiseTransactionSnackbarManager,
+} from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
 
 /**
  * @param t
@@ -33,7 +35,7 @@ import { usePromiseTransactionSnackbarManager } from "../../hooks/snackbar/usePr
  * @constructor
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
-  const { error, active } = useEthers();
+  const { account } = useEthers();
   const { enqueueSnackbar } = useSnackbar();
   const price = useAromaPrice();
 
@@ -72,8 +74,12 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
    * Definition of the aroma buy state
    */
   const [sendAromaBuy, aromaBuyState] = useAromaBuy();
-  const [[transactionInProgress]] =
-    usePromiseTransactionSnackbarManager(aromaBuyState);
+  const [[transactionInProgress]] = usePromiseTransactionSnackbarManager(
+    aromaBuyState,
+    useCallback((status) => {
+      if (status === SUCCESS) setSuccessDialog(true);
+    }, [])
+  );
 
   /**
    * Handles the actual exchange by triggering a blockchain transaction
@@ -116,92 +122,83 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
 
   return (
     <Card elevation={3}>
-      {active ? (
-        <CardContent>
-          <Typography
-            variant="h4"
-            component="h2"
-            color="secondary"
-            align="center"
-            mb={4}
-          >
-            {t("components.CurrencyExchange.title")}
+      <CardContent>
+        <Typography
+          variant="h4"
+          component="h2"
+          color="secondary"
+          align="center"
+          mb={4}
+        >
+          {t("components.CurrencyExchange.title")}
+        </Typography>
+        <Stack spacing={1.5} alignItems="center">
+          <CurrencyInputField
+            id="token-exchange-from"
+            disabled
+            required
+            currency={currencyFrom}
+            label="You Pay"
+            type="sell"
+            value={currencyFromAmount}
+          />
+          <Divider flexItem>
+            <Chip
+              size="small"
+              sx={{
+                "> .MuiChip-label": {
+                  padding: "0 4px",
+                },
+              }}
+              icon={<KeyboardArrowDown />}
+            />
+          </Divider>
+          <CurrencyInputField
+            id="token-exchange-to"
+            currency={currencyTo}
+            label="You Get"
+            type="buy"
+            onUserInput={(e) => handleCurrencyToUserInput(e)}
+            value={currencyToAmount}
+            required
+          />
+          <Typography variant="body2" gutterBottom>
+            Please enter amount between 5 and 10 000 AROMA
           </Typography>
-          <Stack spacing={1.5} alignItems="center">
-            <CurrencyInputField
-              id="token-exchange-from"
-              disabled
-              required
-              currency={currencyFrom}
-              label="You Pay"
-              type="sell"
-              value={currencyFromAmount}
-            />
-            <Divider flexItem>
-              <Chip
-                size="small"
-                sx={{
-                  "> .MuiChip-label": {
-                    padding: "0 4px",
-                  },
-                }}
-                icon={<KeyboardArrowDown />}
-              />
-            </Divider>
-            <CurrencyInputField
-              id="token-exchange-to"
-              currency={currencyTo}
-              label="You Get"
-              type="buy"
-              onUserInput={(e) => handleCurrencyToUserInput(e)}
-              value={currencyToAmount}
-              required
-            />
-            <Typography variant="body2" gutterBottom>
-              Please enter amount between 5 and 10 000 AROMA
-            </Typography>
+          {account ? (
             <LoadingButton
               size="xlarge"
               bg="yellowContained"
               fullWidth
+              disabled
               onClick={handleExchange}
               loading={transactionInProgress}
             >
               {t("components.CurrencyExchange.exchangeButton")}
             </LoadingButton>
-            <Chip
-              label={
-                "For 1 " +
-                NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
-                " you get " +
-                formatCurrency(1 / price) +
-                " AROMA tokens."
-              }
-              size="small"
-              icon={
-                (enableCurrencySwitch && (
-                  <ShowChart onClick={switchCurrencies} />
-                )) || <ShowChart />
-              }
-            />
-          </Stack>
-        </CardContent>
-      ) : (
-        <CardContent>
-          <Typography variant="body2" my={4}>
-            {getErrorMessage(error)}
-          </Typography>
-          <Button
-            variant="contained"
-            component="a"
-            href="https://cryptochefs.medium.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            Learn more
-          </Button>
-        </CardContent>
-      )}
+          ) : (
+            // @todo is this the right place to handle such things?
+            <Button size="xlarge" variant="contained" fullWidth disabled>
+              Wallet Connect Wallet
+            </Button>
+          )}
+          <Chip
+            label={
+              "For 1 " +
+              NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
+              " you get " +
+              formatCurrency(1 / price) +
+              " AROMA tokens."
+            }
+            size="small"
+            icon={
+              (enableCurrencySwitch && (
+                <ShowChart onClick={switchCurrencies} />
+              )) || <ShowChart />
+            }
+          />
+        </Stack>
+      </CardContent>
       <Dialog
         maxWidth="md"
         onClose={() => setSuccessDialog(false)}
