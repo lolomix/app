@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import { useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
-// material-ui
 import { LoadingButton } from "@mui/lab";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
 import {
@@ -19,15 +17,14 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-// custom
 import CurrencyInputField from "../form/CurrencyInputField";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
 import { getErrorMessage } from "../../web3/errors";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
-import SnackbarAction from "../snackbars/SnackbarAction";
 import { parseUnits } from "@ethersproject/units";
+import { usePromiseTransactionSnackbarManager } from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
 
 /**
  * @param t
@@ -37,16 +34,13 @@ import { parseUnits } from "@ethersproject/units";
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const { error, active } = useEthers();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const price = useAromaPrice();
-
-  let transactionInProgressSnackBarKey = "transactionInProgress";
-  let walletInteractionSnackBarKey = "walletInteraction";
 
   /**
    * Definition of the success dialog state
    */
-  const [successDialog, setSuccessDialog] = React.useState(false);
+  const [successDialog, setSuccessDialog] = useState(false);
 
   /**
    * Definition of the currency input field amounts/values
@@ -60,7 +54,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const [currencyFrom, setCurrencyFrom] = useState("MATIC");
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol);
   }, []);
 
@@ -78,60 +72,13 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
    * Definition of the aroma buy state
    */
   const [sendAromaBuy, aromaBuyState] = useAromaBuy();
-
-  React.useEffect(() => {
-    if (aromaBuyState.status === "None") {
-      setTransactionInProgress(false);
-    }
-
-    if (aromaBuyState.status === "Exception") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-      });
-    }
-
-    if (aromaBuyState.status === "Mining") {
-      setTransactionInProgress(true);
-    }
-
-    if (aromaBuyState.status === "Success") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Transaction was successful", {
-        variant: "success",
-      });
-      setSuccessDialog(true);
-    }
-  }, [aromaBuyState, closeSnackbar, enqueueSnackbar]);
-
-  /**
-   * Definition of the transaction in progress state
-   */
-  const [transactionInProgress, setTransactionInProgress] =
-    React.useState(false);
-
-  React.useEffect(() => {
-    if (transactionInProgress === false) {
-      closeSnackbar(transactionInProgressSnackBarKey);
-      return;
-    }
-    closeSnackbar(walletInteractionSnackBarKey);
-    enqueueSnackbar("Transaction in progress", {
-      key: transactionInProgressSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
-    });
-  }, [
-    transactionInProgress,
-    enqueueSnackbar,
-    closeSnackbar,
-    walletInteractionSnackBarKey,
-    transactionInProgressSnackBarKey,
-  ]);
+  const [[transactionInProgress]] =
+    usePromiseTransactionSnackbarManager(aromaBuyState);
 
   /**
    * Handles the actual exchange by triggering a blockchain transaction
+   *
+   * @todo: maybe we should decouple validation
    */
   const handleExchange = async () => {
     if (
@@ -140,33 +87,26 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
       currencyToAmount < 5 ||
       currencyToAmount > 10000
     ) {
-      enqueueSnackbar("Invalid input amount", {
+      const message = t(
+        "exceptions.execution reverted: token count is out of the allowd range",
+        {
+          ns: "contract",
+        }
+      );
+      enqueueSnackbar(message, {
         variant: "error",
       });
-
       return;
     }
 
-    enqueueSnackbar("Waiting for interaction in Wallet", {
-      key: walletInteractionSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
+    await sendAromaBuy(currencyToAmount, {
+      value: currencyToAmount * parseUnits(price),
     });
-
-    try {
-      await sendAromaBuy(currencyToAmount, {
-        value: currencyToAmount * parseUnits(price),
-      });
-    } catch (error) {
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-      });
-    }
   };
 
   /**
    * Handles the user input field (to and from conversion)
+   *
    * todo: connect to web3
    */
   const handleCurrencyToUserInput = (event) => {
@@ -237,7 +177,6 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
                 formatCurrency(1 / price) +
                 " AROMA tokens."
               }
-              sx={{ margin: "8px 0" }}
               size="small"
               icon={
                 (enableCurrencySwitch && (
@@ -293,12 +232,5 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     </Card>
   );
 }
-
-/**
- * @type {{enableCurrencySwitch: Requireable<boolean>}}
- */
-CurrencyExchange.propTypes = {
-  enableCurrencySwitch: PropTypes.bool,
-};
 
 export default withTranslation()(CurrencyExchange);
