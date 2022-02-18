@@ -78,23 +78,23 @@ const Tutorial = () => {
   return (
     <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="back">
       <Box>
-        <CustomContainer>
+        <CustomContainer mb={{ xs: 0, md: -16.5 }} right={{ sm: "15vw" , lg: 180}}>
           <Button
             bg="yellowContainedSmall"
-            elongatedwidth="30"
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
+            size="medium"
           >
             Join Discord
           </Button>
           <Button
             variant="contained"
-            elongatedwidth="30"
             sx={{ backgroundColor: "common.white" }}
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
             rel="nofollow noindex"
+            size="medium"
           >
             White Pepper
           </Button>

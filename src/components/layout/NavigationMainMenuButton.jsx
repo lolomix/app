@@ -36,27 +36,27 @@ function NavigationMainMenuButton() {
     {
       title: "Home",
       ref: "/",
-      icon: <HomeIcon sx={{ fontSize: "3.8rem" }} />,
+      icon: <HomeIcon sx={{ fontSize: "2.3rem" }} />,
     },
     {
       title: "Market",
       ref: "/market",
-      icon: <MarketIcon sx={{ fontSize: "3.8rem" }} />,
+      icon: <MarketIcon sx={{ fontSize: "2.3rem" }} />,
     },
     {
       title: "My Chefs",
       ref: "/my-chefs",
-      icon: <MyChefsIcon sx={{ fontSize: "4rem" }} />,
+      icon: <MyChefsIcon sx={{ fontSize: "2.3rem" }} />,
     },
     {
       title: "Kitchen",
       ref: "/kitchen",
-      icon: <KitchenIcon sx={{ fontSize: "3.8rem" }} />,
+      icon: <KitchenIcon sx={{ fontSize: "2.3rem" }} />,
     },
     {
       title: "Buffet",
       ref: "/buffet",
-      icon: <BuffetIcon sx={{ fontSize: "3.8rem" }} />,
+      icon: <BuffetIcon sx={{ fontSize: "2.3rem" }} />,
     },
   ];
 
@@ -105,7 +105,8 @@ function NavigationMainMenuButton() {
                     to={item.ref}
                     component={RouterLink}
                     color="common.white"
-                    fontWeight={500}
+                    fontWeight={400}
+                    fontSize={26}
                   >
                     {item.title}
                   </Link>

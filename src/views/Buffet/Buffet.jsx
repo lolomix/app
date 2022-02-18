@@ -178,7 +178,7 @@ function Buffet() {
     <Layout
       helmetTitle="Buffet"
       title="Buffet"
-      subTitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+      subTitle="Here you see your recipes and their performances"
       icon={<BuffetIcon sx={{ fontSize: 55, marginTop: 0.2 }} />}
       buttonType="back"
     >
