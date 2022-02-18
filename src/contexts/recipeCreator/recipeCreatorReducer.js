@@ -7,7 +7,7 @@ import {
   REPLACE_TOKEN,
   RESET,
   SWITCH_TOKEN_LOCK,
-  SET_CHEF, SET_STAKE, SET_NAME,
+  SET_CHEFID, SET_STAKE, SET_NAME,
 } from './recipeCreatorContext'
 
 /**
@@ -208,7 +208,7 @@ export function recipeCreatorReducer(state, [type, payload]) {
           return currentToken;
         }),
       };
-    case SET_CHEF:
+    case SET_CHEFID:
       return {
         ...state,
         chefId: payload.chefId,

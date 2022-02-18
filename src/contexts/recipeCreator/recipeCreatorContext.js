@@ -7,7 +7,7 @@ export const REPLACE_TOKEN = "recipe/REPLACE_TOKEN";
 export const NEXT_STEP = "recipe/NEXT_STEP";
 export const PREV_STEP = "recipe/PREV_STEP";
 export const RESET = "recipe/RESET";
-export const SET_CHEF = "recipe/SET_CHEF";
+export const SET_CHEFID = "recipe/SET_CHEFID";
 export const SET_STAKE = "recipe/SET_STAKE";
 export const SET_NAME = "recipe/SET_NAME";
 export const REPORT_ERRORS = "errors/REPORT_ERRORS";
@@ -134,6 +134,18 @@ function useRecipeCreator() {
     dispatch([RESET]);
   };
 
+  const setStake = (stake) => {
+    dispatch([SET_STAKE, { stake }]);
+  };
+
+  const setChefId = (chefId) => {
+    dispatch([SET_CHEFID, { chefId }]);
+  };
+
+  const setName = (name) => {
+    dispatch([SET_NAME, { name }]);
+  };
+
   return [
     state,
     {
@@ -145,6 +157,9 @@ function useRecipeCreator() {
       nextStep,
       prevStep,
       reset,
+      setStake,
+      setChefId,
+      setName
     },
   ];
 }
