@@ -4,6 +4,8 @@ import ViewHeading from "./ViewHeading";
 import { Stack, Container } from "@mui/material";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
+import { useEthers } from "@usedapp/core";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const Layout = ({
   helmetTitle,
@@ -13,6 +15,15 @@ const Layout = ({
   icon,
   buttonType,
 }) => {
+  /**
+   * @todo add error handling here or move it somewhere else
+   */
+  const { active } = useEthers();
+
+  if (!active) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       <Stack justifyContent="space-between" sx={{ minHeight: "100vh" }}>
