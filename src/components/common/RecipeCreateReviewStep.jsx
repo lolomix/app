@@ -139,7 +139,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             <Button
               disabled={tokens.length === maxSelection}
               elongatedwidth="30"
-              bg="yellowContainedSmall"
+              bg="yellowContained"
               size="large"
               {...bindDialogClick(tokenSelectorDialogState)}
             >
@@ -148,7 +148,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             <Button
               disabled={!recipeCalculateId}
               elongatedwidth="30"
-              bg="yellowContainedSmall"
+              bg="yellowContained"
               size="large"
               onClick={nextStep}
             >

@@ -247,7 +247,7 @@ function NftBuy({ t, remainingFormatted }) {
             disableElevation
             elongatedwidth="30"
             onClick={handleBuyDialog}
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             color="primary"
           >
             {t("base.close")}
@@ -256,7 +256,7 @@ function NftBuy({ t, remainingFormatted }) {
             disableElevation
             elongatedwidth="30"
             onClick={handleApproveAndBuy}
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             disabled={transactionInProgress}
           >
             Approve & Buy CHEF
@@ -284,7 +284,7 @@ function NftBuy({ t, remainingFormatted }) {
           <Button
             disableElevation
             elongatedwidth="30"
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             component="a"
             href="https://discord.gg/JufpFYBdKG"
             target="_blank"
@@ -296,7 +296,7 @@ function NftBuy({ t, remainingFormatted }) {
             disableElevation
             elongatedwidth="30"
             onClick={handleSuccessDialog}
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             color="primary"
           >
             {t("base.close")}

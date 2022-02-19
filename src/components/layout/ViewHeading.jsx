@@ -2,10 +2,20 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 // material-ui
 import styled from "@emotion/styled";
-import { Typography, Box, Button, Grid, Tooltip } from "@mui/material";
+import { Typography, Box, ButtonUnstyled, Grid, Tooltip } from "@mui/material";
+import homeButton from "../../assets/home-button.svg";
 import backButton from "../../assets/back-button.svg";
 
-const StyledButton = styled(Button)(({ type, theme }) => ({
+export const StyledButton = styled(ButtonUnstyled)(({ type, theme }) => ({
+  ...(type === "home" && {
+    background: `transparent url(${homeButton}) no-repeat center`,
+    backgroundSize: "cover",
+    [theme.breakpoints.down("md")]: {
+      width: "42px",
+      height: "45px",
+      marginLeft: 0,
+    },
+  }),
   ...(type === "back" && {
     background: `transparent url(${backButton}) no-repeat center`,
     backgroundSize: "cover",
@@ -19,10 +29,15 @@ const StyledButton = styled(Button)(({ type, theme }) => ({
     visibility: "hidden",
   }),
   textAlign: "center",
-  borderTop: "none",
+  border: "none",
   minWidth: "42px",
   width: "43px",
   height: "45px",
+  borderRadius: "9px",
+  cursor: "pointer",
+  "&:hover": {
+    transform: "scale(1.05)"
+  },
 }));
 
 function ViewHeading({ buttonType, title, icon, subTitle }) {
@@ -32,19 +47,21 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
 
   return (
     <Grid container justifyContent="center" zIndex="999" ml={0.5}>
-      <Grid item xs={0.1}>
-        <Tooltip title={buttonType === "back" && "Back"}>
+      <Grid item sx={{position: "relative", left: "-44%", top: 20}}>
+        <Tooltip title={buttonType === "home" ? "Home" : "Back"}>
           <StyledButton
             bg="yellowContained"
             type={buttonType}
-            onClick={() => navigate(-1)}
+            onClick={
+              buttonType === "home" ? () => navigate("/") : () => navigate(-1)
+            }
           ></StyledButton>
         </Tooltip>
       </Grid>
       <Grid
         container
         item
-        xs={11.9}
+        xs={12}
         flexDirection="column"
         alignItems="center"
         mb={1}

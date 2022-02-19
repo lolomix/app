@@ -17,7 +17,7 @@ function Home() {
       <Button
         elongatedwidth="30"
         size="massive"
-        bg="yellowContainedSmall"
+        bg="yellowContained"
         to="/kitchen/recipe/create"
         component={RouterLink}
         startIcon={<WhiteFlameIcon />}

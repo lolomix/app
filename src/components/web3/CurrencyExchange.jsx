@@ -218,7 +218,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             disableElevation
             elongatedwidth="30"
             onClick={() => setSuccessDialog(false)}
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             color="primary"
           >
             {t("base.close")}
