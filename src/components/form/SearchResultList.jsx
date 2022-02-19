@@ -1,4 +1,3 @@
-// material-ui
 import {
   Box,
   List,
@@ -9,6 +8,7 @@ import {
   styled,
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import Icon from "react-crypto-icons";
 
 /**
  * @type {StyledComponent<PropsOf<OverridableComponent<BoxTypeMap>> & MUIStyledCommonProps<Theme>, {}, {}>}
@@ -65,7 +65,11 @@ function SearchResultList({
               }
             >
               <ListItemIcon>
-                {item.icon ?? <HelpOutlineIcon fontSize="large" />}
+                {item.icon ? (
+                  <Icon name={item.icon} size={28} />
+                ) : (
+                  <HelpOutlineIcon fontSize="large" />
+                )}
               </ListItemIcon>
               <ListItemText
                 sx={{ my: 0.4 }}

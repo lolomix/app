@@ -2,52 +2,52 @@
   "USDC": {
     "name": "USD Coin",
     "address": "",
-    "icon": null
+    "icon": "usdc"
   },
   "USDT": {
     "name": "Tether",
     "address": "",
-    "icon": null
+    "icon": "usdt"
   },
   "BTC": {
     "name": "Bitcoin",
     "address": "",
-    "icon": null
+    "icon": "btc"
   },
   "ETH": {
     "name": "Ethereum",
     "address": "",
-    "icon": null
+    "icon": "eth"
   },
   "BNB": {
     "name": "Binance Coin",
     "address": "",
-    "icon": null
+    "icon": "bnb"
   },
   "ADA": {
     "name": "Cardano",
     "address": "",
-    "icon": null
+    "icon": "ada"
   },
   "DOGE": {
     "name": "Dogecoin",
     "address": "",
-    "icon": null
+    "icon": "doge"
   },
   "XRP": {
     "name": "XRP",
     "address": "",
-    "icon": null
+    "icon": "xrp"
   },
   "DOT": {
     "name": "Polkadot",
     "address": "",
-    "icon": null
+    "icon": "dot"
   },
   "UNI": {
     "name": "Uniswap",
     "address": "",
-    "icon": null
+    "icon": "uni"
   },
   "ICP": {
     "name": "Internet-Computer",
@@ -57,67 +57,67 @@
   "LINK": {
     "name": "Chainlink",
     "address": "",
-    "icon": null
+    "icon": "link"
   },
   "BCH": {
     "name": "Bitcoin Cash",
     "address": "",
-    "icon": null
+    "icon": "bch"
   },
   "LTC": {
     "name": "Litecoin",
     "address": "",
-    "icon": null
+    "icon": "ltc"
   },
   "MATIC": {
     "name": "Polygon",
     "address": "",
-    "icon": null
+    "icon": "matic"
   },
   "XLM": {
     "name": "Stellar",
     "address": "",
-    "icon": null
+    "icon": "xlm"
   },
   "SOL": {
     "name": "Solana",
     "address": "",
-    "icon": null
+    "icon": "sol"
   },
   "VET": {
     "name": "VeChain",
     "address": "",
-    "icon": null
+    "icon": "vet"
   },
   "ETC": {
     "name": "Ethereum Classic",
     "address": "",
-    "icon": null
+    "icon": "etc"
   },
   "THETA": {
     "name": "Theta Network",
     "address": "",
-    "icon": null
+    "icon": "theta"
   },
   "EOS": {
     "name": "EOS",
     "address": "",
-    "icon": null
+    "icon": "eos"
   },
   "TRX": {
     "name": "TRON",
     "address": "",
-    "icon": null
+    "icon": "trx"
   },
   "FIL": {
     "name": "Filecoin",
     "address": "",
-    "icon": null
+    "icon": "fil"
   },
   "AAVE": {
     "name": "Aave",
     "address": "",
-    "icon": null
+    "icon": "aave"
   },
   "XMR": {
     "name": "Monero",
@@ -127,22 +127,22 @@
   "CAKE": {
     "name": "PancakeSwap",
     "address": "",
-    "icon": null
+    "icon": "cake"
   },
   "NEO": {
     "name": "NEO",
     "address": "",
-    "icon": null
+    "icon": "neo"
   },
   "MKR": {
     "name": "Maker",
     "address": "",
-    "icon": null
+    "icon": "mkr"
   },
   "MIOTA": {
     "name": "IOTA",
     "address": "",
-    "icon": null
+    "icon": "iota"
   },
   "KLAY": {
     "name": "Klaytn",
@@ -152,97 +152,87 @@
   "XTZ": {
     "name": "Tezos",
     "address": "",
-    "icon": null
+    "icon": "xtz"
   },
   "KSM": {
     "name": "Kusama",
     "address": "",
-    "icon": null
-  },
-  "MIOTA": {
-    "name": "IOTA",
-    "address": "",
-    "icon": null
+    "icon": "ksm"
   },
   "ATOM": {
     "name": "Cosmos",
     "address": "",
-    "icon": null
+    "icon": "atom"
   },
   "HT": {
     "name": "Huobi Token",
     "address": "",
-    "icon": null
+    "icon": "ht"
   },
   "LUNA": {
     "name": "Terra",
     "address": "",
-    "icon": null
+    "icon": "luna"
   },
   "ALGO": {
     "name": "Algorand",
     "address": "",
-    "icon": null
+    "icon": "algo"
   },
   "RUNE": {
     "name": "THORChain",
     "address": "",
-    "icon": null
+    "icon": "rune"
   },
   "COMP": {
     "name": "Compound",
     "address": "",
-    "icon": null
+    "icon": "comp"
   },
   "DCR": {
     "name": "Decred",
     "address": "",
-    "icon": null
+    "icon": "dcr"
   },
   "DASH": {
     "name": "Dash",
     "address": "",
-    "icon": null
+    "icon": "dash"
   },
   "HBAR": {
     "name": "Hedera",
     "address": "",
-    "icon": null
+    "icon": "hbar"
   },
   "ZCASH": {
     "name": "Zcash",
     "address": "",
     "icon": null
   },
-  "MIOTA": {
-    "name": "IOTA",
-    "address": "",
-    "icon": null
-  },
   "CHZ": {
     "name": "Chilliz",
     "address": "",
-    "icon": null
+    "icon": "chz"
   },
   "SUSHI": {
     "name": "SushiSwap",
     "address": "",
-    "icon": null
+    "icon": "sushi"
   },
   "HOT": {
     "name": "Holo",
     "address": "",
-    "icon": null
+    "icon": "hot"
   },
   "MANA": {
     "name": "Decentraland",
     "address": "",
-    "icon": null
+    "icon": "mana"
   },
   "ENJ": {
     "name": "Enjin Coin",
     "address": "",
-    "icon": null
+    "icon": "enj"
   },
   "HNT": {
     "name": "Helium",
@@ -252,6 +242,6 @@
   "QTUM": {
     "name": "Qtum",
     "address": "",
-    "icon": null
+    "icon": "qtum"
   }
 }
