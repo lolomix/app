@@ -75,6 +75,7 @@ function SearchResultList({
             </ListItemButton>
           </ListItem>
         ))}
+        {blurBottom && <ListItem sx={{ mt: 2 }} />}
       </List>
       {blurBottom && <BlurBottom />}
     </Box>
