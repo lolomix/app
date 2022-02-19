@@ -1,15 +1,27 @@
 {
   "exceptions": {
-    "MetaMask Tx Signature: User denied transaction signature.": "You have denied transaction signature.",
-    "unknown account #0": "Please make sure that your wallet is connected.",
-    "execution reverted: token count is out of the allowd range": "You can only purchase between 5 and 10000 AROMAs at once.",
+    "MetaMask Tx Signature: User denied transaction signature.": "Transaction signature has been denied.",
+    "unknown account #0": "No wallet is connected to the application.",
+    "cancelled": "The transaction has been cancelled.",
+    "execution reverted: ERC721: owner query for nonexistent token": "This CHEF has not been minted. Please try with another CHEF.",
+    "execution reverted: ERC20: transfer amount exceeds balance": "AROMA balance is too low. Please buy more or try with less AROMA.",
+    "execution reverted: token count is out of the allowd range": "The purchase amount of AROMA must be between between 5 and 10000 AROMAs at once.",
     "execution reverted: sent MATIC below the price": "Price has changed since submitting the transaction. Please try again.",
     "execution reverted: Sale is paused": "The sale is currently paused. Please try again later.",
     "execution reverted: tranfering AROMA failed": "Something must have gone wrong during the transfer. Please ask our support,",
+    "execution reverted: not enough aroma approved": "Not enough AROMA approved. Please make sure you approve more AROMA.",
+    "execution reverted: the recipe should have 3 to 20 coins": "A recipe should have between 3 to 20 coin pairs. Please check your selections.",
+    "execution reverted: you are not the owner": "The owner of this CHEF is someone else. Please select one of your CHEFs.",
+    "execution reverted: recipe name is taken": "The recipe name is taken. Please try another one.",
+    "execution reverted: this chef already has 3 recipes baked": "This CHEF has 3 recipes already. Try with another CHEF.",
     "this recipe is taken": "Oh snap! This recipe is already taken. Try with other ingredients.",
+    "execution reverted: this recipe is taken": "Oh snap! This recipe is already taken. Try with other ingredients.",
     "total coin percentage is not 100": "The total percentage of the selected coin pairs must be 100%. Amend the percentages accordingly.",
+    "execution reverted: total coin percentage is not 100": "The total percentage of the selected coin pairs must be 100%. Amend the percentages accordingly.",
     "percentage of a coin incremental of 5": "The percentages must be divisible by 5. Amend the percentages accordingly.",
-    "coin is not supported": "One of the coin pairs is not supported. Please ask our support."
+    "execution reverted: percentage of a coin incremental of 5": "The percentages must be divisible by 5. Amend the percentages accordingly.",
+    "coin is not supported": "One of the coin pairs is not supported in the recipe. Please ask our support.",
+    "execution reverted: coin is not supported": "One of the coin pairs is not supported in the recipe. Please ask our support."
   },
   "functions": {
     "theFunctionName": {

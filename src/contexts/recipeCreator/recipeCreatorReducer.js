@@ -7,6 +7,9 @@ import {
   REPLACE_TOKEN,
   RESET,
   SWITCH_TOKEN_LOCK,
+  SET_CHEFID,
+  SET_STAKE,
+  SET_NAME,
 } from "./recipeCreatorContext";
 
 /**
@@ -38,8 +41,12 @@ export function recipeCreatorReducer(state, [type, payload]) {
       (numberOfTokens * minPercentageAmountPerToken -
         minPercentageAmountPerToken);
 
-    console.debug("maxPercentageAmountPerToken: " + maxPercentageAmountPerToken);
-    console.debug("minPercentageAmountPerToken: " + minPercentageAmountPerToken);
+    console.debug(
+      "maxPercentageAmountPerToken: " + maxPercentageAmountPerToken
+    );
+    console.debug(
+      "minPercentageAmountPerToken: " + minPercentageAmountPerToken
+    );
 
     console.debug(
       "before correction of min/max percentages: ",
@@ -202,6 +209,21 @@ export function recipeCreatorReducer(state, [type, payload]) {
           }
           return currentToken;
         }),
+      };
+    case SET_CHEFID:
+      return {
+        ...state,
+        chefId: payload.chefId,
+      };
+    case SET_STAKE:
+      return {
+        ...state,
+        stake: payload.stake,
+      };
+    case SET_NAME:
+      return {
+        ...state,
+        name: payload.name,
       };
     case NEXT_STEP:
       return {

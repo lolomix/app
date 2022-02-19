@@ -1,18 +1,16 @@
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { useEthers, useTokenAllowance } from "@usedapp/core";
 import { formatUnits } from "@ethersproject/units";
-import { useEffect, useState } from "react";
 
 /**
  * Returns the allowance of an AROMA token for an address
  *
- * @param ownerAddress
- * @param spenderAddress
- * @returns {[]}
+ * @param {string|undefined} ownerAddress
+ * @param {string} spenderAddress
+ * @returns [{string|undefined},{BigNumber|undefined}]
  */
-
 export function useAromaAllowance(
-  ownerAddress,
+  ownerAddress = undefined,
   spenderAddress = NETWORKS[TARGET_CHAIN].contractMaster
 ) {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractAroma;
@@ -23,11 +21,6 @@ export function useAromaAllowance(
     ownerAddress ?? account,
     spenderAddress
   );
-  const [balanceFormatted, setBalanceFormatted] = useState();
 
-  useEffect(() => {
-    allowance && setBalanceFormatted(formatUnits(allowance));
-  }, [allowance]);
-
-  return [allowance, balanceFormatted];
+  return [allowance && formatUnits(allowance), allowance];
 }

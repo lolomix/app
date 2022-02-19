@@ -1,6 +1,6 @@
-import { useReducer } from 'react'
-import { recipeCreatorReducer } from './recipeCreatorReducer'
-import { RecipeCreatorContext } from './recipeCreatorContext'
+import { useReducer } from "react";
+import { recipeCreatorReducer } from "./recipeCreatorReducer";
+import { RecipeCreatorContext } from "./recipeCreatorContext";
 
 /**
  * @param children
@@ -11,16 +11,21 @@ import { RecipeCreatorContext } from './recipeCreatorContext'
  */
 export function RecipeCreatorProvider({ children }) {
   let initialState = {
+    maxNameLength: 16,
+    recipePerChef: 3,
     totalPercentage: 100,
     maxSelection: 20,
     minSelection: 3,
     adjustmentPercentage: 5,
+    minimumStake: 200,
     steps: ["Choose Ingredients", "Review & Adjust", "Cook Recipe", "Tasting"],
     startStep: 0,
-    tokens: [],
     errors: [],
   };
 
+  /**
+   * Calculate Min Token Percentage, ActiveStep, TotalSteps and LastStep
+   */
   initialState = {
     ...initialState,
     minTokenPercentage:
@@ -30,12 +35,26 @@ export function RecipeCreatorProvider({ children }) {
     lastStep: initialState.steps.length - 1,
   };
 
+  /**
+   * Calculate Max Token Percentage
+   */
   initialState = {
     ...initialState,
     maxTokenPercentage:
       initialState.totalPercentage -
       initialState.minTokenPercentage * initialState.minSelection +
       initialState.minTokenPercentage,
+  };
+
+  /**
+   * Add Recipe Data
+   */
+  initialState = {
+    ...initialState,
+    name: "",
+    stake: 200,
+    chefId: undefined,
+    tokens: [],
   };
 
   const [state, dispatch] = useReducer(recipeCreatorReducer, initialState);
