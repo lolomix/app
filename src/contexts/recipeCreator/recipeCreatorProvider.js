@@ -52,8 +52,8 @@ export function RecipeCreatorProvider({ children }) {
   initialState = {
     ...initialState,
     name: "",
-    stake: 0,
-    chefId: 0,
+    stake: 200,
+    chefId: undefined,
     tokens: [],
   };
 
