@@ -16,13 +16,13 @@ import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoo
  * @param tokenAbi
  * @param tokenAddress
  * @param tokenID
- * @param lazyLoad
- * @param firstCard
- * @param remainingFormatted
- * @param handleBuyDialog
- * @param transactionInProgress
- * @param priceFormatted
- * @param variant
+ * @param {boolean} lazyLoad
+ * @param {boolean} firstCard
+ * @param remaining
+ * @param {function} handleBuyDialog
+ * @param {boolean} transactionInProgress
+ * @param price
+ * @param {string} variant
  * @returns {JSX.Element}
  * @constructor
  */
@@ -32,10 +32,10 @@ function NftCard({
   tokenID,
   lazyLoad = false,
   firstCard = false,
-  remainingFormatted = true,
+  remaining = true,
   handleBuyDialog,
   transactionInProgress,
-  priceFormatted,
+  price,
   variant = "elevation",
 }) {
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
@@ -80,11 +80,11 @@ function NftCard({
                   fullWidth
                   size="xlarge"
                   startIcon={<CurrencyAromaCartoonIcon />}
-                  disabled={!remainingFormatted}
+                  disabled={!remaining}
                   onClick={handleBuyDialog}
                   loading={transactionInProgress.toString()}
                 >
-                  <Typography variant="h4">{priceFormatted}</Typography>
+                  <Typography variant="h4">{price}</Typography>
                 </Button>
               </>
             ) : (
