@@ -305,7 +305,7 @@ function RecipeCreateCookStep() {
           <CardActions>
             <LoadingButton
               fullWidth
-              bg="yellowContainedSmall"
+              bg="yellowContained"
               size="large"
               loading={transactionInProgress}
               onClick={handleApproveAndCreate}

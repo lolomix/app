@@ -299,7 +299,7 @@ function Buffet() {
                 ))}
                 {myRecipesOn && (
                   <Button
-                    bg="yellowContainedSmall"
+                    bg="yellowContained"
                     size="massive"
                     elongatedwidth="30"
                     to="/kitchen/recipe/create/"

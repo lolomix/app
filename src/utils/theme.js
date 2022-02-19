@@ -9,8 +9,6 @@ import {
   listItemButtonClasses,
   filledInputClasses,
 } from "@mui/material";
-import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
-import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
 import pattern from "../assets/pattern.png";
 import toggleButtonClasses from "@mui/material/ToggleButton/toggleButtonClasses";
 // colors
@@ -351,11 +349,10 @@ theme = createTheme(theme, {
             color: alpha(theme.palette.tertiary.main, 0.5),
           },
           [`&.MuiButton-containedPrimary:hover`]: {
-            boxShadow: "0 0 1em #3A2717",
-            backgroundColor: theme.palette.common.white
+            transform: "scale(1.02)",
+            backgroundColor: theme.palette.common.white,
           },
         },
-        
       },
       variants: [
         {
@@ -411,28 +408,17 @@ theme = createTheme(theme, {
         {
           props: { bg: "yellowContained" },
           style: {
-            background: `transparent url(${YellowButtonBackgroundLarge}) no-repeat center`,
-            backgroundSize: "cover",
-            borderBottom: "3.5px solid #3A2717",
-            boxShadow: "none",
+            backgroundColor: "#FFE655",
+            background:
+              "radial-gradient(circle at top left, rgba(255,236,141,1) 6%, #FFE655 2%)",
+            borderBottom: "2px solid #3A2717",
+            boxShadow:
+              "inset 0 -8px 0 hsl(34, 100%, 60%), inset 0 -30px 0 hsl(44, 100%, 62%)",
             borderRadius: "9px",
             color: theme.palette.common.black,
             "&:hover": {
-              boxShadow: "0 0 0.5em #3A2717",
-            },
-          },
-        },
-        {
-          props: { bg: "yellowContainedSmall" },
-          style: {
-            background: `transparent url(${YellowButtonBackgroundSmall}) no-repeat center`,
-            backgroundSize: "cover",
-            borderBottom: "3px solid #3A2717",
-            boxShadow: "none",
-            borderRadius: "9px",
-            color: theme.palette.common.black,
-            "&:hover": {
-              boxShadow: "0 0 0.5em #3A2717",
+              transform: "scale(1.02)",
+              backgroundColor: "#FFE655",
             },
           },
         },

@@ -89,7 +89,7 @@ const MarketAromaOffers = () => {
                 <Button
                   fullWidth
                   size="massive"
-                  bg="yellowContainedSmall"
+                  bg="yellowContained"
                   sx={{ marginTop: 3 }}
                   to={card.price === null && "/market/aroma/buy"}
                   component={RouterLink}

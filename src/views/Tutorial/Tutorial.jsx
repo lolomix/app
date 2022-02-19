@@ -80,7 +80,7 @@ const Tutorial = () => {
       <Box>
         <CustomContainer mb={{ xs: 0, md: -16.5 }} right={{ sm: "15vw" , lg: 180}}>
           <Button
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"

@@ -118,7 +118,7 @@ function NftBuy({ t, remaining }) {
             <Button
               disableElevation
               elongatedwidth="30"
-              bg="yellowContainedSmall"
+              bg="yellowContained"
               onClick={handleApproveAndBuy}
               disabled={transactionInProgress()}
             >
@@ -152,7 +152,7 @@ function NftBuy({ t, remaining }) {
           <Button
             disableElevation
             elongatedwidth="30"
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             color="primary"
             component="a"
             onClick={successDialogState.handleClose}
@@ -162,7 +162,7 @@ function NftBuy({ t, remaining }) {
           <Button
             disableElevation
             elongatedwidth="30"
-            bg="yellowContainedSmall"
+            bg="yellowContained"
             href="https://discord.gg/JufpFYBdKG"
             target="_blank"
             rel="noopener"
