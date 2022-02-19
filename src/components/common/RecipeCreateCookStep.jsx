@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Card,
   CardActions,
@@ -12,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
-import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";
 import CurrencyInputField from "../form/CurrencyInputField";
@@ -21,210 +22,102 @@ import { useDialogState } from "../../hooks/state/useDialogState";
 import ChefSelectorDialog from "../dialogs/ChefSelectorDialog";
 import { bindDialog, bindDialogClick } from "../../utils/binders";
 import { useRecipeCreate } from "../../hooks/recipe/useRecipeCreate";
-import { useSnackbar } from "notistack";
-import SnackbarAction from "../snackbars/SnackbarAction";
 import { ethers } from "ethers";
 import { parseUnits } from "@ethersproject/units";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
 import { LoadingButton } from "@mui/lab";
+import {
+  SUCCESS,
+  usePromiseTransactionSnackbarManager,
+} from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
+import { useAromaAllowance } from "../../hooks/aroma/useAromaAllowance";
 
 /**
  * @returns {JSX.Element|null}
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const contractAddressChef = NETWORKS[TARGET_CHAIN].contractMaster;
-  const [{ tokens }, { nextStep }] = useRecipeCreator();
+  const spenderAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const [
+    { tokens, chefId, name, stake },
+    { setChefId, setName, setStake, confirmRecipeCorrectness, nextStep },
+  ] = useRecipeCreator();
+  const [, bnAllowance] = useAromaAllowance();
 
   const chefSelectorDialogState = useDialogState({
     dialogId: "chefSelectorDialog",
   });
-
-  const [stakeAroma, setStakeAroma] = useState(200);
-  const [recipeName, setRecipeName] = useState("");
-  const [chefId, setChefId] = useState();
-
-  const handleRecipeNameUserInput = (e) => {
-    setRecipeName(e.target.value);
-  };
-
-  const handleStakeAromaUserInput = (e) => {
-    setStakeAroma(e.target.value);
-  };
 
   const handleChefSelect = (id) => {
     setChefId(id);
     chefSelectorDialogState.handleClose();
   };
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
-  let transactionInProgressSnackBarKey = "transactionInProgress";
-  let walletInteractionSnackBarKey = "walletInteraction";
-
-  /**
-   * Definition of the transaction in progress state
-   */
-  const [transactionInProgress, setTransactionInProgress] = useState(false);
-
-  useEffect(() => {
-    if (transactionInProgress === false) {
-      closeSnackbar(transactionInProgressSnackBarKey);
-      closeSnackbar(walletInteractionSnackBarKey);
-      return;
-    }
-    closeSnackbar(walletInteractionSnackBarKey);
-    enqueueSnackbar("Transaction in progress", {
-      key: transactionInProgressSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
-    });
-  }, [
-    transactionInProgress,
-    enqueueSnackbar,
-    closeSnackbar,
-    transactionInProgressSnackBarKey,
-    walletInteractionSnackBarKey,
-  ]);
-
   /**
    * Defines Aroma Approval State
-   *
-   * @todo: refactors due to duplication
    */
   const [sendAromaApproval, aromaApprovalState] = useAromaApprove();
-
-  React.useEffect(() => {
-    if (aromaApprovalState.status === "None") {
-      setTransactionInProgress(false);
-    }
-
-    if (aromaApprovalState.status === "Exception") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Something must have gone wrong", {
-        variant: "error",
-      });
-    }
-
-    if (aromaApprovalState.status === "Mining") {
-      setTransactionInProgress(true);
-    }
-
-    if (aromaApprovalState.status === "Success") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success",
-      });
-    }
-  }, [aromaApprovalState, closeSnackbar, enqueueSnackbar]);
-
-  /**
-   * Handles Aroma Approval a blockchain transaction
-   */
-  const handleApprove = async () => {
-    enqueueSnackbar("Waiting for interaction in Wallet", {
-      key: walletInteractionSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
-    });
-
-    try {
-      await sendAromaApproval(
-        contractAddressChef,
-        parseUnits(stakeAroma.toString())
-      );
-    } catch (error) {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Error", {
-        variant: "error",
-      });
-    }
-  };
+  const [
+    [aromaApprovalTransactionInProgress],
+    [aromaApprovalPendingSignature],
+  ] = usePromiseTransactionSnackbarManager(aromaApprovalState);
 
   /**
    * Defines Recipe Create State
-   *
-   * @todo: refactors due to duplication
    */
   const [sendRecipeCreate, recipeCreateState] = useRecipeCreate();
+  const [[recipeCreateTransactionInProgress], [recipeCreatePendingSignature]] =
+    usePromiseTransactionSnackbarManager(
+      recipeCreateState,
+      useCallback((status) => {
+        if (status === SUCCESS) nextStep();
+        // @todo maybe we should have wrap the next functions in useCallback instead?
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
+    );
 
-  useEffect(() => {
-    if (recipeCreateState.status === "None") {
-      setTransactionInProgress(false);
-    }
-
-    if (recipeCreateState.status === "Exception") {
-      setTransactionInProgress(false);
-
-      let message;
-      switch (recipeCreateState.errorMessage) {
-        case "execution reverted: total coin percentage is not 100":
-          message = "Total coin percentage must be 100%.";
-          break;
-        case "execution reverted: this recipe is taken":
-          message = "This recipe is taken. Please try another combination.";
-          break;
-        default:
-          message = "Something must have gone wrong";
-          break;
-      }
-
-      enqueueSnackbar(message, {
-        variant: "error",
-      });
-    }
-
-    if (recipeCreateState.status === "Mining") {
-      setTransactionInProgress(true);
-    }
-
-    if (recipeCreateState.status === "Success") {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Success", {
-        variant: "success",
-      });
-      nextStep();
-    }
-  }, [recipeCreateState, closeSnackbar, enqueueSnackbar, nextStep]);
+  /**
+   * Handles AROMA Approval blockchain transaction
+   */
+  const handleApprove = async () => {
+    await sendAromaApproval(spenderAddress, parseUnits(stake.toString()));
+  };
 
   /**
    * Handles Recipe Create blockchain transaction
    */
-  const handleRecipeCreate = async () => {
-    enqueueSnackbar("Waiting for interaction in Wallet", {
-      key: walletInteractionSnackBarKey,
-      variant: "warning",
-      persist: true,
-      action: <SnackbarAction />,
-    });
-
-    try {
-      const payload = [
-        chefId ?? 0,
-        recipeName && ethers.utils.formatBytes32String(recipeName),
-        stakeAroma && parseUnits(stakeAroma.toString()),
-        tokens.map((t) => {
-          return { id: t.id, percentage: t.percentage };
-        }),
-      ];
-      await sendRecipeCreate(...payload);
-    } catch (error) {
-      setTransactionInProgress(false);
-      enqueueSnackbar("Error", {
-        variant: "error",
-      });
+  const handleCreate = async () => {
+    if(! confirmRecipeCorrectness()) {
+      return;
     }
+
+    await sendRecipeCreate(
+      chefId,
+      name && ethers.utils.formatBytes32String(name),
+      stake && parseUnits(stake.toString()),
+      tokens.map((t) => {
+        return { id: t.id, percentage: t.percentage };
+      })
+    );
   };
 
   /**
-   * Handles AROMA Approval and Recipe Create blockchain transaction
+   * @returns {boolean}
    */
-  const handleApproveAndCreate = async () => {
-    await handleApprove();
-    await handleRecipeCreate();
+  const transactionInProgress = () =>
+    aromaApprovalTransactionInProgress ||
+    aromaApprovalPendingSignature ||
+    recipeCreateTransactionInProgress ||
+    recipeCreatePendingSignature;
+
+  /**
+   * @returns {boolean|undefined}
+   */
+  const haveAllowance = () => {
+    if (stake === "") return;
+    const bnStake = parseUnits(parseFloat(stake).toString());
+    return bnStake && bnAllowance?.gte(bnStake);
   };
 
   return (
@@ -261,6 +154,7 @@ function RecipeCreateCookStep() {
                       top: theme.spacing(-0.7),
                     }}
                     {...bindDialogClick(chefSelectorDialogState)}
+                    disabled={transactionInProgress()}
                   >
                     <AddCircleIcon fontSize="small" />
                   </IconButton>
@@ -285,8 +179,9 @@ function RecipeCreateCookStep() {
                   disableUnderline
                   hiddenLabel
                   id="recipe-name"
-                  onChange={handleRecipeNameUserInput}
-                  value={recipeName}
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  disabled={transactionInProgress()}
                 />
               </FormControl>
               <CurrencyInputField
@@ -294,23 +189,47 @@ function RecipeCreateCookStep() {
                 id="stake-aroma"
                 currency="AROMA"
                 label="Stake amount*"
-                onUserInput={handleStakeAromaUserInput}
-                value={stakeAroma}
+                onUserInput={(e) => setStake(e.target.value)}
+                value={stake}
+                disabled={transactionInProgress()}
               />
               <Typography variant="caption">
                 *A minimum of 200 Aroma must be staked.
               </Typography>
             </Stack>
           </CardContent>
+          {haveAllowance() === false && (
+            <CardContent>
+              <Alert
+                severity="error"
+                sx={{
+                  justifyContent: "center",
+                }}
+              >
+                Please approve exactly or more than the staked AROMA.
+              </Alert>
+            </CardContent>
+          )}
           <CardActions>
             <LoadingButton
               fullWidth
               bg="yellowContained"
               size="large"
-              loading={transactionInProgress}
-              onClick={handleApproveAndCreate}
+              loading={transactionInProgress()}
+              onClick={handleApprove}
+              disabled={stake === ""}
             >
-              Approve & Cook
+              Approve AROMA
+            </LoadingButton>
+            <LoadingButton
+              fullWidth
+              bg="yellowContainedSmall"
+              size="large"
+              loading={transactionInProgress()}
+              onClick={handleCreate}
+              disabled={!haveAllowance()}
+            >
+              Cook
             </LoadingButton>
           </CardActions>
         </Card>

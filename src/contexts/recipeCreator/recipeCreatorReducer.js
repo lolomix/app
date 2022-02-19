@@ -7,8 +7,10 @@ import {
   REPLACE_TOKEN,
   RESET,
   SWITCH_TOKEN_LOCK,
-  SET_CHEFID, SET_STAKE, SET_NAME,
-} from './recipeCreatorContext'
+  SET_CHEFID,
+  SET_STAKE,
+  SET_NAME,
+} from "./recipeCreatorContext";
 
 /**
  * @param state

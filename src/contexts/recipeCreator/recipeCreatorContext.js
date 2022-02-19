@@ -18,7 +18,7 @@ export const REPORT_ERRORS = "errors/REPORT_ERRORS";
 export const RecipeCreatorContext = createContext();
 
 /**
- * @returns {[*, {addToken: (function(t): *), removeToken: (function(t): *), prevStep: (function(): *), nextStep: (function(): *), reset: (function(): *), replaceToken: (function(t,r): *), switchTokenLock: (function(t): *), confirmTokenSelection: (function(): *)}]}
+ * @returns {[*, {addToken: (function(t): *), removeToken: (function(t): *), prevStep: (function(): *), nextStep: (function(): *), reset: (function(): *), replaceToken: (function(t,r): *), switchTokenLock: (function(t): *), confirmTokenSelection: (function(): *), confirmRecipeCorrectness: (function(): *), setName: (function(): *), setStake: (function(): *), setChefId: (function(int): *)}]}
  */
 function useRecipeCreator() {
   const context = useContext(RecipeCreatorContext);
@@ -38,28 +38,48 @@ function useRecipeCreator() {
   const validationConditions = {
     ifLessThanMaxTokensSelected: [
       () => state.tokens.length < state.maxSelection,
-      `You cannot select more than ${state.maxSelection} tokens.`,
+      `A recipe cannot contain more than ${state.maxSelection} tokens.`,
     ],
     ifMinTokensSelected: [
       () => state.tokens.length >= state.minSelection,
-      `You must select at least ${state.minSelection} tokens.`,
+      `A recipe must contain at least ${state.minSelection} tokens.`,
     ],
     ifMoreThanMinTokensSelected: [
       () => state.tokens.length > state.minSelection,
-      `You must have at least ${state.minSelection} tokens in the selection.`,
+      `A recipe must contain at least ${state.minSelection} tokens.`,
+    ],
+    ifChefIdSetAndValid: [
+      () =>
+        state.chefId !== undefined &&
+        state.chefId > 0 &&
+        Number.isInteger(state.chefId),
+      `A recipe must be created by a CHEF with at least one empty punch.`,
+    ],
+    ifNameLessOrEqualToMaxNameLength: [
+      () => state.name.length <= state.maxNameLength,
+      `The name of a recipe cannot be more than ${state.maxNameLength} characters.`,
+    ],
+    ifNameSet: [
+      () => state.name && state.name !== "",
+      `A recipe must have a unique name.`,
+    ],
+    ifStakeMoreOrEqualMinimumStake: [
+      () => state.stake >= state.minimumStake,
+      `A recipe must have at least ${state.minimumStake} AROMAs staked.`,
     ],
   };
 
   /**
-   * @param conditions
+   * @param {array} conditions
+   * @param {*|undefined} value
    */
-  const validateConditions = (...conditions) => {
+  const validateConditions = (conditions, value = undefined) => {
     let errors = [];
 
     conditions.forEach((condition) => {
       const [validate, message] = validationConditions[condition];
 
-      if (!validate()) {
+      if (!validate(value)) {
         errors.push(message);
       }
     });
@@ -73,7 +93,7 @@ function useRecipeCreator() {
    * @param token
    */
   const addToken = (token) => {
-    if (!validateConditions("ifLessThanMaxTokensSelected")) return;
+    if (!validateConditions(["ifLessThanMaxTokensSelected"])) return;
 
     dispatch([ADD_TOKEN, { token: { ...tokenDefaults, ...token } }]);
   };
@@ -86,7 +106,7 @@ function useRecipeCreator() {
   const removeToken = (token) => {
     if (
       state.activeStep !== 0 &&
-      !validateConditions("ifMoreThanMinTokensSelected")
+      !validateConditions(["ifMoreThanMinTokensSelected"])
     )
       return;
 
@@ -114,14 +134,30 @@ function useRecipeCreator() {
    * @returns {boolean}
    */
   const confirmTokenSelection = () => {
-    return validateConditions("ifMinTokensSelected");
+    return validateConditions(["ifMinTokensSelected"]);
+  };
+
+  /**
+   * @todo is it a good practice returning anything from here
+   *
+   * @returns {boolean}
+   */
+  const confirmRecipeCorrectness = () => {
+    return validateConditions([
+      "ifMinTokensSelected",
+      "ifLessThanMaxTokensSelected",
+      "ifChefIdSetAndValid",
+      "ifNameSet",
+      "ifNameLessOrEqualToMaxNameLength",
+      "ifStakeMoreOrEqualMinimumStake",
+    ]);
   };
 
   /**
    * @todo we should check for recipeId availability
    */
   const nextStep = () => {
-    if (!validateConditions("ifMinTokensSelected")) return;
+    if (!validateConditions(["ifMinTokensSelected"])) return;
 
     dispatch([NEXT_STEP]);
   };
@@ -135,7 +171,9 @@ function useRecipeCreator() {
   };
 
   const setStake = (stake) => {
-    dispatch([SET_STAKE, { stake }]);
+    const parsedStake = isNaN(parseInt(stake)) ? "" : parseInt(stake);
+
+    dispatch([SET_STAKE, { stake: parsedStake }]);
   };
 
   const setChefId = (chefId) => {
@@ -154,12 +192,13 @@ function useRecipeCreator() {
       replaceToken,
       switchTokenLock,
       confirmTokenSelection,
+      confirmRecipeCorrectness,
       nextStep,
       prevStep,
       reset,
       setStake,
       setChefId,
-      setName
+      setName,
     },
   ];
 }
