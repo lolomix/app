@@ -8,8 +8,10 @@ describe("bindDialogClick() function", () => {
     dialogStateMock = {
       id: "someKindOfId",
       open: true,
+      onClose: () => true,
       handleOpen: () => true,
       handleClose: () => true,
+      handleToggle: () => true,
     };
 
     bindDialogClickResult = bindDialogClick(dialogStateMock);
@@ -55,6 +57,7 @@ describe("bindDialog() function", () => {
       onClose: () => true,
       handleOpen: () => true,
       handleClose: () => true,
+      handleToggle: () => true,
     };
 
     bindDialogResult = bindDialog(dialogStateMock);
