@@ -18,7 +18,7 @@ export const NONE = "None";
  * @param {useCallback|undefined} callback
  * @returns {(boolean|((value: (((prevState: boolean) => boolean) | boolean)) => void))[][]}
  */
-export function usePromiseTransactionSnackbarManager(state, callback) {
+export function usePromiseTransactionSnackbarManager(state, callback = undefined) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { t } = useTranslation("contract", { keyPrefix: "exceptions" });
 
@@ -29,7 +29,7 @@ export function usePromiseTransactionSnackbarManager(state, callback) {
   const [inProgress, setInProgress] = useState(false);
 
   useEffect(() => {
-    console.debug(state);
+    console.debug("PromiseTransactionState", state);
 
     switch (state.status) {
       case MINING:
