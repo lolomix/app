@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
-import SnackbarAction from "../../components/snackbars/SnackbarAction";
 import { useTranslation } from "react-i18next";
+import SnackbarAction from "../../components/snackbars/SnackbarAction";
 
 export const TRANSACTION_IN_PROGRESS_KEY = "transactionInProgress";
 export const PENDING_SIGNATURE_KEY = "pendingSignature";
@@ -15,13 +15,10 @@ export const NONE = "None";
 
 /**
  * @param {object} state
- * @param {function(string)} callback
+ * @param {useCallback|undefined} callback
  * @returns {(boolean|((value: (((prevState: boolean) => boolean) | boolean)) => void))[][]}
  */
-export function usePromiseTransactionSnackbarManager(
-  state,
-  callback = () => {}
-) {
+export function usePromiseTransactionSnackbarManager(state, callback) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { t } = useTranslation("contract", { keyPrefix: "exceptions" });
 
@@ -64,7 +61,7 @@ export function usePromiseTransactionSnackbarManager(
         setPendingSignature(false);
         break;
     }
-    callback(state.status);
+    callback && callback(state.status);
   }, [state, enqueueSnackbar, callback, t]);
 
   /**
