@@ -3,19 +3,9 @@ import { useNavigate } from "react-router-dom";
 // material-ui
 import styled from "@emotion/styled";
 import { Typography, Box, ButtonUnstyled, Grid, Tooltip } from "@mui/material";
-import homeButton from "../../assets/home-button.svg";
 import backButton from "../../assets/back-button.svg";
 
 export const StyledButton = styled(ButtonUnstyled)(({ type, theme }) => ({
-  ...(type === "home" && {
-    background: `transparent url(${homeButton}) no-repeat center`,
-    backgroundSize: "cover",
-    [theme.breakpoints.down("md")]: {
-      width: "42px",
-      height: "45px",
-      marginLeft: 0,
-    },
-  }),
   ...(type === "back" && {
     background: `transparent url(${backButton}) no-repeat center`,
     backgroundSize: "cover",

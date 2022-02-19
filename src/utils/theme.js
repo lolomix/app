@@ -9,8 +9,6 @@ import {
   listItemButtonClasses,
   filledInputClasses,
 } from "@mui/material";
-import YellowButtonBackgroundLarge from "../assets/yellow-button-background-large.svg";
-import YellowButtonBackgroundSmall from "../assets/yellow-button-background-small.svg";
 import pattern from "../assets/pattern.png";
 import toggleButtonClasses from "@mui/material/ToggleButton/toggleButtonClasses";
 // colors
