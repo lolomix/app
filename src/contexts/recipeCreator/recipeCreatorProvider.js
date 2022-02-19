@@ -11,10 +11,13 @@ import { RecipeCreatorContext } from "./recipeCreatorContext";
  */
 export function RecipeCreatorProvider({ children }) {
   let initialState = {
+    maxNameLength: 16,
+    recipePerChef: 3,
     totalPercentage: 100,
     maxSelection: 20,
     minSelection: 3,
     adjustmentPercentage: 5,
+    minimumStake: 200,
     steps: ["Choose Ingredients", "Review & Adjust", "Cook Recipe", "Tasting"],
     startStep: 0,
     errors: [],
