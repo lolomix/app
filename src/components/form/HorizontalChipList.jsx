@@ -2,6 +2,7 @@ import { Chip, Grid, IconButton, Skeleton } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
+import Icon from "react-crypto-icons";
 
 /**
  * @param list
@@ -20,7 +21,13 @@ function HorizontalChipList({ list, onRemoveIconButtonClick }) {
                 label={item.symbol}
                 variant="outlined"
                 shape="squarish"
-                icon={item.icon ?? <HelpOutlineIcon />}
+                icon={
+                  item.icon ? (
+                    <Icon name={item.icon} size={18} />
+                  ) : (
+                    <HelpOutlineIcon />
+                  )
+                }
               />
               <IconButton
                 onClick={() =>
