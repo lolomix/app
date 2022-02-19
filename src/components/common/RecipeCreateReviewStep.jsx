@@ -21,6 +21,7 @@ import RecipeCreateCoinPairPresenter from "./RecipeCreateCoinPairPresenter";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { theme } from "../../utils/theme";
 import { useRecipeCalculateId } from "../../hooks/recipe/useRecipeCalculateId";
+import { useEthers } from "@usedapp/core";
 
 /**
  * @returns {JSX.Element|null}
@@ -32,6 +33,8 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
 
   const [recipeCalculateId, recipeCalculateIdError] =
     useRecipeCalculateId(tokens);
+
+  const { account } = useEthers();
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -145,14 +148,15 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
             >
               Add Tokens
             </Button>
+
             <Button
-              disabled={!recipeCalculateId}
+              disabled={!account || !recipeCalculateId}
               elongatedwidth="30"
               bg="yellowContained"
               size="large"
               onClick={nextStep}
             >
-              Next Step
+              {account ? "Next Step" : "Please Connect Wallet"}
             </Button>
           </CardActions>
         </Card>
