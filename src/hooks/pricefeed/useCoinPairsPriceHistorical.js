@@ -9,11 +9,10 @@ import { useQueries } from "react-query";
 const formatDateTimesToAPISpecification = (dateTimes) => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "short",
-    timeStyle: "short",
   });
 
-  return dateTimes.map((datetime) =>
-    formatter.format(new Date(datetime)).replace(",", "")
+  return dateTimes.map(
+    (datetime) => formatter.format(new Date(datetime)) + " 00:00"
   );
 };
 
@@ -33,7 +32,7 @@ const getCoinPairPriceHistoricalBySymbol = async (
   endTime
 ) => {
   const response = await fetch(
-    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}`
+    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=1d`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
