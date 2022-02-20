@@ -26,19 +26,23 @@ const Layout = ({
 
   return (
     <>
-      <Stack justifyContent="space-between" sx={{ minHeight: "100vh" }}>
+      <Stack
+        justifyContent="space-between"
+        paddingX={{ xs: 0, md: 2 }}
+        sx={{ minHeight: "100vh" }}
+      >
         <Helmet>
           <title>{helmetTitle}</title>
         </Helmet>
         <Container maxWidth={"xl"} disableGutters mt={2}>
           <Navigation />
-          <Stack mx={1} pt={6} pb={3} alignItems="center" spacing={5}>
-            <ViewHeading
-              title={title}
-              subTitle={subTitle}
-              icon={icon}
-              buttonType={buttonType}
-            />
+          <ViewHeading
+            title={title}
+            subTitle={subTitle}
+            icon={icon}
+            buttonType={buttonType}
+          />
+          <Stack mx={1} pt={title ? 6 : -6} pb={3} alignItems="center" spacing={5}>
             {children}
           </Stack>
         </Container>

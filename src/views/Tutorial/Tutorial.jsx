@@ -78,13 +78,16 @@ const Tutorial = () => {
   return (
     <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="back">
       <Box>
-        <CustomContainer mb={{ xs: 0, md: -16.5 }} right={{ sm: "15vw" , lg: 180}}>
+        <CustomContainer
+          mb={{ xs: 0, md: -18 }}
+          right={{ sm: "15vw", lg: 180 }}
+        >
           <Button
             bg="yellowContained"
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
-            size="medium"
+            size="large"
           >
             Join Discord
           </Button>
@@ -94,7 +97,7 @@ const Tutorial = () => {
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
             rel="nofollow noindex"
-            size="medium"
+            size="large"
           >
             White Pepper
           </Button>
@@ -105,7 +108,7 @@ const Tutorial = () => {
               How to Get Started
             </Typography>
             {steps.map((step) => (
-              <Box key={ `step:${step.title}`}>
+              <Box key={`step:${step.title}`}>
                 <Grid
                   container
                   justifyContent="center"

@@ -37,8 +37,8 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
 
   return (
     <Grid container justifyContent="center" zIndex="999" ml={0.5}>
-      <Grid item sx={{position: "relative", left: "-44%", top: 20}}>
-        <Tooltip title={buttonType === "home" ? "Home" : "Back"}>
+      <Grid item sx={{position: "relative", left: "-44%", top: 35}}>
+        <Tooltip title="Back">
           <StyledButton
             bg="yellowContained"
             type={buttonType}
@@ -55,6 +55,7 @@ function ViewHeading({ buttonType, title, icon, subTitle }) {
         flexDirection="column"
         alignItems="center"
         mb={1}
+        mt={-3}
       >
         <Grid container item justifyContent="center" px={5}>
           <Grid item pr={1}>
