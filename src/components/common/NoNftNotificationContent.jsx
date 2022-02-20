@@ -16,16 +16,18 @@ function NoNftNotificationContent({ fullHeight }) {
       alignItems="center"
       fullHeight={fullHeight}
     >
-      <Grid item xs sm={6} textAlign="center">
-        <img
-          src={silhouettes}
-          alt="Chef Silhouettes"
-          style={{ maxWidth: "182px" }}
-        />
-        <Typography mt={2}>
-          It seems like you do not own any CHEFs. You can quickly buy a CHEF in
-          the <Link to="/market">Market</Link> to start cooking up recipes!
-        </Typography>
+      <Grid container item maxWidth="sm">
+        <Grid item xs textAlign="center">
+          <img
+            src={silhouettes}
+            alt="Chef Silhouettes"
+            style={{ maxWidth: "182px" }}
+          />
+          <Typography mt={2}>
+            It seems like you do not own any CHEFs. You can quickly buy a CHEF
+            in the <Link to="/market">Market</Link> to start cooking up recipes!
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
