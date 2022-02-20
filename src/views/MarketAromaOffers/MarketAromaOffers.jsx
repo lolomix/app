@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, Typography, Button, Stack } from "@mui/material";
+import { Grid, Typography, Button, Stack } from "@mui/material";
 import AromaCoinsIcon from "../../components/icons/AromaCoinsIcon";
 //import CurrencyMaticIcon from "../../components/icons/CurrencyMaticIcon";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
@@ -9,6 +9,7 @@ import AromaCoinWithBackgroundIcon from "../../components/icons/AromaCoinWithBac
 import { formatCurrency } from "../../utils/formatters";
 import Layout from "../../components/layout/Layout";
 import { Link as RouterLink } from "react-router-dom";
+import Card from "../../components/styled/Card";
 
 const MarketAromaOffers = () => {
   const cardsContent = [
@@ -57,8 +58,16 @@ const MarketAromaOffers = () => {
         alignItems="stretch"
       >
         {cardsContent.map((card) => (
-          <Grid item xs={12} sm={8} md={6} lg={3.8} columns={16} key={`card:${card.title}`}>
-            <Card fullheight="true" sx={{ padding: 2 }}>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            lg={3.8}
+            columns={16}
+            key={`card:${card.title}`}
+          >
+            <Card fullHeight sx={{ padding: 2 }}>
               <Stack
                 sx={{
                   height: "100%",
