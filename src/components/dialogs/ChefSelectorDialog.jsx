@@ -16,6 +16,7 @@ import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useRecipeIdsOfChefs } from "../../hooks/recipe/useRecipeIdsOfChefs";
 import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
+import NoNftNotificationContent from "../common/NoNftNotificationContent";
 
 /**
  * @param props
@@ -89,10 +90,7 @@ function ChefSelectorDialog(props) {
             </Grid>
           </>
         ) : (
-          <Typography textAlign="center">
-            It seems like you do not own any CHEFs. Please head over to the
-            Market to buy one!
-          </Typography>
+          <NoNftNotificationContent />
         )}
       </DialogContent>
       {!chefs && (

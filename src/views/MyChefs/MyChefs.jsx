@@ -1,12 +1,7 @@
-import React from "react";
 import { withTranslation } from "react-i18next";
-// material-ui
 import { Grid, Link } from "@mui/material";
-// custom
-import { useEthers } from "@usedapp/core";
 import NftCard from "../../components/web3/NftCard";
 import NoNftNotificationCard from "../../components/common/NoNftNotificationCard";
-import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
 import { useChefIdsOfOwner } from "../../hooks/chef/useChefIdsOfOwner";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
@@ -14,15 +9,12 @@ import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
 import NftBuy from "../../components/web3/NftBuy";
 import { Link as RouterLink } from "react-router-dom";
+
 /**
  * @returns {JSX.Element}
  * @constructor
- *
- * @todo refactor and get rid of if hell in jsx
  */
 function MyChefs() {
-  const { active, error } = useEthers();
-
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const nfts = useChefIdsOfOwner();
 
@@ -38,40 +30,27 @@ function MyChefs() {
         <Grid item xs={12} sm={6} md={5} lg={2.5}>
           <NftBuy />
         </Grid>
-        {active ? (
-          nfts ? (
-            nfts.map((tokenID, index) => (
-              <Grid
-                key={tokenID.toString()}
-                item
-                xs={12}
-                sm={6}
-                md={5}
-                lg={2.5}
+        {nfts ? (
+          nfts.map((tokenID, index) => (
+            <Grid key={tokenID.toString()} item xs={12} sm={6} md={5} lg={2.5}>
+              <Link
+                rel="noreferrer nofollow"
+                to={`/my-chefs/chef/${tokenID}`}
+                component={RouterLink}
+                style={{ textDecoration: "none" }}
               >
-                <Link
-                  rel="noreferrer nofollow"
-                  to={`/my-chefs/chef/${tokenID}`}
-                  component={RouterLink}
-                  style={{ textDecoration: "none" }}
-                >
-                  <NftCard
-                    tokenAbi={tokenAbi}
-                    tokenAddress={tokenAddress}
-                    tokenID={tokenID.toNumber()}
-                    lazyLoad={index > 2}
-                  />
-                </Link>
-              </Grid>
-            ))
-          ) : (
-            <Grid item md={6} mb={21}>
-              <NoNftNotificationCard />
+                <NftCard
+                  tokenAbi={tokenAbi}
+                  tokenAddress={tokenAddress}
+                  tokenID={tokenID.toNumber()}
+                  lazyLoad={index > 2}
+                />
+              </Link>
             </Grid>
-          )
+          ))
         ) : (
-          <Grid item xs={10} sm={7} md={5} lg={4} mb={21}>
-            <ConnectionErrorCard error={error} elevation={3} />
+          <Grid item md={6}>
+            <NoNftNotificationCard fullHeight />
           </Grid>
         )}
       </Grid>
