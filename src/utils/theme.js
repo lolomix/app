@@ -190,16 +190,6 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiCard: {
-      variants: [
-        {
-          props: { fullheight: "true" },
-          style: {
-            height: "100%",
-          },
-        },
-      ],
-    },
     MuiCardActions: {
       styleOverrides: {
         root: {
