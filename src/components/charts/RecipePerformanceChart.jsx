@@ -99,18 +99,14 @@ function RecipePerformanceChart({ tokens }) {
     });
     chart.timeScale().fitContent();
 
-    if (chartData?.[10]) {
-      chartData[10].color = "blue";
-    }
-
     console.debug("chartData", chartData);
     const newSeries = chart.addBaselineSeries({
-      topLineColor: theme.palette.success.main,
+      topLineColor: alpha(theme.palette.success.main, 1),
       topFillColor1: alpha(theme.palette.success.main, 0.28),
       topFillColor2: alpha(theme.palette.success.main, 0.05),
+      bottomLineColor: alpha(theme.palette.error.main, 1),
       bottomFillColor1: alpha(theme.palette.error.main, 0.05),
       bottomFillColor2: alpha(theme.palette.error.main, 0.28),
-      bottomLineColor: theme.palette.error.main,
       priceFormat: { type: "percent", precision: 2, minMove: 0.01 },
       baseValue: { type: "percent", price: 0.0 },
     });
