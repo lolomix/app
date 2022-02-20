@@ -32,9 +32,9 @@ function ChefSingle() {
 
   return (
     <Layout buttonType="back">
-      <Grid container mt={4} justifyContent="center">
+      <Grid container mt={6} justifyContent="center">
         {active ? (
-          <Grid container item xs={10} spacing={3}>
+          <Grid container item mt={{xs: 0, sm: -11}} xs={12} sm={8} md={9.5} spacing={3}>
             <Grid item xs={12} md={4.5} lg={4}>
               <NftCard
                 tokenAbi={tokenAbi}
