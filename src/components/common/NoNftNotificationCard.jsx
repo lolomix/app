@@ -1,17 +1,16 @@
-import { Card, CardContent } from "@mui/material";
 import NoNftNotificationContent from "./NoNftNotificationContent";
+import Card from "../styled/Card";
 
 /**
- * @param props
+ * @param {boolean|undefined} fullHeight
+ * @param {object} rest
  * @returns {JSX.Element}
  * @constructor
  */
-function NoNftNotificationCard(props) {
+function NoNftNotificationCard({ fullHeight, ...rest }) {
   return (
-    <Card {...props}>
-      <CardContent>
-        <NoNftNotificationContent />
-      </CardContent>
+    <Card fullHeight={fullHeight} {...rest}>
+      <NoNftNotificationContent fullHeight={fullHeight} />
     </Card>
   );
 }

@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import silhouettes from "../../assets/components/common/no-nft-notification-card/chefs@2x.png";
+import Grid from "../styled/Grid";
 
 /**
+ * @param {boolean|undefined} fullHeight
  * @returns {JSX.Element}
  * @constructor
  */
-function NoNftNotificationContent() {
+function NoNftNotificationContent({ fullHeight }) {
   return (
-    <Grid container justifyContent="center">
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      fullHeight={fullHeight}
+    >
       <Grid item xs sm={6} textAlign="center">
         <img
           src={silhouettes}
