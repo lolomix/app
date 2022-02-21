@@ -1,4 +1,17 @@
-const { coinPairImplode, coinPairExplode } = require("./helpers");
+const {
+  coinPairImplode,
+  coinPairExplode,
+  getLastSundayAt,
+} = require("./helpers");
+const {
+  format,
+  getYear,
+  getMonth,
+  getDay,
+  getHours,
+  getMinutes,
+  getSeconds,
+} = require("date-fns");
 
 describe("coinPairExplode() helper", () => {
   test.each([
@@ -35,5 +48,37 @@ describe("coinPairImplode() helper", () => {
     const result = coinPairImplode(coinPairChunks);
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe("getLastSundayAt() helper", () => {
+  test.each([
+    ["2022-02-21T21:00:00", "2022-02-20T21:00:00", 21],
+    ["2022-02-21T00:00:00", "2022-02-20T21:00:00", 21],
+    ["2022-02-21T01:24:51", "2022-02-20T21:00:00", 21],
+    ["2022-02-20T01:24:51", "2022-02-13T21:00:00", 21],
+    ["2022-02-20T20:59:59", "2022-02-13T21:00:00", 21],
+    ["2022-02-20T21:00:01", "2022-02-20T21:00:00", 21],
+    ["2022-02-27T21:00:01", "2022-02-27T21:00:00", 21],
+    ["2022-02-27T21:00:01", "2022-02-27T21:00:00", 21],
+    ["2022-02-27T01:00:01", "2022-02-27T01:00:00", 1],
+    ["2022-02-27T00:59:59", "2022-02-20T01:00:00", 1],
+  ])(
+    "should get last Sunday for '%s' is '%s')",
+    (timeString, expected, hours) => {
+      const result = getLastSundayAt(hours, new Date(timeString));
+
+      expect(format(result, "yyyy-MM-dd'T'HH:mm:ss")).toEqual(expected);
+    }
+  );
+
+  it("should work without date property", () => {
+    const result = getLastSundayAt(21);
+    expect(result).toBeInstanceOf(Date);
+  });
+
+  it("should work without hours property", () => {
+    const result = getLastSundayAt();
+    expect(result).toBeInstanceOf(Date);
   });
 });
