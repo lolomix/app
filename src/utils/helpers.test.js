@@ -3,15 +3,7 @@ const {
   coinPairExplode,
   getLastSundayAt,
 } = require("./helpers");
-const {
-  format,
-  getYear,
-  getMonth,
-  getDay,
-  getHours,
-  getMinutes,
-  getSeconds,
-} = require("date-fns");
+const { format } = require("date-fns");
 
 describe("coinPairExplode() helper", () => {
   test.each([
