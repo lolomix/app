@@ -9,6 +9,7 @@ import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
 import NftBuy from "../../components/web3/NftBuy";
 import { Link as RouterLink } from "react-router-dom";
+import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining";
 
 /**
  * @returns {JSX.Element}
@@ -17,6 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 function MyChefs() {
   const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
   const nfts = useChefIdsOfOwner();
+  const remaining = useChefSeasonRemaining();
 
   return (
     <Layout
@@ -28,7 +30,7 @@ function MyChefs() {
     >
       <Grid container item gap={3} justifyContent="center">
         <Grid item xs={12} sm={6} md={5} lg={2.5}>
-          <NftBuy />
+          <NftBuy remaining={remaining !== 0} />
         </Grid>
         {nfts ? (
           nfts.map((tokenID, index) => (

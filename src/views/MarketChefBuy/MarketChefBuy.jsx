@@ -41,7 +41,7 @@ const MarketChefBuy = () => {
   return (
     <Layout helmetTitle="Buy a CHEF" title="Chef" buttonType="back">
       <Box maxWidth={330}>
-        <NftBuy remainingFormatted={remaining} />
+        <NftBuy remaining={remaining !== 0} />
         <CustomBanner>
           <Grid container justifyContent="center" alignItems="center" py={2}>
             <Grid item xs={12} sm={3} lg={12} order={{ xs: 2, lg: 1 }}>
