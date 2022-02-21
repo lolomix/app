@@ -408,7 +408,28 @@ theme = createTheme(theme, {
             color: theme.palette.common.black,
             "&:hover": {
               transform: "scale(1.02)",
-              backgroundColor: "#FFE655",
+            },
+          },
+        },
+        {
+          props: { bg: "yellowContained", disabled: true },
+          style: {
+            opacity: "0.8",
+          },
+        },
+        {
+          props: { bg: "yellowContainedSecondary" },
+          style: {
+            backgroundColor: "inherit",
+            background:
+              "radial-gradient(circle at top left, #F7F7F7 6%, #E8E8E8 2%)",
+            borderBottom: "2px solid #3A2717",
+            boxShadow:
+              "inset 0 -8px 0 hsl(0, 0%, 81%), inset 0 -30px 0 hsl(0, 0%, 86%)",
+            borderRadius: "9px",
+            color: theme.palette.common.black,
+            "&:hover": {
+              transform: "scale(1.02)",
             },
           },
         },
