@@ -35,7 +35,7 @@ function RecipeCreateFinishStep() {
               . Head over there to see all of your recipes.
             </Typography>
           </CardContent>
-          <CardActions sx={{ justifyContent: "center", flexFlow: "flex-wrap" }}>
+          <CardActions sx={{ justifyContent: "center" }}>
             <Button
               elongatedwidth="30"
               bg="yellowContained"
