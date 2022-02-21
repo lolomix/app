@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 
 /**
- * @param symbol
+ * @param {string} symbol
  * @returns {Promise<any>}
  *
  * @todo abstract url from the hook
@@ -17,7 +17,7 @@ const getCoinPairPriceBySymbol = async (symbol) => {
 };
 
 /**
- * @param symbol
+ * @param {string} symbol
  * @returns {{ data, dataUpdatedAt, error, errorUpdatedAt, failureCount, isError, isFetched, isFetchedAfterMount, isFetching, isIdle, isLoading, isLoadingError, isPlaceholderData, isPreviousData, isRefetchError, isRefetching, isStale, isSuccess, refetch, remove, status }}
  */
 export default function useCoinPairPrice(symbol) {
@@ -26,7 +26,7 @@ export default function useCoinPairPrice(symbol) {
     () => getCoinPairPriceBySymbol(symbol),
     {
       enabled: !!symbol,
-      refetchInterval: 3600000, // only refetch after an hour
+      staleTime: 3600000, // mark it as stale after an hour
     }
   );
 }

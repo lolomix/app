@@ -26,7 +26,7 @@ export default function useCoinPairOneDayChangeStatistics(symbol) {
     () => getCoinPairOneDayChangeStatisticsBySymbol(symbol),
     {
       enabled: !!symbol,
-      refetchInterval: 3600000, // only refetch after an hour
+      staleTime: 3600000, // mark it as stale after an hour
     }
   );
 }
