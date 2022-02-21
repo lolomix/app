@@ -166,6 +166,7 @@ function NftBuy({ t, remaining }) {
           <Button
             disableElevation
             elongatedwidth="30"
+            size="large"
             bg="yellowContained"
             href="https://discord.gg/JufpFYBdKG"
             target="_blank"
