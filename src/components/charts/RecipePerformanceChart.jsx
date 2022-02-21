@@ -1,13 +1,14 @@
 import { createChart } from "lightweight-charts";
 import { useEffect, useRef, useState } from "react";
 import useCoinPairsPriceHistorical from "../../hooks/pricefeed/useCoinPairsPriceHistorical";
-import { coinPairImplode } from "../../utils/helpers";
+import { coinPairImplode, getLastSundayAt } from "../../utils/helpers";
 import {
   calculateAggregatedPerformanceOfCoinPairs,
   calculatePerformanceOfCoinPairs,
 } from "../../utils/calculators";
 import { theme } from "../../utils/theme";
 import { alpha } from "@mui/material";
+import { format, subMonths } from "date-fns";
 
 /**
  * @returns {JSX.Element|null}
@@ -19,7 +20,18 @@ function RecipePerformanceChart({ tokens }) {
   const symbols =
     tokens?.map((token) => coinPairImplode([token.symbol, "USDT"])) ?? [];
 
-  const coinPairsPriceHistorical = useCoinPairsPriceHistorical(symbols);
+  /**
+   * @type {Date}
+   */
+  const end = getLastSundayAt(21);
+  const start = subMonths(end, 3);
+
+  const coinPairsPriceHistorical = useCoinPairsPriceHistorical(
+    symbols,
+    start,
+    end,
+    "1w"
+  );
 
   const [chartData, setChartData] = useState([]);
 
@@ -32,6 +44,7 @@ function RecipePerformanceChart({ tokens }) {
       return;
     }
 
+    // @todo caching
     let performances = calculatePerformanceOfCoinPairs(
       coinPairsPriceHistorical?.map(({ data }) => data)
     );
@@ -42,13 +55,8 @@ function RecipePerformanceChart({ tokens }) {
     );
 
     setChartData(
-      performances?.[0].map(({ closeDate }, index) => ({
-        // @todo refactor to parse date properly as this is horrible
-        time: closeDate
-          .substring(0, closeDate.indexOf(" "))
-          .split("/")
-          .reverse()
-          .join("-"), //yyyy-mm-dd,
+      performances?.[0].map(({ closeTime }, index) => ({
+        time: format(closeTime, "yyyy-MM-dd"),
         value: aggregatedPerformance?.[index],
       }))
     );
@@ -107,8 +115,11 @@ function RecipePerformanceChart({ tokens }) {
       bottomLineColor: alpha(theme.palette.error.main, 1),
       bottomFillColor1: alpha(theme.palette.error.main, 0.05),
       bottomFillColor2: alpha(theme.palette.error.main, 0.28),
-      priceFormat: { type: "percent", precision: 2, minMove: 0.01 },
-      baseValue: { type: "percent", price: 0.0 },
+      priceFormat: {
+        type: "custom",
+        formatter: (p) => p.toFixed(3) + "%",
+        minMove: 0.001,
+      },
     });
     newSeries.setData(chartData);
 

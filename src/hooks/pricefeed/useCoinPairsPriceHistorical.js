@@ -17,11 +17,10 @@ const formatDateTimesToAPISpecification = (dateTimes) => {
 };
 
 /**
- * @param symbol
- * @param startTime
- * @param endTime
- * @param startTime
- * @param endTime
+ * @param {string} symbol
+ * @param {string} startTime
+ * @param {string} endTime
+ * @param {string} interval
  * @returns {Promise<any>}
  *
  * @todo abstract url from the hook
@@ -29,10 +28,11 @@ const formatDateTimesToAPISpecification = (dateTimes) => {
 const getCoinPairPriceHistoricalBySymbol = async (
   symbol,
   startTime,
-  endTime
+  endTime,
+  interval
 ) => {
   const response = await fetch(
-    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=1d`
+    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=${interval}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -42,11 +42,16 @@ const getCoinPairPriceHistoricalBySymbol = async (
 
 /**
  * @param {array} symbols
- * @param {number} days
+ * @param {Date} start
+ * @param {Date} end
+ * @param {string} interval
  */
-export default function useCoinPairsPriceHistorical(symbols, days = 30) {
-  const end = new Date();
-  const start = new Date().setDate(end.getDate() - days);
+export default function useCoinPairsPriceHistorical(
+  symbols,
+  start = new Date(),
+  end = new Date(),
+  interval = "1d"
+) {
   const [startTime, endTime] = formatDateTimesToAPISpecification([start, end]);
 
   return useQueries(
@@ -54,11 +59,14 @@ export default function useCoinPairsPriceHistorical(symbols, days = 30) {
       return {
         queryKey: ["user", symbol, startTime, endTime],
         queryFn: () =>
-          getCoinPairPriceHistoricalBySymbol(symbol, startTime, endTime),
-        options: {
-          enabled: !!symbol,
-          refetchInterval: 3600000, // only refetch after an hour
-        },
+          getCoinPairPriceHistoricalBySymbol(
+            symbol,
+            startTime,
+            endTime,
+            interval
+          ),
+        enabled: !!symbol,
+        staleTime: 3600000, // mark it as stale after an hour
       };
     })
   );
