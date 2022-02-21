@@ -1,3 +1,5 @@
+import { getHours, isSunday, previousSunday } from "date-fns";
+
 /**
  * Explodes a string representation of a coin-pair into an array.
  *
@@ -26,4 +28,24 @@ export function coinPairImplode(coinPairChunks) {
   }
 
   return coinPairChunks.join("/");
+}
+
+/**
+ * Gets last Sunday precisely to the hours defined
+ *
+ * @param {int} hours
+ * @param {Date} date
+ */
+export function getLastSundayAt(hours = 0, date = new Date()) {
+  let sunday = previousSunday(date);
+
+  if (isSunday(date) && getHours(date) >= hours) {
+    sunday = date;
+  }
+
+  sunday.setHours(hours);
+  sunday.setMinutes(0);
+  sunday.setSeconds(0);
+
+  return sunday;
 }
