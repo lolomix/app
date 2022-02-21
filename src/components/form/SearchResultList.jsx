@@ -18,10 +18,10 @@ const BlurBottom = styled(Box)({
   position: "absolute",
   left: "0px",
   right: "0px",
-  height: "50%",
+  height: "20%",
   bottom: "0px",
   background:
-    "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,1) 100%)",
+    "linear-gradient(180deg, rgba(200,200,200,0) 0%, rgba(255,255,255,1) 100%)",
   pointerEvents: "none",
 });
 

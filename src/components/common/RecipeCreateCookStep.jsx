@@ -88,7 +88,7 @@ function RecipeCreateCookStep() {
    * Handles Recipe Create blockchain transaction
    */
   const handleCreate = async () => {
-    if(! confirmRecipeCorrectness()) {
+    if (!confirmRecipeCorrectness()) {
       return;
     }
 
@@ -223,7 +223,7 @@ function RecipeCreateCookStep() {
             </LoadingButton>
             <LoadingButton
               fullWidth
-              bg="yellowContainedSmall"
+              bg="yellowContained"
               size="large"
               loading={transactionInProgress()}
               onClick={handleCreate}
