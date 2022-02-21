@@ -8,6 +8,7 @@ function SearchInputField(props) {
       fullWidth
       variant="outlined"
       inputProps={{ inputMode: "search" }}
+      InputLabelProps={{ sx: { paddingRight: 4.5 } }}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
