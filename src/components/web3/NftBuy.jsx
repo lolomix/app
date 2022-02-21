@@ -109,7 +109,8 @@ function NftBuy({ t, remaining }) {
           <Button
             disableElevation
             elongatedwidth="30"
-            bg="yellowContainedSmall"
+            bg="yellowContainedSecondary"
+            size="large"
             onClick={buyDialogState.handleClose}
           >
             {t("base.close")}
@@ -119,6 +120,7 @@ function NftBuy({ t, remaining }) {
               disableElevation
               elongatedwidth="30"
               bg="yellowContained"
+              size="large"
               onClick={handleApproveAndBuy}
               disabled={transactionInProgress()}
             >
@@ -128,10 +130,11 @@ function NftBuy({ t, remaining }) {
             <Button
               disableElevation
               elongatedwidth="30"
-              bg="yellowContainedSmall"
+              size="large"
+              bg="yellowContained"
               disabled
             >
-              Please Connect Wallet
+              Connect Wallet
             </Button>
           )}
         </DialogActions>
@@ -152,7 +155,8 @@ function NftBuy({ t, remaining }) {
           <Button
             disableElevation
             elongatedwidth="30"
-            bg="yellowContained"
+            bg="yellowContainedSecondary"
+            size="large"
             color="primary"
             component="a"
             onClick={successDialogState.handleClose}

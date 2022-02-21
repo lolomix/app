@@ -167,7 +167,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           </Typography>
           {account ? (
             <LoadingButton
-              size="xlarge"
+              size="massive"
               bg="yellowContained"
               fullWidth
               onClick={handleExchange}
@@ -177,8 +177,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             </LoadingButton>
           ) : (
             // @todo is this the right place to handle such things?
-            <Button size="xlarge" variant="contained" fullWidth disabled>
-              Please Connect Wallet
+            <Button size="massive" bg="yellowContained" fullWidth disabled>
+              Connect Wallet
             </Button>
           )}
           <Chip
@@ -218,7 +218,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
             disableElevation
             elongatedwidth="30"
             onClick={() => setSuccessDialog(false)}
-            bg="yellowContained"
+            bg="yellowContainedSecondary"
+            size="large"
             color="primary"
           >
             {t("base.close")}

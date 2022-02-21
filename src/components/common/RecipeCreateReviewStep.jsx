@@ -156,7 +156,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
               size="large"
               onClick={nextStep}
             >
-              {account ? "Next Step" : "Please Connect Wallet"}
+              {account ? "Next Step" : "Connect Wallet"}
             </Button>
           </CardActions>
         </Card>
