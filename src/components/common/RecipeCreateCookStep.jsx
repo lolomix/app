@@ -147,7 +147,7 @@ function RecipeCreateCookStep() {
                     size="xsmall"
                     variant="contained"
                     color="success"
-                    inverseColor
+                    inversecolor="inverse"
                     sx={{
                       position: "absolute",
                       right: theme.spacing(-0.7),
@@ -194,7 +194,7 @@ function RecipeCreateCookStep() {
                 disabled={transactionInProgress()}
               />
               <Typography variant="caption">
-                *A minimum of 200 Aroma must be staked.
+                *A minimum of 200 AROMA must be staked.
               </Typography>
             </Stack>
           </CardContent>

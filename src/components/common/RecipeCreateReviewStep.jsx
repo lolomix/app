@@ -106,7 +106,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                         size="xsmall"
                         variant="contained"
                         color="error"
-                        inverseColor
+                        inversecolor="inverse"
                         sx={{
                           position: "absolute",
                           right: theme.spacing(-0.7),

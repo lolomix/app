@@ -58,7 +58,7 @@ function ChefSelectorDialog(props) {
                       size="xsmall"
                       variant="contained"
                       color="success"
-                      inverseColor
+                      inversecolor="inverse"
                       sx={{
                         position: "absolute",
                         right: theme.spacing(-0.7),

@@ -253,7 +253,7 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { variant: "contained", color: "error", inverseColor: true },
+          props: { variant: "contained", color: "error", inversecolor: "inverse" },
           style: {
             backgroundColor: theme.palette.error.contrastText,
             color: theme.palette.error.main,
@@ -273,7 +273,7 @@ theme = createTheme(theme, {
           },
         },
         {
-          props: { variant: "contained", color: "success", inverseColor: true },
+          props: { variant: "contained", color: "success", inversecolor: "inverse" },
           style: {
             backgroundColor: theme.palette.common.white,
             color: theme.palette.success.main,
