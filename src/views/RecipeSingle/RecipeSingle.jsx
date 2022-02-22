@@ -26,7 +26,7 @@ function RecipeSingle() {
   return (
     <Layout buttonType="back">
       <Grid container item mt={4} justifyContent="center">
-        <Grid item xs={12} sm={10} md={9} lg={7}>
+        <Grid item xs={12} sm={10} md={9} lg={7} mt={{ xs: 3, md: -6 }}>
           <Card sx={{ boxShadow: theme.blurredShadows }}>
             <CardContent>
               <Typography
@@ -130,6 +130,10 @@ function RecipeSingle() {
                                 (availableCoinPair) =>
                                   availableCoinPair.id === coinPair.id
                               )?.symbol,
+                              icon: availableCoinPairs.find(
+                                (availableCoinPair) =>
+                                  availableCoinPair.id === coinPair.id
+                              )?.icon,
                             }}
                           />
                         </Box>

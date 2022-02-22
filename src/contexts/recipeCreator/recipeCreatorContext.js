@@ -53,7 +53,7 @@ function useRecipeCreator() {
         state.chefId !== undefined &&
         state.chefId > 0 &&
         Number.isInteger(state.chefId),
-      `A recipe must be created by a CHEF with at least one empty punch.`,
+      `A recipe must be created by a CHEF with at least one empty poach.`,
     ],
     ifNameLessOrEqualToMaxNameLength: [
       () => state.name.length <= state.maxNameLength,
