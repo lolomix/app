@@ -84,6 +84,7 @@ const Tutorial = () => {
         >
           <Button
             bg="yellowContained"
+            sx={{ backgroundColor: "common.white" }}
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
@@ -92,8 +93,7 @@ const Tutorial = () => {
             Join Discord
           </Button>
           <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.white" }}
+            bg="yellowContained"
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
             rel="nofollow noindex"
