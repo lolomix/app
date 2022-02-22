@@ -15,7 +15,7 @@ import { logUseCalls } from "../../utils/loggers";
 export function useRecipesByIds(recipeIds) {
   const abiInterface = new utils.Interface(abi);
   const address = NETWORKS[TARGET_CHAIN].contractMaster;
-  const defaultResults = [];
+  const defaultResults = undefined;
 
   const calls =
     recipeIds?.map((recipeId) => ({
@@ -28,11 +28,14 @@ export function useRecipesByIds(recipeIds) {
 
   logUseCalls(results, calls);
 
-  if (results.some((result) => !result || result.error)) {
+  if (
+    results?.length <= 0 ||
+    results?.some((result) => !result || result.error)
+  ) {
     return defaultResults;
   }
 
-  return results.map((result, i) =>
+  return results?.map((result, i) =>
     formatRecipe({
       ...result?.value?.[0],
       id: recipeIds[i],
