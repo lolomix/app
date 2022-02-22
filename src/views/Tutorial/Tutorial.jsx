@@ -92,8 +92,7 @@ const Tutorial = () => {
             Join Discord
           </Button>
           <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.white" }}
+            bg="yellowContained"
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
             rel="nofollow noindex"

@@ -72,7 +72,6 @@ function NavigationMainMenuButton() {
       <Popover
         {...popoverOriginProps}
         {...bindPopover(mainMenuPopoverState)}
-        closePopover={mainMenuPopoverState.close}
         PaperProps={{
           sx: {
             backgroundColor: "common.black",

@@ -22,6 +22,7 @@ import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
 import { Link as RouterLink } from "react-router-dom";
+import { theme } from "../../utils/theme";
 import { useRecipesOfOwner } from "../../hooks/recipe/useRecipesOfOwner";
 
 const MY_RECIPES_FILTER = "my-recipes";
@@ -165,6 +166,7 @@ function Buffet() {
     >
       <Grid
         container
+        item
         md={10}
         lg={8}
         justifyContent="flex-start"
@@ -221,7 +223,11 @@ function Buffet() {
                   {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
                 </Typography>
                 {!recipesToShow && (
-                  <Skeleton variant="rectangular" height="100px" />
+                  <Skeleton
+                    variant="rectangular"
+                    height="100px"
+                    sx={{ borderRadius: `${theme.shape.borderRadius}px` }}
+                  />
                 )}
                 {recipesToShow && recipesToShow?.length === 0 && (
                   <Typography>Seems like you have no recipes</Typography>
@@ -247,7 +253,7 @@ function Buffet() {
                               margin: "0.3vw",
                               "&:hover": {
                                 backgroundColor: "grey.200",
-                                borderRadius: "12px",
+                                borderRadius: `${theme.shape.borderRadius}px`,
                               },
                             }}
                           >
@@ -257,7 +263,7 @@ function Buffet() {
                                   width: "75px",
                                   minWidth: "75px",
                                   border: "2px solid #E8E8E8",
-                                  borderRadius: "12px",
+                                  borderRadius: `${theme.shape.borderRadius}px`,
                                   paddingX: 2,
                                   paddingY: 1,
                                 }}
