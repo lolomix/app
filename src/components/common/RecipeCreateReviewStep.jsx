@@ -106,7 +106,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
                         size="xsmall"
                         variant="contained"
                         color="error"
-                        inversecolor="inverse"
+                        inverseColor
                         sx={{
                           position: "absolute",
                           right: theme.spacing(-0.7),
@@ -156,7 +156,7 @@ function RecipeCreateReviewStep({ tokenSelectorDialogState }) {
               size="large"
               onClick={nextStep}
             >
-              {account ? "Next Step" : "Connect Wallet"}
+              {account ? "Next Step" : "Please Connect Wallet"}
             </Button>
           </CardActions>
         </Card>
