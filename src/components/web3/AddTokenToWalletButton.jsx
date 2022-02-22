@@ -1,13 +1,14 @@
 import React from "react";
-import { useEthers } from "@usedapp/core";
+import { useConfig, useEthers } from "@usedapp/core";
 import { Button, Tooltip } from "@mui/material";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
 function AddTokenToWalletButton() {
+  const { readOnlyChainId } = useConfig();
   const { library } = useEthers();
 
   const walletWatchAsset = () => {
@@ -18,7 +19,7 @@ function AddTokenToWalletButton() {
           params: {
             type: "ERC20",
             options: {
-              address: NETWORKS[TARGET_CHAIN].contractAroma,
+              address: NETWORKS[readOnlyChainId].contractAroma,
               symbol: "AROMA",
               decimals: 18,
             },
@@ -38,7 +39,10 @@ function AddTokenToWalletButton() {
   return (
     library &&
     window.ethereum && (
-      <Tooltip title="You will see your AROMA balance directly in your Wallet">
+      <Tooltip
+        placement="top"
+        title="You will see your AROMA balance directly in your Wallet"
+      >
         <Button
           fullWidth
           variant="outlined"
