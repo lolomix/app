@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import {
   Box,
   Button,
@@ -14,17 +14,20 @@ import {
   Divider,
   Grid,
   Link,
+  Skeleton,
 } from "@mui/material";
 import Layout from "../../components/layout/Layout";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
 import styled from "@emotion/styled";
 import Image1 from "../../assets/nfts/1.png";
-import Image3 from "../../assets/nfts/3.png";
 import { Link as RouterLink } from "react-router-dom";
+import { useRecipesOfOwner } from "../../hooks/recipe/useRecipesOfOwner";
+
+const MY_RECIPES_FILTER = "my-recipes";
+const ALL_RECIPES_FILTER = "all-recipes";
 
 // Date from Sunday to Sunday
-
 let today = new Date();
 let lastWeekMonth = new Date(
   today.getFullYear(),
@@ -34,8 +37,6 @@ let lastWeekMonth = new Date(
 let lastWeekDay = today.getDate() - today.getDay();
 let nextWeekDay = lastWeekDay + 7;
 let nextWeekMonth = today.toLocaleString("default", { month: "short" });
-
-// Custom styles
 
 export const CustomContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
@@ -71,9 +72,11 @@ const Tab = styled(TabUnstyled)`
   display: flex;
   justify-content: center;
   letter-spacing: 0.21px;
+
   &:hover {
     background-color: #805ac6;
   }
+
   &.${tabUnstyledClasses.selected} {
     background-color: #805ac6;
   }
@@ -94,84 +97,62 @@ const TabsList = styled(TabsListUnstyled)`
   display: flex;
 `;
 
-// component
-
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Buffet() {
-  // static arrays
   const allRecipes = [
     {
-      id: 1,
-      chefImage: Image1,
-      recipeName: "Vanilla Icecream with Hot fudge Brownie",
-      recipePerformance: 13.55,
-      ranking: 1,
+      id: "0x353ea1a5dabc160f00c0b4ecc285adasd9eb61cf03a56f411b4578c1464cf5674",
+      chefId: 1,
+      name: "Vanilla Icecream with Hot fudge Brownie",
     },
     {
-      id: 2,
-      chefImage: Image3,
-      recipeName: "Marshmallow",
-      recipePerformance: 11.31,
-      ranking: 2,
+      id: "0x353ea1a5dabc160f00c0b4ecc2851daasdb61cf03a56f411b4578c1464cf5674",
+      chefId: 1,
+      name: "Marshmallow",
     },
     {
-      id: 3,
-      chefImage: Image1,
-      recipeName: "Peanut Butter",
-      recipePerformance: 10.26,
+      id: "0x353ea1a5dabc160f00c0b4ecc2851da19eb61cf03a56f4sdfsdf4578c1464c724",
+      chefId: 1,
+      name: "Peanut Butter",
       diffFromYesterday: -3.154,
-      ranking: 3,
     },
     {
-      id: 4,
-      chefImage: Image3,
-      recipeName: "Chocolate Donut",
-      recipePerformance: 9.05,
-      ranking: 4,
+      id: "0x353ea1a5dabc160f00c0b4ecc2851da19eb61cf03a56f411b4578c1464cf523423",
+      chefId: 1,
+      name: "Chocolate Donut",
     },
     {
-      id: 5,
-      chefImage: Image1,
-      recipeName: "Springroll",
-      recipePerformance: 8.35,
-      ranking: 5,
+      id: "0x353ea1a5dabc160f00c0b4ecc2851da19eb61cf03a56f411b4578c1464cf1234",
+      chefId: 1,
+      name: "Springroll",
     },
   ];
+  const myRecipes = useRecipesOfOwner();
 
-  const myRecipes = [
-    {
-      id: 3,
-      chefImage: Image1,
-      recipeName: "Peanut Butter",
-      recipePerformance: 10.26,
-      ranking: 3,
-    },
-    {
-      id: 4,
-      chefImage: Image3,
-      recipeName: "Chocolate Donut",
-      recipePerformance: 9.05,
-      ranking: 4,
-    },
-    {
-      id: 5,
-      chefImage: Image1,
-      recipeName: "Springroll",
-      recipePerformance: 8.35,
-      ranking: 5,
-    },
-  ];
+  const [recipesToShow, setRecipesToShow] = useState();
+  const [recipesFilter, setRecipesFilter] = useState(MY_RECIPES_FILTER);
 
-  const [recipesToShow, setRecipesToShow] = useState(myRecipes);
-  const [myRecipesOn, setMyRecipesOn] = useState(true);
+  useEffect(() => {
+    if (recipesFilter !== MY_RECIPES_FILTER) return;
+    setRecipesToShow(myRecipes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(myRecipes), recipesFilter]);
+
+  useEffect(() => {
+    if (recipesFilter !== ALL_RECIPES_FILTER) return;
+    setRecipesToShow(allRecipes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(allRecipes), recipesFilter]);
 
   const handleClickMyRecipes = () => {
-    setMyRecipesOn(true);
-    setRecipesToShow(myRecipes);
+    setRecipesFilter(MY_RECIPES_FILTER);
   };
 
   const handleClickAllRecipes = () => {
-    setMyRecipesOn(false);
-    setRecipesToShow(allRecipes);
+    setRecipesFilter(ALL_RECIPES_FILTER);
   };
 
   return (
@@ -239,65 +220,74 @@ function Buffet() {
                 <Typography variant="h5" color="grey.500">
                   {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
                 </Typography>
-                {recipesToShow.map((recipe) => (
-                  <Fragment key={recipe.id}>
-                    <TabPanelUnstyled value={0} />
-                    <TabPanelUnstyled value={1}>
-                      <Link
-                        rel="noreferrer nofollow"
-                        href={`/buffet/recipe/${recipe.id}`}
-                        style={{
-                          textDecoration: "none",
-                        }}
-                      >
-                        <Grid
-                          container
-                          py={2.5}
-                          alignItems="center"
-                          sx={{
-                            margin: "0.3vw",
-                            "&:hover": {
-                              backgroundColor: "grey.200",
-                              borderRadius: "12px",
-                            },
+                {!recipesToShow && (
+                  <Skeleton variant="rectangular" height="100px" />
+                )}
+                {recipesToShow && recipesToShow?.length === 0 && (
+                  <Typography>Seems like you have no recipes</Typography>
+                )}
+                {recipesToShow &&
+                  recipesToShow?.length > 0 &&
+                  recipesToShow?.map((recipe) => (
+                    <Fragment key={recipe.id}>
+                      <TabPanelUnstyled value={0} />
+                      <TabPanelUnstyled value={1}>
+                        <Link
+                          rel="noreferrer nofollow"
+                          href={`/buffet/recipe/${recipe.id}`}
+                          style={{
+                            textDecoration: "none",
                           }}
                         >
-                          <Grid item mr={2}>
-                            <Box
-                              sx={{
-                                width: "75px",
-                                minWidth: "75px",
-                                border: "2px solid #E8E8E8",
+                          <Grid
+                            container
+                            py={2.5}
+                            alignItems="center"
+                            sx={{
+                              margin: "0.3vw",
+                              "&:hover": {
+                                backgroundColor: "grey.200",
                                 borderRadius: "12px",
-                                paddingX: 2,
-                                paddingY: 1,
-                              }}
-                            >
-                              <img
-                                src={recipe.chefImage}
-                                width="100%"
-                                height="auto"
-                                alt="recipeChef"
-                              />
-                            </Box>
+                              },
+                            }}
+                          >
+                            <Grid item mr={2}>
+                              <Box
+                                sx={{
+                                  width: "75px",
+                                  minWidth: "75px",
+                                  border: "2px solid #E8E8E8",
+                                  borderRadius: "12px",
+                                  paddingX: 2,
+                                  paddingY: 1,
+                                }}
+                              >
+                                {/* @todo replace chef images */}
+                                <img
+                                  src={Image1}
+                                  width="100%"
+                                  height="auto"
+                                  alt="recipeChef"
+                                />
+                              </Box>
+                            </Grid>
+                            <Grid item xs={6} md={8.2} xl={10} textAlign="left">
+                              <Typography
+                                variant="h5"
+                                color="common.black"
+                                sx={{ padding: 1 }}
+                              >
+                                {recipe.name}
+                              </Typography>
+                            </Grid>
                           </Grid>
-                          <Grid item xs={6} md={8.2} xl={10} textAlign="left">
-                            <Typography
-                              variant="h5"
-                              color="common.black"
-                              sx={{ padding: 1 }}
-                            >
-                              {recipe.recipeName}
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Link>
-                      <Divider />
-                    </TabPanelUnstyled>
-                    <TabPanelUnstyled value={2}></TabPanelUnstyled>
-                  </Fragment>
-                ))}
-                {myRecipesOn && (
+                        </Link>
+                        <Divider />
+                      </TabPanelUnstyled>
+                      <TabPanelUnstyled value={2}></TabPanelUnstyled>
+                    </Fragment>
+                  ))}
+                {recipesFilter === MY_RECIPES_FILTER && (
                   <Button
                     bg="yellowContained"
                     size="massive"
