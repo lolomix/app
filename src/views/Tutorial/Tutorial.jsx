@@ -84,7 +84,6 @@ const Tutorial = () => {
         >
           <Button
             bg="yellowContained"
-            sx={{ backgroundColor: "common.white" }}
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
