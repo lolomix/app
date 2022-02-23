@@ -92,7 +92,7 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTOCHEFSIO }}"
-          expires: ${{ github.event_name == 'release' && '' || github.event_name == 'push' && '30d' || '7d' }}
+          expires: ${{ github.event_name == 'release' && '' || github.event_name == 'push' && '30d' || '5d' }}
           channelId: ${{ github.event_name == 'release' && 'live' || github.event_name == 'push' && 'staging' || '' }}
           projectId: cryptochefsio
           target: app
