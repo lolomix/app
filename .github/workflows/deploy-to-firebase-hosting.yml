@@ -45,7 +45,6 @@ jobs:
     name: Build
     needs: install
     env:
-      REACT_APP_CHAIN: ${{ github.event_name == 'release' && 'polygon' || 'rinkeby' }}
       REACT_APP_DEBUG: ${{ github.event_name == 'release' && false || true }}
       REACT_APP_INFURA_ID: ${{ secrets.REACT_APP_INFURA_ID }}
     steps:
