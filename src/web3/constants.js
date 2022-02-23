@@ -13,8 +13,12 @@ export const DAPPCONFIG = {
     [Rinkeby.chainId]: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     [Polygon.chainId]: "https://polygon-rpc.com/",
   },
-  networks: [TARGET_CHAIN === "polygon" ? Polygon : Rinkeby],
-  multicallVersion: 2
+  networks: [Polygon, Rinkeby],
+  multicallVersion: 2,
+  multicallAddresses: {
+    // missing multicall2 address for polygon
+    [Polygon.chainId]: "0x5A616D3195715F2783bf51B46193b5DC8E867717",
+  },
 };
 
 /**
