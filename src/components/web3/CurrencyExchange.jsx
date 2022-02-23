@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import { useEthers } from "@usedapp/core";
+import { useConfig, useEthers } from '@usedapp/core'
 import { useSnackbar } from "notistack";
 import { LoadingButton } from "@mui/lab";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
@@ -18,7 +18,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import CurrencyInputField from "../form/CurrencyInputField";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
@@ -35,6 +35,7 @@ import {
  * @constructor
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
+  const { readOnlyChainId } = useConfig();
   const { account } = useEthers();
   const { enqueueSnackbar } = useSnackbar();
   const price = useAromaPrice();
@@ -57,8 +58,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
   useEffect(() => {
-    setCurrencyFrom(NETWORKS[TARGET_CHAIN].nativeCurrency.symbol);
-  }, []);
+    setCurrencyFrom(NETWORKS[readOnlyChainId].nativeCurrency.symbol);
+  }, [readOnlyChainId]);
 
   /**
    * Handles the switch of currencies if `enableCurrencySwitch` is enabled
@@ -184,7 +185,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           <Chip
             label={
               "For 1 " +
-              NETWORKS[TARGET_CHAIN].nativeCurrency.symbol +
+              NETWORKS[readOnlyChainId].nativeCurrency.symbol +
               " you get " +
               formatCurrency(1 / price) +
               " AROMA tokens."

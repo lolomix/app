@@ -3,7 +3,7 @@ import { theme } from "../../utils/theme";
 import { useParams } from "react-router-dom";
 import NftCard from "../../components/web3/NftCard";
 import { useRecipeById } from "../../hooks/recipe/useRecipeById";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { useRecipeCoinPairs } from "../../hooks/recipe/useRecipeCoinPairs";
 import { Box, Card, CardContent, Skeleton, Typography } from "@mui/material";
@@ -11,6 +11,7 @@ import RecipePerformanceChart from "../../components/charts/RecipePerformanceCha
 import RecipeCreateCoinPairPresenter from "../../components/common/RecipeCreateCoinPairPresenter";
 import GradualStepperInputField from "../../components/form/GradualStepperInputField";
 import Layout from "../../components/layout/Layout";
+import { useConfig } from '@usedapp/core'
 
 /**
  * @returns {JSX.Element}
@@ -18,7 +19,8 @@ import Layout from "../../components/layout/Layout";
  */
 function RecipeSingle() {
   const { recipeId } = useParams();
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const { readOnlyChainId } = useConfig();
+  const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const recipeFormatted = useRecipeById(recipeId);
   // @todo refactor the name of the hook as it's ambiguous
   const availableCoinPairs = useRecipeCoinPairs();

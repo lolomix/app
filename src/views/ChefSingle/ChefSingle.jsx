@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEthers } from "@usedapp/core";
+import { useConfig, useEthers } from '@usedapp/core'
 import NftCard from "../../components/web3/NftCard";
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 import {
   Button,
   Card,
@@ -24,8 +24,9 @@ import { Link as RouterLink } from "react-router-dom";
 
 function ChefSingle() {
   const { tokenId } = useParams();
+  const { readOnlyChainId } = useConfig();
   const { active, error } = useEthers();
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenId);
   const attributes = nft?.metadata?.attributes;
   const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;

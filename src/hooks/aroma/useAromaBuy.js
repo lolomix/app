@@ -1,10 +1,11 @@
-import { useContractFunction } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { useConfig, useContractFunction } from '@usedapp/core'
+import { NETWORKS } from "../../web3/constants";
 import { Contract } from "@ethersproject/contracts";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 
 export function useAromaBuy() {
-  const contractAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const { readOnlyChainId } = useConfig();
+  const contractAddress = NETWORKS[readOnlyChainId].contractMaster;
   const contract = new Contract(contractAddress, abi);
   const { send, state, events } = useContractFunction(contract, "buyAROMA", {
     transactionName: "Buy AROMA",

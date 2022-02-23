@@ -1,5 +1,5 @@
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
-import { useTokenBalance } from "@usedapp/core";
+import { NETWORKS } from "../../web3/constants";
+import { useConfig, useTokenBalance } from '@usedapp/core'
 import { formatUnits } from "@ethersproject/units";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
  * @returns {(BigNumber|string)[]|*[]}
  */
 export function useAromaBalanceOf(targetAccount) {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractAroma;
+  const { readOnlyChainId } = useConfig();
+  const tokenAddress = NETWORKS[readOnlyChainId].contractAroma;
   const balance = useTokenBalance(tokenAddress, targetAccount);
   const [balanceFormatted, setBalanceFormatted] = useState();
 
