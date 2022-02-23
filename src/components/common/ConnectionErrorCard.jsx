@@ -1,23 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
-// material-ui
 import { Card, CardContent, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-// custom
-import { getErrorMessage } from "../../web3/errors";
 import bg from "../../assets/components/common/connection-error-card/bg@2x.png";
 
 /**
- * @param props
+ * @param errorMessage
+ * @param beforeCardContent
+ * @param prependCardContent
+ * @param appendCardContent
+ * @param afterCardContent
+ * @param rest
  * @returns {JSX.Element}
  * @constructor
  */
-function ConnectionErrorCard(props) {
-  const { error, rest } = props;
-
+function ConnectionErrorCard({
+  errorMessage,
+  beforeCardContent,
+  prependCardContent,
+  appendCardContent,
+  afterCardContent,
+  ...rest
+}) {
   return (
     <Card {...rest}>
+      {beforeCardContent}
       <CardContent>
+        {prependCardContent}
         <Grid container justifyContent="center" alignItems="center">
           <Grid item textAlign="center">
             <img
@@ -25,19 +32,18 @@ function ConnectionErrorCard(props) {
               alt="Crypto Wallet Providers"
               style={{ maxWidth: "182px" }}
             />
-            <Typography mt={3}>{getErrorMessage(error)}</Typography>
+            <Typography mt={3}>
+              {errorMessage
+                ? errorMessage
+                : "Something went wrong! Please check your wallet connection."}
+            </Typography>
           </Grid>
         </Grid>
+        {appendCardContent}
       </CardContent>
+      {afterCardContent}
     </Card>
   );
 }
-
-/**
- * @type {{error: Validator<NonNullable<Error>>}}
- */
-ConnectionErrorCard.propTypes = {
-  error: PropTypes.instanceOf(Error),
-};
 
 export default ConnectionErrorCard;

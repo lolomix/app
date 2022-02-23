@@ -1,8 +1,11 @@
-import React from "react";
 import { withTranslation } from "react-i18next";
 import Blockies from "react-blockies";
-import { useEthers } from "@usedapp/core";
-// material-ui
+import {
+  getChainById,
+  useEthers,
+  useLocalStorage,
+  useNetwork,
+} from "@usedapp/core";
 import {
   Avatar,
   Box,
@@ -19,17 +22,28 @@ import {
   Grid,
 } from "@mui/material";
 import { Check, Settings } from "@mui/icons-material";
-// custom
 import VerifyExplorerIconButton from "../buttons/VerifyExplorerIconButton";
 import IconButtonCopy from "../buttons/CopyIconButton";
-import { TARGET_CHAIN } from "../../web3/constants";
 import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
 import { truncate } from "../../utils/formatters";
+import { useChainWatcher } from "../../contexts/chainWatcher/chainWatcherContext";
+import { useEffect } from "react";
 
 function MyAccountPopover(props) {
+  const { chainId } = useEthers();
+  const { chainName } = getChainById(chainId) ?? {};
   const { t, tReady, closePopover, openProvidersPopover, anchorEl, ...rest } =
     props;
   const { account, deactivate } = useEthers();
+  const { network } = useNetwork();
+  const { setOverrideTargetChain } = useChainWatcher();
+
+  useEffect(() => {
+    console.log(network);
+  }, [network]);
+
+  // @todo should be done in useDapp itself
+  const [, setShouldConnectMetamask] = useLocalStorage("shouldConnectMetamask");
 
   return (
     <Popover {...rest} anchorEl={anchorEl}>
@@ -91,7 +105,7 @@ function MyAccountPopover(props) {
             <ListItemAvatar>
               <Avatar
                 sx={{
-                  backgroundColor: "primary.main",
+                  backgroundColor: "success.main",
                 }}
               >
                 <Check
@@ -102,9 +116,7 @@ function MyAccountPopover(props) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              secondary={
-                "Successfully connected to " + TARGET_CHAIN.toUpperCase()
-              }
+              secondary={`Successfully connected to ${chainName}`}
               primary="Connected"
             />
           </ListItem>
@@ -127,7 +139,13 @@ function MyAccountPopover(props) {
               variant="contained"
               onClick={() => {
                 closePopover();
+                // @todo this should be done in chainWatcherProvider somehow
+                setOverrideTargetChain(undefined);
+                // @todo should be done in useDapp itself
+                setShouldConnectMetamask(false);
+                // @todo deactivation should reload the page in particular situations
                 deactivate();
+                window.location.reload();
               }}
             >
               {t("base.disconnect")}

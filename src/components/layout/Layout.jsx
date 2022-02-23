@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Navigation from "./Navigation";
 import { useEthers } from "@usedapp/core";
 import LoadingSpinner from "../common/LoadingSpinner";
+import AnnouncementBar from "./AnnouncementBar";
 
 const Layout = ({
   helmetTitle,
@@ -26,6 +27,7 @@ const Layout = ({
 
   return (
     <>
+      <AnnouncementBar />
       <Stack
         justifyContent="space-between"
         paddingX={{ xs: 0, md: 2 }}
@@ -42,7 +44,13 @@ const Layout = ({
             icon={icon}
             buttonType={buttonType}
           />
-          <Stack mx={1} pt={title ? 6 : -6} pb={3} alignItems="center" spacing={5}>
+          <Stack
+            mx={1}
+            pt={title ? 6 : -6}
+            pb={3}
+            alignItems="center"
+            spacing={5}
+          >
             {children}
           </Stack>
         </Container>

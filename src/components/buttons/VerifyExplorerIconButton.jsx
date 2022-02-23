@@ -2,17 +2,18 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import Launch from "@mui/icons-material/Launch";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { getChainById, useConfig } from "@usedapp/core";
 
 function VerifyExplorerIconButton({ address, size, fontSize }) {
+  const { readOnlyChainId } = useConfig();
+  const { getExplorerAddressLink } = getChainById(readOnlyChainId);
+
   return (
     <Tooltip title="View on Explorer">
       <IconButton
         component="a"
         size={size}
-        href={
-          NETWORKS[TARGET_CHAIN].blockExplorerUrls[0] + "address/" + address
-        }
+        href={getExplorerAddressLink(address)}
         target="_blank"
         aria-label="View on Explorer"
       >

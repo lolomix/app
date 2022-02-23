@@ -24,7 +24,7 @@ import { bindDialog, bindDialogClick } from "../../utils/binders";
 import { useRecipeCreate } from "../../hooks/recipe/useRecipeCreate";
 import { ethers } from "ethers";
 import { parseUnits } from "@ethersproject/units";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
 import { LoadingButton } from "@mui/lab";
 import {
@@ -32,13 +32,15 @@ import {
   usePromiseTransactionSnackbarManager,
 } from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
 import { useAromaAllowance } from "../../hooks/aroma/useAromaAllowance";
+import { useConfig } from '@usedapp/core'
 
 /**
  * @returns {JSX.Element|null}
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const spenderAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const { readOnlyChainId } = useConfig();
+  const spenderAddress = NETWORKS[readOnlyChainId].contractMaster;
   const [
     { tokens, chefId, name, stake },
     { setChefId, setName, setStake, confirmRecipeCorrectness, nextStep },

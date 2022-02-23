@@ -1,5 +1,5 @@
-import { useCall } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { useCall, useConfig } from '@usedapp/core'
+import { NETWORKS } from "../../web3/constants";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
 import { Contract } from "@ethersproject/contracts";
@@ -11,8 +11,9 @@ import { logUseCall } from "../../utils/loggers";
  * @returns {*[]|*}
  */
 export function useRecipeCoinPairIds() {
+  const { readOnlyChainId } = useConfig();
   const abiInterface = new utils.Interface(abi);
-  const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const address = NETWORKS[readOnlyChainId].contractMaster;
   const defaultResult = [];
 
   const call = {

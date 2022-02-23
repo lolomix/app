@@ -4,19 +4,21 @@ import NftCard from "../../components/web3/NftCard";
 import NoNftNotificationCard from "../../components/common/NoNftNotificationCard";
 import { useChefIdsOfOwner } from "../../hooks/chef/useChefIdsOfOwner";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { NETWORKS } from "../../web3/constants";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
 import NftBuy from "../../components/web3/NftBuy";
 import { Link as RouterLink } from "react-router-dom";
 import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining";
+import { useConfig } from '@usedapp/core'
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
 function MyChefs() {
-  const tokenAddress = NETWORKS[TARGET_CHAIN].contractMaster;
+  const { readOnlyChainId } = useConfig();
+  const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const nfts = useChefIdsOfOwner();
   const remaining = useChefSeasonRemaining();
 

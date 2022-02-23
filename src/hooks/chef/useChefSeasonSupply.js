@@ -1,5 +1,5 @@
-import { useContractCall } from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { useConfig, useContractCall } from '@usedapp/core'
+import { NETWORKS } from "../../web3/constants";
 import { utils } from "ethers";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { useEffect, useState } from "react";
@@ -10,8 +10,9 @@ import { useEffect, useState } from "react";
  * @returns {(any)[]|*[]}
  */
 export function useChefSeasonSupply() {
+  const { readOnlyChainId } = useConfig()
   const abiInterface = new utils.Interface(abi);
-  const address = NETWORKS[TARGET_CHAIN].contractMaster;
+  const address = NETWORKS[readOnlyChainId].contractMaster;
   const [seasonSupplyFormatted, setSeasonSupplyFormatted] = useState();
 
   const [seasonSupply] =

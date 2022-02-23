@@ -1,8 +1,8 @@
 import { Alert, darken, Link } from "@mui/material";
-import { TARGET_CHAIN, NETWORKS } from "../../web3/constants";
 import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import { theme } from "../../utils/theme";
 import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining";
+import { getChainById, useConfig } from "@usedapp/core";
 
 /**
  * @returns {JSX.Element|null}
@@ -11,18 +11,19 @@ import { useChefSeasonRemaining } from "../../hooks/chef/useChefSeasonRemaining"
  * @todo refactor this to be more sophisticated and remove constant dependency
  */
 function AnnouncementBar() {
-  const testnet = NETWORKS[TARGET_CHAIN].testnet === true;
+  const { readOnlyChainId } = useConfig();
+  const { isTestChain, chainName } = getChainById(readOnlyChainId);
   const chefSeasonRemaining = useChefSeasonRemaining();
 
   // only show warning on testnet
-  if (testnet) {
+  if (isTestChain) {
     return (
       <Alert
         variant="filled"
         severity="error"
         sx={{ borderRadius: 0, justifyContent: "center" }}
       >
-        {NETWORKS[TARGET_CHAIN].name} Environment
+        {chainName} Environment
       </Alert>
     );
   }
