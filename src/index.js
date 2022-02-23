@@ -4,20 +4,39 @@ import "./index.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { DAppProvider } from "@usedapp/core";
+import { DAppProvider, useLocalStorage } from "@usedapp/core";
 import { DAPPCONFIG } from "./web3/constants";
 import App from "./App";
 import "./i18n";
+import { ChainWatcherProvider } from "./contexts/chainWatcher/chainWatcherProvider";
 
 const queryClient = new QueryClient();
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const DApp = () => {
+  const [overrideTargetChain] = useLocalStorage("overrideTargetChain");
+  return (
+    <DAppProvider
+      config={{
+        ...DAPPCONFIG,
+        ...(overrideTargetChain && { readOnlyChainId: overrideTargetChain }),
+      }}
+    >
+      <ChainWatcherProvider>
+        <App />
+      </ChainWatcherProvider>
+    </DAppProvider>
+  );
+};
+
 ReactDOM.render(
   <BrowserRouter>
-    <DAppProvider config={DAPPCONFIG}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </DAppProvider>
+    <QueryClientProvider client={queryClient}>
+      <DApp />
+    </QueryClientProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );
