@@ -1,5 +1,4 @@
 import { withTranslation } from "react-i18next";
-// material-ui
 import {
   Box,
   Divider,
@@ -12,9 +11,7 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Check, Close } from "@mui/icons-material";
-// custom
 import providersList from "../../web3/connectorsList";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
 import { getErrorMessage } from "../../web3/errors";
 import WalletMetaMaskIcon from "../icons/WalletMetaMaskIcon";
 import WalletWalletConnectIcon from "../icons/WalletWalletConnectIcon";
@@ -49,7 +46,7 @@ const ProviderIcon = ({ providerKey, ...rest }) => {
 function ProvidersPopover(props) {
   const { t, tReady, closePopover, ...rest } = props;
 
-  const { active, error, chainId, activateBrowserWallet } = useEthers();
+  const { active, error, activateBrowserWallet } = useEthers();
 
   const {
     network: { provider },
@@ -67,12 +64,6 @@ function ProvidersPopover(props) {
     providersList[providerKey]?.isActive(provider);
 
   /**
-   * @param error
-   * @returns {boolean}
-   */
-  const isUnsupportedNetwork = (error) => error instanceof Error;
-
-  /**
    * Activates a new provider by its key
    *
    * @param providerKey
@@ -81,46 +72,12 @@ function ProvidersPopover(props) {
     if (isCurrentProvider(providerKey)) {
       return;
     }
-
     setActivatingProvider(providerKey);
-    closePopover();
 
     // hard code injected provider for the time being
     activateBrowserWallet();
 
-    if (providerKey === "injected") {
-      // only works for metamask
-      if (chainId !== NETWORKS[TARGET_CHAIN].chainId) {
-        try {
-          // check if the chain to connect to is installed
-          await window.ethereum.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: NETWORKS[TARGET_CHAIN].chainIdHex }], // chainId must be in hexadecimal numbers
-          });
-        } catch (error) {
-          if (error.code === 4902) {
-            // This error code indicates that the chain has not been added to MetaMask
-            try {
-              await window.ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                  {
-                    chainId: NETWORKS[TARGET_CHAIN].chainIdHex,
-                    blockExplorerUrls: NETWORKS[TARGET_CHAIN].blockExplorerUrls,
-                    chainName: NETWORKS[TARGET_CHAIN].name,
-                    nativeCurrency: NETWORKS[TARGET_CHAIN].nativeCurrency,
-                    rpcUrls: NETWORKS[TARGET_CHAIN].rpcUrls,
-                  },
-                ],
-              });
-            } catch (addError) {
-              console.error(addError);
-            }
-          }
-          console.error(error);
-        }
-      }
-    }
+    closePopover();
   };
 
   /**
@@ -183,28 +140,18 @@ function ProvidersPopover(props) {
                 <LoadingButton
                   fullWidth
                   disableElevation
-                  variant={
-                    isCurrentProvider(key) && !isUnsupportedNetwork(error)
-                      ? "contained"
-                      : "outlined"
-                  }
+                  variant={isCurrentProvider(key) ? "contained" : "outlined"}
                   size="large"
                   sx={{ paddingX: 8 }}
                   color={isCurrentProvider(key) ? "success" : "primary"}
                   startIcon={<ProviderIcon providerKey={key} />}
                   alignedstarticon="align"
-                  endIcon={
-                    isCurrentProvider(key) && !isUnsupportedNetwork(error) ? (
-                      <Check />
-                    ) : null
-                  }
+                  endIcon={isCurrentProvider(key) ? <Check /> : null}
                   loading={handleProviderButtonLoadingProp(key)}
                   disabled={handleProviderButtonDisabledProp(key)}
                   onClick={() => handleProviderButtonClick(key)}
                 >
-                  {isCurrentProvider(key) && isUnsupportedNetwork(error)
-                    ? `Switch to ${NETWORKS[TARGET_CHAIN].name}`
-                    : providersList[key].name}
+                  {providersList[key].name}
                   {providersList[key].soon && (
                     <Typography
                       pl={0.5}
