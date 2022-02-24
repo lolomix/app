@@ -18,7 +18,7 @@ const CustomBanner = styled(Box, {
     left: "70vw",
     borderRadius: 40,
     transform: "rotate(17deg)",
-    [theme.breakpoints.down("lg")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "auto",
       position: "static",
@@ -30,7 +30,6 @@ const CustomBanner = styled(Box, {
     color: theme.palette.common.white,
     border: "7px solid #1111111A",
     textAlign: "center",
-    paddingBottom: 12,
   },
 }));
 
@@ -40,26 +39,30 @@ const MarketChefBuy = () => {
 
   return (
     <Layout helmetTitle="Buy a CHEF" title="Chef" buttonType="back">
-      <Box>
-        <NftBuy remaining={remaining !== 0} />
-        <CustomBanner>
-          <Grid container justifyContent="center" alignItems="center" py={2}>
-            <Grid item xs={12} sm={3} lg={12} order={{ xs: 2, lg: 1 }}>
-              <Typography variant="h2" fontWeight={800}>
-                {remaining}
-              </Typography>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <NftBuy remaining={remaining !== 0} />
+        </Grid>
+        <Grid item xs={12}>
+          <CustomBanner>
+            <Grid container justifyContent="center" alignItems="center" py={2}>
+              <Grid item xs={12} sm={5} md={12} order={{ xs: 2, md: 1 }}>
+                <Typography variant="h2" fontWeight={800}>
+                  {remaining}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={2} md={12} order={{ xs: 1, md: 2 }}>
+                <Typography variant="h3" fontWeight={800}>
+                  Remaining
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} lg={12} order={{ xs: 1, lg: 2 }}>
-              <Typography variant="h3" fontWeight={800}>
-                Remaining
-              </Typography>
-            </Grid>
-          </Grid>
-          <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
-            Sold {soldFormatted}
-          </Typography>
-        </CustomBanner>
-      </Box>
+            <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
+              Sold {soldFormatted}
+            </Typography>
+          </CustomBanner>
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
