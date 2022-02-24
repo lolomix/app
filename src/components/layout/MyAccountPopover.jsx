@@ -1,11 +1,6 @@
 import { withTranslation } from "react-i18next";
 import Blockies from "react-blockies";
-import {
-  getChainById,
-  useEthers,
-  useLocalStorage,
-  useNetwork,
-} from "@usedapp/core";
+import { getChainById, useEthers, useLocalStorage } from "@usedapp/core";
 import {
   Avatar,
   Box,
