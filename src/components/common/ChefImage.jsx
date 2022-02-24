@@ -74,7 +74,7 @@ export default function ChefImage({
  * @returns {JSX.Element}
  * @constructor
  */
-export function ChefImageFromId({
+export function ChefImageById({
   tokenId,
   imgProps,
   sourceProps,
