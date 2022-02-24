@@ -62,7 +62,13 @@ function RecipeCreatorContainer() {
 
   return (
     <>
-      <Grid mb={4} mt={{xs: 6, sm: 0}} container justifyContent="center" alignItems="center">
+      <Grid
+        mb={4}
+        mt={{ xs: 6, md: -2 }}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
         <Grid item xs sm={10} md={8} textAlign="center">
           <Card>
             {/* Box used as CardContent adds an annoying padding  */}
@@ -90,7 +96,7 @@ function RecipeCreatorContainer() {
 function KitchenRecipeCreate() {
   return (
     <Layout helmetTitle="Kitchen - Create Recipe" buttonType="back">
-      <Container as="section">
+      <Container as="section" disableGutters>
         <RecipeCreatorProvider>
           <RecipeCreatorContainer />
         </RecipeCreatorProvider>

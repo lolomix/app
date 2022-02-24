@@ -79,15 +79,15 @@ const Tutorial = () => {
     <Layout helmetTitle="Tutorial" title="Tutorial" buttonType="back">
       <Box>
         <CustomContainer
-          mb={{ xs: 0, md: -18 }}
-          right={{ sm: "15vw", lg: 180 }}
+          mb={{ xs: 0, md: -21.5 }}
+          right={{ sm: "18.5vw", lg: 180 }}
         >
           <Button
             bg="yellowContained"
             href="https://discord.com/invite/JufpFYBdKG/"
             target="_blank"
             rel="nofollow noindex"
-            size="large"
+            size="xlarge"
           >
             Join Discord
           </Button>
@@ -96,12 +96,12 @@ const Tutorial = () => {
             href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
             target="_blank"
             rel="nofollow noindex"
-            size="large"
+            size="xlarge"
           >
             White Pepper
           </Button>
         </CustomContainer>
-        <Card sx={{ marginY: 5, maxWidth: "sm" }}>
+        <Card sx={{ marginY: 5, maxWidth: "500px" }}>
           <Stack p={2} textAlign="center">
             <Typography variant="h4" color="secondary">
               How to Get Started

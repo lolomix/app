@@ -58,15 +58,7 @@ const MarketAromaOffers = () => {
         alignItems="stretch"
       >
         {cardsContent.map((card) => (
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={6}
-            lg={3.8}
-            columns={16}
-            key={`card:${card.title}`}
-          >
+          <Grid item xs={12} sm={6} md={5} lg={2.8} key={`card:${card.title}`}>
             <Card fullHeight sx={{ padding: 2 }}>
               <Stack
                 sx={{

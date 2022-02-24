@@ -23,7 +23,7 @@ function NoNftNotificationContent({ fullHeight }) {
             alt="Chef Silhouettes"
             style={{ maxWidth: "182px" }}
           />
-          <Typography mt={2}>
+          <Typography mt={2} p={1}>
             It seems like you do not own any CHEFs. You can quickly buy a CHEF
             in the <Link to="/market">Market</Link> to start cooking up recipes!
           </Typography>
