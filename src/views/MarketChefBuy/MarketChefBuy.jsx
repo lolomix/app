@@ -43,24 +43,24 @@ const MarketChefBuy = () => {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <NftBuy remaining={remaining !== 0} />
         </Grid>
-<Grid item xs={12}>
-        <CustomBanner>
-          <Grid container justifyContent="center" alignItems="center" py={2}>
-            <Grid item xs={12} sm={5} md={12} order={{ xs: 2, md: 1 }}>
-              <Typography variant="h2" fontWeight={800}>
-                {remaining}
-              </Typography>
+        <Grid item xs={12}>
+          <CustomBanner>
+            <Grid container justifyContent="center" alignItems="center" py={2}>
+              <Grid item xs={12} sm={5} md={12} order={{ xs: 2, md: 1 }}>
+                <Typography variant="h2" fontWeight={800}>
+                  {remaining}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={2} md={12} order={{ xs: 1, md: 2 }}>
+                <Typography variant="h3" fontWeight={800}>
+                  Remaining
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={2} md={12} order={{ xs: 1, md: 2 }}>
-              <Typography variant="h3" fontWeight={800}>
-                Remaining
-              </Typography>
-            </Grid>
-          </Grid>
-          <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
-            Sold {soldFormatted}
-          </Typography>
-        </CustomBanner>
+            <Typography variant="h3" fontWeight={800} sx={{ opacity: "0.8" }}>
+              Sold {soldFormatted}
+            </Typography>
+          </CustomBanner>
         </Grid>
       </Grid>
     </Layout>
