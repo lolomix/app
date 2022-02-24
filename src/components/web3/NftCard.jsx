@@ -7,10 +7,9 @@ import {
   Button,
 } from "@mui/material";
 import { theme } from "../../utils/theme";
-import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
-import BuyChef from "../../assets/components/web3/nft-card/placeholder.png";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 import { useChefMetadata } from "../../hooks/chef/useChefMetadata";
+import ChefImage from "../common/ChefImage";
 
 /**
  * @param tokenAbi
@@ -42,7 +41,6 @@ function NftCard({
   const lore =
     nft?.metadata?.attributes?.find((attr) => attr.trait_type === "Lore")
       ?.value ?? "Unrevealed";
-  const image = nft?.metadata?.image ?? placeholder;
 
   return (
     <Card
@@ -65,46 +63,30 @@ function NftCard({
               padding: 1.5,
             }}
           >
+            <ChefImage
+              tokenId={tokenID}
+              sourceProps={
+                nft?.metadata?.image && { srcSet: nft.metadata.image }
+              }
+            />
             {firstCard ? (
-              <>
-                <picture>
-                  <source srcSet={BuyChef} />
-                  <img
-                    width="100%"
-                    height="auto"
-                    src={BuyChef}
-                    alt={"Buy CHEF"}
-                  />
-                </picture>
-                <Button
-                  bg="yellowContained"
-                  fullWidth
-                  size="xlarge"
-                  startIcon={<CurrencyAromaCartoonIcon />}
-                  disabled={!remaining}
-                  onClick={handleBuyDialog}
-                  loading={transactionInProgress.toString()}
-                >
-                  <Typography variant="h4">{price}</Typography>
-                </Button>
-              </>
+              <Button
+                bg="yellowContained"
+                fullWidth
+                size="xlarge"
+                startIcon={<CurrencyAromaCartoonIcon />}
+                disabled={!remaining}
+                onClick={handleBuyDialog}
+                loading={transactionInProgress.toString()}
+              >
+                <Typography variant="h4">{price}</Typography>
+              </Button>
             ) : (
-              <>
-                <picture>
-                  <source srcSet={image} />
-                  <img
-                    style={{ maxWidth: "100%" }}
-                    src={image}
-                    alt={"CHEF #" + tokenID + " image"}
-                    {...(lazyLoad && { loading: "lazy" })}
-                  />
-                </picture>
-                <Box backgroundColor="grey.200" borderRadius={1}>
-                  <Typography variant="h4" p={2} fontWeight="bold">
-                    CHEF #{tokenID}
-                  </Typography>
-                </Box>
-              </>
+              <Box backgroundColor="grey.200" borderRadius={1}>
+                <Typography variant="h4" p={2} fontWeight="bold">
+                  CHEF #{tokenID}
+                </Typography>
+              </Box>
             )}
           </Box>
         </Stack>
