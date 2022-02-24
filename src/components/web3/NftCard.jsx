@@ -6,11 +6,11 @@ import {
   Stack,
   Button,
 } from "@mui/material";
-import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
 import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/components/web3/nft-card/placeholder.png";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
+import { useChefMetadata } from "../../hooks/chef/useChefMetadata";
 
 /**
  * @param tokenAbi
@@ -38,7 +38,7 @@ function NftCard({
   price,
   variant = "elevation",
 }) {
-  const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenID);
+  const nft = useChefMetadata(tokenID);
   const lore =
     nft?.metadata?.attributes?.find((attr) => attr.trait_type === "Lore")
       ?.value ?? "Unrevealed";

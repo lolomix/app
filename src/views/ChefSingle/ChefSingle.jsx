@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import WhiteFlameIcon from "../../components/icons/WhiteFlameIcon";
 import { theme } from "../../utils/theme";
-import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
+import { useChefMetadata } from "../../hooks/chef/useChefMetadata";
 import Layout from "../../components/layout/Layout";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Link as RouterLink } from "react-router-dom";
@@ -27,7 +27,7 @@ function ChefSingle() {
   const { readOnlyChainId } = useConfig();
   const { active, error } = useEthers();
   const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
-  const nft = useNftWithMetadata(tokenAbi, tokenAddress, tokenId);
+  const nft = useChefMetadata(tokenId);
   const attributes = nft?.metadata?.attributes;
   const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;
 
