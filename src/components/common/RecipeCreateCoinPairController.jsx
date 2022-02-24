@@ -18,7 +18,7 @@ function RecipeCreateCoinPairController({ token }) {
 
   return (
     <Grid container spacing={1} alignItems="center">
-      <Grid item xs>
+      <Grid item xs minWidth="85px">
         <GradualStepperInputField
           setValue={(percentage) => {
             replaceToken(
