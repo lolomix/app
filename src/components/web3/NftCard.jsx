@@ -10,7 +10,6 @@ import { useNftWithMetadata } from "../../hooks/chef/useNftWithMetadata";
 import { theme } from "../../utils/theme";
 import placeholder from "../../assets/components/web3/nft-card/placeholder.png";
 import BuyChef from "../../assets/components/web3/nft-card/placeholder.png";
-import BuyChef2 from "../../assets/components/web3/nft-card/placeholder@x2.png";
 import CurrencyAromaCartoonIcon from "../../components/icons/CurrencyAromaCartoonIcon";
 
 /**
@@ -69,7 +68,7 @@ function NftCard({
             {firstCard ? (
               <>
                 <picture>
-                  <source srcSet={BuyChef, BuyChef2} />
+                  <source srcSet={BuyChef} />
                   <img
                     width="100%"
                     height="auto"
