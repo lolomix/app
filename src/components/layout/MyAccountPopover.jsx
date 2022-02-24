@@ -27,7 +27,6 @@ import IconButtonCopy from "../buttons/CopyIconButton";
 import AddTokenToWalletButton from "../web3/AddTokenToWalletButton";
 import { truncate } from "../../utils/formatters";
 import { useChainWatcher } from "../../contexts/chainWatcher/chainWatcherContext";
-import { useEffect } from "react";
 
 function MyAccountPopover(props) {
   const { chainId } = useEthers();
@@ -35,12 +34,7 @@ function MyAccountPopover(props) {
   const { t, tReady, closePopover, openProvidersPopover, anchorEl, ...rest } =
     props;
   const { account, deactivate } = useEthers();
-  const { network } = useNetwork();
   const { setOverrideTargetChain } = useChainWatcher();
-
-  useEffect(() => {
-    console.log(network);
-  }, [network]);
 
   // @todo should be done in useDapp itself
   const [, setShouldConnectMetamask] = useLocalStorage("shouldConnectMetamask");
