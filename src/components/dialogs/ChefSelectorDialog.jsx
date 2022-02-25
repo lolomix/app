@@ -53,7 +53,7 @@ function ChefSelectorDialog(props) {
                     px={2}
                     py={3}
                   >
-                    <ChefImageById tokenId={tokenID} />
+                    <ChefImageById tokenId={tokenID.toNumber()} />
                     <IconButton
                       size="xsmall"
                       variant="contained"
