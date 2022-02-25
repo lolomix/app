@@ -93,7 +93,7 @@ const Tutorial = () => {
           </Button>
           <Button
             bg="yellowContained"
-            href="https://cryptochefs.io/static/media/White_Pepper.69eb102b.pdf"
+            href="https://cryptochefs.io/static/media/White_Pepper.8246ef6a02d9e546b46b.pdf"
             target="_blank"
             rel="nofollow noindex"
             size="xlarge"
