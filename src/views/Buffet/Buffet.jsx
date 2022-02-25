@@ -269,11 +269,6 @@ function Buffet() {
                               >
                                 <ChefImageById
                                   tokenId={recipe.chefId}
-                                  imgProps={{
-                                    width: "100%",
-                                    height: "auto",
-                                    alt: "recipeChef",
-                                  }}
                                 />
                               </Box>
                             </Grid>
