@@ -3,6 +3,7 @@ import { Polygon, Rinkeby } from "@usedapp/core";
 export const APP_NAME = process.env.REACT_APP_APP_NAME;
 export const APP_VERSION = process.env.REACT_APP_VERSION;
 export const TARGET_CHAIN = process.env.REACT_APP_CHAIN;
+export const PRICE_FEED_API = process.env.REACT_APP_PRICE_FEED_API;
 export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 

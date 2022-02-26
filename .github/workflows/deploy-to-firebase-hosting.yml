@@ -47,6 +47,7 @@ jobs:
     env:
       REACT_APP_CHAIN: ${{ github.event_name == 'release' && 'polygon' || 'rinkeby' }}
       REACT_APP_DEBUG: ${{ github.event_name == 'release' && false || true }}
+      REACT_APP_PRICE_FEED_API: https://price-feed-api-prod-injwaqf3ua-oa.a.run.app/
       REACT_APP_INFURA_ID: ${{ secrets.REACT_APP_INFURA_ID }}
     steps:
       - name: Checkout repository
