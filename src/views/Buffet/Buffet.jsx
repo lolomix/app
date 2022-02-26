@@ -20,10 +20,10 @@ import Layout from "../../components/layout/Layout";
 import BuffetIcon from "../../components/icons/BuffetIcon";
 import ChessQueenIcon from "../../components/icons/ChessQueenIcon";
 import styled from "@emotion/styled";
-import Image1 from "../../assets/nfts/1.png";
 import { Link as RouterLink } from "react-router-dom";
 import { theme } from "../../utils/theme";
 import { useRecipesOfOwner } from "../../hooks/recipe/useRecipesOfOwner";
+import { ChefImageById } from "../../components/common/ChefImage";
 
 const MY_RECIPES_FILTER = "my-recipes";
 const ALL_RECIPES_FILTER = "all-recipes";
@@ -264,16 +264,11 @@ function Buffet() {
                                   minWidth: "75px",
                                   border: "2px solid #E8E8E8",
                                   borderRadius: `${theme.shape.borderRadius}px`,
-                                  paddingX: 2,
-                                  paddingY: 1,
+                                  paddingX: 0.5,
                                 }}
                               >
-                                {/* @todo replace chef images */}
-                                <img
-                                  src={Image1}
-                                  width="100%"
-                                  height="auto"
-                                  alt="recipeChef"
+                                <ChefImageById
+                                  tokenId={recipe.chefId}
                                 />
                               </Box>
                             </Grid>

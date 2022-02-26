@@ -12,11 +12,11 @@ import DialogTitleWithCloseButton from "./DialogTitleWithCloseButton";
 import { useChefIdsOfOwner } from "../../hooks/chef/useChefIdsOfOwner";
 import { Link as RouterLink } from "react-router-dom";
 import { theme } from "../../utils/theme";
-import ChefSilhouetteIcon from "../icons/ChefSilhouetteIcon";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useRecipeIdsOfChefs } from "../../hooks/recipe/useRecipeIdsOfChefs";
 import { useRecipeCreator } from "../../contexts/recipeCreator/recipeCreatorContext";
 import NoNftNotificationContent from "../common/NoNftNotificationContent";
+import { ChefImageById } from "../common/ChefImage";
 
 /**
  * @param props
@@ -53,7 +53,7 @@ function ChefSelectorDialog(props) {
                     px={2}
                     py={3}
                   >
-                    <ChefSilhouetteIcon sx={{ fontSize: "6rem" }} />
+                    <ChefImageById tokenId={tokenID.toNumber()} />
                     <IconButton
                       size="xsmall"
                       variant="contained"
