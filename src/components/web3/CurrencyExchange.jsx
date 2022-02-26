@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import { useConfig, useEthers } from '@usedapp/core'
+import { useConfig, useEthers } from "@usedapp/core";
 import { useSnackbar } from "notistack";
 import { LoadingButton } from "@mui/lab";
 import { KeyboardArrowDown, ShowChart } from "@mui/icons-material";
@@ -107,7 +107,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
     }
 
     await sendAromaBuy(currencyToAmount, {
-      value: currencyToAmount * parseUnits(price),
+      value: parseUnits(price)?.mul(currencyToAmount),
     });
   };
 
