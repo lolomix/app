@@ -1,14 +1,13 @@
 import { useQuery } from "react-query";
+import { PRICE_FEED_API } from "../../web3/constants";
 
 /**
  * @param symbol
  * @returns {Promise<any>}
- *
- * @todo abstract url from the hook
  */
 const getCoinPairOneDayChangeStatisticsBySymbol = async (symbol) => {
   const response = await fetch(
-    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/current/oneDayChangeStatistics?symbol=${symbol}`
+    `${PRICE_FEED_API}/binance/marketData/current/oneDayChangeStatistics?symbol=${symbol}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");

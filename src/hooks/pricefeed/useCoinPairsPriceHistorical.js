@@ -1,4 +1,5 @@
 import { useQueries } from "react-query";
+import { PRICE_FEED_API } from "../../web3/constants";
 
 /**
  * Format time as API only allows one type of datetime format (`13/02/2022 08:29`)
@@ -22,8 +23,6 @@ const formatDateTimesToAPISpecification = (dateTimes) => {
  * @param {string} endTime
  * @param {string} interval
  * @returns {Promise<any>}
- *
- * @todo abstract url from the hook
  */
 const getCoinPairPriceHistoricalBySymbol = async (
   symbol,
@@ -32,7 +31,7 @@ const getCoinPairPriceHistoricalBySymbol = async (
   interval
 ) => {
   const response = await fetch(
-    `https://price-feed-api-3-bmefzfc5ta-oa.a.run.app/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=${interval}`
+    `${PRICE_FEED_API}/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=${interval}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
