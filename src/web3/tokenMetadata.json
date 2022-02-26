@@ -139,7 +139,7 @@
     "address": "",
     "icon": "mkr"
   },
-  "MIOTA": {
+  "IOTA": {
     "name": "IOTA",
     "address": "",
     "icon": "iota"
@@ -163,11 +163,6 @@
     "name": "Cosmos",
     "address": "",
     "icon": "atom"
-  },
-  "HT": {
-    "name": "Huobi Token",
-    "address": "",
-    "icon": "ht"
   },
   "LUNA": {
     "name": "Terra",
