@@ -55,7 +55,7 @@ function RecipeCreateCoinPairPresenter({ coinPair }) {
               fontWeight="medium"
               color="text.secondary"
             >
-              {data?.lastPrice ? (
+              {data?.lastPrice !== undefined ? (
                 `${preferredQuoteSymbol}${formatCurrency(data.lastPrice)}`
               ) : (
                 <Skeleton width="80px" sx={{ display: "inline-block" }} />
@@ -87,7 +87,7 @@ function RecipeCreateCoinPairPresenter({ coinPair }) {
                   variant="caption"
                   fontWeight="medium"
                 >
-                  {oneWeekStatistics?.percentage ? (
+                  {oneWeekStatistics?.percentage !== undefined ? (
                     `${oneWeekStatistics?.percentage?.toFixed(2)}%`
                   ) : (
                     <Skeleton width="25px" />
