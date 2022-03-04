@@ -21,7 +21,7 @@ function RecipeSingle() {
   const { recipeId } = useParams();
   const { readOnlyChainId } = useConfig();
   const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
-  const recipeFormatted = useRecipeById(recipeId);
+  const recipe = useRecipeById(recipeId);
   // @todo refactor the name of the hook as it's ambiguous
   const availableCoinPairs = useRecipeCoinPairs();
 
@@ -37,7 +37,7 @@ function RecipeSingle() {
                 fontWeight={500}
                 mb={3}
               >
-                {recipeFormatted?.name}
+                {recipe?.name}
               </Typography>
               <Grid container spacing={4} justifyContent="center">
                 <Grid item xs={8} sm={6} md={5}>
@@ -45,7 +45,7 @@ function RecipeSingle() {
                     variant="outlined"
                     tokenAbi={tokenAbi}
                     tokenAddress={tokenAddress}
-                    tokenID={recipeFormatted?.chefId}
+                    tokenID={recipe?.chefId}
                   />
                 </Grid>
                 <Grid container item xs={12} sm={6} md={7} spacing={1}>
@@ -54,7 +54,7 @@ function RecipeSingle() {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6">
-                      {recipeFormatted?.date ?? <Skeleton />}
+                      {recipe?.date ?? <Skeleton />}
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
@@ -68,8 +68,8 @@ function RecipeSingle() {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6">
-                      {recipeFormatted?.stakedAroma ? (
-                        recipeFormatted.stakedAroma + " AROMA"
+                      {recipe?.stakedAroma !== undefined? (
+                        recipe.stakedAroma + " AROMA"
                       ) : (
                         <Skeleton />
                       )}
@@ -99,7 +99,7 @@ function RecipeSingle() {
                 The overall performance of your recipe
               </Typography>
               <RecipePerformanceChart
-                tokens={recipeFormatted?.coinPairs?.map((coinPair) => ({
+                tokens={recipe?.coinPairs?.map((coinPair) => ({
                   ...coinPair,
                   symbol: availableCoinPairs.find(
                     (availableCoinPair) => availableCoinPair.id === coinPair.id
@@ -110,8 +110,8 @@ function RecipeSingle() {
                 Selected Tokens
               </Typography>
               <Grid container spacing={3}>
-                {recipeFormatted?.coinPairs?.length > 0 ? (
-                  recipeFormatted?.coinPairs?.map((coinPair) => (
+                {recipe?.coinPairs?.length > 0 ? (
+                  recipe?.coinPairs?.map((coinPair) => (
                     <Grid
                       key={coinPair.id}
                       item
