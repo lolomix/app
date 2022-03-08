@@ -13,7 +13,9 @@ import { Link as RouterLink } from "react-router-dom";
 function Home() {
   return (
     <Layout helmetTitle="Home" buttonType="none">
-      <RecipeOnPlateIcon sx={{ fontSize: 290 }} />
+      <RecipeOnPlateIcon
+        sx={{ fontSize: 290, marginTop: { xs: 0, md: -15 } }}
+      />
       <Button
         elongatedwidth="30"
         size="massive"
@@ -52,9 +54,7 @@ function Home() {
               image={<MarketIcon sx={{ fontSize: "550%" }} />}
               title="Market"
               href="/market"
-            >
-              Market
-            </SquareButton>
+            />
           </Grid>
           <Grid item>
             <SquareButton
@@ -63,9 +63,7 @@ function Home() {
               image={<MyChefsIcon sx={{ fontSize: "55px" }} />}
               title="My Chefs"
               href="/my-chefs"
-            >
-              My Chefs
-            </SquareButton>
+            />
           </Grid>
         </Grid>
         <Grid
@@ -84,9 +82,7 @@ function Home() {
               image={<KitchenIcon sx={{ fontSize: "50px" }} />}
               title="Kitchen"
               href="/kitchen"
-            >
-              Kitchen
-            </SquareButton>
+            />
           </Grid>
           <Grid item>
             <SquareButton
@@ -95,9 +91,7 @@ function Home() {
               image={<BuffetIcon sx={{ fontSize: "550%" }} />}
               title="Buffet"
               href="/buffet"
-            >
-              Buffet
-            </SquareButton>
+            />
           </Grid>
         </Grid>
       </Grid>
