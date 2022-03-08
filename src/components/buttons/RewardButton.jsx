@@ -24,6 +24,7 @@ const RewardButton = () => {
           container
           item
           justifyContent="space-between"
+          alignItems="center"
           width={{ xs: "100%", md: "130px" }}
           sx={{
             backgroundColor: "rgba(0, 0, 0, 0.11)",
