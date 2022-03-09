@@ -40,7 +40,7 @@ function Home() {
         <Grid
           container
           item
-          xs={6}
+          xs={5.8}
           textAlign="left"
           alignItems="flex-end"
           spacing={1}
@@ -71,7 +71,7 @@ function Home() {
         <Grid
           container
           item
-          xs={6}
+          xs={5.8}
           textAlign="right"
           justifyContent="flex-end"
           alignItems="flex-end"
