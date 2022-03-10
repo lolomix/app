@@ -56,6 +56,7 @@ const SquareButton = (props) => {
       component={RouterLink}
       color={props.color}
       size={props.size}
+      onClick={props.onClick}
     >
       <Stack>
         {image}
