@@ -73,10 +73,7 @@ const RewardButton = () => {
             ) : (
               <>
                 <Typography variant="h6" pt={1}>
-                  Next Reward
-                </Typography>
-                <Typography variant="h5">
-                  {hoursLeft}H {minutesLeft}Min
+                  No rewards to collect
                 </Typography>
               </>
             )}
