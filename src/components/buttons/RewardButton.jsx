@@ -8,13 +8,9 @@ const RewardButton = () => {
   /*hard coded info - to be replaced */
 
   const [reward, setReward] = useState(200);
-  const [hoursLeft, setHoursLeft] = useState(0);
-  const [minutesLeft, setMinutesLeft] = useState(0);
 
   const handleClick = () => {
     setReward(0);
-    setHoursLeft(23);
-    setMinutesLeft(59);
   };
 
   return (
@@ -39,7 +35,7 @@ const RewardButton = () => {
               image={
                 <img
                   src={
-                    reward > 0 && hoursLeft === 0 && minutesLeft === 0
+                    reward > 0 
                       ? ChestOpen
                       : ChestClose
                   }
@@ -49,7 +45,7 @@ const RewardButton = () => {
                 />
               }
               title={
-                reward > 0 && hoursLeft === 0 && minutesLeft === 0
+                reward > 0 
                   ? "Collect"
                   : "Collected"
               }
@@ -63,7 +59,7 @@ const RewardButton = () => {
             md={12}
             textAlign={{ xs: "left", md: "center" }}
           >
-            {hoursLeft === 0 && minutesLeft === 0 ? (
+            {reward > 0 ? (
               <>
                 <Typography variant="h6" pt={1}>
                   Total Reward
