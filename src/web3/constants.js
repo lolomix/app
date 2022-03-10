@@ -36,6 +36,7 @@ export const NETWORKS = {
     chainId: 4,
     chainIdHex: "0x4",
     rpcUrls: [`https://rinkeby.infura.io/v3/${INFURA_ID}`],
+    rewardsApi: process.env.REACT_APP_REWARDS_API_RINKEBY,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorerUrls: ["https://rinkeby.etherscan.io/"],
     nativeCurrency: {
@@ -55,6 +56,7 @@ export const NETWORKS = {
     chainId: 4,
     chainIdHex: "0x4",
     rpcUrls: [`https://rinkeby.infura.io/v3/${INFURA_ID}`],
+    rewardsApi: process.env.REACT_APP_REWARDS_API_RINKEBY,
     faucet: "https://faucet.rinkeby.io/",
     blockExplorerUrls: ["https://rinkeby.etherscan.io/"],
     nativeCurrency: {
@@ -73,6 +75,7 @@ export const NETWORKS = {
     chainId: 137,
     chainIdHex: "0x89",
     rpcUrls: ["https://polygon-rpc.com/"],
+    rewardsApi: process.env.REACT_APP_REWARDS_API,
     faucet: "https://faucet.matic.network/",
     blockExplorerUrls: ["https://polygonscan.com"],
     nativeCurrency: {
@@ -92,6 +95,7 @@ export const NETWORKS = {
     chainId: 137,
     chainIdHex: "0x89",
     rpcUrls: ["https://polygon-rpc.com/"],
+    rewardsApi: process.env.REACT_APP_REWARDS_API,
     faucet: "https://faucet.matic.network/",
     blockExplorerUrls: ["https://polygonscan.com"],
     nativeCurrency: {
