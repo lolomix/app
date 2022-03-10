@@ -32,7 +32,7 @@ import {
   usePromiseTransactionSnackbarManager,
 } from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
 import { useAromaAllowance } from "../../hooks/aroma/useAromaAllowance";
-import { useConfig } from '@usedapp/core'
+import { useConfig } from "@usedapp/core";
 
 /**
  * @returns {JSX.Element|null}
@@ -45,7 +45,7 @@ function RecipeCreateCookStep() {
     { tokens, chefId, name, stake },
     { setChefId, setName, setStake, confirmRecipeCorrectness, nextStep },
   ] = useRecipeCreator();
-  const [, bnAllowance] = useAromaAllowance();
+  const { hasAllowance } = useAromaAllowance();
 
   const chefSelectorDialogState = useDialogState({
     dialogId: "chefSelectorDialog",
@@ -83,7 +83,10 @@ function RecipeCreateCookStep() {
    * Handles AROMA Approval blockchain transaction
    */
   const handleApprove = async () => {
-    await sendAromaApproval(spenderAddress, parseUnits(stake.toString()));
+    await sendAromaApproval(
+      spenderAddress,
+      parseUnits(Number.MAX_SAFE_INTEGER.toString())
+    );
   };
 
   /**
@@ -112,15 +115,6 @@ function RecipeCreateCookStep() {
     aromaApprovalPendingSignature ||
     recipeCreateTransactionInProgress ||
     recipeCreatePendingSignature;
-
-  /**
-   * @returns {boolean|undefined}
-   */
-  const haveAllowance = () => {
-    if (stake === "") return;
-    const bnStake = parseUnits(parseFloat(stake).toString());
-    return bnStake && bnAllowance?.gte(bnStake);
-  };
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -200,7 +194,7 @@ function RecipeCreateCookStep() {
               </Typography>
             </Stack>
           </CardContent>
-          {haveAllowance() === false && (
+          {hasAllowance(stake) === false && (
             <CardContent>
               <Alert
                 severity="error"
@@ -208,28 +202,29 @@ function RecipeCreateCookStep() {
                   justifyContent: "center",
                 }}
               >
-                Please approve exactly or more than the staked AROMA.
+                Please approve the spend of AROMA.
               </Alert>
             </CardContent>
           )}
           <CardActions>
-            <LoadingButton
-              fullWidth
-              bg="yellowContained"
-              size="large"
-              loading={transactionInProgress()}
-              onClick={handleApprove}
-              disabled={stake === ""}
-            >
-              Approve AROMA
-            </LoadingButton>
+            {hasAllowance(stake) === false && (
+              <LoadingButton
+                fullWidth
+                bg="yellowContained"
+                size="large"
+                loading={transactionInProgress()}
+                onClick={handleApprove}
+              >
+                Approve AROMA
+              </LoadingButton>
+            )}
             <LoadingButton
               fullWidth
               bg="yellowContained"
               size="large"
               loading={transactionInProgress()}
               onClick={handleCreate}
-              disabled={!haveAllowance()}
+              disabled={!hasAllowance(stake)}
             >
               Cook
             </LoadingButton>
