@@ -12,7 +12,7 @@ export const DAPPCONFIG = {
     TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId,
   readOnlyUrls: {
     [Rinkeby.chainId]: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
-    [Polygon.chainId]: "https://polygon-rpc.com/",
+    [Polygon.chainId]: `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`,
   },
   networks: [Polygon, Rinkeby],
   multicallVersion: 2,
