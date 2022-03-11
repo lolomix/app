@@ -9,6 +9,7 @@ import NavigationButton from "./NavigationButton";
 import NavigationMenuButton from "./NavigationMainMenuButton";
 import NavigationAromaBalance from "./NavigationAromaBalance";
 import { Home } from "@mui/icons-material";
+import RewardButton from "../buttons/RewardButton";
 
 /**
  * @param t
@@ -73,6 +74,7 @@ function Navigation({ t }) {
               </Grid>
             </Grid>
           </Grid>
+          <RewardButton />
         </Grid>
       </Toolbar>
     </AppBar>

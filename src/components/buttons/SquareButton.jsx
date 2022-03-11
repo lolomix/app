@@ -37,6 +37,9 @@ const StyledButton = styled(Button, {
     color: theme.palette.common.white,
     border: "3px solid #0000002B",
     boxShadow: "inset 0px 3px 13px #FFFFFF3B",
+    "&:hover": {
+      backgroundColor:"#00000080 !important",
+    },
   }),
   textAlign: "center",
   borderTop: "none",
@@ -49,10 +52,11 @@ const SquareButton = (props) => {
   return (
     <StyledButton
       variant="contained"
-      to={props.href}
+      to={props.href && props.href}
       component={RouterLink}
       color={props.color}
       size={props.size}
+      onClick={props.onClick}
     >
       <Stack>
         {image}
