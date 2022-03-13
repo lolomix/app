@@ -47,6 +47,7 @@ jobs:
     env:
       REACT_APP_CHAIN: ${{ github.event_name == 'release' && 'polygon' || 'rinkeby' }}
       REACT_APP_DEBUG: ${{ github.event_name == 'release' && false || true }}
+      REACT_APP_IPFS_GATEWAY: https://cryptochefs.mypinata.cloud
       REACT_APP_PRICE_FEED_API: https://price-feed-api-prod-injwaqf3ua-oa.a.run.app
       REACT_APP_REWARDS_API_RINKEBY: https://rewards-server-myqn2ikvva-oa.a.run.app
       REACT_APP_REWARDS_API: https://rewards-server-myqn2ikvva-oa.a.run.app
