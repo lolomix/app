@@ -12,7 +12,7 @@ import RecipeCreateCoinPairPresenter from "../../components/common/RecipeCreateC
 import GradualStepperInputField from "../../components/form/GradualStepperInputField";
 import Layout from "../../components/layout/Layout";
 import { useConfig } from "@usedapp/core";
-import useRecipePerformanceAll from "../../hooks/recipe/useRecipeBlockchainAll";
+import useRecipePerformanceAll from "../../hooks/backend/recipe/useRecipePerformanceAll";
 import { useEffect, useState } from "react";
 
 /**
@@ -30,10 +30,11 @@ function RecipeSingle() {
   useEffect(() => {
     setWeeklyPerformance(
       allRecipesPerformance?.find(
-        (findRecipe) => findRecipe.recipeId === recipe.id
+        (findRecipe) => findRecipe.recipeId === recipeId
       )?.overallPerformancePriceChangePercent
     );
-  }, [JSON.stringify(allRecipesPerformance)]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(allRecipesPerformance), recipeId]);
 
   // @todo refactor the name of the hook as it's ambiguous
   const availableCoinPairs = useRecipeCoinPairs();
@@ -98,8 +99,19 @@ function RecipeSingle() {
                     <Typography variant="h5">Weekly</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h6">
-                      {weeklyPerformance?.toFixed(2) ?? "Coming Soon"}
+                    <Typography
+                      variant="h6"
+                      color={
+                        !weeklyPerformance
+                          ? undefined
+                          : weeklyPerformance <= 0
+                          ? "error.main"
+                          : "success.main"
+                      }
+                    >
+                      {weeklyPerformance
+                        ? weeklyPerformance?.toFixed(2) + "%"
+                        : "Coming Soon"}
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
