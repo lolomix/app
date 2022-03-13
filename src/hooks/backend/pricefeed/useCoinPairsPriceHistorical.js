@@ -1,5 +1,5 @@
 import { useQueries } from "react-query";
-import { PRICE_FEED_API } from "../../web3/constants";
+import { PRICE_FEED_API } from "../../../web3/constants";
 
 /**
  * Format time as API only allows one type of datetime format (`13/02/2022 08:29`)
