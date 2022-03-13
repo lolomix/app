@@ -1,7 +1,7 @@
-import { getLastSundayAt } from "../../utils/helpers";
+import { getLastSundayAt } from "../../../utils/helpers";
 import { subWeeks } from "date-fns";
 import useCoinPairPriceHistorical from "./useCoinPairPriceHistorical";
-import { getRelativePercentageDifferenceBetween } from "../../utils/calculators";
+import { getRelativePercentageDifferenceBetween } from "../../../utils/calculators";
 
 /**
  * @param symbol

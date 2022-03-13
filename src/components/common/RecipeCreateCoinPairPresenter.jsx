@@ -2,9 +2,9 @@ import { Grid, Paper, Skeleton, Stack, Typography } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { coinPairImplode } from "../../utils/helpers";
 import { formatCurrency } from "../../utils/formatters";
-import useCoinPairOneDayChangeStatistics from "../../hooks/pricefeed/useCoinPairOneDayChangeStatistics";
+import useCoinPairOneDayChangeStatistics from "../../hooks/backend/pricefeed/useCoinPairOneDayChangeStatistics";
 import Icon from "react-crypto-icons";
-import useCoinPairWeekDayChangeStatistics from "../../hooks/pricefeed/useCoinPairOneWeekChangeStatistics";
+import useCoinPairWeekDayChangeStatistics from "../../hooks/backend/pricefeed/useCoinPairOneWeekChangeStatistics";
 
 /**
  * @param {object} coinPair

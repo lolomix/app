@@ -1,6 +1,6 @@
 import { createChart } from "lightweight-charts";
 import { useEffect, useRef, useState } from "react";
-import useCoinPairsPriceHistorical from "../../hooks/pricefeed/useCoinPairsPriceHistorical";
+import useCoinPairsPriceHistorical from "../../hooks/backend/pricefeed/useCoinPairsPriceHistorical";
 import { coinPairImplode, getLastSundayAt } from "../../utils/helpers";
 import {
   calculateAggregatedPerformanceOfCoinPairs,
