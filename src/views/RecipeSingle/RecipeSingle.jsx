@@ -11,7 +11,9 @@ import RecipePerformanceChart from "../../components/charts/RecipePerformanceCha
 import RecipeCreateCoinPairPresenter from "../../components/common/RecipeCreateCoinPairPresenter";
 import GradualStepperInputField from "../../components/form/GradualStepperInputField";
 import Layout from "../../components/layout/Layout";
-import { useConfig } from '@usedapp/core'
+import { useConfig } from "@usedapp/core";
+import useRecipePerformanceAll from "../../hooks/backend/recipe/useRecipePerformanceAll";
+import { useEffect, useState } from "react";
 
 /**
  * @returns {JSX.Element}
@@ -22,6 +24,18 @@ function RecipeSingle() {
   const { readOnlyChainId } = useConfig();
   const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const recipe = useRecipeById(recipeId);
+  const { data: allRecipesPerformance } = useRecipePerformanceAll();
+  const [weeklyPerformance, setWeeklyPerformance] = useState();
+
+  useEffect(() => {
+    setWeeklyPerformance(
+      allRecipesPerformance?.find(
+        (findRecipe) => findRecipe.recipeId === recipeId
+      )?.overallPerformancePriceChangePercent
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(allRecipesPerformance), recipeId]);
+
   // @todo refactor the name of the hook as it's ambiguous
   const availableCoinPairs = useRecipeCoinPairs();
 
@@ -68,7 +82,7 @@ function RecipeSingle() {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6">
-                      {recipe?.stakedAroma !== undefined? (
+                      {recipe?.stakedAroma !== undefined ? (
                         recipe.stakedAroma + " AROMA"
                       ) : (
                         <Skeleton />
@@ -85,7 +99,20 @@ function RecipeSingle() {
                     <Typography variant="h5">Weekly</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h6">Coming Soon</Typography>
+                    <Typography
+                      variant="h6"
+                      color={
+                        !weeklyPerformance
+                          ? undefined
+                          : weeklyPerformance <= 0
+                          ? "error.main"
+                          : "success.main"
+                      }
+                    >
+                      {weeklyPerformance
+                        ? weeklyPerformance?.toFixed(2) + "%"
+                        : "Coming Soon"}
+                    </Typography>
                   </Grid>
                   <Grid item xs={5}>
                     <Typography variant="h5">Monthly</Typography>

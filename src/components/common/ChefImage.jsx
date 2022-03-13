@@ -6,12 +6,14 @@ import placeholder3000 from "../../assets/components/common/chef-image/placehold
 import { useChefMetadata } from "../../hooks/chef/useChefMetadata";
 import { theme } from "../../utils/theme";
 import { useState } from "react";
+import { Box } from "@mui/material";
 
 /**
  * @param {int|undefined} tokenId
  * @param {object|undefined} imgProps
  * @param {object|undefined} sourceProps
  * @param {object|undefined} pictureProps
+ * @param {object|undefined} wrapperProps
  * @returns {JSX.Element}
  * @constructor
  *
@@ -22,6 +24,7 @@ export default function ChefImage({
   imgProps,
   sourceProps,
   pictureProps,
+  wrapperProps
 }) {
   const [error, setError] = useState(false);
 
@@ -46,23 +49,27 @@ export default function ChefImage({
   ];
 
   return (
-    <picture {...pictureProps}>
-      {!error && sourceProps && <source {...sourceProps} />}
-      {/* @todo: add loading="lazy" for images below the fold? how to identify those images? */}
-      <img
-        style={{
-          maxInlineSize: "100%",
-          blockSize: "auto",
-        }}
-        srcSet={defaultSrcSet.join(",")}
-        sizes={defaultSizes.join(",")}
-        alt={
-          tokenId ? `CHEF NFT #${tokenId} image` : "CHEF NFT placeholder image"
-        }
-        onError={() => setError(true)}
-        {...imgProps}
-      />
-    </picture>
+    <Box {...wrapperProps}>
+      <picture {...pictureProps}>
+        {!error && sourceProps && <source {...sourceProps} />}
+        {/* @todo: add loading="lazy" for images below the fold? how to identify those images? */}
+        <img
+          style={{
+            maxInlineSize: "100%",
+            blockSize: "auto",
+          }}
+          srcSet={defaultSrcSet.join(",")}
+          sizes={defaultSizes.join(",")}
+          alt={
+            tokenId
+              ? `CHEF NFT #${tokenId} image`
+              : "CHEF NFT placeholder image"
+          }
+          onError={() => setError(true)}
+          {...imgProps}
+        />
+      </picture>
+    </Box>
   );
 }
 
@@ -71,6 +78,7 @@ export default function ChefImage({
  * @param {object|undefined} imgProps
  * @param {object|undefined} sourceProps
  * @param {object|undefined} pictureProps
+ * @param {object|undefined} wrapperProps
  * @returns {JSX.Element}
  * @constructor
  */
@@ -79,6 +87,7 @@ export function ChefImageById({
   imgProps,
   sourceProps,
   pictureProps,
+  wrapperProps
 }) {
   const { metadata } = useChefMetadata(tokenId);
   return (
@@ -90,6 +99,7 @@ export function ChefImageById({
         ...(metadata?.image && { srcSet: metadata.image }),
       }}
       pictureProps={pictureProps}
+      wrapperProps={wrapperProps}
     />
   );
 }
