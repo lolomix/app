@@ -22,6 +22,7 @@ function RewardButton() {
     useRewardCollectAccumulated();
 
   useEffect(() => {
+    if (!account) return;
     if (rewardCollectionIsLoading) {
       enqueueSnackbar("Transaction in progress", {
         key: TRANSACTION_IN_PROGRESS_KEY,
@@ -38,6 +39,7 @@ function RewardButton() {
     enqueueSnackbar,
     closeSnackbar,
     refetchReward,
+    account,
   ]);
 
   const handleClick = () => {
