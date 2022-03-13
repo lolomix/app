@@ -301,6 +301,7 @@ function Buffet() {
                             <Box
                               position="relative"
                               width="85px"
+                              height="85px"
                               border={`2px solid ${theme.palette.grey.A200}`}
                               borderRadius={`${theme.shape.borderRadius}px`}
                             >
