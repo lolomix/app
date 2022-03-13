@@ -1,21 +1,53 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import SquareButton from "../buttons/SquareButton";
 import ChestOpen from "../../assets/chest-open.png";
 import ChestClose from "../../assets/chest-close.png";
+import useRewardAccumulated from "../../hooks/backend/reward/useRewardAccumulated";
+import { useEthers } from "@usedapp/core";
+import useRewardCollectAccumulated from "../../hooks/backend/reward/useRewardCollectAccumulated";
+import { TRANSACTION_IN_PROGRESS_KEY } from "../../hooks/snackbar/usePromiseTransactionSnackbarManager";
+import SnackbarAction from "../snackbars/SnackbarAction";
+import { useSnackbar } from "notistack";
 
-const RewardButton = () => {
-  /*hard coded info - to be replaced */
+function RewardButton() {
+  const { account } = useEthers();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const {
+    reward,
+    hasReward,
+    refetch: refetchReward,
+  } = useRewardAccumulated(account);
+  const { mutate: sendRewardCollection, isLoading: rewardCollectionIsLoading } =
+    useRewardCollectAccumulated();
 
-  const [reward, setReward] = useState(200);
+  useEffect(() => {
+    if (rewardCollectionIsLoading) {
+      enqueueSnackbar("Transaction in progress", {
+        key: TRANSACTION_IN_PROGRESS_KEY,
+        variant: "warning",
+        persist: true,
+        action: <SnackbarAction />,
+      });
+    } else {
+      closeSnackbar(TRANSACTION_IN_PROGRESS_KEY);
+      refetchReward();
+    }
+  }, [
+    rewardCollectionIsLoading,
+    enqueueSnackbar,
+    closeSnackbar,
+    refetchReward,
+  ]);
 
   const handleClick = () => {
-    setReward(0);
+    if (!hasReward()) return;
+    sendRewardCollection(account);
   };
 
   return (
     <Grid container item xs={12} mt={3} justifyContent="flex-end">
-      {window.location.pathname === "/" && (
+      {window.location.pathname === "/" && account && (
         <Grid
           container
           item
@@ -34,21 +66,13 @@ const RewardButton = () => {
               color="dark"
               image={
                 <img
-                  src={
-                    reward > 0 
-                      ? ChestOpen
-                      : ChestClose
-                  }
+                  src={hasReward() ? ChestOpen : ChestClose}
                   width="fit-content"
                   height="fit-content"
                   alt="reward-chest"
                 />
               }
-              title={
-                reward > 0 
-                  ? "Collect"
-                  : "Collected"
-              }
+              title={hasReward() ? "Collect" : ""}
               href=""
               onClick={handleClick}
             />
@@ -59,24 +83,17 @@ const RewardButton = () => {
             md={12}
             textAlign={{ xs: "left", md: "center" }}
           >
-            {reward > 0 ? (
-              <>
-                <Typography variant="h6" pt={1}>
-                  Total Reward
-                </Typography>
-                <Typography variant="h5">{reward} AROMA</Typography>
-              </>
-            ) : (
-              <>
-                <Typography variant="h6" pt={1}>
-                  No rewards to collect
-                </Typography>
-              </>
+            <Typography variant="h6" pt={1}>
+              {hasReward() ? "Reward" : "No Reward"}
+            </Typography>
+            {hasReward() && (
+              <Typography variant="h5">{reward?.toFixed(2)} AROMA</Typography>
             )}
           </Grid>
         </Grid>
       )}
     </Grid>
   );
-};
+}
+
 export default RewardButton;
