@@ -333,6 +333,7 @@ function Buffet() {
                             primary={recipe.name || recipe.recipeName}
                             primaryTypographyProps={{ fontWeight: "bold" }}
                             secondary={recipe?.coinPairs
+                              ?.filter((cp) => cp?.symbol)
                               ?.map((cp) => coinPairExplode(cp.symbol)?.[0])
                               ?.join(", ")}
                           />
