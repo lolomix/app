@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { NETWORKS } from "../../web3/constants";
+import { NETWORKS } from "../../../web3/constants";
 import { useConfig } from "@usedapp/core";
 
 /**
