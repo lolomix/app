@@ -35,7 +35,7 @@ const ALL_RECIPES_FILTER = "all-recipes";
 // Date from Sunday to Sunday
 
 function getParticularDayTimestamp(lastWeekDay) {
-  var currentWeekMonday = new Date().getDate() - new Date().getDay() + 1;
+  let currentWeekMonday = new Date().getDate() - new Date().getDay() + 1;
   return new Date().setDate(currentWeekMonday - lastWeekDay);
 }
 
