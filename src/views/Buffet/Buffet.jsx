@@ -39,7 +39,7 @@ let lastWeekMonth = new Date(
   today.getMonth() + 1,
   0
 ).toLocaleString("default", { month: "short" });
-let lastWeekDay = today.getDate() - today.getDay();
+let lastWeekDay = today.getDate() - today.getDay() - 7;
 let nextWeekDay = lastWeekDay + 7;
 let nextWeekMonth = today.toLocaleString("default", { month: "short" });
 
