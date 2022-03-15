@@ -9,13 +9,13 @@ import BuffetIcon from "../../components/icons/BuffetIcon";
 import MyChefsIcon from "../../components/icons/MyChefsIcon";
 import Layout from "../../components/layout/Layout";
 import { Link as RouterLink } from "react-router-dom";
+import RewardButton from "../../components/buttons/RewardButton";
 
 function Home() {
   return (
     <Layout helmetTitle="Home" buttonType="none">
-      <RecipeOnPlateIcon
-        sx={{ fontSize: 290, marginTop: { xs: 0, md: -15 } }}
-      />
+      <RewardButton />
+      <RecipeOnPlateIcon sx={{ fontSize: 290 }} />
       <Button
         elongatedwidth="30"
         size="massive"
