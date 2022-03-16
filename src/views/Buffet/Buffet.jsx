@@ -33,15 +33,22 @@ const MY_RECIPES_FILTER = "my-recipes";
 const ALL_RECIPES_FILTER = "all-recipes";
 
 // Date from Sunday to Sunday
-let today = new Date();
-let lastWeekMonth = new Date(
-  today.getFullYear(),
-  today.getMonth() + 1,
-  0
-).toLocaleString("default", { month: "short" });
-let lastWeekDay = today.getDate() - today.getDay();
-let nextWeekDay = lastWeekDay + 7;
-let nextWeekMonth = today.toLocaleString("default", { month: "short" });
+
+function getParticularDayTimestamp(lastWeekDay) {
+  let currentWeekMonday = new Date().getDate() - new Date().getDay() + 1;
+  return new Date().setDate(currentWeekMonday - lastWeekDay);
+}
+
+let currentSunday = new Date(getParticularDayTimestamp(1));
+let lastSunday = new Date(getParticularDayTimestamp(8));
+
+let currentSundayDay = currentSunday.getDate() - currentSunday.getDay();
+let currentSundayMonth = currentSunday.toLocaleString("default", {
+  month: "short",
+});
+
+let lastSundayDay = lastSunday.getDate() - lastSunday.getDay();
+let lastSundayMonth = lastSunday.toLocaleString("default", { month: "short" });
 
 export const CustomContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "color" && prop !== "size",
@@ -254,7 +261,7 @@ function Buffet() {
               </CardActions>
               <CardContent>
                 <Typography variant="h5" color="grey.500">
-                  {`${lastWeekDay} ${lastWeekMonth} - ${nextWeekDay} ${nextWeekMonth}`}
+                  {`${lastSundayDay} ${lastSundayMonth} - ${currentSundayDay} ${currentSundayMonth}`}
                 </Typography>
                 {(!recipesToShow || recipesToShow?.length === 0) && (
                   <Box my={10}>
