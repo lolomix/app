@@ -48,7 +48,14 @@ function RewardButton() {
   };
 
   return (
-    <Grid container item xs={12} mt={3} justifyContent="flex-end">
+    <Grid
+      container
+      item
+      xs={12}
+      mt={-5}
+      mb={account && { md: -15 }}
+      justifyContent="flex-end"
+    >
       {window.location.pathname === "/" && account && (
         <Grid
           container

@@ -26,18 +26,16 @@ export const StyledButton = styled(ButtonUnstyled)(({ type, theme }) => ({
   borderRadius: "9px",
   cursor: "pointer",
   "&:hover": {
-    transform: "scale(1.05)"
+    transform: "scale(1.05)",
   },
 }));
 
 function ViewHeading({ buttonType, title, icon, subTitle }) {
   const navigate = useNavigate();
 
-  if (buttonType === "none") return null;
-
   return (
     <Grid container justifyContent="center" zIndex="999" ml={0.5}>
-      <Grid item sx={{position: "relative", left: "-44%", top: 35}}>
+      <Grid item sx={{ position: "relative", left: "-44%", top: 35 }}>
         <Tooltip title="Back">
           <StyledButton
             bg="yellowContained"

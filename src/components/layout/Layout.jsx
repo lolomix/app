@@ -35,7 +35,7 @@ const Layout = ({
         <Helmet>
           <title>{helmetTitle}</title>
         </Helmet>
-        <Container maxWidth={"xl"} disableGutters mt={2}>
+        <Container maxWidth="xl" disableGutters mt={2}>
           <Navigation />
           <ViewHeading
             title={title}
