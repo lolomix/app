@@ -155,7 +155,7 @@ function ChefSingle() {
                     </Grid>
                   </Grid>
                   <Divider sx={{ marginY: 3.5 }} light />
-                  <Grid container item rowSpacing={5}>
+                  <Grid container item rowSpacing={3}>
                     {lore ? (
                       attributes?.map(
                         (attr, index) =>
