@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="215" height="216" viewBox="0 0 215 216">
+  <defs>
+    <filter id="Rectangle_920" x="0" y="0" width="215" height="216" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#8be7fe" flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_10989" data-name="Group 10989" transform="translate(8948 -10625)">
+    <g transform="matrix(1, 0, 0, 1, -8948, 10625)" filter="url(#Rectangle_920)">
+      <rect id="Rectangle_920-2" data-name="Rectangle 920" width="177" height="178" rx="6" transform="translate(19 17)" fill="#fff" stroke="#8be7fe" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+    </g>
+    <g id="Rectangle_901" data-name="Rectangle 901" transform="translate(-8929 10642)" fill="#dcf8fe" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+      <rect width="177" height="178" rx="6" stroke="none"/>
+      <rect x="1.5" y="1.5" width="174" height="175" rx="4.5" fill="none"/>
+    </g>
+    <g id="Utensil" transform="matrix(0.809, 0.588, -0.588, 0.809, 4536.18, 7368.777)" style="mix-blend-mode: luminosity;isolation: isolate">
+      <path id="Path_28106" data-name="Path 28106" d="M200.765,2609.32h0a2.4,2.4,0,0,1-2.14,2.567l-62.076.389c-1.173-.009-76.1-1.532-76.068-2.982l.09-4.727c.028-1.448,74.562-.412,75.733-.378l62.417,2.484a2.4,2.4,0,0,1,2.044,2.647Z" transform="translate(-8977.999 7970.163)" fill="#b58d68" stroke="#000" stroke-miterlimit="10" stroke-width="1.214"/>
+      <path id="Path_28107" data-name="Path 28107" d="M1380.02,2482.73l107.67,2.06-.02,1.18-62.52.31-45.45-1.47Z" transform="translate(-10266.43 8096.209)" fill="#7f5b3d"/>
+      <path id="Path_28108" data-name="Path 28108" d="M200.765,2609.32h0a2.4,2.4,0,0,1-2.14,2.567l-62.076.389c-1.173-.009-76.1-1.532-76.068-2.982l.09-4.727c.028-1.448,74.562-.412,75.733-.378l62.417,2.484a2.4,2.4,0,0,1,2.044,2.647Z" transform="translate(-8977.999 7970.163)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.214"/>
+      <path id="Path_28109" data-name="Path 28109" d="M1380.58,2478.6l.04,5.62-29.08-.64.18-4.91Z" transform="translate(-10266.43 8096.209)" fill="#7f5b3d"/>
+      <path id="Path_28110" data-name="Path 28110" d="M84.065,2601.75c3.945,3.977,3.247,7.513-.73,11.458s-14.571,3.294-18.516-.683-4.613-7.67-.635-11.615S80.12,2597.77,84.065,2601.75Z" transform="translate(-8977.999 7970.163)" fill="#bc6722" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <rect id="Rectangle_891" data-name="Rectangle 891" width="20.459" height="3.989" rx="1.994" transform="translate(-8918.029 10587.247) rotate(-88.904)" fill="#f4af40" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <rect id="Rectangle_892" data-name="Rectangle 892" width="24.464" height="3.989" rx="1.994" transform="translate(-8912.086 10589.282) rotate(-88.904)" fill="#f4af40" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <rect id="Rectangle_893" data-name="Rectangle 893" width="27.794" height="3.989" rx="1.994" transform="translate(-8906.125 10590.939) rotate(-88.904)" fill="#f4af40" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <rect id="Rectangle_894" data-name="Rectangle 894" width="24.464" height="3.989" rx="1.994" transform="translate(-8900.111 10589.267) rotate(-88.904)" fill="#f4af40" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <rect id="Rectangle_895" data-name="Rectangle 895" width="20.459" height="3.989" rx="1.994" transform="translate(-8894.091 10587.297) rotate(-88.904)" fill="#f4af40" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <circle id="Ellipse_480" data-name="Ellipse 480" cx="6.205" cy="6.205" r="6.205" transform="translate(-8780.625 10573.264)" fill="#b58d68" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+      <path id="Path_28111" data-name="Path 28111" d="M197.355,2610.22s6.131,11.643,12.564-.2C209.919,2610.02,205.213,2616.58,197.355,2610.22Z" transform="translate(-8977.999 7970.163)" fill="#7f5b3d"/>
+      <circle id="Ellipse_481" data-name="Ellipse 481" cx="6.205" cy="6.205" r="6.205" transform="translate(-8780.625 10573.264)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.477"/>
+    </g>
+  </g>
+</svg>
