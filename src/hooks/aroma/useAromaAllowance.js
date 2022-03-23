@@ -1,4 +1,3 @@
-import { NETWORKS } from "../../web3/constants";
 import { useCall, useConfig, useEthers } from "@usedapp/core";
 import { formatUnits, parseUnits } from "@ethersproject/units";
 import { Contract } from "@ethersproject/contracts";
@@ -16,8 +15,8 @@ export function useAromaAllowance(
   ownerAddress = undefined,
   spenderAddress = undefined
 ) {
-  const { readOnlyChainId } = useConfig();
-  const tokenAddress = NETWORKS[readOnlyChainId].contractAroma;
+  const { readOnlyChainSettings } = useConfig();
+  const tokenAddress = readOnlyChainSettings.aromaContractAddress;
   const { account } = useEthers();
   const defaultResult = {
     allowance: undefined,
@@ -25,7 +24,7 @@ export function useAromaAllowance(
     hasAllowance: () => undefined,
   };
 
-  spenderAddress = spenderAddress || NETWORKS[readOnlyChainId].contractMaster;
+  spenderAddress = spenderAddress || readOnlyChainSettings.masterContractAddress;
   ownerAddress = ownerAddress || account;
 
   const call = {

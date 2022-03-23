@@ -1,14 +1,12 @@
-import React from "react";
 import { useConfig, useEthers } from "@usedapp/core";
 import { Button, Tooltip } from "@mui/material";
-import { NETWORKS } from "../../web3/constants";
 
 /**
  * @returns {JSX.Element}
  * @constructor
  */
 function AddTokenToWalletButton() {
-  const { readOnlyChainId } = useConfig();
+  const { readOnlyChainSettings } = useConfig();
   const { library } = useEthers();
 
   const walletWatchAsset = () => {
@@ -19,7 +17,7 @@ function AddTokenToWalletButton() {
           params: {
             type: "ERC20",
             options: {
-              address: NETWORKS[readOnlyChainId].contractAroma,
+              address: readOnlyChainSettings.aromaContractAddress,
               symbol: "AROMA",
               decimals: 18,
             },

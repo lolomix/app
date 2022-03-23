@@ -1,5 +1,4 @@
-import { useConfig, useContractFunction } from '@usedapp/core'
-import { NETWORKS } from "../../web3/constants";
+import { useConfig, useContractFunction } from "@usedapp/core";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { Contract } from "@ethersproject/contracts";
 
@@ -7,8 +6,9 @@ import { Contract } from "@ethersproject/contracts";
  * @returns {(((...args: any[]) => Promise<void>)|TransactionStatus|LogDescription[]|(() => void))[]}
  */
 export function useRecipeCreate() {
-  const { readOnlyChainId } = useConfig();
-  const address = NETWORKS[readOnlyChainId].contractMaster;
+  const {
+    readOnlyChainSettings: { masterContractAddress: address },
+  } = useConfig();
   const contract = new Contract(address, abi);
 
   const { send, state, events, resetState } = useContractFunction(

@@ -1,7 +1,6 @@
 import { useTokensOfOwner } from "../useTokensOfOwner";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
-import { NETWORKS } from "../../web3/constants";
-import { useConfig } from '@usedapp/core'
+import { useConfig } from "@usedapp/core";
 
 /**
  * Returns the chefIds of the current account
@@ -9,8 +8,9 @@ import { useConfig } from '@usedapp/core'
  * @returns {(any)[]|*[]}
  */
 export function useChefIdsOfOwner() {
-  const { readOnlyChainId } = useConfig();
-  const address = NETWORKS[readOnlyChainId].contractMaster;
+  const {
+    readOnlyChainSettings: { masterContractAddress: address },
+  } = useConfig();
 
   return useTokensOfOwner(abi, address);
 }

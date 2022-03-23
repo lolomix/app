@@ -1,5 +1,5 @@
-import { IPFS_GATEWAY } from "../web3/constants";
 import IPFSGatewayTools from "@pinata/ipfs-gateway-tools/dist/browser";
+import { IPFS_GATEWAY } from '../model/config/dapp'
 
 /**
  * If the provided string contains an IPFS CID then convert to desired Gateway URL
