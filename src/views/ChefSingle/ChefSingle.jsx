@@ -69,8 +69,6 @@ function ChefSingle() {
   const attributes = nft?.metadata?.attributes;
   const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;
 
-  console.log(attributes);
-
   return (
     <Layout buttonType="back">
       <Grid container mt={6} justifyContent="center">
