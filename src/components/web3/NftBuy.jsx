@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import { useConfig, useEthers } from '@usedapp/core'
+import { useConfig, useEthers } from "@usedapp/core";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,6 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import { NETWORKS } from "../../web3/constants";
 import { useChefPrice } from "../../hooks/chef/useChefPrice";
 import { formatCurrency } from "../../utils/formatters";
 import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
@@ -24,8 +23,9 @@ import { useDialogState } from "../../hooks/state/useDialogState";
 import { bindDialog } from "../../utils/binders";
 
 function NftBuy({ t, remaining }) {
-  const { readOnlyChainId } = useConfig();
-  const spenderAddress = NETWORKS[readOnlyChainId].contractMaster;
+  const {
+    readOnlyChainSettings: { masterContractAddress: spenderAddress },
+  } = useConfig();
   const { account } = useEthers();
   const price = useChefPrice();
 

@@ -24,7 +24,6 @@ import { bindDialog, bindDialogClick } from "../../utils/binders";
 import { useRecipeCreate } from "../../hooks/recipe/useRecipeCreate";
 import { ethers } from "ethers";
 import { parseUnits } from "@ethersproject/units";
-import { NETWORKS } from "../../web3/constants";
 import { useAromaApprove } from "../../hooks/aroma/useAromaApprove";
 import { LoadingButton } from "@mui/lab";
 import {
@@ -39,8 +38,9 @@ import { useConfig } from "@usedapp/core";
  * @constructor
  */
 function RecipeCreateCookStep() {
-  const { readOnlyChainId } = useConfig();
-  const spenderAddress = NETWORKS[readOnlyChainId].contractMaster;
+  const {
+    readOnlyChainSettings: { masterContractAddress: spenderAddress },
+  } = useConfig();
   const [
     { tokens, chefId, name, stake },
     { setChefId, setName, setStake, confirmRecipeCorrectness, nextStep },

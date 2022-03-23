@@ -5,10 +5,10 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DAppProvider, useLocalStorage } from "@usedapp/core";
-import { DAPPCONFIG } from "./web3/constants";
 import App from "./App";
 import "./i18n";
 import { ChainWatcherProvider } from "./contexts/chainWatcher/chainWatcherProvider";
+import { Dapp } from "./model/config/dapp";
 
 const queryClient = new QueryClient();
 
@@ -17,12 +17,20 @@ const queryClient = new QueryClient();
  * @constructor
  */
 const DApp = () => {
+  // @todo change terminology to `overrideChainId` to avoid confusion (target chain is different)
   const [overrideTargetChain] = useLocalStorage("overrideTargetChain");
   return (
     <DAppProvider
       config={{
-        ...DAPPCONFIG,
-        ...(overrideTargetChain && { readOnlyChainId: overrideTargetChain }),
+        ...Dapp,
+        ...(overrideTargetChain && {
+          readOnlyChainId: overrideTargetChain,
+          readOnlyChain: Dapp.networks.find(
+            (chain) => chain.chainId === overrideTargetChain
+          ),
+          readOnlyChainSettings:
+            Dapp.networkSettings[overrideTargetChain],
+        }),
       }}
     >
       <ChainWatcherProvider>

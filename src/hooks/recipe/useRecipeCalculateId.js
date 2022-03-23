@@ -1,5 +1,4 @@
-import { useCall, useConfig } from '@usedapp/core'
-import { NETWORKS } from "../../web3/constants";
+import { useCall, useConfig } from "@usedapp/core";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { Contract } from "@ethersproject/contracts";
 import { utils } from "ethers";
@@ -11,8 +10,9 @@ import { useTranslation } from "react-i18next";
  * @returns {(string|undefined)[]}
  */
 export function useRecipeCalculateId(tokens) {
-  const { readOnlyChainId } = useConfig();
-  const address = NETWORKS[readOnlyChainId].contractMaster;
+  const {
+    readOnlyChainSettings: { masterContractAddress: address },
+  } = useConfig();
   const abiInterface = new utils.Interface(abi);
   const { t } = useTranslation("contract", { keyPrefix: "exceptions" });
 

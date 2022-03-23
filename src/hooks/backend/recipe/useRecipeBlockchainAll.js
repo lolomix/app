@@ -1,13 +1,12 @@
 import { useQuery } from "react-query";
-import { NETWORKS } from "../../../web3/constants";
 import { useConfig } from "@usedapp/core";
 
 /**
- * @param {string} rewardsApi
+ * @param {string} rewardsApiUrl
  * @returns {Promise<any>}
  */
-const getRecipeBlockchainAll = async (rewardsApi) => {
-  const response = await fetch(`${rewardsApi}/blockchain/recipe/all`);
+const getRecipeBlockchainAll = async (rewardsApiUrl) => {
+  const response = await fetch(`${rewardsApiUrl}/blockchain/recipe/all`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -18,11 +17,16 @@ const getRecipeBlockchainAll = async (rewardsApi) => {
  * @returns {UseQueryResult<*, unknown>}
  */
 export default function useRecipeBlockchainAll() {
-  const { readOnlyChainId } = useConfig();
-  const rewardsApi = NETWORKS[readOnlyChainId].rewardsApi;
+  const {
+    readOnlyChainSettings: { rewardsApiUrl },
+  } = useConfig();
 
-  return useQuery(["getRecipeBlockchainAll"], () => getRecipeBlockchainAll(rewardsApi), {
-    enabled: !!rewardsApi,
-    staleTime: 3600000, // mark it as stale after an hour
-  });
+  return useQuery(
+    ["getRecipeBlockchainAll"],
+    () => getRecipeBlockchainAll(rewardsApiUrl),
+    {
+      enabled: !!rewardsApiUrl,
+      staleTime: 3600000, // mark it as stale after an hour
+    }
+  );
 }

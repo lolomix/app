@@ -1,13 +1,14 @@
 import { useQuery } from "react-query";
-import { PRICE_FEED_API } from "../../../web3/constants";
+import { useConfig } from '@usedapp/core'
 
 /**
  * @param {string} symbol
+ * @param {string} priceFeedApiUrl
  * @returns {Promise<any>}
  */
-const getCoinPairPriceBySymbol = async (symbol) => {
+const getCoinPairPriceBySymbol = async (symbol, priceFeedApiUrl) => {
   const response = await fetch(
-    `${PRICE_FEED_API}/binance/marketData/current/price?symbol=${symbol}`
+    `${priceFeedApiUrl}/binance/marketData/current/price?symbol=${symbol}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -20,11 +21,15 @@ const getCoinPairPriceBySymbol = async (symbol) => {
  * @returns {{ data, dataUpdatedAt, error, errorUpdatedAt, failureCount, isError, isFetched, isFetchedAfterMount, isFetching, isIdle, isLoading, isLoadingError, isPlaceholderData, isPreviousData, isRefetchError, isRefetching, isStale, isSuccess, refetch, remove, status }}
  */
 export default function useCoinPairPrice(symbol) {
+  const {
+    readOnlyChainSettings: { priceFeedApiUrl },
+  } = useConfig();
+
   return useQuery(
     ["coinPairPrice", symbol],
-    () => getCoinPairPriceBySymbol(symbol),
+    () => getCoinPairPriceBySymbol(symbol, priceFeedApiUrl),
     {
-      enabled: !!symbol,
+      enabled: !!symbol && !!priceFeedApiUrl,
       staleTime: 3600000, // mark it as stale after an hour
     }
   );

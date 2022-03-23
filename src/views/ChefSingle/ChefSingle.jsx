@@ -3,7 +3,6 @@ import { useConfig, useEthers } from "@usedapp/core";
 import NftCard from "../../components/web3/NftCard";
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
-import { NETWORKS } from "../../web3/constants";
 import {
   Button,
   Card,
@@ -68,9 +67,10 @@ const legendaryImages = [
 
 function ChefSingle() {
   const { tokenId } = useParams();
-  const { readOnlyChainId } = useConfig();
+  const {
+    readOnlyChainSettings: { masterContractAddress: tokenAddress },
+  } = useConfig();
   const { active, error } = useEthers();
-  const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const nft = useChefMetadata(tokenId);
   const attributes = nft?.metadata?.attributes;
   const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;

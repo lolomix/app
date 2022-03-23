@@ -40,6 +40,10 @@ function useRecipeCreator() {
       () => state.tokens.length < state.maxSelection,
       `A recipe cannot contain more than ${state.maxSelection} tokens.`,
     ],
+    ifLessThanOrEqualMaxTokensSelected: [
+      () => state.tokens.length <= state.maxSelection,
+      `A recipe cannot contain more than ${state.maxSelection} tokens.`,
+    ],
     ifMinTokensSelected: [
       () => state.tokens.length >= state.minSelection,
       `A recipe must contain at least ${state.minSelection} tokens.`,
@@ -145,7 +149,7 @@ function useRecipeCreator() {
   const confirmRecipeCorrectness = () => {
     return validateConditions([
       "ifMinTokensSelected",
-      "ifLessThanMaxTokensSelected",
+      "ifLessThanOrEqualMaxTokensSelected",
       "ifChefIdSetAndValid",
       "ifNameSet",
       "ifNameLessOrEqualToMaxNameLength",

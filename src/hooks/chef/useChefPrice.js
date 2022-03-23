@@ -1,5 +1,4 @@
-import { useCall, useConfig } from '@usedapp/core'
-import { NETWORKS } from "../../web3/constants";
+import { useCall, useConfig } from "@usedapp/core";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
 import { formatUnits } from "@ethersproject/units";
@@ -12,9 +11,10 @@ import { logUseCall } from "../../utils/loggers";
  * @returns {string|undefined}
  */
 export function useChefPrice() {
-  const { readOnlyChainId } = useConfig();
+  const {
+    readOnlyChainSettings: { masterContractAddress: address },
+  } = useConfig();
   const abiInterface = new utils.Interface(abi);
-  const address = NETWORKS[readOnlyChainId].contractMaster;
   const defaultResult = undefined;
 
   const call = {

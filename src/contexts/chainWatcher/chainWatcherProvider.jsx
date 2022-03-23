@@ -3,23 +3,16 @@
  * @returns {JSX.Element}
  * @constructor
  */
-import {
-  Rinkeby,
-  useConfig,
-  useEthers,
-  useLocalStorage,
-  Polygon,
-} from "@usedapp/core";
+import { useConfig, useEthers, useLocalStorage } from "@usedapp/core";
 import { useEffect, useRef, useState } from "react";
 import { ChainWatcherContext } from "./chainWatcherContext";
-import { TARGET_CHAIN } from "../../web3/constants";
 
 export function ChainWatcherProvider({ children }) {
   const { account, chainId, library } = useEthers();
   const [overrideTargetChain, setOverrideTargetChain] = useLocalStorage(
     "overrideTargetChain"
   );
-  const { networks } = useConfig();
+  const { networks, targetChainId } = useConfig();
   const previousChainId = useRef();
   const [unsupportedChain, setUnsupportedChain] = useState(false);
 
@@ -39,10 +32,6 @@ export function ChainWatcherProvider({ children }) {
       library?.provider !== undefined &&
       networks?.some((chain) => chain?.chainId === chainId)
     ) {
-      // @todo repurpose TARGET_CHAIN to have standard ID
-      let targetChainId =
-        TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId;
-
       if (targetChainId === chainId) {
         console.debug(
           "remove 'overrideTargetChain' from local storage if present"
