@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { APP_VERSION } from "../../web3/constants";
+import { APP_VERSION } from "../../model/config/dapp";
 
 /**
  * @returns {JSX.Element|null}

@@ -1,5 +1,5 @@
 import { useQueries } from "react-query";
-import { PRICE_FEED_API } from "../../../web3/constants";
+import { useConfig } from '@usedapp/core'
 
 /**
  * Format time as API only allows one type of datetime format (`13/02/2022 08:29`)
@@ -22,16 +22,18 @@ const formatDateTimesToAPISpecification = (dateTimes) => {
  * @param {string} startTime
  * @param {string} endTime
  * @param {string} interval
+ * @param {string} priceFeedUrl
  * @returns {Promise<any>}
  */
 const getCoinPairPriceHistoricalBySymbol = async (
   symbol,
   startTime,
   endTime,
-  interval
+  interval,
+  priceFeedUrl
 ) => {
   const response = await fetch(
-    `${PRICE_FEED_API}/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=${interval}`
+    `${priceFeedUrl}/binance/marketData/historical/candlestickData?symbol=${symbol}&startTime=${startTime}&endTime=${endTime}&interval=${interval}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -51,6 +53,9 @@ export default function useCoinPairsPriceHistorical(
   end = new Date(),
   interval = "1d"
 ) {
+  const {
+    readOnlyChainSettings: { priceFeedApiUrl },
+  } = useConfig();
   const [startTime, endTime] = formatDateTimesToAPISpecification([start, end]);
 
   return useQueries(
@@ -62,9 +67,10 @@ export default function useCoinPairsPriceHistorical(
             symbol,
             startTime,
             endTime,
-            interval
+            interval,
+            priceFeedApiUrl
           ),
-        enabled: !!symbol,
+        enabled: !!symbol && !!priceFeedApiUrl,
         staleTime: 3600000, // mark it as stale after an hour
       };
     })

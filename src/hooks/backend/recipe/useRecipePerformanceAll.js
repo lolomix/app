@@ -1,13 +1,14 @@
 import { useQuery } from "react-query";
-import { NETWORKS } from "../../../web3/constants";
 import { useConfig } from "@usedapp/core";
 
 /**
- * @param {string} rewardsApi
+ * @param {string} rewardsApiUrl
  * @returns {Promise<any>}
  */
-const getRecipePerformanceAll = async (rewardsApi) => {
-  const response = await fetch(`${rewardsApi}/performance/recipe/cached/all`);
+const getRecipePerformanceAll = async (rewardsApiUrl) => {
+  const response = await fetch(
+    `${rewardsApiUrl}/performance/recipe/cached/all`
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -18,11 +19,16 @@ const getRecipePerformanceAll = async (rewardsApi) => {
  * @returns {{ data, dataUpdatedAt, error, errorUpdatedAt, failureCount, isError, isFetched, isFetchedAfterMount, isFetching, isIdle, isLoading, isLoadingError, isPlaceholderData, isPreviousData, isRefetchError, isRefetching, isStale, isSuccess, refetch, remove, status }}
  */
 export default function useRecipePerformanceAll() {
-  const { readOnlyChainId } = useConfig();
-  const rewardsApi = NETWORKS[readOnlyChainId].rewardsApi;
+  const {
+    readOnlyChainSettings: { rewardsApiUrl },
+  } = useConfig();
 
-  return useQuery(["getRecipePerformanceAll"], () => getRecipePerformanceAll(rewardsApi), {
-    enabled: !!rewardsApi,
-    staleTime: 3600000, // mark it as stale after an hour
-  });
+  return useQuery(
+    ["getRecipePerformanceAll"],
+    () => getRecipePerformanceAll(rewardsApiUrl),
+    {
+      enabled: !!rewardsApiUrl,
+      staleTime: 3600000, // mark it as stale after an hour
+    }
+  );
 }

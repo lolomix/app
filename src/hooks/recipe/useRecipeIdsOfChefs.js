@@ -1,5 +1,4 @@
-import { useCalls, useConfig } from '@usedapp/core'
-import { NETWORKS } from "../../web3/constants";
+import { useCalls, useConfig } from "@usedapp/core";
 import abi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { utils } from "ethers";
 import { Contract } from "@ethersproject/contracts";
@@ -13,9 +12,10 @@ import { logUseCalls } from "../../utils/loggers";
  * @returns {*[]|FlatArray<*[], 1>[]|*[]}
  */
 export function useRecipeIdsOfChefs(chefIds, flatten = false) {
-  const { readOnlyChainId } = useConfig();
+  const {
+    readOnlyChainSettings: { masterContractAddress: address },
+  } = useConfig();
   const abiInterface = new utils.Interface(abi);
-  const address = NETWORKS[readOnlyChainId].contractMaster;
   const defaultResults = undefined;
 
   const calls =

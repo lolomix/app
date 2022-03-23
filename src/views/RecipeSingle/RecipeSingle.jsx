@@ -3,7 +3,6 @@ import { theme } from "../../utils/theme";
 import { useParams } from "react-router-dom";
 import NftCard from "../../components/web3/NftCard";
 import { useRecipeById } from "../../hooks/recipe/useRecipeById";
-import { NETWORKS } from "../../web3/constants";
 import tokenAbi from "../../web3/abi/CryptoChefsERC721Facet.json";
 import { useRecipeCoinPairs } from "../../hooks/recipe/useRecipeCoinPairs";
 import { Box, Card, CardContent, Skeleton, Typography } from "@mui/material";
@@ -20,9 +19,10 @@ import { useEffect, useState } from "react";
  * @constructor
  */
 function RecipeSingle() {
+  const {
+    readOnlyChainSettings: { masterContractAddress: tokenAddress },
+  } = useConfig();
   const { recipeId } = useParams();
-  const { readOnlyChainId } = useConfig();
-  const tokenAddress = NETWORKS[readOnlyChainId].contractMaster;
   const recipe = useRecipeById(recipeId);
   const { data: allRecipesPerformance } = useRecipePerformanceAll();
   const [weeklyPerformance, setWeeklyPerformance] = useState();

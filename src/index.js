@@ -5,10 +5,10 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DAppProvider, useLocalStorage } from "@usedapp/core";
-import { DAPP_CONFIG } from "./web3/constants";
 import App from "./App";
 import "./i18n";
 import { ChainWatcherProvider } from "./contexts/chainWatcher/chainWatcherProvider";
+import { Dapp } from "./model/config/dapp";
 
 const queryClient = new QueryClient();
 
@@ -22,12 +22,14 @@ const DApp = () => {
   return (
     <DAppProvider
       config={{
-        ...DAPP_CONFIG,
+        ...Dapp,
         ...(overrideTargetChain && {
           readOnlyChainId: overrideTargetChain,
-          readOnlyChain: DAPP_CONFIG.networks.find(
+          readOnlyChain: Dapp.networks.find(
             (chain) => chain.chainId === overrideTargetChain
           ),
+          readOnlyChainSettings:
+            Dapp.networkSettings[overrideTargetChain],
         }),
       }}
     >
