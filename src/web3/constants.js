@@ -1,4 +1,5 @@
-import { Polygon, Rinkeby } from "@usedapp/core";
+import { Polygon } from '../model/chain/polygon'
+import { Rinkeby } from '../model/chain/ethereum'
 
 export const APP_NAME = process.env.REACT_APP_APP_NAME;
 export const APP_VERSION = process.env.REACT_APP_VERSION;
@@ -7,9 +8,15 @@ export const PRICE_FEED_API = process.env.REACT_APP_PRICE_FEED_API;
 export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 export const IPFS_GATEWAY = process.env.REACT_APP_IPFS_GATEWAY;
 
-export const DAPPCONFIG = {
+export const DAPP_CONFIG = {
+  targetChainId:
+    TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId,
+  targetChain:
+    TARGET_CHAIN === "polygon" ? Polygon : Rinkeby,
   readOnlyChainId:
     TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId,
+  readOnlyChain:
+    TARGET_CHAIN === "polygon" ? Polygon : Rinkeby,
   readOnlyUrls: {
     [Rinkeby.chainId]: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     [Polygon.chainId]: `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`,
