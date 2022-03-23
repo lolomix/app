@@ -38,32 +38,26 @@ import Legendary_Hairstyle from "../../assets/Legendary/legendary_hairstyle.svg"
 import Legendary_Uniform from "../../assets/Legendary/legendary_uniform.svg";
 import Legendary_Utensil from "../../assets/Legendary/legendary_utensil.svg";
 
-const classicImages = [
-  { id: 1, src: Classic_Toque, title: "classic" },
-  { id: 2, src: Classic_Hairstyle, title: "classic" },
-  { id: 3, src: Classic_Uniform, title: "classic" },
-  { id: 4, src: Classic_Utensil, title: "classic" },
-  { id: 5, src: Classic_Gear, title: "classic" },
-  { id: 6, src: Classic_Flavor, title: "classic" },
-];
+function createRarityObject(classic, epic, legendary) {
+  return {
+    Classic: classic,
+    Epic: epic,
+    Legendary: legendary,
+  };
+}
 
-const epicImages = [
-  { id: 1, src: Epic_Toque, title: "epic" },
-  { id: 2, src: Epic_Hairstyle, title: "epic" },
-  { id: 3, src: Epic_Uniform, title: "epic" },
-  { id: 4, src: Epic_Utensil, title: "epic" },
-  { id: 5, src: Epic_Gear, title: "epic" },
-  { id: 6, src: Epic_Flavor, title: "epic" },
-];
-
-const legendaryImages = [
-  { id: 1, src: Legendary_Toque, title: "legendary" },
-  { id: 2, src: Legendary_Hairstyle, title: "legendary" },
-  { id: 3, src: Legendary_Uniform, title: "legendary" },
-  { id: 4, src: Legendary_Utensil, title: "legendary" },
-  { id: 5, src: Legendary_Gear, title: "legendary" },
-  { id: 6, src: Legendary_Flavor, title: "legendary" },
-];
+const traitImages = {
+  Toque: createRarityObject(Classic_Toque, Epic_Toque, Legendary_Toque),
+  Hairstyle: createRarityObject(
+    Classic_Hairstyle,
+    Epic_Hairstyle,
+    Legendary_Hairstyle
+  ),
+  Uniform: createRarityObject(Classic_Uniform, Epic_Uniform, Legendary_Uniform),
+  Utensil: createRarityObject(Classic_Utensil, Epic_Utensil, Legendary_Utensil),
+  Gear: createRarityObject(Classic_Gear, Epic_Gear, Legendary_Gear),
+  Flavor: createRarityObject(Classic_Flavor, Epic_Flavor, Legendary_Flavor),
+};
 
 function ChefSingle() {
   const { tokenId } = useParams();
@@ -74,6 +68,8 @@ function ChefSingle() {
   const nft = useChefMetadata(tokenId);
   const attributes = nft?.metadata?.attributes;
   const lore = attributes?.find((attr) => attr.trait_type === "Lore")?.value;
+
+  console.log(attributes);
 
   return (
     <Layout buttonType="back">
@@ -183,11 +179,7 @@ function ChefSingle() {
                                 >
                                   <img
                                     src={
-                                      attr.rarity === "Classic"
-                                        ? classicImages[index - 1].src
-                                        : attr.rarity === "Epic"
-                                        ? epicImages[index - 1].src
-                                        : legendaryImages[index - 1].src
+                                      traitImages[attr.trait_type][attr.rarity]
                                     }
                                     width="100%"
                                     height="100%"
