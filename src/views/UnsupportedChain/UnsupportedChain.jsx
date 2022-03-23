@@ -1,15 +1,9 @@
 import ConnectionErrorCard from "../../components/common/ConnectionErrorCard";
 import { Button, CardActions, Stack } from "@mui/material";
-import {
-  getChainById,
-  Polygon,
-  Rinkeby,
-  useEthers,
-  useLocalStorage,
-} from "@usedapp/core";
-import { NETWORKS, TARGET_CHAIN } from "../../web3/constants";
+import { useConfig, useEthers, useLocalStorage } from "@usedapp/core";
 import { withTranslation } from "react-i18next";
 import { useChainWatcher } from "../../contexts/chainWatcher/chainWatcherContext";
+import { hexValue } from "ethers/lib/utils";
 
 /**
  * @returns {JSX.Element}
@@ -18,21 +12,17 @@ import { useChainWatcher } from "../../contexts/chainWatcher/chainWatcherContext
 const UnsupportedChain = ({ t }) => {
   const { deactivate } = useEthers();
   const { setOverrideTargetChain } = useChainWatcher();
+  const { targetChain } = useConfig();
 
   // @todo should be done in useDapp itself
   const [, setShouldConnectMetamask] = useLocalStorage("shouldConnectMetamask");
-
-  // @todo deprecate TARGET_CHAIN
-  let appTargetChainId =
-    TARGET_CHAIN === "polygon" ? Polygon.chainId : Rinkeby.chainId;
-  const { chainName } = getChainById(appTargetChainId);
 
   async function switchChain() {
     try {
       // check if the chain to connect to is installed
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: NETWORKS[appTargetChainId].chainIdHex }], // chainId must be in hexadecimal numbers
+        params: [{ chainId: hexValue(targetChain.chainId) }], // chainId must be in hexadecimal numbers
       });
     } catch (error) {
       if (error.code === 4902) {
@@ -42,11 +32,11 @@ const UnsupportedChain = ({ t }) => {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: NETWORKS[appTargetChainId].chainIdHex,
-                chainName: chainName,
-                nativeCurrency: NETWORKS[appTargetChainId].nativeCurrency,
-                blockExplorerUrls: NETWORKS[appTargetChainId].blockExplorerUrls,
-                rpcUrls: NETWORKS[appTargetChainId].rpcUrls,
+                chainId: hexValue(targetChain.chainId),
+                chainName: targetChain.chainName,
+                nativeCurrency: targetChain.nativeCurrency,
+                blockExplorerUrls: targetChain.blockExplorerUrls,
+                rpcUrls: targetChain.rpcUrls,
               },
             ],
           });
@@ -86,7 +76,7 @@ const UnsupportedChain = ({ t }) => {
               size="large"
               onClick={() => switchChain()}
             >
-              Switch to {chainName}
+              Switch to {targetChain.chain}
             </Button>
           </CardActions>
         }

@@ -18,7 +18,6 @@ import {
   DialogActions,
 } from "@mui/material";
 import CurrencyInputField from "../form/CurrencyInputField";
-import { NETWORKS } from "../../web3/constants";
 import { formatCurrency } from "../../utils/formatters";
 import { useAromaPrice } from "../../hooks/aroma/useAromaPrice";
 import { useAromaBuy } from "../../hooks/aroma/useAromaBuy";
@@ -35,7 +34,7 @@ import {
  * @constructor
  */
 function CurrencyExchange({ t, enableCurrencySwitch = false }) {
-  const { readOnlyChainId } = useConfig();
+  const { readOnlyChain } = useConfig();
   const { account } = useEthers();
   const { enqueueSnackbar } = useSnackbar();
   const price = useAromaPrice();
@@ -58,8 +57,8 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
   const [currencyTo, setCurrencyTo] = useState("AROMA");
 
   useEffect(() => {
-    setCurrencyFrom(NETWORKS[readOnlyChainId].nativeCurrency.symbol);
-  }, [readOnlyChainId]);
+    setCurrencyFrom(readOnlyChain.nativeCurrency.symbol);
+  }, [readOnlyChain]);
 
   /**
    * Handles the switch of currencies if `enableCurrencySwitch` is enabled
@@ -185,7 +184,7 @@ function CurrencyExchange({ t, enableCurrencySwitch = false }) {
           <Chip
             label={
               "For 1 " +
-              NETWORKS[readOnlyChainId].nativeCurrency.symbol +
+              readOnlyChain.nativeCurrency.symbol +
               " you get " +
               formatCurrency(1 / price) +
               " AROMA tokens."
